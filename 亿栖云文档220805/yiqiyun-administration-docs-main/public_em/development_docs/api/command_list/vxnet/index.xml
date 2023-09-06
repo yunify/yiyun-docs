@@ -1,0 +1,924 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 私有网络</title>
+    <link>/development_docs/api/command_list/vxnet/</link>
+    <description>Recent content in 私有网络 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/vxnet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: CreateVxnets</title>
+      <link>/development_docs/api/command_list/vxnet/create_vxnets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/create_vxnets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;创建新的私有网络。&lt;/p&gt;
+&lt;p&gt;亿栖云私有网络有两种类型： 受管私有网络 ( vxnet_type=1 ) 和 自管私有网络 ( vxnet_type=0 ) ，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;受管私有网络可以使用亿栖云路由器来配置和管理其网络，使得网络搭建更方便快捷。&lt;/li&gt;
+&lt;li&gt;自管私有网络需要您自行配置和管理网络，适用于对底层网络有特殊需求的用户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;私有网络类型，1 - 受管私有网络，0 - 自管私有网络。&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;新建私有网络的数量，默认是1&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;target_user&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;目标用户 ID ，可用于主账号为其子账号创建资源。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnets&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;创建成功的私有网络ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CreateVxnets
+&amp;amp;vxnet_name=demo
+&amp;amp;vxnet_type=1
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CreateVxnetsResponse&amp;#34;,
+  &amp;#34;vxnets&amp;#34;:[
+    &amp;#34;vxnet-f3y0h3q&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteVxnets</title>
+      <link>/development_docs/api/command_list/vxnet/delete_vxnets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/delete_vxnets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;除私有网络。&lt;/p&gt;
+&lt;p&gt;只能删除没有云服务器的私有网络，若删除时仍然有云服务器在此网络中，会返回错误信息。 可通过 &lt;a href=&#34;../leave_vxnet/&#34;&gt;&lt;em&gt;LeaveVxnet&lt;/em&gt;&lt;/a&gt; 移出云服务器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnets.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnets&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;成功删除的私有网络ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteVxnets
+&amp;amp;vxnets.1=vxnet-7mwzdbs
+&amp;amp;vxnets.2=vxnet-f3y0h3q
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteVxnetsResponse&amp;#34;,
+  &amp;#34;vxnets&amp;#34;:[
+    &amp;#34;vxnet-7mwzdbs&amp;#34;,
+    &amp;#34;vxnet-f3y0h3q&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeVxnetInstances</title>
+      <link>/development_docs/api/command_list/vxnet/describe_vxnet_instances/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/describe_vxnet_instances/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取私有网络中的云服务器。&lt;/p&gt;
+&lt;p&gt;可通过云服务器ID，镜像ID，云服务器配置类型，云服务器状态作为过滤条件进行筛选。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instances.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instance_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器配置类型&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器状态&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;镜像ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instance_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的私有网络的云服务器列表，每项数据可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的云服务器总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instance_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instance_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instance_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器类型，配置列表请参考 &lt;a href=&#34;../../../common/instance_type&#34;&gt;&lt;em&gt;Instance Types&lt;/em&gt;&lt;/a&gt;。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vcpus_current&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;云服务器CPU核心数目。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;memory_current&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;云服务器内存大小，单位为MB。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器状态，有效值为pending, running, stopped, suspended，terminated, ceased。&lt;br/&gt;pending： 等待被创建&lt;br/&gt;running： 运行中&lt;br/&gt;stopped： 已关机&lt;br/&gt;suspended： 由于欠费，已被暂停使用&lt;br/&gt;terminated： 已被删除，但处于此状态的云服务器在2小时之内仍可以被恢复为 running 状态&lt;br/&gt;ceased： 已被彻底删除，处于此状态的云服务器无法恢复&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;transition_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器过渡状态，有效值为creating, starting, stopping, restarting, suspending，resuming，terminating，recovering，resetting。&lt;br/&gt;creating： 创建中，由 pending 状态变成 running 状态&lt;br/&gt;starting： 启动中，由 stopped 状态变成 running 状态&lt;br/&gt;stopping： 关闭中，由 running 状态变成 stopped 状态&lt;br/&gt;restarting： 重启中&lt;br/&gt;suspending： 欠费暂停中，由 running/stopped 状态变成 suspended 状态&lt;br/&gt;resuming： 恢复中，由 suspended 状态变成 running 状态&lt;br/&gt;terminating： 删除中，由 running/stopped/suspended 状态变成 terminated 状态&lt;br/&gt;recovering： 恢复中，由 terminated 状态变成 running 状态&lt;br/&gt;resetting： 操作系统重置中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;云服务器创建时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;云服务器最近一次状态变更时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;image_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器的模板ID。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dhcp_options&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;私有网络中针对该云服务器的 DHCP 配置。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;private_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;云服务器的位于该私有网络的IP。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeVxnetInstances
+&amp;amp;vxnet=vxnet-ytuyg2q
+&amp;amp;status=running
+&amp;amp;limit=1
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeVxnetInstancesResponse&amp;#34;,
+  &amp;#34;instance_set&amp;#34;:[
+    {
+      &amp;#34;vcpus_current&amp;#34;:1,
+      &amp;#34;instance_id&amp;#34;:&amp;#34;i-syx7qtud&amp;#34;,
+      &amp;#34;image_id&amp;#34;:&amp;#34;centos64x64&amp;#34;,
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ytuyg2q&amp;#34;,
+      &amp;#34;sequence&amp;#34;:0,
+      &amp;#34;sub_code&amp;#34;:0,
+      &amp;#34;transition_status&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;instance_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;instance_type&amp;#34;:&amp;#34;small_b&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-30T09:13:37Z&amp;#34;,
+      &amp;#34;status&amp;#34;:&amp;#34;running&amp;#34;,
+      &amp;#34;private_ip&amp;#34;:&amp;#34;192.168.1.2&amp;#34;,
+      &amp;#34;description&amp;#34;:null,
+      &amp;#34;status_time&amp;#34;:&amp;#34;2013-08-30T09:13:37Z&amp;#34;,
+      &amp;#34;nic_id&amp;#34;:&amp;#34;52:54:5b:e3:69:f4&amp;#34;,
+      &amp;#34;dhcp_options&amp;#34;:{
+        &amp;#34;val2&amp;#34;:&amp;#34;domain-name-servers=8.8.8.8&amp;#34;,
+        &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-jak6z5nx&amp;#34;
+      },
+      &amp;#34;memory_current&amp;#34;:1024
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;total_count&amp;#34;:1
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeVxnets</title>
+      <link>/development_docs/api/command_list/vxnet/describe_vxnets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/describe_vxnets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;可根据私有网络ID作过滤条件，获取私有网络列表。 如果不指定任何过滤条件，默认返回你所拥有的所有私有网络。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnets.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;私有网络类型，分为 1 - 受管私有网络，0 - 自管私有网络。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词，支持私有网络ID，私有网络名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tags.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;按照标签ID过滤, 只返回已绑定某标签的资源&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，若为1，则返回已加入此私有网络的资源信息。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的私有网络数据列表，每项数据可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的私有网络总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;私有网络类型，分为 1 - 受管私有网络，0 - 自管私有网络。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;创建时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络的描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instance_ids&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;已加入此私有网络的云服务器ID列表。只有在请求参数 verbose=1 才会返回此项。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;与此私有网络相连的路由器信息，数据格式为:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;router&amp;#34;:{
+  &amp;#34;router_id&amp;#34;:&amp;#34;rtr-9iy0lt3s&amp;#34;,
+  &amp;#34;router_name&amp;#34;:&amp;#34;demo&amp;#34;,
+  &amp;#34;manager_ip&amp;#34;: &amp;#34;192.168.100.1&amp;#34;,
+  &amp;#34;ip_network&amp;#34;: &amp;#34;192.168.100.0/24&amp;#34;,
+  &amp;#34;dyn_ip_end&amp;#34;: &amp;#34;192.168.100.254&amp;#34;,
+  &amp;#34;dyn_ip_start&amp;#34;: &amp;#34;192.168.100.2&amp;#34;,
+  &amp;#34;mode&amp;#34;: 0
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;|&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeVxnets
+&amp;amp;vxnets.1=vxnet-ytuyg2q
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeVxnetsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:2,
+  &amp;#34;vxnet_set&amp;#34;:[
+    {
+      &amp;#34;vxnet_type&amp;#34;:1,
+      &amp;#34;description&amp;#34;:null,
+      &amp;#34;vxnet_name&amp;#34;:&amp;#34;test&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-27T10:02:25Z&amp;#34;,
+      &amp;#34;router&amp;#34;:{
+        &amp;#34;router_id&amp;#34;:&amp;#34;rtr-b0u6sdj6&amp;#34;,
+        &amp;#34;router_name&amp;#34;:&amp;#34;demo&amp;#34;,
+        &amp;#34;manager_ip&amp;#34;:&amp;#34;192.168.100.1&amp;#34;,
+        &amp;#34;ip_network&amp;#34;:&amp;#34;192.168.100.0/24&amp;#34;,
+        &amp;#34;dyn_ip_end&amp;#34;:&amp;#34;192.168.100.254&amp;#34;,
+        &amp;#34;dyn_ip_start&amp;#34;:&amp;#34;192.168.100.2&amp;#34;,
+        &amp;#34;mode&amp;#34;:0
+      },
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ytuyg2q&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeVxnets
+&amp;amp;vxnets.1=vxnet-ytuyg2q
+&amp;amp;verbose=1
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeVxnetsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:2,
+  &amp;#34;vxnet_set&amp;#34;:[
+    {
+      &amp;#34;vxnet_type&amp;#34;:1,
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ytuyg2q&amp;#34;,
+      &amp;#34;instance_ids&amp;#34;:[
+        &amp;#34;i-syx7qtud&amp;#34;
+      ],
+      &amp;#34;vxnet_name&amp;#34;:&amp;#34;test&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-27T10:02:25Z&amp;#34;,
+      &amp;#34;router&amp;#34;:{
+        &amp;#34;router_id&amp;#34;:&amp;#34;rtr-b0u6sdj6&amp;#34;,
+        &amp;#34;router_name&amp;#34;:&amp;#34;demo&amp;#34;,
+        &amp;#34;router_name&amp;#34;&amp;#34;manager_ip&amp;#34;:&amp;#34;192.168.100.1&amp;#34;,
+        &amp;#34;router_name&amp;#34;&amp;#34;ip_network&amp;#34;:&amp;#34;192.168.100.0/24&amp;#34;,
+        &amp;#34;router_name&amp;#34;&amp;#34;dyn_ip_end&amp;#34;:&amp;#34;192.168.100.254&amp;#34;,
+        &amp;#34;dyn_ip_start&amp;#34;:&amp;#34;192.168.100.2&amp;#34;,
+        &amp;#34;mode&amp;#34;:0
+      },
+      &amp;#34;description&amp;#34;:null
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: JoinVxnet</title>
+      <link>/development_docs/api/command_list/vxnet/join_vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/join_vxnet/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将云服务器加入到私有网络。当需要云服务器加入私有网络时指定 IP 地址，只支持单台云服务器加入。&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;一台云服务器最多只能加入一个受管网络 ( 包括基础网络vxnet-0 )&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID (如果要指定 ip 地址，格式为&amp;rsquo;私有网络 ID|IP 地址&#39;)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instances.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;加入到网络的云服务器 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=JoinVxnet
+&amp;amp;vxnet=vxnet-q8f2bu7
+&amp;amp;instances.1=i-opv1n2brh
+&amp;amp;instances.2=i-m163jcqw1
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;JoinVxnetResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-pp51vko0&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: LeaveVxnet</title>
+      <link>/development_docs/api/command_list/vxnet/leave_vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/leave_vxnet/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将云服务器从私有网络中断开。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;instances.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;要离开的云服务器 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=LeaveVxnet
+&amp;amp;vxnet=vxnet-q8f2bu7
+&amp;amp;instances.1=i-opv1n2brh
+&amp;amp;instances.2=i-m163jcqw1
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;LeaveVxnetResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-pp51vko0&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyVxnetAttributes</title>
+      <link>/development_docs/api/command_list/vxnet/modify_vxnet_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/modify_vxnet_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改私有网络的名称和描述。&lt;/p&gt;
+&lt;p&gt;一次只能修改一个私有网络。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络描述&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyVxnetAttributes
+&amp;amp;vxnet=vxnet-rtyv0968
+&amp;amp;vxnet_name=sample
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyVxnetAttributesResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

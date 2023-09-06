@@ -1,0 +1,718 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 标签</title>
+    <link>/development_docs/api/command_list/tag/</link>
+    <description>Recent content in 标签 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/tag/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: AttachTags</title>
+      <link>/development_docs/api/command_list/tag/attach_tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/attach_tags/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将标签绑定到资源上, 绑定之后，获取资源列表（例如 DescribeInstances） 的时候，可以传参数tags来过滤该标签的资源, 获取资源列表(例如DescribeInstances), 资源详情也会包含已绑定的标签信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_tag_pairs.n&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;资源标签对, 每项参数可见下面 &lt;a href=&#34;#resource-tag-pairs-item&#34;&gt;Resource Tag Pairs Item&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Resource Tag Pairs Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源类型, 见下面 &lt;a href=&#34;#id1&#34;&gt;支持的资源列表&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AttachTags
+&amp;amp;resource_tag_pairs.1.tag_id=tag-hp55o9i5
+&amp;amp;resource_tag_pairs.1.resource_type=instance
+&amp;amp;resource_tag_pairs.1.resource_id=i-5yn6js06
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AttachTagsResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;支持的资源列表&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;云服务器&lt;/td&gt;
+&lt;td&gt;instance&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;硬盘&lt;/td&gt;
+&lt;td&gt;volume&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SSH 密钥&lt;/td&gt;
+&lt;td&gt;keypair&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;防火墙&lt;/td&gt;
+&lt;td&gt;security_group&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;私有网络&lt;/td&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;公网 IP&lt;/td&gt;
+&lt;td&gt;eip&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;路由器&lt;/td&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;负载均衡&lt;/td&gt;
+&lt;td&gt;loadbalancer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Virtual SAN&lt;/td&gt;
+&lt;td&gt;s2_server&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;备份&lt;/td&gt;
+&lt;td&gt;snapshot&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;关系数据库&lt;/td&gt;
+&lt;td&gt;rdb&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mongo DB&lt;/td&gt;
+&lt;td&gt;mongo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;缓存&lt;/td&gt;
+&lt;td&gt;cache&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Zookeeper&lt;/td&gt;
+&lt;td&gt;zookeeper&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;队列&lt;/td&gt;
+&lt;td&gt;queue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spark&lt;/td&gt;
+&lt;td&gt;spark&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: CreateTag</title>
+      <link>/development_docs/api/command_list/tag/create_tag/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/create_tag/</guid>
+      <description>
+        
+        
+        &lt;p&gt;创建标签，每个标签可以绑定多个资源。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;: 标签名称少于15个字符, 不可重复.&lt;/p&gt;
+&lt;p&gt;标签数据可以随时通过 &lt;a href=&#34;../describe_tags/&#34;&gt;&lt;em&gt;DescribeTags&lt;/em&gt;&lt;/a&gt; 得到。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签名称, 名称不可重复&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;创建成功的标签 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CreateTag
+&amp;amp;tag_name=test
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CreateTagResponse&amp;#34;,
+  &amp;#34;tag_id&amp;#34;:&amp;#34;tag-axbkmf20&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteTags</title>
+      <link>/development_docs/api/command_list/tag/delete_tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/delete_tags/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一个或多个你拥有的标签，该标签绑定的所有资源自动解除绑定关系 关于解绑标签可参考 &lt;a href=&#34;../detach_tags/&#34;&gt;&lt;em&gt;DetachTags&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tags.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tags&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;删除的标签 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteTags
+&amp;amp;tags.1=tag-axbkmf20
+&amp;amp;tags.2=tag-axbkmf21
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteTagsResponse&amp;#34;,
+  &amp;#34;tags&amp;#34;:[
+    &amp;#34;tag-axbkmf20&amp;#34;,
+    &amp;#34;tag-axbkmf21&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeTags</title>
+      <link>/development_docs/api/command_list/tag/describe_tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/describe_tags/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取一个或多个标签&lt;/p&gt;
+&lt;p&gt;可根据标签ID，名称作为过滤条件，获取标签列表。 如果不指定任何过滤条件，默认返回你所拥有的所有标签。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tags.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词，支持标签名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，若为1，则返回绑定了该标签的资源的信息，默认为0.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的密钥数据列表，每项参数可见下面 &lt;a href=&#34;#response-item&#34;&gt;Response Item&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的密钥总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Response Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_count&lt;/td&gt;
+&lt;td&gt;Interger&lt;/td&gt;
+&lt;td&gt;该标签绑定资源总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_type_count&lt;/td&gt;
+&lt;td&gt;Interger&lt;/td&gt;
+&lt;td&gt;该标签绑定资源分类数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_tag_pairs&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;密钥绑定的资源的列表&lt;br/&gt;只有在请求参数 verbose=1 时才会返回此信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeTags
+&amp;amp;verbose=1
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeTagsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;tag_set&amp;#34;:[
+    {
+      &amp;#34;tag_id&amp;#34;:&amp;#34;tag-axbkmf20&amp;#34;,
+      &amp;#34;tag_name&amp;#34;:&amp;#34;tag 1&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;resource_count&amp;#34;:1,
+      &amp;#34;resource_type_count&amp;#34;:[
+        {
+          &amp;#34;count&amp;#34;:1,
+          &amp;#34;resource_type&amp;#34;:&amp;#34;keypair&amp;#34;
+        }
+      ],
+      &amp;#34;resource_tag_pairs&amp;#34;:[
+        {
+          &amp;#34;tag_id&amp;#34;:&amp;#34;tag-axbkmf20&amp;#34;,
+          &amp;#34;resource_type&amp;#34;:&amp;#34;keypair&amp;#34;,
+          &amp;#34;resource_id&amp;#34;:&amp;#34;kp-9i9pm6u3&amp;#34;
+        }
+      ],
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-30T05:13:50Z&amp;#34;,
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DetachTags</title>
+      <link>/development_docs/api/command_list/tag/detach_tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/detach_tags/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将标签从资源上解绑，&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_tag_pairs.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源标签对, 每项参数可见下面 &lt;a href=&#34;#resource-tag-pairs-item&#34;&gt;Resource Tag Pairs Item&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Resource Tag Pairs Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt; &lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DetachTags
+&amp;amp;resource_tag_pairs.1.tag_id=tag-hp55o9i5
+&amp;amp;resource_tag_pairs.1.resource_type=instance
+&amp;amp;resource_tag_pairs.1.resource_id=i-5yn6js06
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DetachTagsResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyTagAttributes</title>
+      <link>/development_docs/api/command_list/tag/modify_tag_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/modify_tag_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改标签的名称和描述。&lt;/p&gt;
+&lt;p&gt;一次只能修改一个标签。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;tag&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tag_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;标签描述&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyTagAttributes
+&amp;amp;tag=tag-axbkmf21
+&amp;amp;tag_name=sample
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyTagAttributesResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

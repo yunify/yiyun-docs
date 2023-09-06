@@ -1,0 +1,6180 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>DeleteVolumes | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/development_docs/api/" class="has-text-primary">API文档</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/development_docs/api/command_list/" class="has-text-primary">API指令列表</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/development_docs/api/command_list/volume/" class="has-text-primary">硬盘</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">DeleteVolumes</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">硬盘</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  API文档
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/api/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/overview/"
+      class="menu__title  "
+      data-depth="0">概述</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/parameters/"
+      class="menu__title  "
+      data-depth="0">公共参数</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/signature/"
+      class="menu__title  "
+      data-depth="0">签名方法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/error_code/"
+      class="menu__title  "
+      data-depth="0">错误码</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  API指令列表
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/command_list/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  云服务器
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/instance/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/describe_instances/"
+      class="menu__title  "
+      data-depth="2">DescribeInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/run_instances/"
+      class="menu__title  "
+      data-depth="2">RunInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/terminate_instances/"
+      class="menu__title  "
+      data-depth="2">TerminateInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/start_instances/"
+      class="menu__title  "
+      data-depth="2">StartInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/stop_instances/"
+      class="menu__title  "
+      data-depth="2">StopInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/restart_instances/"
+      class="menu__title  "
+      data-depth="2">RestartInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/reset_instances/"
+      class="menu__title  "
+      data-depth="2">ResetInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/resize_instances/"
+      class="menu__title  "
+      data-depth="2">ResizeInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/modify_instance_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyInstanceAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/describe_instance_types/"
+      class="menu__title  "
+      data-depth="2">DescribeInstanceTypes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/create_brokers/"
+      class="menu__title  "
+      data-depth="2">CreateBrokers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/delete_brokers/"
+      class="menu__title  "
+      data-depth="2">DeleteBrokers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/create_instance_groups/"
+      class="menu__title  "
+      data-depth="2">CreateInstanceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/delete_instance_groups/"
+      class="menu__title  "
+      data-depth="2">DeleteInstanceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/join_instance_group/"
+      class="menu__title  "
+      data-depth="2">JoinInstanceGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/leave_instance_group/"
+      class="menu__title  "
+      data-depth="2">LeaveInstanceGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/describe_instance_groups/"
+      class="menu__title  "
+      data-depth="2">DescribeInstanceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/clone_instances/"
+      class="menu__title  "
+      data-depth="2">CloneInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/instance/cease_instances/"
+      class="menu__title  "
+      data-depth="2">CeaseInstances</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="2">
+  硬盘
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/volume/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/attach_volumes/"
+      class="menu__title  "
+      data-depth="2">AttachVolumes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/create_volumes/"
+      class="menu__title  "
+      data-depth="2">CreateVolumes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/delete_volumes/"
+      class="menu__title active "
+      data-depth="2">DeleteVolumes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/describe_volumes/"
+      class="menu__title  "
+      data-depth="2">DescribeVolumes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/detach_volumes/"
+      class="menu__title  "
+      data-depth="2">DetachVolumes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/modify_volume_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyVolumeAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/volume/resize_volumes/"
+      class="menu__title  "
+      data-depth="2">ResizeVolumes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  网卡
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/nic/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nic/attach_nics/"
+      class="menu__title  "
+      data-depth="2">AttachNics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nic/create_nics/"
+      class="menu__title  "
+      data-depth="2">CreateNics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nic/delete_nics/"
+      class="menu__title  "
+      data-depth="2">DeleteNics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nic/describe_nics/"
+      class="menu__title  "
+      data-depth="2">DescribeNics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nic/detach_nics/"
+      class="menu__title  "
+      data-depth="2">DetachNics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nic/modify-nic-attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyNicAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  私有网络
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/vxnet/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/create_vxnets/"
+      class="menu__title  "
+      data-depth="2">CreateVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/delete_vxnets/"
+      class="menu__title  "
+      data-depth="2">DeleteVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/describe_vxnet_instances/"
+      class="menu__title  "
+      data-depth="2">DescribeVxnetInstances</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/describe_vxnets/"
+      class="menu__title  "
+      data-depth="2">DescribeVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/join_vxnet/"
+      class="menu__title  "
+      data-depth="2">JoinVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/leave_vxnet/"
+      class="menu__title  "
+      data-depth="2">LeaveVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vxnet/modify_vxnet_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyVxnetAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  路由器
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/router/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/add_router_static_entries/"
+      class="menu__title  "
+      data-depth="2">AddRouterStaticEntries</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/add_router_statics/"
+      class="menu__title  "
+      data-depth="2">AddRouterStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/copy_router_statics/"
+      class="menu__title  "
+      data-depth="2">CopyRouterStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/create_routers/"
+      class="menu__title  "
+      data-depth="2">CreateRouters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/delete_routers/"
+      class="menu__title  "
+      data-depth="2">DeleteRouters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/delete_router_static_entries/"
+      class="menu__title  "
+      data-depth="2">DeleteRouterStaticEntries</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/delete_router_statics/"
+      class="menu__title  "
+      data-depth="2">DeleteRouterStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/describe_routers/"
+      class="menu__title  "
+      data-depth="2">DescribeRouters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/describe_router_static_entries/"
+      class="menu__title  "
+      data-depth="2">DescribeRouterStaticEntries</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/describe_router_statics/"
+      class="menu__title  "
+      data-depth="2">DescribeRouterStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/describe_router_vxnets/"
+      class="menu__title  "
+      data-depth="2">DescribeRouterVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/join_router/"
+      class="menu__title  "
+      data-depth="2">JoinRouter</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/leave_router/"
+      class="menu__title  "
+      data-depth="2">LeaveRouter</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/modify_router_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyRouterAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/modify_router_static_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyRouterStaticAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/modify_router_static_entry_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyRouterStaticEntryAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/poweroff_routers/"
+      class="menu__title  "
+      data-depth="2">PowerOffRouters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/poweron_routers/"
+      class="menu__title  "
+      data-depth="2">PowerOnRouters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/router/update_routers/"
+      class="menu__title  "
+      data-depth="2">UpdateRouters</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  公网 IP
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/eip/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/allocate_eips/"
+      class="menu__title  "
+      data-depth="2">AllocateEips</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/associate_eip/"
+      class="menu__title  "
+      data-depth="2">AssociateEip</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/change_eips_bandwidth/"
+      class="menu__title  "
+      data-depth="2">ChangeEipsBandwidth</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/change_eips_billing_mode/"
+      class="menu__title  "
+      data-depth="2">ChangeEipsBillingMode</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/describe_eips/"
+      class="menu__title  "
+      data-depth="2">DescribeEips</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/dissociate_eips/"
+      class="menu__title  "
+      data-depth="2">DissociateEips</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/modify_eip_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyEipAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/eip/release_eips/"
+      class="menu__title  "
+      data-depth="2">ReleaseEips</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  防火墙
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/sg/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/add_security_group_rules/"
+      class="menu__title  "
+      data-depth="2">AddSecurityGroupRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/apply_security_group/"
+      class="menu__title  "
+      data-depth="2">ApplySecurityGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/copy_security_group_ipsets/"
+      class="menu__title  "
+      data-depth="2">CopySecurityGroupIPSets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/create_security_group/"
+      class="menu__title  "
+      data-depth="2">CreateSecurityGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/create_security_group_ipset/"
+      class="menu__title  "
+      data-depth="2">CreateSecurityGroupIPSet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/create_security_group_snapshot/"
+      class="menu__title  "
+      data-depth="2">CreateSecurityGroupSnapshot</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/delete_security_group_ipsets/"
+      class="menu__title  "
+      data-depth="2">DeleteSecurityGroupIPSets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/delete_security_group_rules/"
+      class="menu__title  "
+      data-depth="2">DeleteSecurityGroupRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/delete_security_groups/"
+      class="menu__title  "
+      data-depth="2">DeleteSecurityGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/delete_security_group_snapshots/"
+      class="menu__title  "
+      data-depth="2">DeleteSecurityGroupSnapshots</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/describe_security_group_ipsets/"
+      class="menu__title  "
+      data-depth="2">DescribeSecurityGroupIPSets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/describe_security_group_rules/"
+      class="menu__title  "
+      data-depth="2">DescribeSecurityGroupRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/describe_security_groups/"
+      class="menu__title  "
+      data-depth="2">DescribeSecurityGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/describe_security_group_snapshots/"
+      class="menu__title  "
+      data-depth="2">DescribeSecurityGroupSnapshots</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/modify_security_group_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifySecurityGroupAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/modify_security_group_ipset_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifySecurityGroupIPSetAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/modify_security_group_rule_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifySecurityGroupRuleAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sg/rollback_security_group/"
+      class="menu__title  "
+      data-depth="2">RollbackSecurityGroup</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  WAF
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/waf/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/add_waf_rules/"
+      class="menu__title  "
+      data-depth="2">AddWAFRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/apply_waf_domain_policy/"
+      class="menu__title  "
+      data-depth="2">ApplyWAFDomainPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/attach_waf_domain_policies/"
+      class="menu__title  "
+      data-depth="2">AttachWAFDomainPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/create_waf_domain_policy/"
+      class="menu__title  "
+      data-depth="2">CreateWAFDomainPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/delete_waf_domain_policy/"
+      class="menu__title  "
+      data-depth="2">DeleteWAFDomainPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/delete_waf_rules/"
+      class="menu__title  "
+      data-depth="2">DeleteWAFRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/describe_waf_domain_policy/"
+      class="menu__title  "
+      data-depth="2">DescribeWAFDomainPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/detach_waf_domain_policies/"
+      class="menu__title  "
+      data-depth="2">DetachWAFDomainPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/modify_loadbalancer_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyLoadBalancerAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/waf/modify_waf_domain_policy/"
+      class="menu__title  "
+      data-depth="2">ModifyWAFDomainPolicyAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  SSH 密钥
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/keypair/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/keypair/attach_key_pairs/"
+      class="menu__title  "
+      data-depth="2">AttachKeyPairs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/keypair/create_key_pairs/"
+      class="menu__title  "
+      data-depth="2">CreateKeyPair</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/keypair/delete_key_pairs/"
+      class="menu__title  "
+      data-depth="2">DeleteKeyPairs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/keypair/describe_key_pairs/"
+      class="menu__title  "
+      data-depth="2">DescribeKeyPairs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/keypair/detach_key_pairs/"
+      class="menu__title  "
+      data-depth="2">DetachKeyPairs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/keypair/modify_key_pair_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyKeyPairAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  镜像
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/image/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/capture_image_from_snapshot/"
+      class="menu__title  "
+      data-depth="2">CaptureImageFromSnapshot</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/capture_instance/"
+      class="menu__title  "
+      data-depth="2">CaptureInstance</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/clone-images/"
+      class="menu__title  "
+      data-depth="2">CloneImages</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/delete_images/"
+      class="menu__title  "
+      data-depth="2">DeleteImages</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/describe_images/"
+      class="menu__title  "
+      data-depth="2">DescribeImages</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/describe-image-users/"
+      class="menu__title  "
+      data-depth="2">DescribeImageUsers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/grant-image-to-users/"
+      class="menu__title  "
+      data-depth="2">GrantImageToUsers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/modify_image_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyImageAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/image/revoke-image-from-users/"
+      class="menu__title  "
+      data-depth="2">RevokeImageFromUsers</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  NFV网络功能虚拟化
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/nfv/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/associate_eips_to_nfv/"
+      class="menu__title  "
+      data-depth="2">AssociateEipsToNFV</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/create_nfv/"
+      class="menu__title  "
+      data-depth="2">CreateNFV</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/delete_nfvs/"
+      class="menu__title  "
+      data-depth="2">DeleteNFVs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/describe_nfvs/"
+      class="menu__title  "
+      data-depth="2">DescribeNFVs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/dissociate_eips_from_nfv/"
+      class="menu__title  "
+      data-depth="2">DissociateEipsFromNFV</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/get_nfv_monitor/"
+      class="menu__title  "
+      data-depth="2">GetNFVMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/modify_nfv_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyNFVAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/modify_nfv_security_groups/"
+      class="menu__title  "
+      data-depth="2">ModifyNFVSecurityGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/nfv_join_vxnets/"
+      class="menu__title  "
+      data-depth="2">NFVJoinVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/nfv_leave_vxnets/"
+      class="menu__title  "
+      data-depth="2">NFVLeaveVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/resize_nfv/"
+      class="menu__title  "
+      data-depth="2">ResizeNFV</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/start_nfvs/"
+      class="menu__title  "
+      data-depth="2">StartNFVs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/stop_nfvs/"
+      class="menu__title  "
+      data-depth="2">StopNFVs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/nfv/update_nfvs/"
+      class="menu__title  "
+      data-depth="2">UpdateNFVs</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  负载均衡器
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/lb/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/add_loadbalancer_backends/"
+      class="menu__title  "
+      data-depth="2">AddLoadBalancerBackends</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/add_loadbalancer_listeners/"
+      class="menu__title  "
+      data-depth="2">AddLoadBalancerListeners</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/add_loadbalancer_policy_rules/"
+      class="menu__title  "
+      data-depth="2">AddLoadBalancerPolicyRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/apply_loadbalancer_policy/"
+      class="menu__title  "
+      data-depth="2">ApplyLoadBalancerPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/associate_eips_to_loadbalancer/"
+      class="menu__title  "
+      data-depth="2">AssociateEipsToLoadBalancer</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/associate_server_certs_to_loadbalancer_listener/"
+      class="menu__title  "
+      data-depth="2">AssociateServerCertsToLBListener</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/create_loadbalancer/"
+      class="menu__title  "
+      data-depth="2">CreateLoadBalancer</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/create_loadbalancer_policy/"
+      class="menu__title  "
+      data-depth="2">CreateLoadBalancerPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/create_server_certificate/"
+      class="menu__title  "
+      data-depth="2">CreateServerCertificate</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/delete_loadbalancer_backends/"
+      class="menu__title  "
+      data-depth="2">DeleteLoadBalancerBackends</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/delete_loadbalancer_listeners/"
+      class="menu__title  "
+      data-depth="2">DeleteLoadBalancerListeners</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/delete_loadbalancer_policies/"
+      class="menu__title  "
+      data-depth="2">DeleteLoadBalancerPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/delete_loadbalancer_policy_rules/"
+      class="menu__title  "
+      data-depth="2">DeleteLoadBalancerPolicyRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/delete_loadbalancers/"
+      class="menu__title  "
+      data-depth="2">DeleteLoadBalancers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/delete_server_certificates/"
+      class="menu__title  "
+      data-depth="2">DeleteServerCertificates</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/describe_loadbalancer_backends/"
+      class="menu__title  "
+      data-depth="2">DescribeLoadBalancerBackends</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/describe_loadbalancer_listeners/"
+      class="menu__title  "
+      data-depth="2">DescribeLoadBalancerListeners</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/describe_loadbalancer_policies/"
+      class="menu__title  "
+      data-depth="2">DescribeLoadBalancerPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/describe_loadbalancer_policy_rules/"
+      class="menu__title  "
+      data-depth="2">DescribeLoadBalancerPolicyRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/describe_loadbalancers/"
+      class="menu__title  "
+      data-depth="2">DescribeLoadBalancers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/describe_server_certificates/"
+      class="menu__title  "
+      data-depth="2">DescribeServerCertificates</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/dissociate_eips_from_loadbalancer/"
+      class="menu__title  "
+      data-depth="2">DissociateEipsFromLoadBalancer</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/dissociate_server_certs_from_loadbalancer_listener/"
+      class="menu__title  "
+      data-depth="2">DissociateServerCertsFromLBListener</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/loadbalancer_join_vxnet/"
+      class="menu__title  "
+      data-depth="2">LoadBalancerJoinVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/loadbalancer_leave_vxnet/"
+      class="menu__title  "
+      data-depth="2">LoadBalancerLeaveVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/modify_loadbalancer_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyLoadBalancerAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/modify_loadbalancer_backend_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyLoadBalancerBackendAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/modify_loadbalancer_listener_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyLoadBalancerListenerAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/modify_loadbalancer_policy_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyLoadBalancerPolicyAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/modify_loadbalancer_policy_rule_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyLoadBalancerPolicyRuleAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/modify_server_certificate_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyServerCertificateAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/resize_loadbalancers/"
+      class="menu__title  "
+      data-depth="2">ResizeLoadBalancers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/start_loadbalancers/"
+      class="menu__title  "
+      data-depth="2">StartLoadBalancers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/stop_loadbalancers/"
+      class="menu__title  "
+      data-depth="2">StopLoadBalancers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/lb/update_loadbalancers/"
+      class="menu__title  "
+      data-depth="2">UpdateLoadBalancers</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  路由表
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/routing_table/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/add_routes/"
+      class="menu__title  "
+      data-depth="2">AddRoutes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/associate_route_table/"
+      class="menu__title  "
+      data-depth="2">AssociateRouteTable</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/create_route_table/"
+      class="menu__title  "
+      data-depth="2">CreateRouteTable</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/delete_route_tables/"
+      class="menu__title  "
+      data-depth="2">DeleteRouteTables</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/describe_routes/"
+      class="menu__title  "
+      data-depth="2">DescribeRoutes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/describe_route_tables/"
+      class="menu__title  "
+      data-depth="2">DescribeRouteTables</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/describe_routing_table_resources/"
+      class="menu__title  "
+      data-depth="2">DescribeRoutingTableResources</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/dissociate_route_table/"
+      class="menu__title  "
+      data-depth="2">DissociateRouteTable</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/modify_route_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyRouteAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/modify_route_table_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyRouteTableAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/remove_routes/"
+      class="menu__title  "
+      data-depth="2">RemoveRoutes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/routing_table/update_route_table/"
+      class="menu__title  "
+      data-depth="2">UpdateRouteTable</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  资源监控
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/monitor/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_cache_monitor/"
+      class="menu__title  "
+      data-depth="2">GetCacheMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_loadbalancer_monitor/"
+      class="menu__title  "
+      data-depth="2">GetLoadBalancerMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_mongo_monitor/"
+      class="menu__title  "
+      data-depth="2">GetMongoMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_monitor/"
+      class="menu__title  "
+      data-depth="2">GetMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_monitors/"
+      class="menu__title  "
+      data-depth="2">GetMonitors</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_queue_monitor/"
+      class="menu__title  "
+      data-depth="2">GetQueueMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_rdb_monitor/"
+      class="menu__title  "
+      data-depth="2">GetRDBMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/get_zookeeper_monitor/"
+      class="menu__title  "
+      data-depth="2">GetZooKeeperMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/monitor/compress/"
+      class="menu__title  "
+      data-depth="2">监控数据压缩说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  监控告警
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/alarm/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/add_alarm_policy_actions/"
+      class="menu__title  "
+      data-depth="2">AddAlarmPolicyActions</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/add_alarm_policy_rules/"
+      class="menu__title  "
+      data-depth="2">AddAlarmPolicyRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/apply_alarm_policy/"
+      class="menu__title  "
+      data-depth="2">ApplyAlarmPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/associate_alarm_policy/"
+      class="menu__title  "
+      data-depth="2">AssociateAlarmPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/create_alarm_policy/"
+      class="menu__title  "
+      data-depth="2">CreateAlarmPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/delete_alarm_policies/"
+      class="menu__title  "
+      data-depth="2">DeleteAlarmPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/delete_alarm_policy_actions/"
+      class="menu__title  "
+      data-depth="2">DeleteAlarmPolicyActions</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/delete_alarm_policy_rules/"
+      class="menu__title  "
+      data-depth="2">DeleteAlarmPolicyRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/describe_alarm_history/"
+      class="menu__title  "
+      data-depth="2">DescribeAlarmHistory</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/describe_alarm_policies/"
+      class="menu__title  "
+      data-depth="2">DescribeAlarmPolicies</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/describe_alarm_policy_actions/"
+      class="menu__title  "
+      data-depth="2">DescribeAlarmPolicyActions</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/describe_alarm_policy_rules/"
+      class="menu__title  "
+      data-depth="2">DescribeAlarmPolicyRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/describe_alarms/"
+      class="menu__title  "
+      data-depth="2">DescribeAlarms</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/dissociate_alarm_policy/"
+      class="menu__title  "
+      data-depth="2">DissociateAlarmPolicy</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/modify_alarm_policy_action_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyAlarmPolicyActionAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/modify_alarm_policy_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyAlarmPolicyAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/alarm/modify_alarm_policy_rule_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyAlarmPolicyRuleAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  备份
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/snapshot/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/apply_snapshots/"
+      class="menu__title  "
+      data-depth="2">ApplySnapshots</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/capture_instance_from_snapshot/"
+      class="menu__title  "
+      data-depth="2">CaptureInstanceFromSnapshot</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/create_snapshots/"
+      class="menu__title  "
+      data-depth="2">CreateSnapshots</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/create_volume_from_snapshot/"
+      class="menu__title  "
+      data-depth="2">CreateVolumeFromSnapshot</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/delete_snapshots/"
+      class="menu__title  "
+      data-depth="2">DeleteSnapshots</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/describe_snapshots/"
+      class="menu__title  "
+      data-depth="2">DescribeSnapshots</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/snapshot/modify_snapshot_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifySnapshotAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  User Data
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/userdata/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/userdata/upload_userdata_attachment/"
+      class="menu__title  "
+      data-depth="2">UploadUserDataAttachment</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  内网域名别名
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/dns_alias/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/dns_alias/associate_dns_alias/"
+      class="menu__title  "
+      data-depth="2">AssociateDNSAlias</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/dns_alias/describe_dns_aliases/"
+      class="menu__title  "
+      data-depth="2">DescribeDNSAliases</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/dns_alias/dissociate_dns_aliases/"
+      class="menu__title  "
+      data-depth="2">DissociateDNSAliases</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/dns_alias/get_dns_label/"
+      class="menu__title  "
+      data-depth="2">GetDNSLabel</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  操作日志
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/job/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/job/describe_jobs/"
+      class="menu__title  "
+      data-depth="2">DescribeJobs</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  标签
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/tag/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/tag/attach_tags/"
+      class="menu__title  "
+      data-depth="2">AttachTags</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/tag/create_tag/"
+      class="menu__title  "
+      data-depth="2">CreateTag</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/tag/delete_tags/"
+      class="menu__title  "
+      data-depth="2">DeleteTags</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/tag/describe_tags/"
+      class="menu__title  "
+      data-depth="2">DescribeTags</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/tag/detach_tags/"
+      class="menu__title  "
+      data-depth="2">DetachTags</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/tag/modify_tag_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyTagAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  区域
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/zone/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/zone/describe_zones/"
+      class="menu__title  "
+      data-depth="2">DescribeZones</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  AppCenter
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/appcenter2/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  云应用
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/cloud/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/add_cluster_nodes/"
+      class="menu__title  "
+      data-depth="3">AddClusterNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/associate_eip_to_cluster_node/"
+      class="menu__title  "
+      data-depth="3">AssociateEipToClusterNode</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/cease_clusters/"
+      class="menu__title  "
+      data-depth="3">CeaseClusters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/change_cluster_vxnet/"
+      class="menu__title  "
+      data-depth="3">ChangeClusterVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/delete_cluster_nodes/"
+      class="menu__title  "
+      data-depth="3">DeleteClusterNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/delete_clusters/"
+      class="menu__title  "
+      data-depth="3">DeleteClusters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/deploy_app_version/"
+      class="menu__title  "
+      data-depth="3">DeployAppVersion</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_app_version_attachments/"
+      class="menu__title  "
+      data-depth="3">DescribeAppVersionAttachments</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_app_versions/"
+      class="menu__title  "
+      data-depth="3">DescribeAppVersions</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_cluster_display_tabs/"
+      class="menu__title  "
+      data-depth="3">DescribeClusterDisplayTabs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_cluster_env/"
+      class="menu__title  "
+      data-depth="3">DescribeClusterEnvironment</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_cluster_jobs/"
+      class="menu__title  "
+      data-depth="3">DescribeClusterJobs</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_cluster_nodes/"
+      class="menu__title  "
+      data-depth="3">DescribeClusterNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/describe_clusters/"
+      class="menu__title  "
+      data-depth="3">DescribeClusters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/dissociate_eip_from_cluster_node/"
+      class="menu__title  "
+      data-depth="3">DissociateEipFromClusterNode</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/get_cluster_monitor/"
+      class="menu__title  "
+      data-depth="3">GetClusterMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/recover_clusters/"
+      class="menu__title  "
+      data-depth="3">RecoverClusters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/resize_cluster/"
+      class="menu__title  "
+      data-depth="3">ResizeCluster</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/restart_cluster_service/"
+      class="menu__title  "
+      data-depth="3">RestartClusterService</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/start_clusters/"
+      class="menu__title  "
+      data-depth="3">StartClusters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/stop_clusters/"
+      class="menu__title  "
+      data-depth="3">StopClusters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/cloud/update_cluster_env/"
+      class="menu__title  "
+      data-depth="3">UpdateClusterEnvironment</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  SaaS应用
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/saas/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/saas/account_api/"
+      class="menu__title  "
+      data-depth="3">SSO API</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/appcenter2/saas/new_billing_api/"
+      class="menu__title  "
+      data-depth="3">用户计费API</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  缓存服务
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/cache/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/add_cache_nodes/"
+      class="menu__title  "
+      data-depth="2">AddCacheNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/apply_cache_parameter_group/"
+      class="menu__title  "
+      data-depth="2">ApplyCacheParameterGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/change_cache_vxnet/"
+      class="menu__title  "
+      data-depth="2">ChangeCacheVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/create_cache/"
+      class="menu__title  "
+      data-depth="2">CreateCache</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/create_cache_from_snapshot/"
+      class="menu__title  "
+      data-depth="2">CreateCacheFromSnapshot</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/create_cache_parameter_group/"
+      class="menu__title  "
+      data-depth="2">CreateCacheParameterGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/delete_cache_nodes/"
+      class="menu__title  "
+      data-depth="2">DeleteCacheNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/delete_cache_parameter_groups/"
+      class="menu__title  "
+      data-depth="2">DeleteCacheParameterGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/delete_caches/"
+      class="menu__title  "
+      data-depth="2">DeleteCaches</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/describe_cache_nodes/"
+      class="menu__title  "
+      data-depth="2">DescribeCacheNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/describe_cache_parameter_groups/"
+      class="menu__title  "
+      data-depth="2">DescribeCacheParameterGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/describe_cache_parameters/"
+      class="menu__title  "
+      data-depth="2">DescribeCacheParameters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/describe_caches/"
+      class="menu__title  "
+      data-depth="2">DescribeCaches</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/modify_cache_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyCacheAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/modify_cache_node_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyCacheNodeAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/modify_cache_parameter_group_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyCacheParameterGroupAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/reset_cache_parameters/"
+      class="menu__title  "
+      data-depth="2">ResetCacheParameters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/resize_cache/"
+      class="menu__title  "
+      data-depth="2">ResizeCaches</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/restart_cache_nodes/"
+      class="menu__title  "
+      data-depth="2">RestartCacheNodes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/restart_caches/"
+      class="menu__title  "
+      data-depth="2">RestartCaches</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/start_caches/"
+      class="menu__title  "
+      data-depth="2">StartCaches</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/stop_caches/"
+      class="menu__title  "
+      data-depth="2">StopCaches</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/update_cache/"
+      class="menu__title  "
+      data-depth="2">UpdateCache</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/cache/update_cache_parameters/"
+      class="menu__title  "
+      data-depth="2">UpdateCacheParameters</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Virtual SAN / NAS
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/s2/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/associate_s2_account_group/"
+      class="menu__title  "
+      data-depth="2">AssociateS2AccountGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/attach_to_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">AttachToS2SharedTarget</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/change_s2_server_vxnet/"
+      class="menu__title  "
+      data-depth="2">ChangeS2ServerVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/create_s2_account/"
+      class="menu__title  "
+      data-depth="2">CreateS2Account</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/create_s2_group/"
+      class="menu__title  "
+      data-depth="2">CreateS2Group</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/create_s2_server/"
+      class="menu__title  "
+      data-depth="2">CreateS2Server</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/create_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">CreateS2SharedTarget</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/delete_s2_accounts/"
+      class="menu__title  "
+      data-depth="2">DeleteS2Accounts</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/delete_s2_groups/"
+      class="menu__title  "
+      data-depth="2">DeleteS2Groups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/delete_s2_servers/"
+      class="menu__title  "
+      data-depth="2">DeleteS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/delete_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">DeleteS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/describe_s2_accounts/"
+      class="menu__title  "
+      data-depth="2">DescribeS2Accounts</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/describle_s2_default_parameters/"
+      class="menu__title  "
+      data-depth="2">DescribeS2DefaultParameters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/describe_s2_groups/"
+      class="menu__title  "
+      data-depth="2">DescribeS2Groups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/describe_s2_servers/"
+      class="menu__title  "
+      data-depth="2">DescribeS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/describe_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">DescribeS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/detach_from_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">DetachFromS2SharedTarget</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/disable_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">DisableS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/dissociate_s2_account_group/"
+      class="menu__title  "
+      data-depth="2">DissociateS2AccountGroup</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/enable_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">EnableS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/modify_s2_account/"
+      class="menu__title  "
+      data-depth="2">ModifyS2Account</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/modify_s2_group/"
+      class="menu__title  "
+      data-depth="2">ModifyS2Group</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/modify_s2_server/"
+      class="menu__title  "
+      data-depth="2">ModifyS2Server</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/modify_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">ModifyS2SharedTargetAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/poweroff_s2_servers/"
+      class="menu__title  "
+      data-depth="2">PowerOffS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/poweron_s2_servers/"
+      class="menu__title  "
+      data-depth="2">PowerOnS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/resize_s2_servers/"
+      class="menu__title  "
+      data-depth="2">ResizeS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/s2/update_s2_servers/"
+      class="menu__title  "
+      data-depth="2">UpdateS2Servers</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Virtual SAN
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/vsan/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/attach_to_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">AttachToS2SharedTarget</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/change_s2_server_vxnet/"
+      class="menu__title  "
+      data-depth="2">ChangeS2ServerVxnet</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/create_s2_server/"
+      class="menu__title  "
+      data-depth="2">CreateS2Server</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/create_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">CreateS2SharedTarget</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/delete_s2_servers/"
+      class="menu__title  "
+      data-depth="2">DeleteS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/delete_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">DeleteS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/describle_s2_default_parameters/"
+      class="menu__title  "
+      data-depth="2">DescribeS2DefaultParameters</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/describe_s2_servers/"
+      class="menu__title  "
+      data-depth="2">DescribeS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/describe_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">DescribeS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/detach_from_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">DetachFromS2SharedTarget</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/disable_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">DisableS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/enable_s2_shared_targets/"
+      class="menu__title  "
+      data-depth="2">EnableS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/modify_s2_server/"
+      class="menu__title  "
+      data-depth="2">ModifyS2Server</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/modify_s2_shared_target/"
+      class="menu__title  "
+      data-depth="2">ModifyS2SharedTargets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/poweroff_s2_servers/"
+      class="menu__title  "
+      data-depth="2">PowerOffS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/poweron_s2_servers/"
+      class="menu__title  "
+      data-depth="2">PowerOnS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/resize_s2_servers/"
+      class="menu__title  "
+      data-depth="2">ResizeS2Servers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vsan/update_s2_servers/"
+      class="menu__title  "
+      data-depth="2">UpdateS2Servers</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  资源协作
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/resource_acl/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/addgrouprolerules/"
+      class="menu__title  "
+      data-depth="2">AddGroupRoleRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/addresourcegroupitems/"
+      class="menu__title  "
+      data-depth="2">AddResourceGroupItems</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/addusergroupmembers/"
+      class="menu__title  "
+      data-depth="2">AddUserGroupMembers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/creategrouproles/"
+      class="menu__title  "
+      data-depth="2">CreateGroupRoles</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/createresourcegroups/"
+      class="menu__title  "
+      data-depth="2">CreateResourceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/createusergroups/"
+      class="menu__title  "
+      data-depth="2">CreateUserGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/deletegrouprolerules/"
+      class="menu__title  "
+      data-depth="2">DeleteGroupRoleRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/deletegrouproles/"
+      class="menu__title  "
+      data-depth="2">DeleteGroupRoles</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/deleteresourcegroupitems/"
+      class="menu__title  "
+      data-depth="2">DeleteResourceGroupItems</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/deleteresourcegroups/"
+      class="menu__title  "
+      data-depth="2">DeleteResourceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/deleteusergroupmembers/"
+      class="menu__title  "
+      data-depth="2">DeleteUserGroupMembers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/deleteusergroups/"
+      class="menu__title  "
+      data-depth="2">DeleteUserGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describegrouprolerules/"
+      class="menu__title  "
+      data-depth="2">DescribeGroupRoleRules</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describegrouproles/"
+      class="menu__title  "
+      data-depth="2">DescribeGroupRoles</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describeresourcegroupitems/"
+      class="menu__title  "
+      data-depth="2">DescribeResourceGroupItems</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describeresourcegroups/"
+      class="menu__title  "
+      data-depth="2">DescribeResourceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describeresourceusergroups/"
+      class="menu__title  "
+      data-depth="2">DescribeResourceUserGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describesharedresourcegroups/"
+      class="menu__title  "
+      data-depth="2">DescribeSharedResourceGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describeusergroupmembers/"
+      class="menu__title  "
+      data-depth="2">DescribeUserGroupMembers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/describeusergroups/"
+      class="menu__title  "
+      data-depth="2">DescribeUserGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/grantresourcegroupstousergroups/"
+      class="menu__title  "
+      data-depth="2">GrantResourceGroupsToUserGroups</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/modifygrouproleattributes/"
+      class="menu__title  "
+      data-depth="2">ModifyGroupRoleAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/modifygrouproleruleattributes/"
+      class="menu__title  "
+      data-depth="2">ModifyGroupRoleRuleAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/modifyresourcegroupattributes/"
+      class="menu__title  "
+      data-depth="2">ModifyResourceGroupAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/modifyusergroupattributes/"
+      class="menu__title  "
+      data-depth="2">ModifyUserGroupAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/modifyusergroupmemeberattributes/"
+      class="menu__title  "
+      data-depth="2">ModifyUserGroupMemberAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/resource_acl/revokeresourcegroupsfromusergroups/"
+      class="menu__title  "
+      data-depth="2">RevokeResourceGroupsFromUserGroups</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  消息中心及通知列表
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/notification_center/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/create_notification_items/"
+      class="menu__title  "
+      data-depth="2">CreateNotificationItems</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/create_notification_list/"
+      class="menu__title  "
+      data-depth="2">CreateNotificationList</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/delete_notification_items/"
+      class="menu__title  "
+      data-depth="2">DeleteNotificationItems</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/delete_notification_lists/"
+      class="menu__title  "
+      data-depth="2">DeleteNotificationLists</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/describe_notification_center_user_posts/"
+      class="menu__title  "
+      data-depth="2">DescribeNotificationCenterUserPosts</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/describe_notification_items/"
+      class="menu__title  "
+      data-depth="2">DescribeNotificationItems</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/describe_notification_lists/"
+      class="menu__title  "
+      data-depth="2">DescribeNotificationLists</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/modify_notification_list_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyNotificationListAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/notification_center/verify_notification_item/"
+      class="menu__title  "
+      data-depth="2">VerifyNotificationItem</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  SPAN (Switched Port Analyzer)
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/span/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/add-span-members/"
+      class="menu__title  "
+      data-depth="2">AddSpanMembers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/create_span/"
+      class="menu__title  "
+      data-depth="2">CreateSpan</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/delete_spans/"
+      class="menu__title  "
+      data-depth="2">DeleteSpans</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/describe_spans/"
+      class="menu__title  "
+      data-depth="2">DescribeSpans</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/modify-span-attributes/"
+      class="menu__title  "
+      data-depth="2">ModifySpanAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/remove-span-members/"
+      class="menu__title  "
+      data-depth="2">RemoveSpanMembers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/span/update-span/"
+      class="menu__title  "
+      data-depth="2">UpdateSpan</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  子帐户
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/subuser/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/subuser/create_sub_user/"
+      class="menu__title  "
+      data-depth="2">CreateSubUser</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/subuser/delete_sub_users/"
+      class="menu__title  "
+      data-depth="2">DeleteSubUsers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/subuser/describe_sub_users/"
+      class="menu__title  "
+      data-depth="2">DescribeSubUsers</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/subuser/modify_sub_user_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifySubUserAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/subuser/restore_sub_users/"
+      class="menu__title  "
+      data-depth="2">RestoreSubUsers</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  计费
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/billing/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/billing/get_balance/"
+      class="menu__title  "
+      data-depth="2">GetBalance</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/billing/get_charge_records/"
+      class="menu__title  "
+      data-depth="2">GetChargeRecords</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/billing/get_charge_sums/"
+      class="menu__title  "
+      data-depth="2">GetChargeSums</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/billing/get_lease_info/"
+      class="menu__title  "
+      data-depth="2">GetLeaseInfo</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  SD-WAN
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/sdwan/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sdwan/change_wan_access_bandwidth/"
+      class="menu__title  "
+      data-depth="2">ChangeWanAccessBandwidth</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sdwan/describe_wan_accesss/"
+      class="menu__title  "
+      data-depth="2">DescribeWanAccesss</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sdwan/get_wan_info/"
+      class="menu__title  "
+      data-depth="2">GetWanInfo</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sdwan/get_wan_monitor/"
+      class="menu__title  "
+      data-depth="2">GetWanMonitor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/sdwan/upgrade_wan_access/"
+      class="menu__title  "
+      data-depth="2">UpgradeWanAccess</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  边界路由器
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/vpc_border/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/add_border_statics/"
+      class="menu__title  "
+      data-depth="2">AddBorderStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/associate_border/"
+      class="menu__title  "
+      data-depth="2">AssociateBorder</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/cancel_border_static_changes/"
+      class="menu__title  "
+      data-depth="2">CancelBorderStaticChanges</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/config_border/"
+      class="menu__title  "
+      data-depth="2">ConfigBorder</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/create_vpc_borders/"
+      class="menu__title  "
+      data-depth="2">CreateVpcBorders</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/delete_border_statics/"
+      class="menu__title  "
+      data-depth="2">DeleteBorderStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/delete_vpc_borders/"
+      class="menu__title  "
+      data-depth="2">DeleteVpcBorders</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/describe_border_statics/"
+      class="menu__title  "
+      data-depth="2">DescribeBorderStatics</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/describe_border_vxnets/"
+      class="menu__title  "
+      data-depth="2">DescribeBorderVxnets</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/describe_vpc_borders/"
+      class="menu__title  "
+      data-depth="2">DescribeVpcBorders</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/dissociate_border/"
+      class="menu__title  "
+      data-depth="2">DissociateBorder</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/join_border/"
+      class="menu__title  "
+      data-depth="2">JoinBorder</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/leave_border/"
+      class="menu__title  "
+      data-depth="2">LeaveBorder</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/modify_border_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyBorderAttributes</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/vpc_border/modify_border_static_attributes/"
+      class="menu__title  "
+      data-depth="2">ModifyBorderStaticAttributes</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  其它
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/misc/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/misc/describe_quotas/"
+      class="menu__title  "
+      data-depth="2">DescribeQuotas</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/misc/get_quota_left/"
+      class="menu__title  "
+      data-depth="2">GetQuotaLeft</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/misc/grant_quota_indep/"
+      class="menu__title  "
+      data-depth="2">GrantQuotaIndep</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/command_list/misc/revoke_quota_indep/"
+      class="menu__title  "
+      data-depth="2">RevokeQuotaIndep</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  通用部分
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/common/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/common/security_group_rule_icmp_type/"
+      class="menu__title  "
+      data-depth="1">ICMP 类型及代码</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/common/instance_type/"
+      class="menu__title  "
+      data-depth="1">Instance Types</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/common/response_with_job_id/"
+      class="menu__title  "
+      data-depth="1">Response with job_id</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/api/common/response_without_job/"
+      class="menu__title  "
+      data-depth="1">Response without Jobd</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  SDK文档
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/sdk/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  SDK文档简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/sdk/intro/intro/"
+      class="menu__title  "
+      data-depth="1">SDK文档简介</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  Python
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/python/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  安装指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/install/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/sdk/python/install/install/"
+      class="menu__title  "
+      data-depth="2">安装 SDK</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/sdk/python/manual/manual_guide/"
+      class="menu__title  "
+      data-depth="2">快速入门</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  CLI文档
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/cli/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  安装指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/install/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/cli/install/install/"
+      class="menu__title  "
+      data-depth="1">CLI安装</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/development_docs/api/command_list/volume/delete_volumes/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/development_docs/cli/manual/operation/"
+      class="menu__title  "
+      data-depth="1">CLI配置</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents"></nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">硬盘</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>DeleteVolumes</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-12-01
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	
+	
+
+	
+	<p>删除一块或多块硬盘。硬盘须在可用（ available ）状态下才能被删除， 已加载到云服务器的硬盘需先卸载后才能删除。</p>
+<p><strong>Request Parameters</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>volumes.n</td>
+<td>String</td>
+<td>硬盘 ID</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>zone</td>
+<td>String</td>
+<td>区域 ID，注意要小写</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><a href="../../../parameters/"><em>公共参数</em></a></p>
+<p><strong>Response Elements</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action</td>
+<td>String</td>
+<td>响应动作</td>
+</tr>
+<tr>
+<td>job_id</td>
+<td>String</td>
+<td>执行任务的 Job ID</td>
+</tr>
+<tr>
+<td>ret_code</td>
+<td>Integer</td>
+<td>执行成功与否，0 表示成功，其他值则为错误代码</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<p><em>Example Request</em>:</p>
+<pre tabindex="0"><code>https://api.yiqiyun.net.cn/iaas/?action=DeleteVolumes
+&amp;volumes.1=vol-uydrnlax
+&amp;zone=zw2
+&amp;COMMON_PARAMS
+</code></pre><p><em>Example Response</em>:</p>
+<pre tabindex="0"><code>{
+  &#34;action&#34;:&#34;DeleteVolumesResponse&#34;,
+  &#34;job_id&#34;:&#34;j-bm6ym3r8&#34;,
+  &#34;ret_code&#34;:0
+}
+</code></pre>
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+		<a href="/development_docs/api/command_list/volume/create_volumes/" class="prev pl1" title="CreateVolumes ">
+			上一页: CreateVolumes
+		</a>
+		
+
+		
+		<a href="/development_docs/api/command_list/volume/describe_volumes/" class="next pr1" title="DescribeVolumes">
+			下一页: DescribeVolumes
+		</a>
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,2086 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 监控告警</title>
+    <link>/development_docs/api/command_list/alarm/</link>
+    <description>Recent content in 监控告警 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/alarm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: AddAlarmPolicyActions</title>
+      <link>/development_docs/api/command_list/alarm/add_alarm_policy_actions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/add_alarm_policy_actions/</guid>
+      <description>
+        
+        
+        &lt;p&gt;给监控策略添加告警行为，目前行为只支持发送通知。 即当资源发生告警、或解除告警、或取不到监控数据时 给通知列表中的所有联系项发邮件或短信通知。&lt;/p&gt;
+&lt;p&gt;通知列表中只有验证过的联系方式才能接收通知。&lt;/p&gt;
+&lt;p&gt;改后需要调用 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使修改生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;actions.n.trigger_action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;通知列表 ID ，&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;actions.n.trigger_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当监控告警变成什么状态时，发消息给此通知列表。有效值是 “ok”, “alarm”, “insufficient”, “deleted”&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_actions&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;添加成功的告警行为 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AddAlarmPolicyActions
+&amp;amp;actions.1.trigger_action=nl-xxxxxx
+&amp;amp;actions.1.trigger_status=ok
+&amp;amp;alarm_policy=alp-xxxxxx
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AddAlarmPolicyActionsResponse&amp;#34;,
+  &amp;#34;alarm_policy_actions&amp;#34;:[
+    &amp;#34;alpa-xxxxx&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: AddAlarmPolicyRules</title>
+      <link>/development_docs/api/command_list/alarm/add_alarm_policy_rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/add_alarm_policy_rules/</guid>
+      <description>
+        
+        
+        &lt;p&gt;给监控告警策略添加规则，当资源监控数据满足设置的任何一条规则，都会触发告警行为。 改后需要调用 &lt;a href=&#34;../apply_alarm_policy&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使修改生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.alarm_policy_rule_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.meter&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源监控项，不同资源类型有不同的监控项。可参考 &lt;a href=&#34;../../monitor/&#34;&gt;&lt;em&gt;资源监控&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.condition_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;条件类型: gt (大于), lt (小于)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.thresholds&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;阈值&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.data_processor&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据处理方式: raw (使用监控数据原始值), percent (只适用于 IP 带宽监控，将监控数据转换为带宽占用百分比，再跟阈值进行比较) 默认是 raw 。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.consecutive_periods&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;连续周期数，即连续几个检查周期，监控数据都达到了告警阈值，才触发告警行为。 默认是 1 。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.period_start_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则生效开始时间&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.period_end_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则生效结束时间&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.alarm_level_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警级别，level-00000000 表示高，level-00000001表示低&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rules&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;添加成功的监控告警策略规则 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AddAlarmPolicyRules
+&amp;amp;rules.1.meter=cpu
+&amp;amp;rules.1.condition_type=gt
+&amp;amp;rules.1.thresholds=70
+&amp;amp;rules.1.data_processor=raw
+&amp;amp;rules.1.consecutive_periods=5
+&amp;amp;alarm_policy=alp-xxxxx
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AddAlarmPolicyRulesResponse&amp;#34;,
+  &amp;#34;alarm_policy_rules&amp;#34;:[
+    &amp;#34;alpr-xxxxx&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ApplyAlarmPolicy</title>
+      <link>/development_docs/api/command_list/alarm/apply_alarm_policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/apply_alarm_policy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;应用监控告警策略。当告警策略的属性、规则或告警行为发生改变后， 新规则不会即刻生效需要调用本 API 才会生效。&lt;/p&gt;
+&lt;p&gt;某个告警策略是否被应用过，可通过 &lt;a href=&#34;../describe_alarm_policies&#34;&gt;&lt;em&gt;DescribeAlarmPolicies&lt;/em&gt;&lt;/a&gt; 返回的 is_applied 属性判断，&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;要应用生效的监控告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ApplyAlarmPolicy
+&amp;amp;alarm_policy=alp-12djpg8q
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ApplyAlarmPolicyResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-bm6ym3r8&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: AssociateAlarmPolicy</title>
+      <link>/development_docs/api/command_list/alarm/associate_alarm_policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/associate_alarm_policy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将告警策略绑定到资源上, 绑定每个资源都会自动创建对应的 Alarm 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resources&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;资源 ID 列表。可一次绑定多个资源，但这些资源需要匹配告警策略的类型 (alarm_policy_type) 。&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;related_resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当绑定公网负载均衡器时，related_resource 需指定某一个此负载均衡器关联的公网 IP ID 。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;任务 ID (绑定操作是异步任务)。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AssociateAlarmPolicy
+&amp;amp;alarm_policy=alp-hp55o9i5
+&amp;amp;resources.1=i-xxxxx
+&amp;amp;resources.2=i-xxxxx
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AssociateAlarmPolicyResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-xxxxx&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: CreateAlarmPolicy</title>
+      <link>/development_docs/api/command_list/alarm/create_alarm_policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/create_alarm_policy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;创建告警策略，每个告警策略可以绑定多个资源。&lt;/p&gt;
+&lt;p&gt;创建策略时，可一同创建规则(rules) 和行为(action) ，也可创建之后再添加规则或行为。&lt;/p&gt;
+&lt;p&gt;告警策略数据可以通过 &lt;a href=&#34;../describe_alarm_policies&#34;&gt;&lt;em&gt;DescribeAlarmPolicies&lt;/em&gt;&lt;/a&gt; 得到。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略类型: 云服务器（instance），路由器（router），公网 IP（eip），负载均衡器（loadbalancer_listener_http / loadbalancer_listener_https / loadbalancer_listener_tcp / loadbalancer_backend_http / loadbalancer_backend_tcp），集群（cluster_node）&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;period&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略周期：一分钟：1m ，5分钟：5m&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;notice_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;连续告警次数（1-5）&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.alarm_policy_rule_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.meter&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源监控项，不同资源类型有不同的监控项。可参考 &lt;a href=&#34;../../monitor/&#34;&gt;&lt;em&gt;资源监控&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.condition_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;条件类型: gt (大于), lt (小于)&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.thresholds&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;阈值&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.data_processor&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据处理方式: raw (使用监控数据原始值), percent (只适用于 IP 带宽监控，将监控数据转换为带宽占用百分比，再跟阈值进行比较) 默认是 raw 。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.consecutive_periods&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;连续周期数，即连续几个检查周期，监控数据都达到了告警阈值，才触发告警行为。 默认是 1 。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.period_start_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则生效开始时间&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.period_end_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则生效结束时间&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rules.n.alarm_level_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警级别，level-00000000 表示高，level-00000001表示低&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;actions.n.trigger_action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;通知列表 ID ，&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;actions.n.trigger_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当监控告警变成什么状态时，发消息给此通知列表。有效值是 “ok”, “alarm”, “insufficient”&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;创建成功的告警策略 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CreateAlarmPolicy
+&amp;amp;alarm_policy_type=eip
+&amp;amp;period=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CreateAlarmPolicyResponse&amp;#34;,
+  &amp;#34;alarm_policy_id&amp;#34;:&amp;#34;alp-axbkmf20&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteAlarmPolicies</title>
+      <link>/development_docs/api/command_list/alarm/delete_alarm_policies/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/delete_alarm_policies/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一个或多个你拥有的告警策略，删除前该告警策略绑定的所有资源需先解除绑定关系。&lt;/p&gt;
+&lt;p&gt;解绑告警策略可参考 &lt;a href=&#34;../dissociate_alarm_policy/&#34;&gt;&lt;em&gt;DissociateAlarmPolicy&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policies.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policies&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;删除的告警策略 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteAlarmPolicys
+&amp;amp;alarm_policies.1=alp-axbkmf20
+&amp;amp;alarm_policies.2=alp-axbkmf21
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteAlarmPolicysResponse&amp;#34;,
+  &amp;#34;alarm_policies&amp;#34;:[
+    &amp;#34;alp-axbkmf20&amp;#34;,
+    &amp;#34;alp-axbkmf21&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteAlarmPolicyActions</title>
+      <link>/development_docs/api/command_list/alarm/delete_alarm_policy_actions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/delete_alarm_policy_actions/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除告警行为。&lt;/p&gt;
+&lt;p&gt;删除后，记得调用 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使其生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_actions.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警行为ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_actions&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;成功删除的告警行为ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteAlarmPolicyActions
+&amp;amp;alarm_policy_actions.1=alpa-13cooxdd
+&amp;amp;alarm_policy_actions.2=alpa-c25rz9c1
+&amp;amp;alarm_policy_actions.3=alpa-191d8eb5
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteAlarmPolicyActionsResponse&amp;#34;,
+  &amp;#34;alarm_policy_actions&amp;#34;:[
+    &amp;#34;alpa-13cooxdd&amp;#34;,
+    &amp;#34;alpa-c25rz9c1&amp;#34;,
+    &amp;#34;alpa-191d8eb5&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteAlarmPolicyRules</title>
+      <link>/development_docs/api/command_list/alarm/delete_alarm_policy_rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/delete_alarm_policy_rules/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除告警策略规则。&lt;/p&gt;
+&lt;p&gt;删除规则后，记得调用 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使其生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rules.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略规则ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rules&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;成功删除的告警策略规则ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteAlarmPolicyRules
+&amp;amp;alarm_policy_rules.1=alpr-13cooxdd
+&amp;amp;alarm_policy_rules.2=alpr-c25rz9c1
+&amp;amp;alarm_policy_rules.3=alpr-191d8eb5
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteAlarmPolicyRulesResponse&amp;#34;,
+  &amp;#34;alarm_policy_rules&amp;#34;:[
+    &amp;#34;alpr-13cooxdd&amp;#34;,
+    &amp;#34;alpr-c25rz9c1&amp;#34;,
+    &amp;#34;alpr-191d8eb5&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeAlarmHistory</title>
+      <link>/development_docs/api/command_list/alarm/describe_alarm_history/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/describe_alarm_history/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取资源的监控告警历史。&lt;/p&gt;
+&lt;p&gt;资源监控过程中的重要事件都会记录在告警历史中，历史记录包括：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;当修改了告警策略，并应用修改后，历史中会有一条配置变化的记录。&lt;/li&gt;
+&lt;li&gt;当资源监控状态发生变化时，会有相应的记录。&lt;/li&gt;
+&lt;li&gt;当执行告警事件时，也会有相应的记录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源告警实体的 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;history_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警历史的类型：&lt;br/&gt;*   “trigger_action”: 触发告警行为&lt;br/&gt;*   “status_change”: 告警状态发生变化&lt;br/&gt;*   “config_update”: 告警策略配置更新&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_history_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的数据列表，每项参数可见下面 &lt;a href=&#34;#response-item&#34;&gt;Response Item&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Response Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源告警实体 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_history_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警历史 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;history_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;历史记录类型&lt;br/&gt;*   “trigger_action”: 触发告警行为&lt;br/&gt;*   “status_change”: 告警状态发生变化&lt;br/&gt;*   “config_update”: 告警策略配置更新&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;历史的创建时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;历史的详细内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeAlarmHistory
+&amp;amp;alarm=alm-xxxxxx
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeAlarmHistoryResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;alarm_set&amp;#34;:[
+    {
+      &amp;#34;alarm_id&amp;#34;:&amp;#34;alm-xxxx&amp;#34;,
+      &amp;#34;alarm_history_id&amp;#34;:&amp;#34;almh-xxxx&amp;#34;,
+      &amp;#34;history_type&amp;#34;:&amp;#34;config_update&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;configuration update&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2014-06-07T02:12:43Z&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeAlarmPolicies</title>
+      <link>/development_docs/api/command_list/alarm/describe_alarm_policies/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/describe_alarm_policies/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取一个或多个告警策略。&lt;/p&gt;
+&lt;p&gt;可根据告警策略ID，名称，类型作为过滤条件，获取告警策略列表。 如果不指定任何过滤条件，默认返回你所拥有的所有告警策略。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policies.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;支持告警策略类型，目前支持： ‘instance’, ‘eip’, ‘router’ ‘loadbalancer_listener_tcp’, ‘loadbalancer_listener_https’, ‘loadbalancer_listener_http’, ‘loadbalancer_backend_http’, ‘loadbalancer_backend_tcp’, ‘rdb_mysql’, ‘rdb_psql’, ‘elasticsearch_node’, ‘cache_node_memcached’, ‘cache_node_redis’, ‘queue_node_Kafka’, ‘spark_node’, ‘hadoop_node’, ‘zookeeper_node’, ‘hbase_node’, ‘mongo_instance’, ‘storm_node’,&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略状态，有效值为 active, deleted, ceased&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词，支持告警策略名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，若为1，则返回绑定了该告警策略的资源的信息，默认为0.&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的数据列表，每项参数可见下面 &lt;a href=&#34;#response-item&#34;&gt;Response Item&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Response Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resources&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;该告警策略绑定的资源 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;该告警策略类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;is_applied&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;告警策略的改动是否应用了。 可参见 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;告警策略创建时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;告警策略最后一次状态变化的时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeAlarmPolicies
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeAlarmPoliciesResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;alarm_policy_set&amp;#34;:[
+    {
+      &amp;#34;alarm_policy_id&amp;#34;:&amp;#34;alarm_policy-axbkmf20&amp;#34;,
+      &amp;#34;alarm_policy_name&amp;#34;:&amp;#34;alarm_policy 1&amp;#34;,
+      &amp;#34;alarm_policy_type&amp;#34;:&amp;#34;instance&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;status&amp;#34;:&amp;#34;active&amp;#34;,
+      &amp;#34;owner&amp;#34;:&amp;#34;usr-xxxxx&amp;#34;,
+      &amp;#34;resources&amp;#34;:[&amp;#34;i-xxxxxx&amp;#34;],
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-30T05:13:50Z&amp;#34;,
+      &amp;#34;status_time&amp;#34;:&amp;#34;2013-08-30T05:13:50Z&amp;#34;,
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeAlarmPolicyActions</title>
+      <link>/development_docs/api/command_list/alarm/describe_alarm_policy_actions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/describe_alarm_policy_actions/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取某个告警策略的告警行为列表。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_actions.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警行为ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_action_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的告警行为数据列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的告警策略总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_action_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警行为ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trigger_action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警行为对应的 ID ，目前支持的是通知列表 ID 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trigger_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;触发此行为的监控告警的状态，ok - 监控告警恢复正常时触发；alarm - 发生告警时触发&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeAlarmPolicyActions
+&amp;amp;alarm_policy=alp-n43jh2pq
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeAlarmPolicyActionsResponse&amp;#34;,
+  &amp;#34;alarm_policy_action_set&amp;#34;:[
+    {
+      &amp;#34;alarm_policy_id&amp;#34;:&amp;#34;alp-nlqi5sa1&amp;#34;,
+      &amp;#34;alarm_policy_action_id&amp;#34;:&amp;#34;alpa-0jzv8t0q&amp;#34;,
+      &amp;#34;trigger_status&amp;#34;:&amp;#34;alarm&amp;#34;,
+      &amp;#34;trigger_action&amp;#34;:&amp;#34;nl-xxxxx&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;total_count&amp;#34;:1
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeAlarmPolicyRules</title>
+      <link>/development_docs/api/command_list/alarm/describe_alarm_policy_rules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/describe_alarm_policy_rules/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取某个告警策略的规则信息。&lt;/p&gt;
+&lt;p&gt;可根据告警策略ID，告警策略规则ID 作过滤条件，获取告警策略规则列表。 如果不指定任何过滤条件，默认返回你所拥有的所有告警策略的所有规则。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略 ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rules.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略规则ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rule_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的告警策略规则数据列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的告警策略总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rule_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略规则ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源监控项，不同资源类型有不同的监控项。可参考 &lt;a href=&#34;../../monitor/&#34;&gt;&lt;em&gt;资源监控&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;condition_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;判断条件类型：gt - 大于, lt - 小于&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;thresholds&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警阈值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;data_processor&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;通常都是采用默认值 “raw” 表示对监控数据不需做额外处理。 如果监控资源类型是公网 IP ，还可选择 “percent” 表示阈值数字代表的是百分比， 这样系统会自动根据公网 IP 当前的带宽上限计算百分比。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;consecutive_periods&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;连续周期数，表示连续多个周期都满足告警条件时，才出发告警。默认是 1 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;period_start_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;此规则生效的起始时间，格式为 hh:mm ，默认是零点。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;period_end_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;此规则生效的结束时间，格式为 hh:mm 默认是 23:59 。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeAlarmPolicyRules
+&amp;amp;alarm_policy=alp-n43jh2pq
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeAlarmPolicyRulesResponse&amp;#34;,
+  &amp;#34;alarm_policy_rule_set&amp;#34;:[
+    {
+      &amp;#34;meter&amp;#34;:&amp;#34;cpu&amp;#34;,
+      &amp;#34;alarm_policy_id&amp;#34;:&amp;#34;sg-nlqi5sa1&amp;#34;,
+      &amp;#34;condition_type&amp;#34;:&amp;#34;gt&amp;#34;,
+      &amp;#34;thresholds&amp;#34;:&amp;#34;90&amp;#34;,
+      &amp;#34;alarm_policy_rule_id&amp;#34;:&amp;#34;sgr-0jzv8t0q&amp;#34;,
+      &amp;#34;consecutive_periods&amp;#34;:&amp;#34;1&amp;#34;,
+      &amp;#34;period_start_hhmm&amp;#34;:&amp;#34;00:00&amp;#34;,
+      &amp;#34;period_end_hhmm&amp;#34;:&amp;#34;23:59&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2017-07-18T07:17:13Z&amp;#34;,
+      &amp;#34;data_processor&amp;#34;:&amp;#34;raw&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;total_count&amp;#34;:1
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeAlarms</title>
+      <link>/development_docs/api/command_list/alarm/describe_alarms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/describe_alarms/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取一个或多个资源的监控告警实体，可通过告警策略 ID 或资源 ID 过滤需要的告警实体。&lt;/p&gt;
+&lt;p&gt;资源监控告警实体，是通过将“告警策略”关联到“资源”后生成的。它会定期检查资源监控数据， 判断是否满足告警条件，如若满足，则触发告警行为。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarms.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源告警ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略 ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警状态：ok - 正常，alarm - 告警中，insufficient - 无法采集监控数据&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警关联的资源 ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的数据列表，每项参数可见下面 &lt;a href=&#34;#response-item&#34;&gt;Response Item&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Response Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源告警ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源告警状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控告警策略 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;该告警关联的资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;related_resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;如果关联的是负载均衡器，那此项参数表示监控的是负载均衡器绑定的哪个 IP 。 其他资源类型此项为空。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;此告警的创建时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeAlarms
+&amp;amp;resource=i-xxxxxx
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeAlarmsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;alarm_set&amp;#34;:[
+    {
+      &amp;#34;alarm_id&amp;#34;:&amp;#34;alm-xxxxxx&amp;#34;,
+      &amp;#34;status&amp;#34;:&amp;#34;alarm&amp;#34;,
+      &amp;#34;alarm_policy_id&amp;#34;:&amp;#34;alp-xxxx&amp;#34;,
+      &amp;#34;resource_id&amp;#34;:&amp;#34;i-xxxxx&amp;#34;,
+      &amp;#34;related_resource&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-30T05:13:50Z&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DissociateAlarmPolicy</title>
+      <link>/development_docs/api/command_list/alarm/dissociate_alarm_policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/dissociate_alarm_policy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将告警策略从资源上解绑，&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resources&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;要与这个告警策略解绑的资源 ID 列表。 如果不传此参数，则解绑与此告警策略关联的所有资源。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;related_resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当解绑公网负载均衡器时，related_resource 需指定此负载均衡器关联的公网 IP ID 。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;任务 ID (解绑操作是异步任务)。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DissociateAlarmPolicy
+&amp;amp;alarm_policy=alp-hp55o9i5
+&amp;amp;resources.1=i-xxxxx
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DissociateAlarmPolicyResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-xxxx&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyAlarmPolicyActionAttributes</title>
+      <link>/development_docs/api/command_list/alarm/modify_alarm_policy_action_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/modify_alarm_policy_action_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改告警行为的属性。&lt;/p&gt;
+&lt;p&gt;修改规则后，记得调用 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使其生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警行为ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trigger_action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;通知列表 ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;trigger_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当监控告警变成什么状态时，发消息给此通知列表。有效值是 “ok”, “alarm”, “deleted”&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_action_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;成功修改的告警行为ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyAlarmPolicyActionAttributes
+&amp;amp;alarm_policy_action=alpa-13cooxdd
+&amp;amp;trigger_action=nl-xxxxx
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyAlarmPolicyActionAttributesResponse&amp;#34;,
+  &amp;#34;alarm_policy_action_id&amp;#34;:&amp;#34;alpa-13cooxdd&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyAlarmPolicyAttributes</title>
+      <link>/development_docs/api/command_list/alarm/modify_alarm_policy_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/modify_alarm_policy_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改告警策略的名称和描述等属性，如果修改告警检查周期或者连续告警次数， 改后需要调用 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使修改生效。&lt;/p&gt;
+&lt;p&gt;一次只能修改一个告警策略。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;period&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略检查周期&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略描述&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;notice_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;连续告警次数（1-5）&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyAlarmPolicyAttributes
+&amp;amp;alarm_policy=alarm_policy-axbkmf21
+&amp;amp;alarm_policy_name=sample
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyAlarmPolicyAttributesResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyAlarmPolicyRuleAttributes</title>
+      <link>/development_docs/api/command_list/alarm/modify_alarm_policy_rule_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/modify_alarm_policy_rule_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改告警策略规则的属性。&lt;/p&gt;
+&lt;p&gt;修改规则后，记得调用 &lt;a href=&#34;../apply_alarm_policy/&#34;&gt;&lt;em&gt;ApplyAlarmPolicy&lt;/em&gt;&lt;/a&gt; 使其生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rule&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略规则ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rule_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警策略规则名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;condition_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;条件类型: gt (大于), lt (小于)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;thresholds&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;阈值&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;data_processor&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据处理方式: raw (使用监控数据原始值), percent (只适用于 IP 带宽监控，将监控数据转换为带宽占用百分比，再跟阈值进行比较)&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;consecutive_periods&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;连续周期数，即连续几个检查周期，监控数据都达到了告警阈值，才触发告警行为。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;period_start_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则生效开始时间&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;period_end_hhmm&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则生效结束时间&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_level_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;告警级别，level-00000000 表示高，level-00000001表示低&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alarm_policy_rule_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;成功修改的告警策略规则ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyAlarmPolicyRuleAttributes
+&amp;amp;alarm_policy_rule=alpr-13cooxdd
+&amp;amp;alarm_policy_rule_name=demo_rule
+&amp;amp;thresholds=83
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyAlarmPolicyRuleAttributesResponse&amp;#34;,
+  &amp;#34;alarm_policy_rule_id&amp;#34;:&amp;#34;alpr-13cooxdd&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

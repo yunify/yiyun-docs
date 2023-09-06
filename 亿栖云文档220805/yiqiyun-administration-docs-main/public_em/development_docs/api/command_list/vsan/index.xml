@@ -1,0 +1,1822 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – Virtual SAN</title>
+    <link>/development_docs/api/command_list/vsan/</link>
+    <description>Recent content in Virtual SAN on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/vsan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: AttachToS2SharedTarget</title>
+      <link>/development_docs/api/command_list/vsan/attach_to_s2_shared_target/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/attach_to_s2_shared_target/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为共享存储目标添加硬盘。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AttachToS2SharedTarget
+&amp;amp;shared_target=s2st-eawpunuj
+&amp;amp;volumes.1=vol-02x95cwp
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AttachToS2SharedTargetResponse&amp;#34;,
+  &amp;#34;shared_targets&amp;#34;:[
+    &amp;#34;s2st-eawpunuj&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ChangeS2ServerVxnet</title>
+      <link>/development_docs/api/command_list/vsan/change_s2_server_vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/change_s2_server_vxnet/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改共享存储服务器的属性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;private_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定私有网络IP地址&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ChangeS2ServerVxnet
+&amp;amp;s2_servers.1=s2-lxqjtu3l
+&amp;amp;vxnet=vxnet-ln2mtlk
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ChangeS2ServerVxnetResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-bdg2109b&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: CreateS2Server</title>
+      <link>/development_docs/api/command_list/vsan/create_s2_server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/create_s2_server/</guid>
+      <description>
+        
+        
+        &lt;p&gt;创建新的共享存储服务器。&lt;/p&gt;
+&lt;p&gt;亿栖云目前仅支持VSAN类型的共享存储服务器， 及基于iSCSI协议的存储服务。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络标识&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;service_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享服务类型（vsan）&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享服务名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;共享服务大小0/1/2/3&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;private_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定共享服务器的IP地址&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;描述&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;新创建的 共享存储服务器 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CreateS2Server
+&amp;amp;vxnet_id=vxnet-ln2mtlk
+&amp;amp;service_type=vsan
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CreateS2ServerResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-i76waodo&amp;#34;,
+  &amp;#34;s2_server_id&amp;#34;:&amp;#34;s2-lxqjtu3l&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: CreateS2SharedTarget</title>
+      <link>/development_docs/api/command_list/vsan/create_s2_shared_target/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/create_s2_shared_target/</guid>
+      <description>
+        
+        
+        &lt;p&gt;新建共享存储目标，在新建时可以直接添加硬盘作为backstore，也可以以后添加。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;export_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;共享存储目标名称，及IQN&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;也可以输入短名，系统会自动帮你补全IQN。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;| Yes |
+| target_type | String | 共享存储目标类型，目前仅支持ISCSI | Yes |
+| description | String | 共享存储目标描述 | No |
+| volumes.n | String | 添加硬盘作为backstore | No |
+| initiator_names.n | String | 指定客户端IQN | No |
+| zone | String | 区域 ID，注意要小写 | Yes |&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CreateS2SharedTarget
+&amp;amp;s2_server=s2-lxqjtu3l
+&amp;amp;export_name=demo
+&amp;amp;description=demo_descritpion
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CreateS2SharedTargetResponse&amp;#34;,
+  &amp;#34;s2_shared_target&amp;#34;:&amp;#34;s2st-gkps8hq9&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteS2Servers</title>
+      <link>/development_docs/api/command_list/vsan/delete_s2_servers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/delete_s2_servers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一台或多台共享存储服务器。&lt;/p&gt;
+&lt;p&gt;销毁共享存储服务器的前提，是此共享存储服务器已建立租用信息（租用信息是在创建共享存储服务器成功后， 几秒钟内系统自动建立的）。所以正在创建的共享存储服务器（状态为 pending ）， 以及刚刚创建成功但还没有建立租用信息的共享存储服务器，是不能被销毁的。&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;被删除的共享存储服务器会被立即系统回收，不具有可恢复的功能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2servers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteS2Servers
+&amp;amp;s2_servers.1=s2-s5nqo8mr
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteS2ServerResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-32c66ja8&amp;#34;,
+  &amp;#34;s2_servers&amp;#34;:[
+    &amp;#34;s2-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteS2SharedTargets</title>
+      <link>/development_docs/api/command_list/vsan/delete_s2_shared_targets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/delete_s2_shared_targets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一个或多个共享存储目标。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteS2SharedTargets
+&amp;amp;shared_targets.1=s2st-eawpunuj
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteS2SharedTargetsResponse&amp;#34;,
+  &amp;#34;shared_targets&amp;#34;:[
+    &amp;#34;s2st-eawpunuj&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeS2DefaultParameters</title>
+      <link>/development_docs/api/command_list/vsan/describle_s2_default_parameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/describle_s2_default_parameters/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取共享存储目标缺省参数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;service_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务类型，目前支持vsan&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;target_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标类型，目前支持ISCSI&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_default_parameters_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的共享存储缺省参数，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的共享存储服务器总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;service_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;target_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;param_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标参数名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;default_value&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标参数缺省值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;参数描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeS2DefaultParameters
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeS2DefaultParametersResponse&amp;#34;,
+  &amp;#34;s2_default_parameters_set&amp;#34;:[
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;DataPDUInOrder&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;Yes&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The DataPDUInOrder parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;DataSequenceInOrder&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;Yes&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The DataSequenceInOrder parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;DefaultTime2Retain&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;20&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The DefaultTime2Retain parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;DefaultTime2Wait&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;2&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The DefaultTime2Wait parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;ErrorRecoveryLevel&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;0&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The ErrorRecoveryLevel parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;FirstBurstLength&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;65536&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The FirstBurstLength parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;HeaderDigest&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;CRC32C,None&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The HeaderDigest parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;IFMarkInt&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;2048~65535&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The IFMarkInt parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;IFMarker&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;No&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The IFMarker parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;ImmediateData&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;Yes&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The ImmediateData parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;InitialR2T&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;Yes&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The InitialR2T parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;MaxBurstLength&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;262144&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The MaxBurstLength parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;MaxConnections&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;1&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The MaxConnections parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;MaxOutstandingR2T&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;1&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The MaxOutstandingR2T parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;MaxRecvDataSegmentLength&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;8192&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The MaxRecvDataSegmentLength parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;OFMarkInt&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;2048~65535&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The OFMarkInt parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;OFMarker&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;No&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The OFMarker parameter&amp;#34;
+    },
+    {
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;param_name&amp;#34;:&amp;#34;DataDigest&amp;#34;,
+      &amp;#34;default_value&amp;#34;:&amp;#34;CRC32C,None&amp;#34;,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;description&amp;#34;:&amp;#34;The OFMarker parameter&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeS2Servers</title>
+      <link>/development_docs/api/command_list/vsan/describe_s2_servers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/describe_s2_servers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取一个或多个共享存储服务器&lt;/p&gt;
+&lt;p&gt;可根据共享存储服务器ID，状态，名称作过滤条件，来获取共享存储服务器列表。 如果不指定任何过滤条件，默认返回你所拥有的所有共享存储服务器。 如果指定不存在的共享存储服务器ID，或非法状态值，则会返回错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_servers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器状态: pending, active, poweroffed, suspended, deleted, ceased&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词，支持共享存储服务器ID，共享存储服务器名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tags.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;按照标签ID过滤, 只返回已绑定某标签的资源&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，若为1，则返回共享存储服务器相关其他资源的详细数据。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的共享存储服务器数据列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的共享存储服务器总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;service_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务类型，目前有效值为 vsan.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;共享存储服务器类型，目前有效值为 0/1/2/3.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;private_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器内网IP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;is_applied&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;共享存储服务器规则是否已更新，1为已更新，0为还未更新。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;共享存储服务器状态，有效值为pending, active, poweroffed, suspended, deleted, ceased。&lt;/p&gt;
+&lt;p&gt;pending： 等待被创建&lt;/p&gt;
+&lt;p&gt;active： 运行状态&lt;/p&gt;
+&lt;p&gt;poweroffed： 关闭状态&lt;/p&gt;
+&lt;p&gt;suspended： 由于欠费，已被暂停使用&lt;/p&gt;
+&lt;p&gt;deleted： 已被删除，被删除的共享存储服务器不可以被恢复&lt;/p&gt;
+&lt;p&gt;ceased： 已被彻底删除&lt;/p&gt;
+&lt;p&gt;|
+| transition_status | String |&lt;/p&gt;
+&lt;p&gt;共享存储服务器过渡状态，有效值为creating, updating, suspending, resuming，poweroffing，poweroning，deleting，。&lt;/p&gt;
+&lt;p&gt;creating： 创建中，由 pending 状态变成 active 状态&lt;/p&gt;
+&lt;p&gt;updating： 更新共享存储服务器规则中&lt;/p&gt;
+&lt;p&gt;suspending： 欠费暂停中，由 active/poweroffed 状态变成 suspended 状态&lt;/p&gt;
+&lt;p&gt;resuming： 恢复中，由 suspended 状态变成 active 状态&lt;/p&gt;
+&lt;p&gt;poweroffing： 关闭中，由 active 状态变成 poweroffed 状态&lt;/p&gt;
+&lt;p&gt;poweroning： 开启中，由 poweroffed 状态变成 active 状态&lt;/p&gt;
+&lt;p&gt;deleting： 删除中，由 active/poweroffed/suspended 状态变成 deleted 状态&lt;/p&gt;
+&lt;p&gt;|
+| create_time | TimeStamp | 共享存储服务器创建时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;. |
+| status_time | TimeStamp | 共享存储服务器最近一次状态变更时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;. |
+| vxnet | Dict |&lt;/p&gt;
+&lt;p&gt;共享存储服务器连接的私有网络信息&lt;/p&gt;
+&lt;p&gt;vxnet_id： 私有网络ID&lt;/p&gt;
+&lt;p&gt;nic_id： 网卡ID&lt;/p&gt;
+&lt;p&gt;只有在请求参数 verbose=1 时才会返回此信息。&lt;/p&gt;
+&lt;p&gt;|&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeS2Servers
+&amp;amp;s2_servers.1=s2-lxqjtu3l
+&amp;amp;verbose=1
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeS2ServersResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;s2_server_set&amp;#34;:[
+    {
+      &amp;#34;status&amp;#34;:&amp;#34;poweroffed&amp;#34;,
+      &amp;#34;is_applied&amp;#34;:0,
+      &amp;#34;description&amp;#34;:null,
+      &amp;#34;sub_code&amp;#34;:0,
+      &amp;#34;transition_status&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;controller&amp;#34;:&amp;#34;self&amp;#34;,
+      &amp;#34;console_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;instance_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;service_type&amp;#34;:&amp;#34;vsan&amp;#34;,
+      &amp;#34;root_user_id&amp;#34;:&amp;#34;yunify&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2015-02-07T07:09:17Z&amp;#34;,
+      &amp;#34;private_ip&amp;#34;:null,
+      &amp;#34;s2_server_id&amp;#34;:&amp;#34;s2-lxqjtu3l&amp;#34;,
+      &amp;#34;memory&amp;#34;:2048,
+      &amp;#34;owner&amp;#34;:&amp;#34;yunify&amp;#34;,
+      &amp;#34;status_time&amp;#34;:&amp;#34;2015-02-09T16:11:43Z&amp;#34;,
+      &amp;#34;cpu&amp;#34;:1,
+      &amp;#34;s2_server_type&amp;#34;:1,
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ln2mtlk&amp;#34;,
+      &amp;#34;vxnet&amp;#34;:{
+        &amp;#34;vxnet_type&amp;#34;:1,
+        &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ln2mtlk&amp;#34;,
+        &amp;#34;controller&amp;#34;:&amp;#34;self&amp;#34;,
+        &amp;#34;console_id&amp;#34;:&amp;#34;&amp;#34;,
+        &amp;#34;vxnet_name&amp;#34;:&amp;#34;test_s2&amp;#34;,
+        &amp;#34;root_user_id&amp;#34;:&amp;#34;yunify&amp;#34;,
+        &amp;#34;create_time&amp;#34;:&amp;#34;2015-02-02T23:29:13&amp;#34;,
+        &amp;#34;owner&amp;#34;:&amp;#34;yunify&amp;#34;,
+        &amp;#34;description&amp;#34;:null
+      },
+      &amp;#34;name&amp;#34;:&amp;#34;test&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeS2SharedTargets</title>
+      <link>/development_docs/api/command_list/vsan/describe_s2_shared_targets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/describe_s2_shared_targets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取一个或多个共享存储目标&lt;/p&gt;
+&lt;p&gt;可根据共享存储目标ID，共享存储服务器ID，状态，名称作过滤条件，来获取共享存储目标列表。 如果不指定任何过滤条件，默认返回你所拥有的所有共享存储目标。 如果指定不存在的共享存储目标ID，或非法状态值，则会返回错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;shared_targets.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词，支持共享存储目标ID，共享存储目标名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，若为1，则返回共享存储目标相关其他资源的详细数据。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_shared_target_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的共享存储目标数据列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的共享存储目标总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_shared_target_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;export_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标名称,IQN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;target_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储目标类型，目前有效值为 ISCSI.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;共享存储服务器创建时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;共享存储服务器最近一次状态变更时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeS2SharedTargets
+&amp;amp;s2_shared_targets.1=s2st-o0lf1gqu
+&amp;amp;verbose=1
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeS2SharedTargetsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;s2_shared_target_set&amp;#34;:[
+    {
+      &amp;#34;username&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;root_user_id&amp;#34;:&amp;#34;usr-cT9nUFvT&amp;#34;,
+      &amp;#34;s2_server_id&amp;#34;:&amp;#34;s2-nx0yvxqg&amp;#34;,
+      &amp;#34;shared_target_id&amp;#34;:&amp;#34;s2st-o0lf1gqu&amp;#34;,
+      &amp;#34;export_name&amp;#34;:&amp;#34;iqn.2014-12.com..s2:sn.test&amp;#34;,
+      &amp;#34;enabled&amp;#34;:1,
+      &amp;#34;target_type&amp;#34;:&amp;#34;ISCSI&amp;#34;,
+      &amp;#34;console_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;controller&amp;#34;:&amp;#34;self&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2015-02-13T00:36:55Z&amp;#34;,
+      &amp;#34;volumes&amp;#34;:{},
+      &amp;#34;owner&amp;#34;:&amp;#34;usr-cT9nUFvT&amp;#34;,
+      &amp;#34;password&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;ip_address&amp;#34;:&amp;#34;0.0.0.0&amp;#34;,
+      &amp;#34;port&amp;#34;:3260,
+      &amp;#34;description&amp;#34;:null
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DetachFromS2SharedTarget</title>
+      <link>/development_docs/api/command_list/vsan/detach_from_s2_shared_target/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/detach_from_s2_shared_target/</guid>
+      <description>
+        
+        
+        &lt;p&gt;从共享存储目标卸载硬盘。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DetachFromS2SharedTarget
+&amp;amp;shared_target=s2st-eawpunuj
+&amp;amp;volumes.1=vol-02x95cwp
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DetachFromS2SharedTargetResponse&amp;#34;,
+  &amp;#34;shared_targets&amp;#34;:[
+    &amp;#34;s2st-eawpunuj&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DisableS2SharedTargets</title>
+      <link>/development_docs/api/command_list/vsan/disable_s2_shared_targets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/disable_s2_shared_targets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;禁用一个或多个共享存储目标。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DisableS2SharedTargets
+&amp;amp;shared_targets.1=s2st-eawpunuj
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DisableS2SharedTargetsResponse&amp;#34;,
+  &amp;#34;shared_targets&amp;#34;:[
+    &amp;#34;s2st-eawpunuj&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: EnableS2SharedTargets</title>
+      <link>/development_docs/api/command_list/vsan/enable_s2_shared_targets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/enable_s2_shared_targets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;启用一个或多个共享存储目标，此操作可在共享存储目标被禁用后使用。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=EnableS2SharedTargets
+&amp;amp;shared_targets.1=s2st-eawpunuj
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;EnableS2SharedTargetsResponse&amp;#34;,
+  &amp;#34;shared_targets&amp;#34;:[
+    &amp;#34;s2st-eawpunuj&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyS2Server</title>
+      <link>/development_docs/api/command_list/vsan/modify_s2_server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/modify_s2_server/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改共享存储服务器的属性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器描述&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyS2Server
+&amp;amp;s2_server=s2-lxqjtu3l
+&amp;amp;name=demo
+&amp;amp;description=demo_descritpion
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyS2ServerResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyS2SharedTargets</title>
+      <link>/development_docs/api/command_list/vsan/modify_s2_shared_target/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/modify_s2_shared_target/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改共享存储目标属性，通过此操作可以修改共享存储目标参数和设置客户端标识。 共享存储目标参数可参见 :ref: api-describle-s2-default-parameters 。&lt;/p&gt;
+&lt;p&gt;此操作完成后需要调用 &lt;a href=&#34;../update_s2_servers/&#34;&gt;&lt;em&gt;UpdateS2Servers&lt;/em&gt;&lt;/a&gt; 以应用到共享存储服务器上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyS2SharedTarget
+&amp;amp;shared_targets.1=s2st-eawpunuj
+&amp;amp;operation=add
+&amp;amp;initiator_names.1=iqn.1993-08.org.debian:01:967eaffe29d7
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyS2SharedTargetesponse&amp;#34;,
+  &amp;#34;shared_targets&amp;#34;:[
+    &amp;#34;s2st-eawpunuj&amp;#34;
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: PowerOffS2Servers</title>
+      <link>/development_docs/api/command_list/vsan/poweroff_s2_servers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/poweroff_s2_servers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;关闭一台或多台共享存储服务器。&lt;/p&gt;
+&lt;p&gt;共享存储服务器只有在活动 active 状态才能被关闭，如果处于非活动状态，则返回错误信息。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;启动共享存储服务器之后，共享存储服务器将停止收费。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_servers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=PowerOffS2Servers
+&amp;amp;s2_servers.1=s2-s5nqo8mr
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;PowerOnS2ServersResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-32c66ja8&amp;#34;,
+  &amp;#34;s2_servers&amp;#34;:[
+    &amp;#34;s2-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: PowerOnS2Servers</title>
+      <link>/development_docs/api/command_list/vsan/poweron_s2_servers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/poweron_s2_servers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;启动一台或多台共享存储服务器。&lt;/p&gt;
+&lt;p&gt;共享存储服务器只有在关闭 poweroffed 状态才能被启动，如果处于非关闭状态，则返回错误信息。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;启动共享存储服务器之后，共享存储服务器将开始收费。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_servers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=PowerOnS2Servers
+&amp;amp;s2_servers.1=s2-s5nqo8mr
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;PowerOnS2ServersResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-32c66ja8&amp;#34;,
+  &amp;#34;s2_servers&amp;#34;:[
+    &amp;#34;s2-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ResizeS2Servers</title>
+      <link>/development_docs/api/command_list/vsan/resize_s2_servers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/resize_s2_servers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改共享存储服务器的类型。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_server_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;共享存储服务器类型&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ResizeS2Servers
+&amp;amp;s2_servers.1=s2-lxqjtu3l
+&amp;amp;s2_server_type=1
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ResizeS2ServersResponse&amp;#34;,
+  &amp;#34;s2_servers&amp;#34;:[
+    &amp;#34;s2-lxqjtu3l&amp;#34;
+  ],
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-iox6lwlc&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: UpdateS2Servers</title>
+      <link>/development_docs/api/command_list/vsan/update_s2_servers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/update_s2_servers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;更新一台或多台共享存储服务器的配置信息。当配置发生变更之后，需要执行本操作使配置生效。&lt;/p&gt;
+&lt;p&gt;只有在处于 active 状态的共享存储服务器才能支持此操作，如果处于非活跃状态，则返回错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;s2_servers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;共享存储服务器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=UpdateS2Servers
+&amp;amp;s2_servers.1=s2-lxqjtu3l
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;UpdateS2ServersResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-bdg2109b&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

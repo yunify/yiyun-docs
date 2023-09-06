@@ -1,0 +1,1357 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 资源监控</title>
+    <link>/development_docs/api/command_list/monitor/</link>
+    <description>Recent content in 资源监控 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/monitor/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: GetCacheMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_cache_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_cache_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过此 API 可获得缓存服务每个节点的流量监控，以及与缓存相关的监控项目。&lt;/p&gt;
+&lt;p&gt;因为缓存服务包含多个缓存节点，每个缓存节点都有独立的监控数据。&lt;/p&gt;
+&lt;p&gt;不同的缓存类型，监控数据含义不同，具体可见下面”监控数据集说明”&lt;/p&gt;
+&lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩， 在解析返回数据时要留意。详细说明参见 &lt;a href=&#34;../compress/&#34;&gt;&lt;em&gt;监控数据压缩说明&lt;/em&gt;&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;缓存节点 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项的类型&lt;br/&gt;&lt;code&gt;traffic&lt;/code&gt;： 流量监控&lt;br/&gt;&lt;code&gt;cpu&lt;/code&gt; : 节点的 CPU 使用率&lt;br/&gt;&lt;code&gt;memory&lt;/code&gt; : 节点内存使用率 &lt;br/&gt;&lt;code&gt;disk-us-volume&lt;/code&gt; : 节点磁盘空间使用率&lt;br/&gt;&lt;code&gt;disk-iops-volume&lt;/code&gt; : 节点磁盘 IOPS 监控&lt;br/&gt;&lt;code&gt;disk-volume&lt;/code&gt; : 节点磁盘吞吐&lt;br/&gt;&lt;code&gt;stats&lt;/code&gt; ： 缓存服务监控&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d 。&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集，可参见下面的监控数据集说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;监控数据集说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;缓存节点的流量监控数据单位是 &lt;strong&gt;Bps&lt;/strong&gt; (如果要换做 bps，记得每个值都乘以8)，每组数据都包括两个值 [进, 出]。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不同缓存类型的缓存节点服务监控数据不同&lt;/p&gt;
+&lt;p&gt;1.Redis 缓存服务的监控数据为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“平均已占用内存 | 最大已占用内存 | 最小已占用内存 | 总连接个数 | 平均连接客户端个数 | 最大连接客户端个数 | 最小连接客户端个数 | 过期的 key 个数 | 因为内存满被拒绝的 key 个数 | 命中个数 | 未命中个数 | 平均 key 总数 | 最大 key 总数 | 最小 key 总数 | 和 Get 相关的操作总数 | 和 Set 相关的操作总数 | 和Key相关的操作总数 | 和String类型相关的操作总数 | 和 List 类型相关的操作总数 | 和 Hash 类型相关的操作总数 | 和 Set 类型相关的操作总数 | 和 Sorted Set 类型相关的操作总数 | 缓存命中率平均值 | 缓存命中率最大值 | 缓存命中率最小值”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2.Memcached 缓存服务的监控数据为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“该段时间内连接个数 | 总连接个数 | 平均连接客户端个数 | 被拒绝 Key 个数 | 使用召回内存的 Key 个数 | 查询命中数 | 查询未命中数 | 查询命中率 | Get 操作总数 | Delete 操作总数 | Incr 操作总数 | Decr 操作总数 | touch 操作总数 | Cas 操作总数 | Set 操作总数 | Flush 操作总数 | 平均 key 总数”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 请求缓存服务监控数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetCacheMonitor
+&amp;amp;resource=cn-5ry0ma0j
+&amp;amp;meters.1=stats
+&amp;amp;start_time==2015-05-01T10%3A39%3A40.091Z
+&amp;amp;end_time=2015-05-01T16%3A39%3A40.091Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetCacheMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        [
+          1430496300,
+          &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;
+        ],
+        &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;,
+        &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;,
+        &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;,
+        &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;,
+        &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;,
+        &amp;#34;6|6|6|30|2|2|2|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0&amp;#34;
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;stats&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;cn-5ry0ma0j&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2. 请求缓存服务流量监控&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetCacheMonitor
+&amp;amp;resource=cn-5ry0ma0j
+&amp;amp;meters.1=traffic
+&amp;amp;start_time==2015-05-01T16%3A00%3A40.091Z
+&amp;amp;end_time=2015-05-01T16%3A39%3A40.091Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetCacheMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        [
+          1430496300,
+          [
+            81,
+            111
+          ]
+        ],
+        [
+          110,
+          109
+        ],
+        [
+          98,
+          109
+        ],
+        [
+          87,
+          110
+        ],
+        [
+          110,
+          108
+        ],
+        [
+          88,
+          107
+        ],
+        [
+          96,
+          111
+        ]
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;traffic&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;cn-5ry0ma0j&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetLoadBalancerMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_loadbalancer_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_loadbalancer_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过此 API 可获得负载均衡器的外网流量监控，以及每个监听器和后端服务的延迟时间，请求数和响应数。&lt;/p&gt;
+&lt;p&gt;因为负载均衡器可以绑定多个公网IP，所以每项监控数据都会按 IP 分组。&lt;/p&gt;
+&lt;p&gt;监听器和后端服务在不同协议下，监控数据含义不同，具体可见下面”监控数据集说明”&lt;/p&gt;
+&lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩， 在解析返回数据时要留意。详细说明参见 &lt;a href=&#34;../compress/&#34;&gt;&lt;em&gt;监控数据压缩说明&lt;/em&gt;&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项，不同类型的资源支持的监控项不同：&lt;br/&gt;*   如果资源是负载均衡器，meters 只有 traffic&lt;br/&gt;*   如果资源是监听器或后端服务，meters 目前只有 request&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d 。&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集，可参见下面 &lt;a href=&#34;#lb-data-meaning&#34;&gt;&lt;em&gt;监控数据集说明&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;监控数据集说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;负载均衡器的流量监控数据单位是 &lt;strong&gt;Bps&lt;/strong&gt; (如果要换做 bps，记得每个值都乘以8)，每组数据都包括两个值 [进, 出]。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;监听器在不同协议下的监控数据不同&lt;/p&gt;
+&lt;p&gt;1.HTTP 协议时数据含义为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“请求数 | LB 4xx | LB 5xx | 总 backend 1xx | 总 backend 2xx | 总 backend 3xx | 总 backend 4xx | 总 backend 5xx | 最大延迟 | 最小延迟 | 平均延迟 | 最大并发连接数 | 平均并发连接数 | 并发连接数上限”&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;需要注意的是，请求数及响应数对应的数据值都是指在该段时间(即 step 指定的时间间隔)内的 &lt;strong&gt;累计数&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;1xx, 2xx, 3xx, 4xx, 5xx 表示响应的 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html&#34;&gt;HTTP status code&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2.TCP 协议时数据含义为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“该段时间内新建连接个数 | 最大并发连接数 | 平均并发连接数 | 并发连接数上限”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;后端服务在不同协议下的监控数据也不同&lt;/p&gt;
+&lt;p&gt;1.HTTP 协议时数据含义为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“backend 1xx | backend 2xx | backend 3xx | backend 4xx | backend 5xx | 最大延迟 | 最小延迟 | 平均延迟”&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;响应数也是指在该段时间(即 step 指定的时间间隔)内的 &lt;strong&gt;累计数&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2.TCP 协议时数据含义为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“该段时间内新建连接个数”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 当监听器的监听协议是 HTTP 时的监控数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetLoadBalancerMonitor
+&amp;amp;resource=lbl-1234abcd
+&amp;amp;meters.1=request
+&amp;amp;start_time==2014-02-09T21%3A47%3A00.820Z
+&amp;amp;end_time=2014-02-10T03%3A47%3A00.820Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetLoadBalancerMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        {
+          &amp;#34;eip_id&amp;#34;:&amp;#34;eip-1234abcd&amp;#34;,
+          &amp;#34;data&amp;#34;:[
+            [
+              1381816200,
+              &amp;#34;3345|90|0|0|2925|330|0|0|0|0|0&amp;#34;,
+              &amp;#34;1204|70|0|0|2232|330|0|0|0|0|0&amp;#34;
+            ]
+          ]
+        }
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;request&amp;#34;
+    },
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;lbl-1234abcd&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2. 当监听器的监听协议是 TCP 时的监控数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetLoadBalancerMonitor
+&amp;amp;resource=lbl-1234abcd
+&amp;amp;meters.1=request
+&amp;amp;start_time==2014-02-09T21%3A47%3A00.820Z
+&amp;amp;end_time=2014-02-10T03%3A47%3A00.820Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetLoadBalancerMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        {
+          &amp;#34;eip_id&amp;#34;:&amp;#34;eip-gliq0zh3&amp;#34;,
+          &amp;#34;data&amp;#34;:[
+            [1392244200,0],
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;request&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;lbl-1234abcd&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetMongoMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_mongo_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_mongo_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取指定 Mongo 节点的监控信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;Mongo 节点 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项，Mongo 的监控项包括：&lt;br/&gt;*   若要查询节点云服务器相关的信息，meters 可以是：&lt;br/&gt;    *   “cpu”: 节点的 CPU 使用率&lt;br/&gt;    *   “memory”: 节点内存使用率&lt;br/&gt;    *   “disk-us-volume”: 节点磁盘空间使用率&lt;br/&gt;    *   “disk-iops-volume”: 节点磁盘 IOPS 监控&lt;br/&gt;    *   “disk-volume”: 节点磁盘吞&lt;br/&gt;*   若要查询 MongoDB 相关的信息，meters 可以是：&lt;br/&gt;    *   &lt;br/&gt;        “status”: MongoDB 状态数据，返回值是由”|”分隔的多项状态值：&lt;br/&gt;        opcounters insert&lt;br/&gt;        opcounters query&lt;br/&gt;        opcounters update&lt;br/&gt;        opcounters delete&lt;br/&gt;        opcounters getmore&lt;br/&gt;        opcounters command&lt;br/&gt;        opcountersRepl insert&lt;br/&gt;        opcountersRepl query&lt;br/&gt;        opcountersRepl update&lt;br/&gt;        opcountersRepl delete&lt;br/&gt;        opcountersRepl getmore&lt;br/&gt;        opcountersRepl command | connections: 当前连接数&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetMongoMonitor
+&amp;amp;resource=mi-ole0pgn1
+&amp;amp;meters.1=status
+&amp;amp;start_time=2015-06-21T01:10:10Z
+&amp;amp;end_time=2015-06-22T01:10:10Z
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetMongoMonitorResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource&amp;#34;:&amp;#34;mongo-uja5twny&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        {
+          &amp;#34;role&amp;#34;:&amp;#34;replica&amp;#34;,
+          &amp;#34;data&amp;#34;:[
+            [
+              1434876300,
+              &amp;#34;0|0|0|0|0|193|0|0|0|0|0|0|2&amp;#34;
+            ],
+            &amp;#34;0|0|0|0|0|419|200|0|0|0|0|0|2&amp;#34;,
+            &amp;#34;0|0|0|0|0|420|2300|0|0|0|0|0|1&amp;#34;,
+            &amp;#34;0|0|0|0|0|420|0|0|0|0|0|0|1&amp;#34;,
+            &amp;#34;0|0|0|0|0|420|700|0|0|0|0|0|1&amp;#34;,
+            &amp;#34;0|0|0|0|0|420|0|0|0|0|0|0|1&amp;#34;,
+            &amp;#34;0|0|0|0|0|420|0|0|0|0|0|0|1&amp;#34;
+          ]
+        }
+      ],
+      &amp;#34;meter&amp;#34;:&amp;#34;status&amp;#34;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取资源监控数据。支持的资源包括云服务器、公网 IP 和路由器， 选定不同类型资源，可获取的监控项不同。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;云服务器的监控项包括: CPU 使用率，内存使用率，系统盘数据(吞吐量， IOPS 和使用率)， 云服务器连接私有网络的网卡带宽，与云服务器绑定的各磁盘数据（吞吐量， IOPS 和使用率）。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;其中内存使用率和磁盘使用率暂不支持 Windows ，以及 kernel 版本过低的 Linux&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公网 IP 资源可得到公网 “进/出” 的带宽、流量数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果资源为路由器，可得到路由器在基础网络的带宽数据，以及与路由器连接的私有网络的带宽数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩， 在解析返回数据时要留意。详细说明参见 &lt;a href=&#34;../compress/&#34;&gt;&lt;em&gt;监控数据压缩说明&lt;/em&gt;&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源的ID，资源可以是云服务器，公网IP，路由器。&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项，不同类型的资源支持的监控项不同：&lt;br/&gt;*   若资源是云服务器，meters 可以是&lt;br/&gt;    *   “cpu”：云服务器 cpu 使用率&lt;br/&gt;    *   “memory”：云服务器内存使用率&lt;br/&gt;    *   “disk-os”, “disk-iops-os”, “disk-us-os”：云服务器系统盘吞吐量，IOPS，空间使用率&lt;br/&gt;    *   “disk-硬盘ID”, “disk-iops-硬盘ID”, “disk-us-硬盘ID”：与云服务器绑定的硬盘的吞吐量，IOPS，空间使用率&lt;br/&gt;    *   “if-网卡地址”：云服务器网卡带宽&lt;br/&gt;*   资源是公网IP，meters 支持：带宽 “traffic” 和流量 “flow”，数据单位分别是 Bps 和 Byte 。&lt;br/&gt;*   资源是路由器，meters 可以是 “vxnet-0” 和 “与路由器相连的私有网络ID”&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d。&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集，可参见下面的监控数据集说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;监控数据集说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;云服务器的 cpu，memory 监控值表示 “使用的千分比”，若要计算百分比请 &lt;strong&gt;先将值除以10&lt;/strong&gt; 。比如 API 返回的 cpu 监控数据值是 56，表示资源使用百分比为5.6% 。&lt;/li&gt;
+&lt;li&gt;磁盘监控数据:
+&lt;ul&gt;
+&lt;li&gt;磁盘吞吐量的监控数据单位是 &lt;strong&gt;B/s&lt;/strong&gt;, 每组数据都包括两个值 [读, 写]。&lt;/li&gt;
+&lt;li&gt;磁盘 IOPS 的监控数据单位就是 &lt;strong&gt;IOPS&lt;/strong&gt;, 每组数据也包括两个值 [读, 写]。&lt;/li&gt;
+&lt;li&gt;磁盘使用率的监控数据是类似这种格式 &lt;em&gt;/|18|3319|15816&lt;/em&gt; ，以 | 分隔表示 “mount 的路径”, “使用百分比”, “已使用空间（MB）”, “剩余可用空间（MB）”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网络带宽的监控数据单位是 &lt;strong&gt;Bps&lt;/strong&gt; (如果要换做 bps，记得每个值都乘以8)，每组数据都包括两个值 [进, 出]。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetMonitor
+&amp;amp;resource=i-1234abcd
+&amp;amp;meters.1=cpu
+&amp;amp;meters.2=if-52%3A54%3Af4%3A98%3A5d%3Af3
+&amp;amp;meters.3=disk-os
+&amp;amp;start_time==2014-02-09T21%3A47%3A00.820Z
+&amp;amp;end_time=2014-02-10T03%3A47%3A00.820Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data&amp;#34;:[
+        [1392072000,[12,12]],
+        [12,12],
+        [12,12],
+        [11,11],
+        [11,11],
+        [11,12],
+        [15,23],
+        [15,29],
+        [11,12]
+      ],
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-0&amp;#34;,
+      &amp;#34;meter_id&amp;#34;:&amp;#34;52:54:f4:98:5d:f3&amp;#34;,
+      &amp;#34;sequence&amp;#34;:0
+    },
+    {
+      &amp;#34;data&amp;#34;:[
+        [1392072000,[0,14440]],
+        [0,13762],
+        [0,13901],
+        [0,14546],
+        [0,14710],
+        [0,14730],
+        [0,14655],
+        [0,14898],
+        [0,14772]],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;disk-os&amp;#34;
+    },
+    {
+      &amp;#34;data&amp;#34;:[
+        [1392072000,7],
+        7,
+        7,
+        7,
+        7,
+        6,
+        7,
+        11,
+        7
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;cpu&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;i-1234abcd&amp;#34;}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetMonitors</title>
+      <link>/development_docs/api/command_list/monitor/get_monitors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_monitors/</guid>
+      <description>
+        
+        
+        &lt;p&gt;批量获取多个资源的多个监控数据，一次请求总数不能超过 100 个资源。
+支持的资源类型和监控项可参考 &lt;a href=&#34;./get_monitor.html&#34;&gt;&lt;em&gt;GetMonitor&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_meters_pairs.n.resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_meters_pairs.n.meters&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;多个监控项，如 &lt;code&gt;[&amp;quot;cpu&amp;quot;, &amp;quot;disk_rd-&amp;lt;volume id&amp;gt;&amp;quot;]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d。&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;monitors&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集，可参见下面 &lt;a href=&#34;#data-meaning&#34;&gt;&lt;em&gt;监控数据集说明&lt;/em&gt;&lt;/a&gt; 和 Example&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;监控数据集说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;云服务器的 cpu，memory 监控值表示 “使用的千分比”，若要计算百分比请 &lt;strong&gt;先将值除以10&lt;/strong&gt; 。比如 API 返回的 cpu 监控数据值是 56，表示资源使用百分比为5.6% 。&lt;/li&gt;
+&lt;li&gt;磁盘监控数据:
+&lt;ul&gt;
+&lt;li&gt;磁盘吞吐量的监控数据单位是 &lt;strong&gt;B/s&lt;/strong&gt;, 每组数据都包括两个值 [读, 写]。&lt;/li&gt;
+&lt;li&gt;磁盘 IOPS 的监控数据单位就是 &lt;strong&gt;IOPS&lt;/strong&gt;, 每组数据也包括两个值 [读, 写]。&lt;/li&gt;
+&lt;li&gt;磁盘使用率的监控数据是类似这种格式 &lt;em&gt;/|18|3319|15816&lt;/em&gt; ，以 | 分隔表示 “mount 的路径”, “使用百分比”, “已使用空间（MB）”, “剩余可用空间（MB）”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网络带宽的监控数据单位是 &lt;strong&gt;Bps&lt;/strong&gt; (如果要换做 bps，记得每个值都乘以8)，每组数据都包括两个值 [进, 出]。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetMonitors
+&amp;amp;resource_meters_pairs.1.resource=i-hpqfipia
+&amp;amp;resource_meters_pairs.1.meters=%5B%22cpu%22%2C%22memory%22%5D
+&amp;amp;resource_meters_pairs.2.resource=i-m39k0aoy
+&amp;amp;resource_meters_pairs.2.meters=%5B%22cpu%22%2C%22memory%22%5D
+&amp;amp;start_time==2014-02-09T21%3A47%3A00.820Z
+&amp;amp;end_time=2014-02-10T03%3A47%3A00.820Z
+&amp;amp;step=5m
+&amp;amp;zone=jn1
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetMonitorsResponse&amp;#34;,
+  &amp;#34;monitors&amp;#34;:[
+    {
+      &amp;#34;meter_set&amp;#34;:[
+        {
+          &amp;#34;data&amp;#34;:[
+            [
+              1543827000,
+              327
+            ],
+            6,
+            5
+          ],
+          &amp;#34;meter_id&amp;#34;:&amp;#34;cpu&amp;#34;
+        },
+        {
+          &amp;#34;data&amp;#34;:[
+            [
+              1543827000,
+              367
+            ],
+            330,
+            330
+          ],
+          &amp;#34;meter_id&amp;#34;:&amp;#34;memory&amp;#34;
+        }
+      ],
+      &amp;#34;resource_id&amp;#34;:&amp;#34;i-hpqfipia&amp;#34;
+    },
+    {
+      &amp;#34;meter_set&amp;#34;:[
+        {
+          &amp;#34;data&amp;#34;:[
+            [
+              1543827000,
+              106
+            ],
+            34,
+            5
+          ],
+          &amp;#34;meter_id&amp;#34;:&amp;#34;cpu&amp;#34;
+        },
+        {
+          &amp;#34;data&amp;#34;:[
+            [
+              1543827000,
+              139
+            ],
+            140,
+            143
+          ],
+          &amp;#34;meter_id&amp;#34;:&amp;#34;memory&amp;#34;
+        }
+      ],
+      &amp;#34;resource_id&amp;#34;:&amp;#34;i-m39k0aoy&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetQueueMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_queue_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_queue_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过此 API 可获得消息队列服务每个节点的流量监控，以及与消息队列相关的监控项目。&lt;/p&gt;
+&lt;p&gt;因为消息队列服务包含多个节点，每个消息队列节点都有独立的监控数据。&lt;/p&gt;
+&lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩， 在解析返回数据时要留意。详细说明参见 &lt;a href=&#34;../compress/&#34;&gt;&lt;em&gt;监控数据压缩说明&lt;/em&gt;&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;消息队列节点 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项，有效值为 stats&lt;br/&gt;stats： 消息队列服务监控&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d 。&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集，可参见下面的监控数据集说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;监控数据集说明&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;#id1&#34;&gt;*&lt;/a&gt;消息队列服务的监控数据为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“JVM 堆内存使用率 | 1分钟内平均流入消息速率(BytesPerSec) | 1分钟内平均流出消息速率(BytesPerSec) | 1分钟内平均流入消息速率(MessagesInPerSec) | 副本消息最大滞后量 | ISR 扩大速率 | ISR 收缩速率 | Leader 分区数量 | 分区数量 | 未复制的分区数量 | 管理节点数 | 离线分区数”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 请求消息队列服务监控数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetQueueMonitor
+&amp;amp;resource=qn-71sgden7
+&amp;amp;meters.1=stats
+&amp;amp;start_time==2016-03-01T10%3A39%3A40.091Z
+&amp;amp;end_time=2016-05-01T16%3A39%3A40.091Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetQueueMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        [
+          1458551760,
+          &amp;#34;41|0|0|0|0|0|0|0|0|0|1|0&amp;#34;
+        ],
+        &amp;#34;85|0|0|0|0|0|0|0|0|0|1|0&amp;#34;,
+        &amp;#34;110|0|0|0|0|0|0|0|0|0|1|0&amp;#34;
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;stats&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;qn-71sgden7&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetRDBMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_rdb_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_rdb_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取指定数据库实例的监控信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;针对不同的监控项，该值可以设置为数据库集群 ID，或数据库实例 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项，数据库的监控项包括：&lt;br/&gt;*   若 resource 是数据库实例 ID，那么 meters 可以是：&lt;br/&gt;    *   “cpu”：数据库节点的 CPU 使用率&lt;br/&gt;    *   “memory”：数据库节点内存使用率&lt;br/&gt;    *   “disk-us-volume”：数据库节点磁盘空间使用率&lt;br/&gt;*   若 resource 是数据库集群 ID，那么 meters 可以是：&lt;br/&gt;    *   &lt;br/&gt;        “status”: MySQL 数据库基础状态数据，返回值是由”|”分隔的多项状态值：&lt;br/&gt;        Slow_queries: 慢查询次数&lt;br/&gt;        Opened_tables: 当前打开的数据库表数量&lt;br/&gt;        Select_scan: 全表扫描次数&lt;br/&gt;        Threads_connected: 当前连接线程数&lt;br/&gt;        Threads_running: 当前活跃连接线程数&lt;br/&gt;        Max_used_connections: 最大并发连接数&lt;br/&gt;        Innodb_buffer_pool_pages_free: InnoDB 缓冲池可用空间（单位：页）&lt;br/&gt;        Com_commit: 提交事务数&lt;br/&gt;        Com_rollback: 回滚事务数&lt;br/&gt;        Innodb_buffer_pool_reads: 穿透 InnoDB 缓冲池的查询数量&lt;br/&gt;        Innodb_buffer_pool_read_requests: 从 InnoDB 缓冲池返回的查询数量&lt;br/&gt;        Qcache_hits: 从查询缓存返回的查询数量&lt;br/&gt;        Qcache_inserts: 穿透查询缓存的查询数量&lt;br/&gt;        Threads_created: 已创建连接线程数&lt;br/&gt;        Connections: 全部连接数（包括连接失败的连接数量）&lt;br/&gt;        Questions: 查询数量&lt;br/&gt;        Seconds_Behind_Master: 从节点落后主节点的秒数&lt;br/&gt;    *   &lt;br/&gt;        “status”: PostgreSQL 数据库基础状态数据，返回值是由”|”分隔的多项状态值：&lt;br/&gt;        blks_read: 未命中中缓存的查询数量 | blks_hit: 命中缓存的查询数量 | connections: 当前连接数&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetRDBMonitor
+&amp;amp;resource=rdb-5s127ypr
+&amp;amp;meters.1=status
+&amp;amp;meters.2=slave
+&amp;amp;start_time==2014-02-09T21%3A47%3A00.820Z
+&amp;amp;end_time=2014-02-10T03%3A47%3A00.820Z
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetRDBMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data_set&amp;#34;:[
+        {
+          &amp;#34;role&amp;#34;:&amp;#34;master&amp;#34;,
+          &amp;#34;data&amp;#34;:[
+            [
+              1411035000,
+              &amp;#34;0|0|0|2|2|2|196457|0|0|145|1274|0|0|2|66|2&amp;#34;
+            ],
+            &amp;#34;0|0|0|2|2|2|172057|0|0|147|8607444|0|1|2|167|2&amp;#34;,
+            &amp;#34;0|0|0|2|2|2|131453|0|0|147|29669767|0|1|2|317|2&amp;#34;,
+            &amp;#34;0|0|0|2|2|2|123781|0|0|147|36040006|0|2|2|460|2&amp;#34;,
+            &amp;#34;0|0|0|2|2|2|123781|0|0|147|36040006|0|2|2|595|2&amp;#34;,
+            &amp;#34;0|0|0|1|1|2|195870|0|0|734|5638|0|0|2|72|2&amp;#34;
+          ]
+        },
+        {
+          &amp;#34;role&amp;#34;:&amp;#34;topslave&amp;#34;,
+          &amp;#34;data&amp;#34;:[
+            [
+              1411035000,
+              &amp;#34;0|0|0|2|2|2|196457|0|0|145|1309|0|1|2|67|2&amp;#34;
+            ],
+            &amp;#34;0|0|0|2|2|3|170479|0|0|147|9061862|0|1|3|178|2&amp;#34;,
+            &amp;#34;0|0|0|2|2|3|131271|0|0|147|30458416|0|2|3|332|2&amp;#34;,
+            &amp;#34;0|0|0|2|2|3|126196|0|0|147|35483687|0|3|3|461|2&amp;#34;,
+            &amp;#34;0|0|0|1|1|3|126196|0|0|147|35483687|0|3|3|575|2&amp;#34;,
+            &amp;#34;0|0|0|1|1|2|195862|0|0|739|5822|0|0|2|70|2&amp;#34;
+          ]
+        }
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;status&amp;#34;
+    },
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;rdb-5s127ypr&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetZooKeeperMonitor</title>
+      <link>/development_docs/api/command_list/monitor/get_zookeeper_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/get_zookeeper_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过此 API 可获得 ZooKeeper 服务每个节点的监控指标。&lt;/p&gt;
+&lt;p&gt;因为 ZooKeeper 服务包含多个节点，每个 ZooKeeper 节点都有独立的监控数据。&lt;/p&gt;
+&lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩， 在解析返回数据时要留意。详细说明参见 &lt;a href=&#34;../compress/&#34;&gt;&lt;em&gt;监控数据压缩说明&lt;/em&gt;&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;ZooKeeper 节点 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项，有效值为 stats&lt;br/&gt;stats： ZooKeeper 服务监控&lt;br/&gt;注解&lt;br/&gt;参数值请使用小写字母&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：5m, 15m, 2h, 1d 。&lt;br/&gt;(m 表示分钟，h 表示小时，d 表示天)&lt;br/&gt;注解&lt;br/&gt;若请求最近15天以内的数据，数据间隔最小可以到5m；若请求15天以上的数据，数据间隔可选2h 或 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的起始 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2015-07-11T11:07:00Z 或 2015-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控数据的结束 &lt;strong&gt;UTC&lt;/strong&gt; 时间，格式为 2015-07-11T11:07:00Z 或 2016-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;监控数据集，可参见下面的监控数据集说明&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;监控数据集说明&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“Latency min | Latency avg | Latency max | Received | Sent | Connections | Outstanding | Mode | Node count”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 请求 ZooKeeper 服务监控数据&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetZookeeperMonitor
+&amp;amp;resource=zkn-l32ku359
+&amp;amp;meters.1=stats
+&amp;amp;start_time==2016-03-01T10%3A39%3A40.091Z
+&amp;amp;end_time=2016-05-01T16%3A39%3A40.091Z
+&amp;amp;step=5m
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetZookeeperMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      [
+        1458547800,
+        &amp;#34; 0|0|0|9|8|1|0|follower|4&amp;#34;
+      ],
+      &amp;#34; 0|0|0|33|32|1|0|follower|4&amp;#34;,
+      &amp;#34; 0|0|0|63|62|1|0|follower|4&amp;#34;,
+      &amp;#34; 0|0|0|93|92|1|0|follower|4&amp;#34;,
+      &amp;#34; 0|0|0|123|122|1|0|follower|4&amp;#34;
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;stats&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;zkn-l32ku359&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 监控数据压缩说明</title>
+      <link>/development_docs/api/command_list/monitor/compress/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/compress/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩处理。&lt;/p&gt;
+&lt;p&gt;API 返回的监控数据 sample:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[1392072000, value], &amp;#34;NA&amp;#34;, value, [500, value], value, ... ]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;第一个数据总是会包括两项：[时间, 值]。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;其中时间是北京时间，即 UTC+8&lt;/p&gt;
+&lt;p&gt;后面的大部分数据都只有“值”，其对应的时间则是 “前一时间 + step”。&lt;/p&gt;
+&lt;p&gt;如果遇到例子中 [500, value] 这种结构的数据，表示这个数据的“时间”是有自己的时间跨度的 ，这个跨度跟 step 无关，即 “时间 ＝ 前一时间 + 时间跨度(此例中跨度是 500)”。&lt;/p&gt;
+&lt;p&gt;数据中偶尔会出现”NA”，表示这一刻监控数据值无效。&lt;/p&gt;
+&lt;p&gt;将 sample 中每个数据都加上“时间”后（假设 step 为 5m，即 300s），得到:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[1392072000, value], [1392072300, null], [1392072600, value], [1392073100, value], [1392073400, value], ... ]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;还有要注意的是第一个数据中的“时间”并不一定等于请求 API 时的 start_time 参数， 它的确切含义为 &lt;em&gt;“第一个有效监控数据的时间”&lt;/em&gt; 。例如一台刚启动几分钟的云服务器， 如果请求最近1小时的监控数据 ( start_time 为1小时前)， 那么第一个有效数据的时间则是启动后的某个时间。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

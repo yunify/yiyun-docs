@@ -1,0 +1,62 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 资源管理</title>
+    <link>/operation/resource/</link>
+    <description>Recent content in 资源管理 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/operation/resource/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Operation: 产品简介</title>
+      <link>/operation/resource/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/operation/resource/intro/</guid>
+      <description>
+        
+        
+        &lt;p&gt;资源管理包括以下内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;project_intro/&#34;&gt;什么是项目管理&lt;/a&gt;&lt;!--[什么是资源共享](resource_intro/)--&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;quota_intro/&#34;&gt;什么是配额管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Operation: 操作指南</title>
+      <link>/operation/resource/manual/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/operation/resource/manual/</guid>
+      <description>
+        
+        
+        &lt;p&gt;项目管理具体操作内容如下所示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;project/management/&#34;&gt;项目使用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;project/resources/&#34;&gt;项目资源管理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;project/member_role/&#34;&gt;成员与角色&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;project/statistics/&#34;&gt;消费与用量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;project/upgrade_description/&#34;&gt;升级资源组&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--资源共享具体操作内容如下所示：--&gt;&lt;!--[创建共享单元](resource_share/create_unit)--&gt;&lt;!--[编辑共享单元](resource_share/edited_unit)--&gt;&lt;!--[查看共享给我的资源](resource_share/check_unit)--&gt;&lt;!--[共享效果](resource_share/unit_performance)--&gt;
+&lt;p&gt;配额管理具体操作内容如下所示：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;quota/view_quota&#34;&gt;查看我的配额&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;quota/apply_quota&#34;&gt;提升资源配额&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

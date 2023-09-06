@@ -1,0 +1,201 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – Bucket API</title>
+    <link>/storage/object-storage/api/bucket/</link>
+    <description>Recent content in Bucket API on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 28 Feb 2020 10:08:56 +0900</lastBuildDate>
+    
+	  <atom:link href="/storage/object-storage/api/bucket/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: Bucket 策略（Policy）</title>
+      <link>/storage/object-storage/api/bucket/policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/policy/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./put_policy&#34;&gt;PUT Bucket Policy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./get_policy&#34;&gt;GET Bucket Policy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./delete_policy&#34;&gt;DELETE Bucket Policy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 基础操作</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;创建 Bucket：&lt;a href=&#34;./put&#34;&gt;PUT Bucket&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;删除 Bucket：&lt;a href=&#34;./delete&#34;&gt;Delete Bucket&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;获取 Bucket 元信息：&lt;a href=&#34;./head&#34;&gt;Head Bucket&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;列取对象（List Objects）：&lt;a href=&#34;./get&#34;&gt;GET Bucket&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bucket 使用统计：&lt;a href=&#34;./get_stats&#34;&gt;GET Bucket Statistics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;列取分段上传：&lt;a href=&#34;./list_multipart_uploads&#34;&gt;List Multipart Uploads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;批量删除对象：&lt;a href=&#34;./delete_multiple&#34;&gt;Delete Multiple&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 跨区域复制（Replication）</title>
+      <link>/storage/object-storage/api/bucket/repliation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/repliation/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_replication/&#34;&gt;PUT Bucket Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_replication/&#34;&gt;GET Bucket Replication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_replication/&#34;&gt;DELETE Bucket Replication&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 跨域资源共享（CORS）</title>
+      <link>/storage/object-storage/api/bucket/cors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/cors/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_cors/&#34;&gt;PUT Bucket CORS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_cors/&#34;&gt;GET Bucket CORS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_cors/&#34;&gt;DELETE Bucket CORS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 权限控制（ACL）</title>
+      <link>/storage/object-storage/api/bucket/acl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/acl/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_acl/&#34;&gt;PUT Bucket ACL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_acl/&#34;&gt;GET Bucket ACL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 日志管理（Logging）</title>
+      <link>/storage/object-storage/api/bucket/logging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/logging/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_logging/&#34;&gt;PUT Bucket Logging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_logging/&#34;&gt;GET Bucket Logging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_logging/&#34;&gt;DELETE Bucket Logging&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 生命周期（Lifecycle）</title>
+      <link>/storage/object-storage/api/bucket/lifecycle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/lifecycle/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_lifecycle/&#34;&gt;PUT Bucket Lifecycle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_lifecycle/&#34;&gt;GET Bucket Lifecycle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_lifecycle/&#34;&gt;DELETE Bucket Lifecycle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 事件通知（Notification）</title>
+      <link>/storage/object-storage/api/bucket/notification/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/notification/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_notification/&#34;&gt;PUT Bucket Notification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_notification/&#34;&gt;GET Bucket Notification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_notification/&#34;&gt;DELETE Bucket Notification&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 外部镜像（External Mirror）</title>
+      <link>/storage/object-storage/api/bucket/external_mirror/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/external_mirror/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_external_mirror/&#34;&gt;PUT Bucket External Mirror&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_external_mirror/&#34;&gt;GET Bucket External Mirror&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_external_mirror/&#34;&gt;DELETE Bucket External Mirror&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 自定义域名（CNAME）</title>
+      <link>/storage/object-storage/api/bucket/cname/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/cname/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;put_cname/&#34;&gt;PUT Bucket CNAME&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;get_cname/&#34;&gt;GET Bucket CNAME&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;delete_cname/&#34;&gt;DELETE Bucket CNAME&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

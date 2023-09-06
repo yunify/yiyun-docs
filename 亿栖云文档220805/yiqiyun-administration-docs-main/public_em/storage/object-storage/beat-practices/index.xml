@@ -1,0 +1,711 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 最佳实践</title>
+    <link>/storage/object-storage/beat-practices/</link>
+    <description>Recent content in 最佳实践 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/storage/object-storage/beat-practices/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: 数据迁移方案</title>
+      <link>/storage/object-storage/beat-practices/migrate/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/migrate/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云对象存储推出了无缝数据迁移方案，帮助用户将业务数据从自建平台或者其他对象存储平台高效完整地迁移至亿栖云对象存储服务。&lt;/p&gt;
+&lt;p&gt;本方案提供两种迁移方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被动触发迁移&lt;/li&gt;
+&lt;li&gt;用户主动迁移&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;综合运用两种迁移方式，可以在不中断业务的前提下，平滑完整地进行迁移。本方案首先介绍亿栖云对象存储提供的两种迁移方式，再对迁移步骤进行详细说明。&lt;/p&gt;
+&lt;h2 id=&#34;被动触发迁移---外部镜像&#34;&gt;被动触发迁移 - 外部镜像&lt;/h2&gt;
+&lt;p&gt;对于已经设置了外部镜像的亿栖云对象存储 的 Bucket，当请求的 Object 在 Bucket 中不存在时，亿栖云对象存储服务端会把 Object Key 拼接在外部镜像源站后作为抓取的源链接，然后自动从源站抓取（回源），并写入到 Bucket 当中。在回源过程中，请求这个 Object 的客户端，有可能会下载到源站文件，也有可能收到重定向到源站相应路径的 302 请求。在回源完成后，客户端能够直接从亿栖云对象存储的 Bucket 中获取这个 Object。亿栖云对象存储建议用户可先使用 &lt;a href=&#34;/storage/object-storage/api/object/basic_opt/head/&#34;&gt;Head Object&lt;/a&gt; 返回 200 成功来确认 Object 存在。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;bucket_external_mirror_diagram.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;下面结合示意图，说明外部镜像的工作原理:&lt;/p&gt;
+&lt;p&gt;假设用户的外部镜像源站为 &lt;code&gt;http://img.example.com&lt;/code&gt;，在亿栖云对象存储的 Bucket 的默认域名为 &lt;code&gt;http://bucketname.jn2.is.yiqiyun.com&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示意图左侧为首次请求:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户发起获取 Object 的请求，如 &lt;code&gt;http://bucketname.jn2.is.yiqiyun.com/blog.png&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;Object 在亿栖云对象存储的 Bucket 中不存在，且用户已经为该 Bucket 设置了外部镜像源站，此时，亿栖云对象存储服务端会将 Object Key &lt;code&gt;blog.png&lt;/code&gt; 拼接到源站，生成源链接 &lt;code&gt;http://img.example.com/blog.png&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;亿栖云对象存储服务端从该源链接抓取；&lt;/li&gt;
+&lt;li&gt;在抓取过程中，请求该 Object 的客户端，有可能会下载到源站文件，也有可能收到重定向到源站相应路径的 302 请求。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;示意图右侧为抓取完成后，再次发起请求:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户发起获取 Object 的请求；&lt;/li&gt;
+&lt;li&gt;Object 在亿栖云对象存储的 Bucket 中已存在，直接返回。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;备注：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部镜像 API 请参考 &lt;a href=&#34;/storage/object-storage/api/bucket/external_mirror/&#34;&gt;Bucket External Mirror&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;外部镜像，需要源站在提供下载文件时能返回 &lt;code&gt;Content-Length&lt;/code&gt; 头，否则回源失败。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;用户主动迁移---fetch-api&#34;&gt;用户主动迁移 - Fetch API&lt;/h2&gt;
+&lt;p&gt;如果需要迁移单个源站资源，可以使用 &lt;a href=&#34;/storage/object-storage/api/object/basic_opt/fetch/&#34;&gt;PUT Object - Fetch&lt;/a&gt; 接口。该接口通过请求头 &lt;code&gt;x-qs-fetch-source&lt;/code&gt; 附带源链接。亿栖云对象存储会从该链接抓取资源，保存到指定的 Object 中， 并且在抓取时能够自动处理源链接服务器返回的 301/302/307 等重定向请求。该接口同步下载文件，完成后才会返回结果。&lt;/p&gt;
+&lt;p&gt;使用该接口，根据不同场景，亿栖云对象存储服务端会返回如下错误信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;409 ：fetch_in_process，表明同一时间相同源链接的 Fetch 请求正在进行，或者被动触发的外部镜像功能正在抓取该源链接对应的文件；&lt;/li&gt;
+&lt;li&gt;404 ：object_not_exists，获取的 Object 不存在；&lt;/li&gt;
+&lt;li&gt;503 ：upstream_failed，无法与 Fetch 请求的源链接或者外部镜像的源站建立链接，或源站服务器返回 200，3xx，404 范围之外的错误代码，或链接中断；&lt;/li&gt;
+&lt;li&gt;其他错误码，可参考：&lt;a href=&#34;/storage/object-storage/api/error_code/&#34;&gt;错误信息&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当 Object 特别大或源站下载速度比较慢时，该 API 请求有可能会导致客户端 TCP 超时。针对这种情形，亿栖云对象存储建议用户可以先使用 &lt;a href=&#34;/storage/object-storage/api/object/basic_opt/head/&#34;&gt;Head Object&lt;/a&gt; 获取并比较源站文件和 Bucket 中 Object 的大小与时间戳，如果 Head Object 返回 404，客户端需重复调用一次 Fetch Object 接口； 请求若返回 409 则说明抓取已经开始。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备注：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fetch API 请参考 &lt;a href=&#34;/storage/object-storage/api/object/basic_opt/fetch/&#34;&gt;PUT Object - Fetch&lt;/a&gt;；&lt;/li&gt;
+&lt;li&gt;Fetch 功能，需要源站在提供下载文件时能返回 &lt;code&gt;Content-Length&lt;/code&gt; 头，否则回源失败；&lt;/li&gt;
+&lt;li&gt;亿栖云对象存储建议用户使用本文介绍的 &lt;a href=&#34;#%E7%94%A8%E6%88%B7%E4%B8%BB%E5%8A%A8%E8%BF%81%E7%A7%BB---qscamel&#34;&gt;qscamel&lt;/a&gt; 工具，便捷的实现迁移。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;用户主动迁移---qscamel&#34;&gt;用户主动迁移 - qscamel&lt;/h2&gt;
+&lt;p&gt;qscamel 是把 HTTP(s) 形式的数据高效地批量迁移到亿栖云对象存储的命令行工具。其输入可以是包含源链接的文件，也可以是其他对象存储平台的 Bucket 名称。更多介绍请参考 &lt;a href=&#34;/storage/object-storage/manual/tool/qscamel/&#34;&gt;qscamel&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;qscamel 有如下特点:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;支持并行迁移，即同时迁移多个对象。&lt;/li&gt;
+&lt;li&gt;支持给迁移任务命名，用来继续迁移未完成的迁移任务。qscamel 会记录本次迁移任务中成功迁移的源站。在退出后、重新执行时，qscamel 会跳过已经成功迁移的源站资源，迁移剩下未完成的源站资源。&lt;/li&gt;
+&lt;li&gt;支持灵活的覆盖模式。qscamel 默认进行增量迁移，即通过比较源站资源和亿栖云对象存储的 Bucket 中 Object 的最后修改时间，仅同步亿栖云对象存储的 Bucket 中已存在但非最新的 Object，及亿栖云对象存储的 Bucket 中不存在的 Object。&lt;/li&gt;
+&lt;li&gt;除了默认的增量迁移外，qscamel 还支持参数 &lt;code&gt;--ignore-existing&lt;/code&gt;，即：不覆盖亿栖云对象存储的 Bucket 中已存在的 Object；以及参数 &lt;code&gt;--overwrite&lt;/code&gt; ，强制覆盖亿栖云对象存储的 Bucket 中已存在的 Object。&lt;/li&gt;
+&lt;li&gt;支持指定日志文件。qscamel 默认输出到标准输出，也可以指定输出到日志文件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;推荐使用步骤&#34;&gt;推荐使用步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;通过命令行工具 qscamel 将冷数据批量迁移到亿栖云对象存储。&lt;/li&gt;
+&lt;li&gt;更改业务的数据上传路径，将路径设置为亿栖云对象存储的 Bucket 默认域名，或者亿栖云对象存储的 Bucket 所绑定的自定义域名。&lt;/li&gt;
+&lt;li&gt;配置外部镜像功能，以使得访问不存在的 Object 时触发回源。&lt;/li&gt;
+&lt;li&gt;外部镜像功能只针对 Object 不存在的情况，不会从源站拉取新版本 Object。如果业务逻辑中没有覆盖更新同一 Object 的场景，可以直接让业务从亿栖云对象存储中读取；如果业务逻辑中有覆盖更新同一 Object 的逻辑，建议先更新业务代码，让业务上传数据时同时更新到源站和亿栖云对象存储，然后就可以使用亿栖云对象存储来承载业务。&lt;/li&gt;
+&lt;li&gt;再次使用命令行工具 qscamel 增量同步，以保证源站到亿栖云对象存储的 Bucket 数据迁移完成，没有遗漏。&lt;/li&gt;
+&lt;li&gt;停止源站的使用。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;faq&#34;&gt;FAQ&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;请问回源过程下载数据会产生费用吗？&lt;/p&gt;
+&lt;p&gt;会按照请求次数收费。内网下载请求不收流量费。假如是外网下载请求，若已经回源成功到亿栖云对象存储的 Bucket 中，会收取下载流量费用；假如返回 302 重定向到源站，则不收取流量费用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请问被动迁移有什么限制 ?&lt;/p&gt;
+&lt;p&gt;源站方面需要返回文件的长度 &lt;code&gt;Content-Length&lt;/code&gt;，并且从源站下载不能要求用户认证。亿栖云对象存储会最大限度保证客户端请求成功。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 实时增量数据备份解决方案</title>
+      <link>/storage/object-storage/beat-practices/backup/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/backup/</guid>
+      <description>
+        
+        
+        &lt;p&gt;实时且增量地对数据进行备份是用户的普遍需求，本方案将描述如何在 Linux 下将本地业务数据实时备份至亿栖云对象存储的 Bucket 中。&lt;/p&gt;
+&lt;p&gt;本方案采用 lsyncd 实时地监控指定目录在文件系统层次的变化，当该目录下发生文件创建、重命名、删除等操作时，&lt;a href=&#34;/storage/object-storage/manual/tool/qsctl/&#34;&gt;qsctl&lt;/a&gt; 便会被自动调用以将数据同步至指定的对象存储的 Bucket 中。因为 qsctl 支持增量同步，所以整个方案可以做到实时且增量的数据备份。&lt;/p&gt;
+&lt;p&gt;下面介绍完整的配置步骤。&lt;/p&gt;
+&lt;h2 id=&#34;环境要求&#34;&gt;环境要求&lt;/h2&gt;
+&lt;p&gt;本方案仅支持 Linux Kernel 2.6.13 及其以后的版本，且要求 Kernel 编译选项 &lt;code&gt;CONFIG_INOTIFY_USER&lt;/code&gt; 为开启状态。用户可以使用如下命令来确认自己的系统是否支持该方案:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;本地终端输入如下命令行：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;grep INOTIFY_USER /boot/config-&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;uname -r&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;返回结果：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONFIG_INOTIFY_USER&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;y
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;则说明可以采用该方案。&lt;/p&gt;
+&lt;h2 id=&#34;软件配置&#34;&gt;软件配置&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;安装 lsyncd，使用系统对应的包管理器进行安装即可&lt;/p&gt;
+&lt;p&gt;Debian、Ubuntu 等系统：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install lsyncd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;CentOS、Fedora 等系统：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install epel-release &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; yum makecache
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install lsyncd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 pip 安装并配置 qsctl，qsctl 的详细配置可以参考 &lt;a href=&#34;/storage/object-storage/manual/tool/qsctl/&#34;&gt;qsctl 的文档&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install qsctl -U
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法&lt;/h2&gt;
+&lt;p&gt;假设需要同步的目录为 &lt;code&gt;/tmp/example&lt;/code&gt;， 待同步的亿栖云对象存储的 Bucket 为 &lt;code&gt;example-bucket&lt;/code&gt;，lsyncd 的配置文件为 &lt;code&gt;~/qingstor-backup.conf&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;编辑配置文件&#34;&gt;编辑配置文件&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;lsyncd 配置文件&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-plain_text&#34; data-lang=&#34;plain_text&#34;&gt;settings {
+   logfile    = &amp;#34;/tmp/lsyncd.log&amp;#34;,
+   statusFile = &amp;#34;/tmp/lsyncd.status&amp;#34;,
+   maxDelays = 10,
+}
+
+bash = {
+   delay = 5,
+   maxProcesses = 1,
+   onCreate = &amp;#34;/path/to/qsctl sync ^source ^target --delete&amp;#34;,
+   onModify = &amp;#34;/path/to/qsctl sync ^source ^target&amp;#34;,
+   onDelete = &amp;#34;/path/to/qsctl sync ^source ^target --delete&amp;#34;,
+   onMove   = &amp;#34;/path/to/qsctl sync ^source ^target --delete&amp;#34;,
+   onStartup = &amp;#34;/path/to/qsctl sync ^source ^target --delete&amp;#34;,
+}
+
+sync {
+bash,
+source = &amp;#34;/tmp/example&amp;#34;,
+target = &amp;#34;qs://example-bucket&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;qsctl 配置文件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;若不知道 qsctl 的完整路径，可以使用 &lt;code&gt;which qsctl&lt;/code&gt; 以获取。配置文件中，各配置项含义说明如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;logfile:&lt;/code&gt; 日志文件配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;statusFile:&lt;/code&gt; 状态文件配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;maxDelays:&lt;/code&gt; 当延时的事件到达此限制后将会直接运行，即使还没有到达延时的事件，单位为秒。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;delay:&lt;/code&gt; 延时设置，事件触发后将会等待对应时间再运行，单位为秒。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;maxProcesses:&lt;/code&gt; 最大进程数配置，最多允许同时运行的进程数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;测试配置&#34;&gt;测试配置&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;由于 lsyncd 没有默认的配置文件，运行 lsyncd 时，需在命令行中通过参数的形式给出。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ lsyncd -nodaemon ~/qingstor-backup.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建一个文件并等待五秒左右&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello, yiqiyun!&amp;#34;&lt;/span&gt; &amp;gt; /tmp/example/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看 “hello.txt” 是否在 Bucket “example-bucket” 中存在&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ qsctl ls qs://example-bucket/hello.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若存在，则表示配置成功，否则表示配置存在问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;后台运行-lsyncd&#34;&gt;后台运行 lsyncd&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;当测试配置没有问题，且测试时运行结果符合预期时，可以将 lsyncd 放入后台运行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ lsyncd ~/qingstor-backup.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看配置文件中指定的状态文件以了解 lsyncd 的运行状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat /tmp/lsyncd.status
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Lsyncd status report at Mon Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; 02:31:48 &lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Sync1 source&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/tmp/incron/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;There are &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; delays
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Excluding:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nothing.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Inotify watching &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; directories
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1: /tmp/incron/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2: /tmp/incron/test/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看配置文件中指定的日志文件地址以查看 lsyncd 的运行日志&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat /tmp/lsyncd.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Mon Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; 02:10:49 &lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt; Normal: Event Init spawns action &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/home/xuanwo/.pyenv/shims/qsctl&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Mon Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; 02:10:51 &lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt; Error: Failure on startup of &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/incron/&amp;#34;&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Mon Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; 02:31:38 &lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt; Normal: Startup of &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/tmp/incron/&amp;#34;&lt;/span&gt; finished.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Mon Jan &lt;span style=&#34;color:#ae81ff&#34;&gt;16&lt;/span&gt; 02:33:46 &lt;span style=&#34;color:#ae81ff&#34;&gt;2017&lt;/span&gt; Normal: --- TERM signal, fading ---
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 移动 App 接入方案</title>
+      <link>/storage/object-storage/beat-practices/app_integration/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/app_integration/</guid>
+      <description>
+        
+        
+        &lt;p&gt;伴随着移动互联网的浪潮，移动应用 App 的开发需求越来越多样化，无论何种功能都离不开文件存储。在以前，应用开发者需要自行开发构建文件服务器，用于保存数据文件，并面向互联网提供访问，例如社交网络中的用户照片，视频网站中的影音内容，电商平台中的商品图片。&lt;/p&gt;
+&lt;p&gt;然而这些数据通常由终端用户直接生产和消费，伴随着用户增长，服务器的压力也会日益增大，开发者很难构建一个兼具高可用性、高扩展性和低成本的文件服务器。亿栖云对象存储刚好填补了这方面的需求，可为移动开发者提供一站式的文件存储解决方案。&lt;/p&gt;
+&lt;p&gt;亿栖云对象存储提供 HTTP RESTful 风格的访问接口，并辅助于编程语言相关的 SDK 工具，帮助开发者用极少的开发成本，将移动应用 App 对接到亿栖云对象存储。本文将介绍三种不同使用场景下，与亿栖云对象存储对接的方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用亿栖云对象存储 SDK&lt;/li&gt;
+&lt;li&gt;开发者实现签名服务器&lt;/li&gt;
+&lt;li&gt;表单 POST 上传&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最后再介绍一种特殊的签名认证方式：请求参数签名，用于当 Bucket 为私有权限时，在用户之间分享 Bucket 中的文件链接。&lt;/p&gt;
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+&lt;h3 id=&#34;创建-bucket&#34;&gt;创建 Bucket&lt;/h3&gt;
+&lt;p&gt;使用亿栖云对象存储之前，用户需创建相应的 Bucket，用于储存 Object。详细操作可参考 &lt;a href=&#34;/storage/object-storage/manual/console/bucket_manage/basic_opt/#%E5%88%9B%E5%BB%BA-bucket&#34;&gt;创建 Bucket&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;创建-access-key&#34;&gt;创建 Access Key&lt;/h3&gt;
+&lt;p&gt;详细操作可参考 &lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;创建 Access Key&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;使用-sdk&#34;&gt;使用 SDK&lt;/h2&gt;
+&lt;p&gt;亿栖云对象存储目前已提供多种语言的 SDK，包括开发 iPhone App 使用的 Swift 语言，以及开发 Android App 使用的 Java 语言。App 开发者将 SDK 嵌入到客户端程序中，通过调用 SDK 提供的方法和接口与亿栖云对象存储服务端通信。&lt;/p&gt;
+&lt;p&gt;这里将以开发一个上传照片的 iPhone App 为例，讲解如何使用亿栖云对象存储的 SDK for Swift 将 App 接入到亿栖云对象存储。&lt;/p&gt;
+&lt;h3 id=&#34;配置-cocoapods&#34;&gt;配置 CocoaPods&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;如果你还没有安装 CocoaPods，可以执行以下命令来安装，版本需为：CocoaPods 1.1.0+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gem install cocoapods
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在项目工程根目录下，输入以下命令来初始化 CocoaPods&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pod init
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;打开 Podfile，增加 &lt;code&gt;pod &#39;QingStorSDK&#39;&lt;/code&gt; 至对应的 Target，内容参考如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;target &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  use_frameworks!
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  pod &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;QingStorSDK&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;最后，输入以下命令来安装亿栖云对象存储 SDK 的依赖包&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pod install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;开始编码&#34;&gt;开始编码&lt;/h3&gt;
+&lt;p&gt;本文目的是学习亿栖云对象存储的 SDK，而不是花费时间来研究 UI，关于例子中用到的页面大概讲解如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Main.storyboard UI结构图：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;main_storyboard.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用一个 BucketListController 显示当前的 Bucket 列表，一个 ObjectListController 显示 Bucket 下面的对象列表。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个 Config.plist，并添加到工程。在 plist 文件里面填写申请的 API 密钥信息，内容参考如下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-plist&#34; data-lang=&#34;plist&#34;&gt;access_key_id
+ACCESS_KEY_ID
+secret_access_key
+SECRET_ACCESS_KEY
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;打开工程的 AppDelegate.swift 文件，在文件的顶部添加如下代码，导入 SDK：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;QingStorSDK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;在程序的启动入口，添加全局的注册操作，代码如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;application&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&amp;gt; Bool {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Register QingStorSDK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; url = URL(fileURLWithPath: Bundle.main.path(forResource: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Config&amp;#34;&lt;/span&gt;, ofType: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;plist&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;! Registry.registerFrom(plist: url)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;打开 BucketListController，在 viewDidLoad 方法里面初始化我们的亿栖云对象存储服务：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fileprivate &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; qsService: QingStor!
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;viewDidLoad&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;.viewDidLoad()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    qsService = QingStor()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    setupView()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;为了灵活使用，除了上述初始化亿栖云对象存储服务的方法之外，SDK 也支持在服务初始化的时候传入配置信息：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;首先修改 Config.plist 内容如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-plist&#34; data-lang=&#34;plist&#34;&gt;    access_key_id
+    ACCESS_KEY_ID
+    secret_access_key
+    SECRET_ACCESS_KEY
+    protocol
+    https
+    host
+    qingstor.com
+    port
+    443
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;修改 qsService 的初始化方式：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; url = URL(fileURLWithPath: Bundle.main.path(forResource: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Config&amp;#34;&lt;/span&gt;, ofType: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;plist&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; context = &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;! APIContext(plist: url)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsService = QingStor(context: context)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;有了 qsService 实例，我们可以用它来获取 Bucket 列表，请求操作代码如下，并把得到的响应数据存储到 &lt;code&gt;listBucketsOutput&lt;/code&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestBucketList&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    qsService.listBuckets(input: ListBucketsInput()) { response, error &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; response = response {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response.output.errMessage == &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.listBucketsOutput = response.output
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.tableView.reloadData()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;response.output.errMessage&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;error&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.refreshControl?.endRefreshing()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;刷新 TableView 的时候根据输出显示对应的内容，最终效果如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;bucket_list.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mobile-bucket-test&lt;/code&gt; 是之前为了测试创建的 Bucket。&lt;/li&gt;
+&lt;li&gt;点击该列表项，会跳转至 &lt;strong&gt;ObjectListController&lt;/strong&gt; 页面，并把当前列表项的 Bucket 数据传递过去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;打开 &lt;strong&gt;ObjectListController&lt;/strong&gt; 文件，在监听 &lt;code&gt;bucketModel&lt;/code&gt; 的事件里，初始化 Bucket 服务：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fileprivate &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; bucketService: Bucket!
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; bucketModel: BucketModel! {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;didSet&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        title = bucketModel.name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        bucketService = QingStor().bucket(bucketName: bucketModel.name!, zone: bucketModel.location!)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;增加 &lt;strong&gt;requestObjectList&lt;/strong&gt; 方法来请求 Object 列表，并把得到的响应数据存储到 &lt;code&gt;listObjectsOutput&lt;/code&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestObjectList&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    bucketService.listObjects(input: ListObjectsInput()) { response, error &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; response = response {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response.output.errMessage == &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.listObjectsOutput = response.output
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.tableView.reloadData()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;response.output.errMessage&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;error&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.refreshControl?.endRefreshing()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;刷新 TableView 的时候根据输出显示对应的内容，最终效果如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;object_list.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点击右上角 &lt;code&gt;+&lt;/code&gt; 符号，会触发选择图片事件&lt;/li&gt;
+&lt;li&gt;使用 UIImagePickerController 来做图片选择器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;11&#34;&gt;
+&lt;li&gt;当选择完图片时会触发 UIImagePickerController 的回调方法，可以在该方法做一些图片上传的处理，代码如下&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;imagePickerController&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;_&lt;/span&gt; picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    dismiss(animated: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, completion: &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; contentType: String? = &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; UTI = info[UIImagePickerControllerMediaType], &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; type = UTTypeCopyPreferredTagWithClass(UTI &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt;! CFString, kUTTagClassMIMEType)?.takeRetainedValue() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        contentType = type &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; String
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        contentType = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;image/jpeg&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; pathExtension = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpg&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; url = info[UIImagePickerControllerReferenceURL] &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt;? URL {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        pathExtension = url.pathExtension.lowercased()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; image = info[UIImagePickerControllerEditedImage] &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt;? UIImage {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; originRightBarButtonItem = navigationItem.rightBarButtonItem
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        spinner.startAnimating()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: spinner)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; data = UIImageJPEGRepresentation(image, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; input = PutObjectInput(contentLength: data.count, contentType: contentType, bodyInputStream: InputStream(data: data))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; key = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;Int&lt;span style=&#34;color:#e6db74&#34;&gt;(&lt;/span&gt;Date&lt;span style=&#34;color:#e6db74&#34;&gt;()&lt;/span&gt;.timeIntervalSince1970&lt;span style=&#34;color:#e6db74&#34;&gt;))&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;pathExtension&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        bucketService.putObject(objectKey: key, input: input) { response, error &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; response = response {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response.output.errMessage == &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.beginRefresh()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;response.output.errMessage&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;error&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.navigationItem.rightBarButtonItem = originRightBarButtonItem
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;代码有点长，不过我们应该关注的地方只有下面这一段代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-swift&#34; data-lang=&#34;swift&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; data = UIImageJPEGRepresentation(image, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; input = PutObjectInput(contentLength: data.count, contentType: contentType, bodyInputStream: InputStream(data: data))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; key = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;Int&lt;span style=&#34;color:#e6db74&#34;&gt;(&lt;/span&gt;Date&lt;span style=&#34;color:#e6db74&#34;&gt;()&lt;/span&gt;.timeIntervalSince1970&lt;span style=&#34;color:#e6db74&#34;&gt;))&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;pathExtension&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bucketService.putObject(objectKey: key, input: input) { response, error &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;let&lt;/span&gt; response = response {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response.output.errMessage == &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.beginRefresh()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;response.output.errMessage&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;\(&lt;/span&gt;error&lt;span style=&#34;color:#e6db74&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;self&lt;/span&gt;.navigationItem.rightBarButtonItem = originRightBarButtonItem
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先把图片信息转换成 Data，方便后续转成 InputStream，也可以将 Image 存到本地文件，再转成 InputStream。&lt;/li&gt;
+&lt;li&gt;再把文件的一些信息传给 Input 对象，比如 ContentLength 和 ContentType。&lt;/li&gt;
+&lt;li&gt;key 值是存储的文件名，用于后续的删除下载操作，这里只是简单的获取了一下时间戳当做文件名。&lt;/li&gt;
+&lt;li&gt;最后用 bucketService 来把文件上传到亿栖云对象存储，通过调用 putObject 方法来实现。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个简单的教程到这里就告一段落了，例子里面还加了一个侧滑删除的操作，大家有兴趣可以 &lt;a href=&#34;https://github.com/qychrisyang/qingstor-sdk-swift-demo&#34;&gt;下载源码&lt;/a&gt; 看看。&lt;/p&gt;
+&lt;h2 id=&#34;开发者实现签名服务器&#34;&gt;开发者实现签名服务器&lt;/h2&gt;
+&lt;p&gt;上文中介绍的使用 SDK 对接亿栖云对象存储服务，适用于 Bucket 被个人用户所拥有的情况。如果 Bucket 为 App 开发者所拥有，由于需要将签名密钥内置到客户端程序中，会带来安全方面的隐患。为了保证签名密钥的安全，开发者可以根据亿栖云对象存储签名方法，自己搭建并实现一个签名服务器。用于签名的密钥只需要在服务端保存，客户端不需要拿到，从而避免了认证信息泄漏的隐患。&lt;/p&gt;
+&lt;p&gt;亿栖云对象存储提供了一个签名服务器的 &lt;a href=&#34;https://github.com/yunify/qingstor-demo-auth-server&#34;&gt;样例&lt;/a&gt; 供 App 开发者参考。网页端使用 JavaScript SDK 配合签名服务器进行上传可以参考官方提供的 &lt;a href=&#34;https://github.com/yunify/qingstor-sdk-js-demo&#34;&gt;Demo 项目&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;注意事项&lt;/h3&gt;
+&lt;p&gt;若用户需自己开发签名服务，需要注意：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;签名服务需要考虑 &lt;a href=&#34;/storage/object-storage/api/practices/signature/&#34;&gt;JavaScript 客户端的特例&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;签名服务需要把计算签名时所有的时间戳，返回给客户端，客户端根据这个时间戳设置 &lt;code&gt;Date&lt;/code&gt; 头字段（一般客户端）或 &lt;code&gt;x-qs-date&lt;/code&gt; 头字段（JavaScript客户端）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;由于没有权限验证，该样例不适合直接运行在生产环境，若暴露在公网上，任何人都可以访问并进行签名认证。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;样例的使用步骤如下：&lt;/p&gt;
+&lt;h3 id=&#34;安装签名服务器&#34;&gt;安装签名服务器&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/yunify/qingstor-demo-auth-server.git
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd qingstor-demo-auth-server
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install -r requirements
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;配置认证信息&#34;&gt;配置认证信息&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ACCESS_KEY_ID&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ACCESS_KEY_ID_EXAMPLE&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export SECRET_ACCESS_KEY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SECRET_ACCESS_KEY_EXAMPLE&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ZONE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jn2.is&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中 ZONE 可以在服务器端进行配置，也可以在每一次请求中指定。如果都没有的话，服务器将会抛出异常。&lt;/p&gt;
+&lt;h3 id=&#34;运行认证服务器&#34;&gt;运行认证服务器&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python demo.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;获得请求签名&#34;&gt;获得请求签名&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;从客户端发送签名请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Content-Type: application/json&amp;#34;&lt;/span&gt; -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{&amp;#34;method&amp;#34;:&amp;#34;GET&amp;#34;, &amp;#34;url&amp;#34;:&amp;#34;/&amp;#34;, &amp;#34;headers&amp;#34;:{&amp;#34;Date&amp;#34;:&amp;#34;Wed, 10 Dec 2014 17:20:31 GMT&amp;#34;}}&amp;#39;&lt;/span&gt; 127.0.0.1:5000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;客户端将会获得如下的返回结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;QS PLLZOBTTZXGBNOWUFHZZ:vIWg/qAxvXlcFRb9uzYmdIM9tiF6EuM6SC3i13yLzH8&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;将该结果附加到请求头中，作为最终发送给亿栖云对象存储的请求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /mybucket/music.mp3 &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;QS PLLZOBTTZXGBNOWUFHZZ:vIWg/qAxvXlcFRb9uzYmdIM9tiF6EuM6SC3i13yLzH8=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 14 Nov 2016 14:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;SDK 参考例子：&lt;a href=&#34;/storage/object-storage/sdk/java/&#34;&gt;Java 使用服务端签名&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;表单-post-上传&#34;&gt;表单 POST 上传&lt;/h2&gt;
+&lt;p&gt;表单上传是专门为浏览器设计的一种文件上传方式，表单上传分为以下几步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户通过浏览器请求开发者的 Web Server&lt;/li&gt;
+&lt;li&gt;Web Server 生成包含 &lt;code&gt;signature&lt;/code&gt; 字段的表单返回给浏览器，例如&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Upload
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .jn1.is.yiqiyun.com&amp;#34; method=&amp;#34;POST&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;用户通过表单上传文件以及 Signature 给亿栖云对象存储。表单上传的具体方法，请见 &lt;a href=&#34;/storage/object-storage/api/object/post/&#34;&gt;表单上传&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;请求参数签名&#34;&gt;请求参数签名&lt;/h2&gt;
+&lt;p&gt;最后我们介绍一种不同于请求头签名的认证方式，该方法适用于 Bucket 为私有权限，但是需要分享文件下载链接给其它用户，或者其它设置请求头签名不方便的客户端。如果开发者想要生成一个亿栖云对象存储的访问链接，并将链接分享给其他用户，可以使用该签名方式，即请求参数签名。下面是一个请求示例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /music.mp3?access_key_id=PLLZOBTTZXGBNOWUFHZZ&amp;amp;expires=1479107162&amp;amp;signature=tuXu/KcggHWPAfEmraUHDwEUdiIPSXVRsO%2BT2rxomBQ%3D &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 14 Nov 2016 14:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参数签名使用的场合较为广泛，它所能达成的效果跟请求头签名完全一样，只是让附带签名的过程更加方便和易于使用。具体方法请见 &lt;a href=&#34;/storage/object-storage/api/practices/signature&#34;&gt;签名验证&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Linux 使用对象存储作为本地盘</title>
+      <link>/storage/object-storage/beat-practices/linux_uses_object_storage_as_a_local_disk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/linux_uses_object_storage_as_a_local_disk/</guid>
+      <description>
+        
+        
+        &lt;p&gt;本文介绍如何通过 goofys 将亿栖云对象存储挂载到文件系统使用。项目地址：&lt;a href=&#34;https://github.com/kahing/goofys&#34;&gt;Github 项目&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建 Bucket，若已经有可使用的 Bucket，可略过该步骤。详细操作可参考 &lt;a href=&#34;/storage/object-storage/manual/console/bucket_manage/basic_opt/#%E5%88%9B%E5%BB%BA-bucket&#34;&gt;创建 Bucket&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;申请 API 密钥。详细操作可参考 &lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;创建 Access Key&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装 goofys (以 Ubuntu 为例)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir /usr/local/goofys
+cd /usr/local/goofys
+wget https://github.com/kahing/goofys/releases/latest/download/goofys
+chmod +x goofys
+echo &amp;#34;PATH=\$PATH:/usr/local/goofys&amp;#34; &amp;gt;&amp;gt; /etc/profile
+source /etc/profile
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;挂载 Bucket&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd ~
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim .aws/credentials
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;default&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws_access_key_id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; qy_access_key_id							&lt;span style=&#34;color:#75715e&#34;&gt;#API密钥ID&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws_secret_access_key &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; qy_secret_access_key					&lt;span style=&#34;color:#75715e&#34;&gt;#API密钥密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;goofys --endpoint https://s3.&amp;lt;zone&amp;gt;.is.yiqiyun.com &amp;lt;bucket_name&amp;gt; &amp;lt;mount_point&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;&lt;code&gt;df -Th&lt;/code&gt; 查看结果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/linux_uses_os.png&#34; alt=&#34;image-20210523151936393&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 静态网站托管方案</title>
+      <link>/storage/object-storage/beat-practices/web_hosting/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/web_hosting/</guid>
+      <description>
+        
+        
+        &lt;p&gt;静态网站托管（Bucket Web Hosting），是亿栖云对象存储，面向静态网页内容（包含音频和视频等文件）提供的一种托管服务，是对静态网站的文件存储、访问控制、 CDN 分发加速，以及安全保障等一站式的解决方案。网页内容包含音频和视频等文件。可帮助用户快速构建并托管基于静态内容的网站，并提供高可靠与高可用的服务保障，大幅简化用户建站的操作流程，同时大幅降低网站的日常运营与维护成本。&lt;/p&gt;
+&lt;h2 id=&#34;主要优势&#34;&gt;主要优势&lt;/h2&gt;
+&lt;h3 id=&#34;高可靠高可用&#34;&gt;高可靠、高可用&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;继承亿栖云对象存储高可靠高可用特性。&lt;/li&gt;
+&lt;li&gt;存储容量可无限水平扩展。&lt;/li&gt;
+&lt;li&gt;提供完善的 API 接口与管理功能。&lt;/li&gt;
+&lt;li&gt;用户可便捷地上传与管理托管的静态内容。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;操作简便&#34;&gt;操作简便&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;配合亿栖云对象存储提供的 &lt;a href=&#34;/storage/object-storage/manual/tool/qsctl&#34;&gt;qsctl&lt;/a&gt; 文件上传工具，可实现对托管内容的快速实时更新，保障用户对网站内容的快速更新。&lt;/li&gt;
+&lt;li&gt;用户可以通过亿栖云对象存储完善的功能，实现对所托管网站的访问控制、流量监控、安全防护等功能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;无缝衔接-cdn-加速及-https-证书&#34;&gt;无缝衔接 CDN 加速及 HTTPS 证书&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;整合了亿栖云 CDN 加速服务，并支持对网站开启 HTTPS 证书认证，以满足用户对网站访问的更高需求。&lt;/li&gt;
+&lt;li&gt;在管理控制台与静态网站托管功能进行无缝衔接，使用户在一致的操作体验中完成操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用成本大幅降低&#34;&gt;使用成本大幅降低&lt;/h3&gt;
+&lt;p&gt;亿栖云对象存储成本低廉，无需采购、部署和运维，可按量付费。并且支持用户通过存储分层及对象生命周期管理，将成本降至更低。&lt;/p&gt;
+&lt;h2 id=&#34;应用场景&#34;&gt;应用场景&lt;/h2&gt;
+&lt;h3 id=&#34;静态网站托管&#34;&gt;静态网站托管&lt;/h3&gt;
+&lt;p&gt;亿栖云对象存储静态网站托管可为企业官网、新闻站点、自媒体站点、个人博客及文档汇编等大量使用静态内容的网站提供一套使用简便、成本低廉、高效可靠的面向静态网页的托管方案。&lt;/p&gt;
+&lt;p&gt;三步完成网站上线，省去繁杂的基础设施运维：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将所有静态网站文件上传至亿栖云对象存储 Bucket，并点选相应的配置；&lt;/li&gt;
+&lt;li&gt;设置网站访问域名，选择是否开启 CDN 或 HTTPS 证书（证书需用户自行提前准备好）；&lt;/li&gt;
+&lt;li&gt;开启静态网站托管。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;静态网站托管使用流程：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;设置 Bucket 为公开可读：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/web_hosting1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;通过上传文件功能，将网站内容上传至 Bucket。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/web_hosting2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;推荐使用亿栖云对象存储提供的命令行工具 qsctl 进行上传，使用方法可以参考 &lt;a href=&#34;/storage/object-storage/manual/tool/qsctl&#34;&gt;qsctl 文档&lt;/a&gt;。如使用 sync 命令上传整个网站，操作命令行为：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-plain_text&#34; data-lang=&#34;plain_text&#34;&gt;qsctl sync /path/to/website qs://test-bucket
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;绑定自定义域名并开启静态网站设置，请参考 &lt;a href=&#34;/storage/object-storage/beat-practices/web_hosting&#34;&gt;控制台指南&lt;/a&gt; 并操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在浏览器中访问刚才绑定的自定义域名，即可查看网站内容。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;大型动态网站动静分离&#34;&gt;大型动态网站动静分离&lt;/h3&gt;
+&lt;p&gt;将静态内容单独拆分出来进行托管，是目前普遍的网站优化手段，亿栖云对象存储静态网站托管可帮助提升网站的整体运行效率，并降低使用成本。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;降低 Web 服务器负载，静态文件访问负载全部通过 CDN&lt;/li&gt;
+&lt;li&gt;通过对象存储可与亿栖云大数据平台无缝集成，高效进行网站各项数据分析应用&lt;/li&gt;
+&lt;li&gt;Web 服务可直接将海量非结构化数据存储至对象存储，降低存储成本&lt;/li&gt;
+&lt;li&gt;配合 CDN 使用，降低流量成本，提高静态内容响应速度&lt;/li&gt;
+&lt;li&gt;无限水平扩展的海量存储空间，无需考虑存储架构升级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Web 服务静态化拆分样例&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原有 Web 服务架构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/bucket_web_hosting_static_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;例如，有如上图的 Web 服务架构。客户端和浏览器通过统一的 Web 服务网关访问网页、多媒体文件、软件安装包、API 等，同时 API Server 还依赖数据库（如 MySQL）、缓存（如 Redis）、大数据平台（如 Hadoop、Spark 等）等其他后端服务。&lt;/p&gt;
+&lt;p&gt;这种服务架构的缺点是所有访问请求都经由网关，如果 Web 服务的静态内容的访问量大，则会影响到 API Server 请求的响应速度。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优化后 Web 服务架构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/bucket_web_hosting_static_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;优化过的 Web 服务架构如上图。引入亿栖云对象存储之后，网页、多媒体文件、软件包等静态文件存储至 Bucket。Bucket 可以开启静态网站托管服务，同时也可以使用 CDN 来提高访问速度。客户端或浏览器只有访问 API 时才会请求 Web 服务网关，能够去除静态文件的负载压力。 API Server 可将非结构化数据统一存储至 Bucket。Web 应用的数据也可以定时打包备份至 Bucket，大数据平台也能够接触对象存储实现计算与数据存储分离。&lt;/p&gt;
+&lt;p&gt;这样一来，可以让亿栖云对象存储支撑起整个 Web 服务的存储，无需再考虑存储容量和存储架构升级问题，同时也能降低使用云服务成本。&lt;/p&gt;
+&lt;h2 id=&#34;对比传统部署方式&#34;&gt;对比传统部署方式&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/bucket_web_hosting_traditional.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;网站的访问体验是站长以及开发者最关心的一点，通过上面小节的介绍，相比过去自主购买服务器并部署上线网站的标准流程（如上图），使用静态网站除了能够节省成本之外， 还帮助用户省去了面向服务器的所有繁杂的配置与部署操作，并且不需要考虑服务器的选型购买与维护更新。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/bucket_web_hosting_improved.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;相比绝大多数类似服务，亿栖云对象存储提供的静态网站托管整合了 CDN 加速服务，并支持对网站开启 HTTPS 证书认证，对用户的访问效率和访问安全提供了保证，使静态网站的上线发布和更新维护流程变的简单高效。如上图所示。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Bucket Policy 白名单和黑名单使用实例</title>
+      <link>/storage/object-storage/beat-practices/policy/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/policy/</guid>
+      <description>
+        
+        
+        &lt;p&gt;ACL 提供了 Bucket 级别的读写权限设置，包括可读、可写和可读写。用户可以将不同的访问权限分别授予不同的亿栖云用户，也可以选择所有用户整体设置。Bucket Policy 允许用户更细粒度的控制 Bucket 的访问。其语义主要由用户、 资源、动作及条件运算符组合定义。例如仅允许指定用户以指定站点为 Referer 以下载 Bucket 中的某单个 Object，或者防止外链等。&lt;/p&gt;
+&lt;p&gt;ACL 过于广域，对于一些更细粒度的控制无法实现，需要用 Policy 来实现访问控制。&lt;/p&gt;
+&lt;p&gt;以下是 Policy 规则分别使用白名单和黑名单实现相同结果的两个案例，从案例中熟悉 Policy 黑白名单的使用。最终实现的效果都是一样，即头字段里的 &lt;code&gt;referer&lt;/code&gt; 必须匹配 &lt;code&gt;*.baidu.com&lt;/code&gt;，才能允许访问。详细操作如下：&lt;/p&gt;
+&lt;h2 id=&#34;案例一acl无任何规则&#34;&gt;案例一：ACL无任何规则&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;进入 &lt;strong&gt;访问控制&lt;/strong&gt; 设置页面，清除所有 ACL 规则，详细操作可参考 &lt;a href=&#34;/storage/object-storage/manual/console/bucket_manage/access_control/#%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8bucket-acl&#34;&gt;Bucket ACL&lt;/a&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/policy1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;进入 &lt;strong&gt;存储空间策略&lt;/strong&gt; 设置页面，创建规则，设置 Referer 匹配 &lt;code&gt;*.baidu.com&lt;/code&gt; 访问，也就是设置访问白名单。详细操作可参考 &lt;a href=&#34;/storage/object-storage/manual/console/bucket_manage/access_control/#%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E7%AD%96%E7%95%A5bucket-policy&#34;&gt;Bucket Policy&lt;/a&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/policy2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;测试结果如下，直接 curl 访问提示无权限，添加 &lt;code&gt;--referer&lt;/code&gt; 参数，指定 &lt;code&gt;www.baidu.com&lt;/code&gt; 之后可以正常访问:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/policy3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可见，ACL 不做任何规则限制，此时默认都无权访问，但是由于 Policy 优先级更高，可以直接越过 ACL 的限制。&lt;/p&gt;
+&lt;h2 id=&#34;案例二acl限制所有人可读&#34;&gt;案例二：ACL限制所有人可读&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;进入 &lt;strong&gt;访问控制&lt;/strong&gt; 设置页面，添加所有用户可读的 ACL 规则，详细操作可参考 &lt;a href=&#34;/storage/object-storage/manual/console/bucket_manage/access_control/#%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8bucket-acl&#34;&gt;Bucket ACL&lt;/a&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/policy4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;进入 &lt;strong&gt;存储空间策略&lt;/strong&gt; 设置页面，创建规则，设置 Referer 不匹配 &lt;code&gt;*.baidu.com&lt;/code&gt; 访问，也就是添加访问黑名单。详细操作可参考 &lt;a href=&#34;/storage/object-storage/manual/console/bucket_manage/access_control/#%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E7%AD%96%E7%95%A5bucket-policy&#34;&gt;Bucket Policy&lt;/a&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/policy5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;测试结果如下，直接 curl 访问提示无权限，添加 &lt;code&gt;--referer&lt;/code&gt; 参数，指定 &lt;code&gt;www.baidu.com&lt;/code&gt; 之后可以正常访问:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/policy6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可见，实现的结果和 &lt;strong&gt;案例一&lt;/strong&gt; 是一致的。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

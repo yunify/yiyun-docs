@@ -1,0 +1,395 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 跨区域复制（Replication）</title>
+    <link>/storage/object-storage/api/bucket/repliation/</link>
+    <description>Recent content in 跨区域复制（Replication） on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/storage/object-storage/api/bucket/repliation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: Delete Bucket Replication</title>
+      <link>/storage/object-storage/api/bucket/repliation/delete_replication/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/repliation/delete_replication/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该接口用于删除 Bucket 的跨区域复制相关设置。对象存储定义跨区域复制为 Bucket 的子资源，因此，只有 Bucket 的所有者才能调用该 API。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;DELETE&lt;/span&gt; /?replication &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone_id&amp;gt;.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求消息体&#34;&gt;请求消息体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功删除跨区域复制相关设置&lt;/td&gt;
+&lt;td&gt;204&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;DELETE&lt;/span&gt; /?replication &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 1 Oct 2018 15:04:01 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;204&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NoContent&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 1 Oct 2018 15:04:01 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Get Bucket Replication</title>
+      <link>/storage/object-storage/api/bucket/repliation/get_replication/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/repliation/get_replication/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该接口用于获取 Bucket 的跨区域复制规则列表。对象存储定义跨区域复制为 Bucket 的子资源，因此，只有 Bucket 的所有者才能调用该 API。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?replication &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone_id&amp;gt;.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求消息体&#34;&gt;请求消息体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;响应体&#34;&gt;响应体&lt;/h2&gt;
+&lt;p&gt;成功调用该 API 后，会返回一个 Json 格式的 Response Body。该 Response Body 包括如下两个部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;前期设置的的跨区域复制（Replication）规则，这部分可参考 &lt;a href=&#34;../put_replication#%E8%AF%B7%E6%B1%82%E4%BD%93&#34;&gt;PUT Bucket Replication&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;跨区域复制规则中目标 Bucket 所在的 Zone ID，这部分为 GET Bucket Replication 特有的 Response Body。详情如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;目标 Bucket 所在的 Zone ID。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功获取跨区域复制（Replication）规则列表&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?replication &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;my-bucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 1 Oct 2018 15:04:01 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 1 Oct 2018 15:04:01 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;193&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;rules&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;id&amp;#34;: &amp;#34;replicatin-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;status&amp;#34;: enabled,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;filters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;prefix&amp;#34;: &amp;#34;image&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;sync_marker&amp;#34;: &amp;#34;disabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;delete_marker&amp;#34;: &amp;#34;disabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;destination&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;zone&amp;#34;: &amp;#34;pek3b&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;bucket&amp;#34;: &amp;#34;replicate-bucket-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;storage_class&amp;#34;: &amp;#34;standard_ia&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;id&amp;#34;: &amp;#34;replicatin-2&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;status&amp;#34;: enabled,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;filters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;prefix&amp;#34;: &amp;#34;videos/&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;sync_marker&amp;#34;: &amp;#34;enabled&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;delete_marker&amp;#34;: &amp;#34;enabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;destination&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;zone&amp;#34;: &amp;#34;pek3b&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;bucket&amp;#34;: &amp;#34;replicate-bucket-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;storage_class&amp;#34;: &amp;#34;standard&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Put Bucket Replication</title>
+      <link>/storage/object-storage/api/bucket/repliation/put_replication/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/repliation/put_replication/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该接口用于创建或更新 Bucket 的跨区域复制规则的相关设置。对象存储会按照用户所设置的跨区域复制规则，在用户完成某些动作后对匹配规则的对象执行复制操作.&lt;/p&gt;
+&lt;p&gt;目前会触发跨区域复制的动作如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;上传对象&lt;/li&gt;
+&lt;li&gt;删除对象&lt;/li&gt;
+&lt;li&gt;更新对象元数据&lt;/li&gt;
+&lt;li&gt;完成分段上传&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用说明&#34;&gt;使用说明&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;对象存储定义跨区域复制规则为 Bucket 的子资源，因此，只有 Bucket 的所有者才能调用该 API。&lt;/li&gt;
+&lt;li&gt;跨区域复制采用异步复制机制，故，数据复制至目标 Bucket 需要一定的时间，通常为几分钟到几个小时不等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /?replication &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;rules&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;id&amp;#34;: &amp;#34;replicatin-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;status&amp;#34;: enabled,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;filters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;prefix&amp;#34;: &amp;#34;image&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;sync_marker&amp;#34;: &amp;#34;disabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;delete_marker&amp;#34;: &amp;#34;disabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;destination&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;bucket&amp;#34;: &amp;#34;replicate-bucket-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;storage_class&amp;#34;: &amp;#34;standard_ia&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求体&#34;&gt;请求体&lt;/h2&gt;
+&lt;p&gt;调用该 API 需携带如 &lt;a href=&#34;#%E8%AF%B7%E6%B1%82%E8%AF%AD%E6%B3%95&#34;&gt;请求语法&lt;/a&gt; 中的 Json 消息体。该消息体各字段说明如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;rules&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rules&lt;/code&gt; 的元素为跨区域复制规则。一次请求中需至少包含一条规则且不能超过 1000 条规则，且规则的总的字节数不能超过 2097152。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则的标识符。可为任意 UTF-8 编码字符串，长度不能超过 255 个字符。同一个 Bucket 中，跨区域复制规则的标识符必须唯一。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;该条规则的状态。可忽略大小写，默认值为 &lt;code&gt;enabled&lt;/code&gt;。 可选值为： &lt;br&gt;- &lt;code&gt;enabled&lt;/code&gt; 表示生效 &lt;br&gt;- &lt;code&gt;disabled&lt;/code&gt; 表示禁用&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;filters&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;用于设置对象的过滤条件，目前支持的键为 &lt;code&gt;prefix&lt;/code&gt;。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;prefix&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;对象名的前缀。匹配此前缀的对象应用此规则。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;delete_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;用于设置是否对删除对象的操作进行复制。默认值为 &lt;code&gt;disabled&lt;/code&gt;，忽略大小写。可选值为：&lt;br&gt;- &lt;code&gt;enabled&lt;/code&gt; 表示启用； &lt;br&gt;- &lt;code&gt;disabled&lt;/code&gt; 表示禁用。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;destination&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;用于描述复制的目标区域的信息。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;目标区域的 Bucket 名称。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;storage_class&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;目标区域的 Bucket 所使用的存储级别。默认值为 &lt;code&gt;STANDARD&lt;/code&gt;。可选值为：&lt;br&gt;- &lt;code&gt;STANDARD&lt;/code&gt; 标准存储；&lt;br&gt;- &lt;code&gt;STANDARD_IA&lt;/code&gt; 低频存储。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;sync_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;用于设置是否对历史数据进行同步。默认值为 &lt;code&gt;disabled&lt;/code&gt;，忽略大小写。可选值为：&lt;br&gt;- &lt;code&gt;enabled&lt;/code&gt; 表示同步；&lt;br&gt;- &lt;code&gt;disabled&lt;/code&gt; 表示不同步。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;id&lt;/code&gt; 用来唯一标记跨区域复制规则，描述该规则的用途。不能与其他跨区域复制规则 &lt;code&gt;id&lt;/code&gt; 相重复。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;prefix&lt;/code&gt; 最大字符长度为 1024。多个规则中的 &lt;code&gt;prefix&lt;/code&gt; 不能有重叠匹配。比如规则一中 &lt;code&gt;&amp;quot;prefix&amp;quot;: &amp;quot;image&amp;quot;&lt;/code&gt;，那么其它规则中不能出现类似 &lt;code&gt;&amp;quot;prefix&amp;quot;: &amp;quot;image1&amp;quot;&lt;/code&gt;，&lt;code&gt;&amp;quot;prefix&amp;quot;: &amp;quot;image-1&amp;quot;&lt;/code&gt; 这样的设置。默认为空字符串，表示匹配所有对象。不支持正则表达式。&lt;/li&gt;
+&lt;li&gt;同一条请求中，所有跨区域复制规则中的目标 Bucket，必须指向同一个 Bucket。&lt;/li&gt;
+&lt;li&gt;为防止用户误操作删除数据，亿栖云对象存储不建议用户在配置规则时开启 &lt;code&gt;delete_marker&lt;/code&gt; 选项。&lt;/li&gt;
+&lt;li&gt;若通过 &lt;code&gt;storage_class&lt;/code&gt; 设置的存储级别在目标 Bucket 所在区域不被支持，系统会返回设置失败。&lt;/li&gt;
+&lt;li&gt;若设置 &lt;code&gt;sync_marker&lt;/code&gt; 为 &lt;code&gt;enabled&lt;/code&gt;，则历史数据会在规则生效 30 分钟之后开始同步。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功设置跨区域复制（Replication）规则&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /?replication &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;my-bucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 1 Oct 2018 15:04:01 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;193&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;rules&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;id&amp;#34;: &amp;#34;replicatin-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;status&amp;#34;: enabled,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;filters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;prefix&amp;#34;: &amp;#34;image&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;sync_marker&amp;#34;: &amp;#34;disabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;delete_marker&amp;#34;: &amp;#34;disabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;destination&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;bucket&amp;#34;: &amp;#34;replicate-bucket-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;storage_class&amp;#34;: &amp;#34;standard_ia&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;id&amp;#34;: &amp;#34;replicatin-2&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;status&amp;#34;: enabled,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;filters&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;prefix&amp;#34;: &amp;#34;videos/&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;sync_marker&amp;#34;: &amp;#34;enabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;delete_marker&amp;#34;: &amp;#34;enabled&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;#34;destination&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;bucket&amp;#34;: &amp;#34;replicate-bucket-1&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &amp;#34;storage_class&amp;#34;: &amp;#34;standard&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mon, 1 Oct 2018 15:04:01 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

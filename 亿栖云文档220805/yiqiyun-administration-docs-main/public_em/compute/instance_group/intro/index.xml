@@ -1,0 +1,36 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 产品简介</title>
+    <link>/compute/instance_group/intro/</link>
+    <description>Recent content in 产品简介 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/compute/instance_group/intro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Compute: 安置策略组</title>
+      <link>/compute/instance_group/intro/instance_group/</link>
+      <pubDate>Thu, 30 Jan 2020 00:36:25 +0900</pubDate>
+      
+      <guid>/compute/instance_group/intro/instance_group/</guid>
+      <description>
+        
+        
+        &lt;p&gt;安置策略组功能为用户提供了云服务器分组功能，用户可以通过创建合适关系的安置策略组并将部署的云服务器加入相应的分组，从而将一组云服务器实例按照分组关系部署到合适的物理节点上，来提高资源的可用性，业务的连续性。&lt;/p&gt;
+&lt;p&gt;云平台安置策略组有两种类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;集中： 安置策略组内的云服务器趋向于部署/迁移到相同的物理节点上。&lt;/li&gt;
+&lt;li&gt;分散： 安置策略组内的云服务器趋向于部署/迁移到不同的物理节点上。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

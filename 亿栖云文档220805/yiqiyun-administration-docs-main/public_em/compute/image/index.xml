@@ -1,0 +1,45 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 镜像</title>
+    <link>/compute/image/</link>
+    <description>Recent content in 镜像 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/compute/image/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Compute: 产品简介</title>
+      <link>/compute/image/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/compute/image/intro/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;云服务器-instance&#34;&gt;云服务器 (Instance)&lt;/h2&gt;
+&lt;p&gt;IaaS 平台所交付的云服务器服务，是云计算的核心业务，也是用户最为关系的计算的核心。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Compute: 操作指南</title>
+      <link>/compute/image/manual/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/compute/image/manual/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

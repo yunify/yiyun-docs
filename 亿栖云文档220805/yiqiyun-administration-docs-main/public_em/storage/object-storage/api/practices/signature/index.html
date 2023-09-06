@@ -1,0 +1,2731 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>签名验证 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/storage/object-storage/" class="has-text-primary">对象存储</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/storage/object-storage/api/" class="has-text-primary">API 参考</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/storage/object-storage/api/practices/" class="has-text-primary">API 使用示例</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">签名验证</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">API 使用示例</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  对象存储
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/object-storage/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/news/history/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/intro/object-storage/"
+      class="menu__title  "
+      data-depth="1">对象存储</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/intro/function_list/"
+      class="menu__title  "
+      data-depth="1">功能概览</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/billing/price/"
+      class="menu__title  "
+      data-depth="1">消费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/manual/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Console
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/console/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/overview/"
+      class="menu__title  "
+      data-depth="2">概述</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  Bucket 管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/bucket_manage/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/basic_opt/"
+      class="menu__title  "
+      data-depth="3">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/access_control/"
+      class="menu__title  "
+      data-depth="3">访问控制</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/monitor/"
+      class="menu__title  "
+      data-depth="3">监控与报表</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/logging/"
+      class="menu__title  "
+      data-depth="3">日志归档</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/lifecycle/"
+      class="menu__title  "
+      data-depth="3">生命周期管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/replication/"
+      class="menu__title  "
+      data-depth="3">跨区域复制</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  Object 管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/object_manage/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/object_manage/basic_opt/"
+      class="menu__title  "
+      data-depth="3">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/object_manage/change_level/"
+      class="menu__title  "
+      data-depth="3">变更存储级别</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/object_manage/modify_meta/"
+      class="menu__title  "
+      data-depth="3">修改元数据</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  数据处理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/data_process/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/data_process/image_process/"
+      class="menu__title  "
+      data-depth="3">图片处理</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  客户端工具
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/tool/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/qsctl/"
+      class="menu__title  "
+      data-depth="2">qsctl</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/qscamel/"
+      class="menu__title  "
+      data-depth="2">qscamel</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/qsftpd/"
+      class="menu__title  "
+      data-depth="2">qsftpd</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/mountain-duck/"
+      class="menu__title  "
+      data-depth="2">Mountain Duck</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  第三方数据集成
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/third_party_integration/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/third_party_integration/logstash_input/"
+      class="menu__title  "
+      data-depth="2">Logstash Input QingStor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/third_party_integration/logstash_output/"
+      class="menu__title  "
+      data-depth="2">Logstash Output QingStor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/third_party_integration/wordpress_plugin_for_qingstor/"
+      class="menu__title  "
+      data-depth="2">WordPress QingStor </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  最佳实践
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/beat-practices/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/migrate/"
+      class="menu__title  "
+      data-depth="1">数据迁移方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/backup/"
+      class="menu__title  "
+      data-depth="1">实时增量数据备份解决方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/app_integration/"
+      class="menu__title  "
+      data-depth="1">移动 App 接入方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/linux_uses_object_storage_as_a_local_disk/"
+      class="menu__title  "
+      data-depth="1">Linux 使用对象存储作为本地盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/web_hosting/"
+      class="menu__title  "
+      data-depth="1">静态网站托管方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/policy/"
+      class="menu__title  "
+      data-depth="1">Bucket Policy 白名单和黑名单使用实例</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  API 参考
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/api/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/overview/"
+      class="menu__title  "
+      data-depth="1">概述</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/common_header/"
+      class="menu__title  "
+      data-depth="1">公共字段</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/metadata/"
+      class="menu__title  "
+      data-depth="1">对象元数据</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/error_code/"
+      class="menu__title  "
+      data-depth="1">错误信息</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Bucket API
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/bucket/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/policy/"
+      class="menu__title  "
+      data-depth="2">Bucket 策略（Policy）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/basic_opt/"
+      class="menu__title  "
+      data-depth="2">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/repliation/"
+      class="menu__title  "
+      data-depth="2">跨区域复制（Replication）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/cors/"
+      class="menu__title  "
+      data-depth="2">跨域资源共享（CORS）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/acl/"
+      class="menu__title  "
+      data-depth="2">权限控制（ACL）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/logging/"
+      class="menu__title  "
+      data-depth="2">日志管理（Logging）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/lifecycle/"
+      class="menu__title  "
+      data-depth="2">生命周期（Lifecycle）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/notification/"
+      class="menu__title  "
+      data-depth="2">事件通知（Notification）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/external_mirror/"
+      class="menu__title  "
+      data-depth="2">外部镜像（External Mirror）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/cname/"
+      class="menu__title  "
+      data-depth="2">自定义域名（CNAME）</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Object API
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/object/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/append/"
+      class="menu__title  "
+      data-depth="2">Append Object</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/multipart/"
+      class="menu__title  "
+      data-depth="2">Multipart 分段</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/post/"
+      class="menu__title  "
+      data-depth="2">Post Object</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/basic_opt/"
+      class="menu__title  "
+      data-depth="2">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/encryption/"
+      class="menu__title  "
+      data-depth="2">数据加密</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/image_process/"
+      class="menu__title  "
+      data-depth="2">图片处理</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Service API
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/service/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/service/get/"
+      class="menu__title  "
+      data-depth="2">GET Service</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/service/location/"
+      class="menu__title  "
+      data-depth="2">List Locations</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="2">
+  API 使用示例
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/practices/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/practices/access_control/"
+      class="menu__title  "
+      data-depth="2">访问控制</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/practices/signature/"
+      class="menu__title active "
+      data-depth="2">签名验证</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/faq/object-faq/"
+      class="menu__title  "
+      data-depth="1">FAQ</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  AWS S3 兼容
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/s3/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/s3_browser/"
+      class="menu__title  "
+      data-depth="1">安装 S3 Browser</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/compatible_headers/"
+      class="menu__title  "
+      data-depth="1">兼容公共头</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/compatible_apis/"
+      class="menu__title  "
+      data-depth="1">兼容接口</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/examples/"
+      class="menu__title  "
+      data-depth="1">使用示例</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  SDK
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/sdk/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/python/"
+      class="menu__title  "
+      data-depth="1">Python SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/go/"
+      class="menu__title  "
+      data-depth="1">Go SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/ruby/"
+      class="menu__title  "
+      data-depth="1">Ruby SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/cpp/"
+      class="menu__title  "
+      data-depth="1">C/C&#43;&#43; SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/java/"
+      class="menu__title  "
+      data-depth="1">Java SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/javascript/"
+      class="menu__title  "
+      data-depth="1">JavaScript SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/php/"
+      class="menu__title  "
+      data-depth="1">PHP SDK</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  硬盘
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/disk/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">硬盘简介</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/billing/price/"
+      class="menu__title  "
+      data-depth="1">硬盘计费</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/create_disk/"
+      class="menu__title  "
+      data-depth="1">步骤1：购买硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/load/"
+      class="menu__title  "
+      data-depth="1">步骤2：加载硬盘</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  步骤3：初始化硬盘
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/init/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/init/init_start/"
+      class="menu__title  "
+      data-depth="2">初始化及分区方式</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/init/init_linux/"
+      class="menu__title  "
+      data-depth="2">初始化 Linux 数据盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/init/init_win/"
+      class="menu__title  "
+      data-depth="2">初始化 Windows 数据盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/basic_operation/"
+      class="menu__title  "
+      data-depth="1">硬盘基本操作</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  硬盘扩容
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/expand/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/expand/expan_linux/"
+      class="menu__title  "
+      data-depth="2">扩容 Linux 数据盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/expand/expan_win/"
+      class="menu__title  "
+      data-depth="2">扩容 Windows 数据盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/expand/expan_linux_sys/"
+      class="menu__title  "
+      data-depth="2">扩容系统盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  配置自动挂载
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/auto_mount/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/auto_mount/linux_auto_mount/"
+      class="menu__title  "
+      data-depth="2">自动挂载 Linux 硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/auto_mount/win_auto_mount/"
+      class="menu__title  "
+      data-depth="2">自动挂载 Windows 硬盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/create_snapshot/"
+      class="menu__title  "
+      data-depth="1">备份硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/unload/"
+      class="menu__title  "
+      data-depth="1">卸载硬盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  共享存储
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/share/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/share/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">共享存储</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/share/manual/neonsan_volume/"
+      class="menu__title  "
+      data-depth="1">企业级分布式 SAN</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/share/manual/vsan/"
+      class="menu__title  "
+      data-depth="1">Virtual SAN</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  备份
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/backup/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">备份概述</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/create_snapshot/"
+      class="menu__title  "
+      data-depth="1">创建备份</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/delete_snapshot/"
+      class="menu__title  "
+      data-depth="1">删除备份</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/rollback_snapshot/"
+      class="menu__title  "
+      data-depth="1">备份回滚</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/bak_create_mirror/"
+      class="menu__title  "
+      data-depth="1">基于备份制作镜像</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/bak_create_disk/"
+      class="menu__title  "
+      data-depth="1">基于备份创建硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/backup/"
+      class="menu__title  "
+      data-depth="1">其他备份相关操作</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  文件存储
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/vnas/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/vnas/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">Virtual NAS</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/api/practices/signature/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/vnas/manual/vnas_expansion/"
+      class="menu__title  "
+      data-depth="1">Virtual NAS 云硬盘扩容</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/vnas/manual/vnas/"
+      class="menu__title  "
+      data-depth="1">Virtual NAS</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#签名方式">签名方式</a>
+      <ul>
+        <li><a href="#请求头签名">请求头签名</a></li>
+        <li><a href="#请求参数签名">请求参数签名</a></li>
+        <li><a href="#表单签名">表单签名</a></li>
+        <li><a href="#签名服务">签名服务</a></li>
+      </ul>
+    </li>
+    <li><a href="#获取-access-key">获取 Access Key</a>
+      <ul>
+        <li><a href="#注意事项">注意事项</a></li>
+        <li><a href="#操作步骤">操作步骤</a></li>
+      </ul>
+    </li>
+    <li><a href="#请求头签名示例">请求头签名示例</a>
+      <ul>
+        <li><a href="#构建签名串">构建签名串</a></li>
+        <li><a href="#构建-canonicalized-headers">构建 Canonicalized Headers</a></li>
+        <li><a href="#构建-canonicalized-resource">构建 Canonicalized Resource</a></li>
+        <li><a href="#计算签名-signature">计算签名 Signature</a></li>
+        <li><a href="#添加签名-authorization">添加签名 Authorization</a></li>
+      </ul>
+    </li>
+    <li><a href="#针对-javascript-客户端的特殊考虑">针对 JavaScript 客户端的特殊考虑</a></li>
+    <li><a href="#请求参数签名示例">请求参数签名示例</a></li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">API 使用示例</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>签名验证</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-02-28
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	
+	
+
+	
+	<p>亿栖云对象存储具备多种访问方式。根据场景的不同，亿栖云对象存储提供了相应的方案来进行请求的身份认证。由于实现签名需要考虑的细节较多，包括语言编码、特殊字符处理、以及新 API 的支持等，所以建议开发者直接使用亿栖云对象存储提供的 SDK 或客户端工具，以减少开发和维护工作。</p>
+<p>若用户的 Bucket 设为私有权限，需要通过请求进行签名；若用户的 Bucket 已经配置为公开读或公开读写权限，则不需要对请求进行签名。</p>
+<h2 id="签名方式">签名方式</h2>
+<h3 id="请求头签名">请求头签名</h3>
+<p>该方式适用于大部分的场景，如运行在服务器端的应用程序向亿栖云对象存储服务端发起访问请求。应用程序需配置 Access Key。为了防止签名请求被恶意用户拦截重放，从保证用户数据安全的角度出发，亿栖云对象存储设置了 15 分钟之后签名串失效的机制。</p>
+<p>所以，用户需要将系统时间通过 NTP 校准到网络时间。若用户的服务器是运行在 IaaS 平台上的虚拟机，系统会自动同步标准时间。</p>
+<h3 id="请求参数签名">请求参数签名</h3>
+<p>该方式支持所有类型的 API 请求，适合在客户端无法设置请求头时使用。其中典型的场景包括：由服务端程序调用 SDK 生成带一定过期时间的参数签名的 URL，显示在网页上作为下载链接。</p>
+<h3 id="表单签名">表单签名</h3>
+<p>该方式适用于浏览器直接通过 HTML 表单方式上传小文件。详情请参考 <a href="../../object/post/">Post Object API</a></p>
+<h3 id="签名服务">签名服务</h3>
+<p>由于移动端应用的特点，将 Access Key 随 APP 分发会带来安全问题。所以亿栖云对象存储提供了签名服务解决方案，具体请参考 <a href="../../../beat-practices/app_integration/">移动 App 接入方案</a>。</p>
+<p>移动客户端每次上传下载文件之前，由亿栖云对象存储服务端验证了用户身份之后，签名服务根据特定的亿栖云 API 调用参数，生成头签名或参数签名，返回给客户端。客户端使用该签名直接跟亿栖云对象存储进行交互。</p>
+<p>适用于Ajax类型应用的 <a href="/storage/object-storage/sdk/javascript/">Javascript SDK</a>、适用 Android 平台的 <a href="/storage/object-storage/sdk/java/">Java SDK</a> 均支持构造 API 请求时应用服务端计算的签名串。</p>
+<p>由于移动客户端经常会遇到系统时间不准确的问题，且签名计算结果跟时间又密切相关，这就需要签名服务在计算签名时把所用的标准时间一并返回给客户端，设置正确的 <code>Date header</code>。</p>
+<h2 id="获取-access-key">获取 Access Key</h2>
+<p>亿栖云对象存储通过使用对称加密的方法来验证请求者的身份。如果用户以个人身份请求亿栖云对象存储服务时，首先需要拥有一对密钥。密钥包括 <code>Access Key ID</code> 和 <code>Secret Access Key</code>，其中 <code>Secret Access Key</code> 在签名的过程中需要用到。</p>
+<h3 id="注意事项">注意事项</h3>
+<ul>
+<li>获得密钥的用户，可以以密钥拥有者的身份访问亿栖云对象存储，所以密钥中的 Secret Access Key 部分需要对外保密。</li>
+<li>API 密钥下载链接，自创建 10 分钟后失效。用户需及时下载并保存。</li>
+</ul>
+<h3 id="操作步骤">操作步骤</h3>
+<ol>
+<li>登录管理控制台，选择 <strong>产品与服务</strong> &gt; <strong>访问与授权</strong> &gt; <strong>API 密钥</strong>，进入 API 密钥主页面：</li>
+</ol>
+<p><img src="/storage/object-storage/_images/ak_sk_1.png" alt=""></p>
+<ol start="2">
+<li>在 API 密钥主页面，点击 <strong>创建</strong>，按要求输入相关信息后，点击 <strong>提交</strong> 按钮：</li>
+</ol>
+<p><img src="/storage/object-storage/_images/create_access_key.png" alt=""></p>
+<ol start="3">
+<li>在随后的对话框中下载密钥文件：</li>
+</ol>
+<p><img src="/storage/object-storage/_images/down_access_key.png" alt=""></p>
+<ol start="4">
+<li>用文本查看 API 密钥信息：</li>
+</ol>
+<p><img src="/storage/object-storage/_images/ak_sk_2.png" alt=""></p>
+<p><strong>说明</strong></p>
+<p>如上图所示，Access Key ID 和 Secret Access Key 分别为：<br><code>HOKUMWFMUIDFDIWEKLCA</code> 与 <code>YD0vaP82NQX6R7t0lZVtNtC1JsnkGxgFcXAiwLCN</code>。</p>
+<h2 id="请求头签名示例">请求头签名示例</h2>
+<p>这里以请求头签名的方式为例加，对签名串的创建过程，进行说明。</p>
+<h3 id="构建签名串">构建签名串</h3>
+<p>签名串 (String To Sign) 的总体构成有如下几个部分：</p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">string_to_sign = Verb + &#34;\n&#34;
+              + Content-MD5 + &#34;\n&#34;
+              + Content-Type + &#34;\n&#34;
+              + Date + &#34;\n&#34;
+              (+ Canonicalized Headers + &#34;\n&#34;)
+              + Canonicalized Resource
+</code></pre><ul>
+<li><code>Verb</code>：HTTP Method，包括 HEAD，GET，PUT，DELETE，OPTIONS。</li>
+<li><code>Content-MD5</code>：请求内容数据的 MD5 值，和请求头里的字段值保持一致，若请求头没有这个参数，保留空白行。</li>
+<li><code>Content-Type</code>：请求内容的类型，和请求头里的字段值保持一致，若请求头没有这个参数，保留空白行。</li>
+<li><code>Date</code>：此次请求的时间，需要符合 HTTP 规定的 GMT 格式。</li>
+<li><code>Canonicalized Headers</code>：请求头中以 <code>x-qs-</code> 开头的字段。若该值为空，不保留空白行。构建方式参考 <a href="#%E6%9E%84%E5%BB%BA-canonicalized-headers">下文内容</a>。</li>
+<li><code>Canonicalized Resource</code>：请求访问的资源。构建方式参考 <a href="#%E6%9E%84%E5%BB%BA-canonicalized-resource">下文内容</a>。</li>
+</ul>
+<p><strong>签名串示例</strong></p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">PUT
+4gJE4saaMU4BqNR0kLY+lw==
+image/jpeg
+Wed, 10 Dec 2014 17:20:31 GMT
+/mybucket/%28%27this%20is%20test%27%2C%29
+</code></pre><h3 id="构建-canonicalized-headers">构建 Canonicalized Headers</h3>
+<p>下面介绍签名串中 <code>Canonicalized Headers</code> 和 <code>Canonicalized Resource</code> 的拼接方法：</p>
+<ol>
+<li>将所有以 <code>x-qs-</code> (不区分大小写) 为前缀的 HTTP 请求头的名字转换成小写字母。例如 <code>X-QS-Date: Wed, 10 Dec 2014 17:20:31 GMT</code> 转换成 <code>x-qs-date: Wed, 10 Dec 2014 17:20:31 GMT</code>。如果某些请求头的值在发出的时候被 URL 编码，那么计算签名时也应当是 URL 编码之后的值。</li>
+<li>将上一步得到的所有 HTTP 请求头按照请求头名字部分的字典升序排列。</li>
+<li>删除请求头和内容之间分隔符两端出现的任何空格。例如 <code>x-qs-date: Wed, 10 Dec 2014 17:20:31 GMT</code> 转换成 <code>x-qs-date:Wed, 10 Dec 2014 17:20:31 GMT</code></li>
+<li>将所有的头和内容用 <code>\n</code> 分隔符分隔拼成最后的 Canonicalized Headers。</li>
+</ol>
+<p><strong>含有 Canonicalized Headers 的签名串示例：</strong></p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">PUT
+4gJE4saaMU4BqNR0kLY+lw==
+image/jpeg
+
+x-qs-copy-source:/mybucket/%E4%B8%AD%E6%96%87
+x-qs-copy-source-if-match:%22199389a12492266114933fc428e8cfdc%22
+x-qs-date:Wed, 10 Dec 2014 17:20:31 GMT
+/mybucket/%28%27this%20is%20test%27%2C%29
+</code></pre><h3 id="构建-canonicalized-resource">构建 Canonicalized Resource</h3>
+<ol>
+<li>若请求 URL 为 Virtual-host 风格，则设置初始字符串为 <code>/&lt;bucket-name&gt;</code>。若请求 URL 为 Path 风格，则设置初始字符串为空。</li>
+<li>在第1步得到的字符串末尾追加 URI Path。与请求头中的请求字段 <code>path</code> 一致，即 URI 编码后的值。</li>
+<li>若请求包括子资源，例如 ACL 信息等，那么需将所有的子资源按照字典序从小到大排列，以 <code>&amp;</code> 拼接生成子资源字符串，并以 <code>?</code> 开头追加至字符串结尾。</li>
+<li>除了上述子资源以外，形如 <code>response-*</code> 的参数，如 <a href="/storage/object-storage/api/object/basic_opt/get/">GET Object</a>，也需要按照上述规则拼接至 <code>Canonicalized Resource</code> 中。</li>
+</ol>
+<p><strong>全部的子资源包括：</strong></p>
+<ul>
+<li>acl</li>
+<li>append</li>
+<li>cors</li>
+<li>cname</li>
+<li>delete</li>
+<li>image</li>
+<li>logging</li>
+<li>lifecycle</li>
+<li>mirror</li>
+<li>notification</li>
+<li>policy</li>
+<li>position</li>
+<li>part_number</li>
+<li>replication</li>
+<li>stats</li>
+<li>uploads</li>
+<li>upload_id</li>
+</ul>
+<p>经过上面步骤得到的 <code>Canonicalized Resource</code>，应该类似于：</p>
+<p><strong>List Objects：</strong></p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">/mybucket/ 
+</code></pre><p><strong>不含子资源的请求：</strong></p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">/mybucket/photo.jpg
+</code></pre><p><strong>包含子资源的请求：</strong></p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">/mybucket/movie.mov?uploads
+</code></pre><p><strong>包含多个子资源的请求：</strong></p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">/mybucket/movie.mov?part_number=3&amp;upload_id=dbb3d762975711e6b457525441715ab4
+</code></pre><p>无论 URL 为 Virtual-host 风格或是 Path 风格，最终得到的签名字符串是一致的。</p>
+<h3 id="计算签名-signature">计算签名 Signature</h3>
+<p>假设经过前文步骤得到的签名串为 <code>string_to_sign</code>，接下来的步骤是对签名串进行签名。</p>
+<ol>
+<li>
+<p>将 API 密钥的私钥 <code>secret_access_key</code> 作为 Key，使用 Hmac sha256 算法给签名串生成签名：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> hmac
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>h <span style="color:#f92672">=</span> hmac<span style="color:#f92672">.</span>new(secret_access_key, digestmod<span style="color:#f92672">=</span>sha256)
+</span></span><span style="display:flex;"><span>h<span style="color:#f92672">.</span>update(string_to_sign)
+</span></span></code></pre></div></li>
+<li>
+<p>将签名进行 Base64 编码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>signature <span style="color:#f92672">=</span> base64<span style="color:#f92672">.</span>b64encode(h<span style="color:#f92672">.</span>digest())<span style="color:#f92672">.</span>strip()
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="添加签名-authorization">添加签名 Authorization</h3>
+<p>添加 HTTP 请求头:</p>
+<pre tabindex="0"><code>Authorization: QS &lt;access_key_id&gt;:&lt;signature&gt;
+</code></pre><p>请求头示例:</p>
+<pre tabindex="0"><code>Authorization: QS PLLZOBTTZXGBNOWUFHZZ:tuXu/KcggHWPAfEmraUHDwEUdiIPSXVRsO+T2rxomBQ=
+</code></pre><h2 id="针对-javascript-客户端的特殊考虑">针对 JavaScript 客户端的特殊考虑</h2>
+<p>由于在浏览器环境中，<code>Date</code> 字段是被保护的不能设置，所以 JavaScript SDK 在签名时需要将 <code>Date</code> 头字段留空，并且设置 <code>x-qs-date</code> 头字段。以下是一个 JavaScript 客户端的示例：</p>
+<p><strong>请求</strong></p>
+<pre tabindex="0"><code>GET /
+HOST: js-sdk-test.jn2.is.yiqiyun.com
+x-qs-date:  Fri, 04 May 2018 16:37:00 GMT
+</code></pre><p><strong>签名串 (string_to_sign)</strong></p>
+<pre tabindex="0"><code>GET
+
+application/octet-stream
+
+x-qs-date:Fri, 04 May 2018 16:37:00 GMT
+/js-sdk-test
+</code></pre><h2 id="请求参数签名示例">请求参数签名示例</h2>
+<p>在一些使用场景中可能不便于设置请求头，比如使用浏览器重定向请求，或者给其它用户分享下载链接。亿栖云对象存储允许使用请求参数签名的方式，替代请求头签名。</p>
+<p>需要注意的是，该方式需要设定请求过期时间 <code>expires</code> 参数。在过期时间之后到达的请求将被亿栖云对象存储拒绝。</p>
+<p>请求参数签名的方式不需要在 HTTP 请求头中附加任何内容，只需在请求参数中添加以下三项 <strong>必要参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access_key_id</td>
+<td>在管理控制台申请的 Access Key ID</td>
+<td>PLLZOBTTZXGBNOWUFHZZ</td>
+</tr>
+<tr>
+<td>expires</td>
+<td>签名过期时间，该时间为 Unix Time (也称为 Epoch Time)，表示方法是自历元 <code>1970-01-01 00:00，The Epoch</code> 之后的秒数，类型为整数。</td>
+<td>1479107162</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>签名串 <code>string_to_sign</code> 经过 HMAC-SHA256 加密后，再使用 Base64 编码，最后使用 URI 编码后的结果</td>
+<td>tuXu/KcggHWPAfEmraUHDwEUdiIPSXVRsO%2BT2rxomBQ%3D</td>
+</tr>
+</tbody>
+</table>
+<p><strong>构建签名串：</strong></p>
+<p>相比于请求头签名方法，签名串 <code>string_to_sign</code> 的生成过程只有一点不同，需把 <code>Date</code> 替换为 <code>Expires</code>：</p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">string_to_sign = Verb + &#34;\n&#34;
+              + Content-MD5 + &#34;\n&#34;
+              + Content-Type + &#34;\n&#34;
+              + Expires + &#34;\n&#34;
+              (+ Canonicalized Headers + &#34;\n&#34;)
+              + Canonicalized Resource
+</code></pre><p><strong>计算签名：</strong></p>
+<p>通过上述方法得到签名串 <code>string_to_sign</code> 以后计算 <code>signature</code>。需注意的是，<code>signature</code> 必须进行 URI 编码，比如加号 <code>+</code> 要被编码成 <code>%2B</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> hmac
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> base64
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> urllib
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>h <span style="color:#f92672">=</span> hmac<span style="color:#f92672">.</span>new(secret_access_key, digestmod<span style="color:#f92672">=</span>sha256)
+</span></span><span style="display:flex;"><span>h<span style="color:#f92672">.</span>update(string_to_sign)
+</span></span><span style="display:flex;"><span>signature <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>quote(base64<span style="color:#f92672">.</span>b64encode(h<span style="color:#f92672">.</span>digest())<span style="color:#f92672">.</span>strip())
+</span></span></code></pre></div><p><strong>拼接请求参数：</strong></p>
+<p>将以上计算得出的字符串，拼接成请求参数，追加到请求地址的后面：</p>
+<pre tabindex="0"><code class="language-plain_text" data-lang="plain_text">access_key_id=PLLZOBTTZXGBNOWUFHZZ&amp;expires=1479107162&amp;signature=tuXu/KcggHWPAfEmraUHDwEUdiIPSXVRsO%2BT2rxomBQ%3D
+</code></pre><p><strong>请求示例：</strong></p>
+<p>最终发出去的请求示例：</p>
+<pre tabindex="0"><code>GET /music.mp3?access_key_id=PLLZOBTTZXGBNOWUFHZZ&amp;expires=1479107162&amp;signature=tuXu/KcggHWPAfEmraUHDwEUdiIPSXVRsO%2BT2rxomBQ%3D
+Host: mybucket.jn2.is.yiqiyun.com
+Date: Mon, 14 Nov 2016 14:05:00 GMT
+</code></pre>
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+		<a href="/storage/object-storage/api/practices/access_control/" class="prev pl1" title="访问控制 ">
+			上一页: 访问控制
+		</a>
+		
+
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

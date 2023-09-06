@@ -1,0 +1,969 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 基础操作</title>
+    <link>/storage/object-storage/api/bucket/basic_opt/</link>
+    <description>Recent content in 基础操作 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/storage/object-storage/api/bucket/basic_opt/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: PUT Bucket</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/put/</link>
+      <pubDate>Tue, 17 Aug 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/put/</guid>
+      <description>
+        
+        
+        &lt;p&gt;用于创建一个新的 Bucket。创建成功后，该 Bucket 的所有者就是 API 的调用者。匿名用户默认无法调用此 API，请先注册账户并 &lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;申请 Access Key&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bucket 名称在亿栖云对象存储中是全局唯一的，并且遵守 DNS 规则。&lt;/li&gt;
+&lt;li&gt;Bucket 的命名规范：由长度为 6 ～ 63 的小写字母、数字、中划线组成的字符串，且以字母或数字开始和结尾。&lt;/li&gt;
+&lt;li&gt;Bucket 配额可通过工单申请调整。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求体&#34;&gt;请求体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功创建 Bucket&lt;/td&gt;
+&lt;td&gt;201&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_already_exists&lt;/td&gt;
+&lt;td&gt;创建 Bucket时，Bucket 已存在&lt;/td&gt;
+&lt;td&gt;409&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;too_many_buckets&lt;/td&gt;
+&lt;td&gt;创建 Bucket 时，超出限额。&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: HEAD Bucket</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/head/</link>
+      <pubDate>Tue, 17 Aug 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/head/</guid>
+      <description>
+        
+        
+        &lt;p&gt;用于判断一个 Bucket 是否存在，以及用户是否有权限访问这个 Bucket。匿名用户默认无法调用此 API，请先注册账户并 &lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;申请 Access Key&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;HEAD&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求体&#34;&gt;请求体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;Bucket 存在或有权限访问该 Bucket&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;HEAD&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: GET Bucket</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/get/</link>
+      <pubDate>Tue, 17 Aug 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/get/</guid>
+      <description>
+        
+        
+        &lt;p&gt;用于获取 Bucket 的对象列表。此 API 需调用者对 Bucket 拥有读权限，匿名用户默认无法调用。&lt;/p&gt;
+&lt;h2 id=&#34;使用限制&#34;&gt;使用限制&lt;/h2&gt;
+&lt;p&gt;调用该接口时，有如下注意事项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;亿栖云对象存储服务端对这个接口的调用频率会加以限制，建议用户的相关应用请勿依赖于该接口的并发调用。&lt;/li&gt;
+&lt;li&gt;该接口的响应速度，与 Bucket 内对象数目有关。若 Bucket 内对象数目不断增长，为了不影响相关资源的访问速度，亿栖云对象存储建议用户在业务侧自行保存对象名称或将对象名称拼接至需要访问的对象 URL 中。&lt;/li&gt;
+&lt;li&gt;亿栖云对象存储服务端会对目录归并结果进行缓存。当一个指定的前缀中，文件和子目录被频繁地更改，则缓存的结果，并不能立刻反映新目录的存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;调用该接口时，可在 URL 中添加如下参数：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;是否必选&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;prefix&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;限定返回的对象名（Object Key）前缀&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;delimiter&lt;/td&gt;
+&lt;td&gt;Char&lt;/td&gt;
+&lt;td&gt;对对象名（Object Key）进行分组的字符。所有对象名（Object Key）包含指定的前缀且第一次出现 &lt;code&gt;delimiter&lt;/code&gt; 字符之间的 Object 作为一组元素&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;列取的游标。用来实现分页显示效果&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;限定此次返回 Object 的最大数量，默认值为 100。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;使用说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;该 API 支持通过分页的方式获取给定前缀下的对象列表。具体操作如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;传入参数 &lt;code&gt;marker&lt;/code&gt; 为本次开始遍历的起始游标，返回以字母为顺序的最后一个对象名称作为 &lt;code&gt;next_marker&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;用户再次调用该 API，将上一次返回的 &lt;code&gt;next_marker&lt;/code&gt; 的值传入 &lt;code&gt;marker&lt;/code&gt; 参数；&lt;/li&gt;
+&lt;li&gt;返回值 &lt;code&gt;has_more&lt;/code&gt; 为 &lt;code&gt;false&lt;/code&gt; 时，表示遍历结束；&lt;/li&gt;
+&lt;li&gt;以此循环调用该 API，即可遍历满足 &lt;code&gt;prefix&lt;/code&gt; 条件的所有对象列表。遍历返回结果的顺序为内部存储中的顺序，而非字节序。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;参数说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对象存储没有固定的目录结构，亿栖云对象存储通过 &lt;code&gt;delimiter = &#39;/&#39;&lt;/code&gt; 参数来实现目录结构访问。&lt;/li&gt;
+&lt;li&gt;亿栖云对象存储将给定 &lt;code&gt;prefix&lt;/code&gt; 下相同前缀的多个对象合并为一个结果，通过 &lt;code&gt;common_prefixes&lt;/code&gt; 返回，以实现目录层级的浏览。&lt;/li&gt;
+&lt;li&gt;用户无须自行构造或修改 &lt;code&gt;marker&lt;/code&gt; 的内容。首次调用时，不指定该参数，后续调用时，传入上一次 Response 返回的 &lt;code&gt;next_marker&lt;/code&gt; 的值。&lt;/li&gt;
+&lt;li&gt;亿栖云对象存储服务端限制该 API 单次调用返回 Object 的最大数量为 100。用户可通过参数 &lt;code&gt;limit&lt;/code&gt; 进行调整，设置的参数值若超出服务端限制，亿栖云对象存储服务仅会按照最大值进行处理。&lt;/li&gt;
+&lt;li&gt;若用户是自行拼接参数，调用该API，则需将 URL 参数进行 URL 编码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求体&#34;&gt;请求体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;响应体&#34;&gt;响应体&lt;/h2&gt;
+&lt;p&gt;成功调用该 API 后，会返回一个 Json 消息体，其各字段说明如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;Bucket 的名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;owner&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;Bucket 的所有者&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;common_prefixes&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;若请求中指定了 &lt;code&gt;delimiter&lt;/code&gt; 参数，则响应中包含该元素，用以标明那些以 &lt;code&gt;delimiter&lt;/code&gt; 结尾，并有共同前缀的 对象名（Object Key）的集合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;prefix&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;若请求中指定了 &lt;code&gt;prefix&lt;/code&gt; 参数，则响应中包含该元素&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;next_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;返回这次遍历的游标(长度不固定)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当前返回与 &lt;code&gt;next_marker&lt;/code&gt; 相同，仅为了向前兼容而存在，不建议使用该值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;has_more&lt;/td&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;是否还有更多结果在下一页&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;keys&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;匹配的对象元信息列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;key&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;对象名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;size&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;对象大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;etag&lt;/td&gt;
+&lt;td&gt;Hex&lt;/td&gt;
+&lt;td&gt;对象内容的唯一标示 (该值会使用双引号括起来)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mime_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;对象类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;created&lt;/td&gt;
+&lt;td&gt;Date&lt;/td&gt;
+&lt;td&gt;对象创建时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;modified&lt;/td&gt;
+&lt;td&gt;Int&lt;/td&gt;
+&lt;td&gt;对象修改时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;encrypted&lt;/td&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;对象是否加密&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;storage_class&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;对象的存储级别，目前支持的存储级别为 &lt;code&gt;STANDARD&lt;/code&gt; 和 &lt;code&gt;STANDARD_IA&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功获取 Bucket 对象列表&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?delimiter=/&amp;amp;limit=4 &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;559&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;name&amp;#34;: &amp;#34;mybucket&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;keys&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;created&amp;#34;: &amp;#34;2016-08-22T15:03:32.000Z&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;modified&amp;#34;: 1471878212,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;encrypted&amp;#34;: true,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;storage_class&amp;#34;: &amp;#34;STANDARD&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;etag&amp;#34;: &amp;#34;\&amp;#34;4f44b10f5cb83777fea4ef88a3f7b3c4\&amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;key&amp;#34;: &amp;#34;api.txt&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;mime_type&amp;#34;: &amp;#34;text/plain&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;size&amp;#34;: 38970
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;created&amp;#34;: &amp;#34;2016-08-22T15:09:52.000Z&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;modified&amp;#34;: 1471878592,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;encrypted&amp;#34;: false,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;storage_class&amp;#34;: &amp;#34;STANDARD_IA&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;etag&amp;#34;: &amp;#34;\&amp;#34;9f1cd921dbb6656c2c9e57f83f73d70e\&amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;key&amp;#34;: &amp;#34;bigtable-osdi06.pdf&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;mime_type&amp;#34;: &amp;#34;application/pdf&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;size&amp;#34;: 221214
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;prefix&amp;#34;: &amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;owner&amp;#34;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;id&amp;#34;: &amp;#34;usr-DxWdNcCr&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;name&amp;#34;: &amp;#34;william&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;delimiter&amp;#34;: &amp;#34;/&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;limit&amp;#34;: 4,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;marker&amp;#34;: &amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;next_marker&amp;#34;: &amp;#34;bigtable-osdi06.pdf&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;has_more&amp;#34;: true,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;common_prefixes&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;QCI/&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;Screenshot/&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: DELETE Bucket</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/delete/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/delete/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该接口用于删除指定的 Bucket。待删除的 Bucket 需为空，且是活跃状态。由于计费系统的要求，Bucket 的创建和删除操作之间，需要相差一分钟以上。&lt;/p&gt;
+&lt;p&gt;若待删除 Bucket 不为空，需先删除存储于该 Bucket 中的对象，再删除该 Bucket。删除对象可参考 &lt;a href=&#34;/storage/object-storage/api/object/basic_opt/delete/&#34;&gt;Delete Object&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;DELETE&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求体&#34;&gt;请求体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功删除 Bucket&lt;/td&gt;
+&lt;td&gt;204&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_not_exists&lt;/td&gt;
+&lt;td&gt;Bucket 不存在&lt;/td&gt;
+&lt;td&gt;404&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_not_empty&lt;/td&gt;
+&lt;td&gt;Bucket 不为空&lt;/td&gt;
+&lt;td&gt;409&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lease_not_ready&lt;/td&gt;
+&lt;td&gt;Bucket 计费信息尚未准备好&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;DELETE&lt;/span&gt; / &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;204&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;NoContent&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Delete Multiple Objects</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/delete_multiple/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/delete_multiple/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该接口用于从指定的 Bucket 中批量删除对象。此 API 需调用者对 Bucket 拥有写权限，匿名用户默认无法调用该 API。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /?delete &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-MD5&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Dd11y+x5Jegm/fUJ6mOuhg==&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;quiet&amp;#34;: false,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;objects&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {&amp;#34;key&amp;#34;: &amp;lt;key-name-1&amp;gt;},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {&amp;#34;key&amp;#34;: &amp;lt;key-name-2&amp;gt;},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Content-MD5&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请求体的 md5 值进行 base64 编码。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;此接口涉及的其他公共请求头，请参见&lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求消息体&#34;&gt;请求消息体&lt;/h2&gt;
+&lt;p&gt;调用该 API 需携带如 &lt;a href=&#34;#%E8%AF%B7%E6%B1%82%E8%AF%AD%E6%B3%95&#34;&gt;请求语法&lt;/a&gt; 中的 Json 消息体。该消息体各字段说明如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;objects&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;待删除的对象列表。列表元素的格式为: &lt;code&gt;{&amp;quot;key&amp;quot;: &amp;lt;key-name-1&amp;gt;}&lt;/code&gt; 。object key 要求是 UTF8 编码并根据 json 规范来转义。&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;quiet&lt;/td&gt;
+&lt;td&gt;Bool&lt;/td&gt;
+&lt;td&gt;静默模式。如果打开，则请求返回的结果中不会包含删除成功的对象列表。默认关闭。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;响应体&#34;&gt;响应体&lt;/h2&gt;
+&lt;p&gt;成功调用该 API 后，会返回一个 Json 消息体，其各字段说明如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;deleted&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;删除成功的对象列表，列表元素的格式为： &lt;code&gt;{&amp;quot;key&amp;quot;: }&lt;/code&gt; 。如果打开静默模式，则本项不会出现在返回结果中。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;errors&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;删除失败的对象列表，列表元素的格式为： &lt;code&gt;{&amp;quot;key&amp;quot;: , &amp;quot;code&amp;quot;: string, &amp;quot;message&amp;quot;: string}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功删除&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /?delete &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-MD5&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Dd11y+x5Jegm/fUJ6mOuhg==&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;quiet&amp;#34;: false,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;objects&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {&amp;#34;key&amp;#34;: &amp;#34;object_1&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;71&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;deleted&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {&amp;#34;key&amp;#34;: &amp;#34;object_1&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;errors&amp;#34;: []
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: GET Bucket Statistics</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/get_stats/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/get_stats/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取 Bucket 的统计信息 (Statistics)。亿栖云对象存储定义统计信息是 Bucket 的子资源，只有 Bucket 的所有者才能调用。&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?stats &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见&lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求体&#34;&gt;请求体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;响应体&#34;&gt;响应体&lt;/h2&gt;
+&lt;p&gt;成功调用该 API 后，会返回一个 Json 消息体，各返回字段说明如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;Bucket 内存储的对象数量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;size&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;Bucket 内存储的对象所占用的空间大小&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;storage_classes&lt;/td&gt;
+&lt;td&gt;dict&lt;/td&gt;
+&lt;td&gt;Bucket 级别。可选值为 &lt;code&gt;STANDARD&lt;/code&gt; 与 &lt;code&gt;STANDARD_IA&lt;/code&gt;，即标准存储与低频存储&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;Bucket 所在区域，即 Zone ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;created&lt;/td&gt;
+&lt;td&gt;Date&lt;/td&gt;
+&lt;td&gt;Bucket 的创建时间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;Enum&lt;/td&gt;
+&lt;td&gt;Bucket 的状态。枚举值：active, suspended&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;storage_classes&lt;/code&gt; 为字典类型，对应的值为相应存储类型的统计信息，包括：&lt;code&gt;count&lt;/code&gt;, &lt;code&gt;size&lt;/code&gt;, &lt;code&gt;billing_size&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;标准存储中，上文的 &lt;code&gt;size&lt;/code&gt; 和 &lt;code&gt;billing_size&lt;/code&gt; 是相等的值；因为低频存储有最小存储计费时间的限制，故低频存储的 &lt;code&gt;billing_size&lt;/code&gt; 大于等于 上文中的 &lt;code&gt;size&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;操作成功&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?stats &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 16 Aug 2015 09:05:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/json&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;222&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5886952542e6ce14b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;count&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;active&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mybucket&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;created&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2015-07-22T02:23:04.000Z&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;url&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mybucket.jn2.is.yiqiyun.com&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;location&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jn2.is&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;storage_classes&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;STANDARD&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;count&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;billing_size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3000&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;STANDARD_IA&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;count&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;billing_size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3180&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;6000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: List Multipart Uploads</title>
+      <link>/storage/object-storage/api/bucket/basic_opt/list_multipart_uploads/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/basic_opt/list_multipart_uploads/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该接口用于获取 Bucket 内正在进行的分段上传对象的列表。列表按照对象名称的 &lt;code&gt;alphanumeric&lt;/code&gt; 顺序从小到大排序。&lt;/p&gt;
+&lt;p&gt;正在进行的分段上传的对象，是指该对象已经调用 &lt;a href=&#34;/storage/object-storage/api/object/multipart/initiate/&#34;&gt;Initiate Multipart&lt;/a&gt; 接口开启了分段上传模式，且尚未调用 &lt;a href=&#34;/storage/object-storage/api/object/multipart/complete/&#34;&gt;Complete Multipart&lt;/a&gt; 或 &lt;a href=&#34;/storage/object-storage/api/object/multipart/abort/&#34;&gt;Abort Multipart&lt;/a&gt; 接口结束分段上传。&lt;/p&gt;
+&lt;p&gt;若用户只想获取某个对象已经上传的分段，请参考接口：&lt;a href=&#34;/storage/object-storage/api/object/multipart/list/&#34;&gt;List Multipart&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;请求语法&#34;&gt;请求语法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?uploads &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;bucket-name&amp;gt;.&amp;lt;zone-id&amp;gt;.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;date&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization-string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;请求参数&#34;&gt;请求参数&lt;/h2&gt;
+&lt;p&gt;调用该接口时，可在 URL 中添加如下参数：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;是否必选&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;prefix&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定返回的分段上传对象名（Object Key）的前缀&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;delimiter&lt;/td&gt;
+&lt;td&gt;Char&lt;/td&gt;
+&lt;td&gt;用于给对象名（Object Key）分组的字符。列表返回从指定的前缀开始，至第一次出现该分割字符之间的对象名（Object Key）&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;key_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;用于分页。当前页的起始标记&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;upload_id_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;当前分段 &lt;code&gt;upload_id&lt;/code&gt; 的起始标记&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;此次返回的分段对象的最大数量，默认值为 200，最大允许设置 1000&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户第一次发送该请求时，&lt;code&gt;key_marker&lt;/code&gt; 与 &lt;code&gt;upload_id_marker&lt;/code&gt; 均为空。亿栖云对象存储收到请求后，返回字段 &lt;code&gt;next_key_marker&lt;/code&gt; 与  &lt;code&gt;next_upload_id_marker&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;用户第二次发送该请求时，将返回字段 &lt;code&gt;next_key_marker&lt;/code&gt; 与  &lt;code&gt;next_upload_id_marker&lt;/code&gt; 依次填入 &lt;code&gt;key_marker&lt;/code&gt; 与 &lt;code&gt;upload_id_marker&lt;/code&gt;，从而获取列表下一页内容。&lt;/li&gt;
+&lt;li&gt;若同名对象有多个分段上传，翻页被截断后只显示了一部分，下次翻页可通过 &lt;code&gt;upload_id_marker&lt;/code&gt; 参数，获取剩下的分段上传。&lt;/li&gt;
+&lt;li&gt;用户通过传递 &lt;code&gt;prefix&lt;/code&gt; 与 &lt;code&gt;delimiter&lt;/code&gt; 参数，指定获取某个目录下面正在进行的分段上传。&lt;/li&gt;
+&lt;li&gt;该接口只列出未完成的分段上传对象，假设还有一个目录为 &lt;code&gt;Sci-Fi/&lt;/code&gt;，但是该目录下没有未完成的分段上传，那么不会列出这个目录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;请求头&#34;&gt;请求头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共请求头。关于公共请求头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;请求消息体&#34;&gt;请求消息体&lt;/h2&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;h2 id=&#34;响应头&#34;&gt;响应头&lt;/h2&gt;
+&lt;p&gt;此接口仅包含公共响应头。关于公共响应头的更多信息，请参见 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E5%93%8D%E5%BA%94%E5%A4%B4%E5%AD%97%E6%AE%B5-response-header&#34;&gt;公共响应头&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;响应体&#34;&gt;响应体&lt;/h2&gt;
+&lt;p&gt;成功调用该 API 后，会返回一个 Json 消息体，其各字段说明如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;Bucket 名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;prefix&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请求参数 prefix&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;delimiter&lt;/td&gt;
+&lt;td&gt;Char&lt;/td&gt;
+&lt;td&gt;请求参数 delimiter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请求参数 key_marker&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;请求参数 limit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;next_key_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;本次返回列表里的最后一个 &lt;code&gt;key&lt;/code&gt; 或 &lt;code&gt;common prefix&lt;/code&gt;。当已经列取完全部的内容将返回空&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;next_upload_id_marker&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;如果有多个同名的分段上传，翻页时可能会被截断，该值是本次返回结果里最后一个 &lt;code&gt;upload id&lt;/code&gt;，用于下一次请求参数 &lt;code&gt;upload_id_marker&lt;/code&gt; 代表下一页的起始标志&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;uploads&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;正在进行的分段上传对象列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;common_prefixes&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;如果请求中指定了 &lt;code&gt;delimiter&lt;/code&gt; 参数，那么将返回所有以 &lt;code&gt;prefix&lt;/code&gt; 开头到第一个 &lt;code&gt;delimiter&lt;/code&gt; 之间的分段上传对象名称（Object Key）的集合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;错误码&#34;&gt;错误码&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;OK&lt;/td&gt;
+&lt;td&gt;成功获取相应列表&lt;/td&gt;
+&lt;td&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;其他错误码可参考 &lt;a href=&#34;/storage/object-storage/api/error_code/#%E9%94%99%E8%AF%AF%E7%A0%81%E5%88%97%E8%A1%A8&#34;&gt;错误码列表&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;请求示例&#34;&gt;请求示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt; /?uploads&amp;amp;prefix=Movies/&amp;amp;delimiter=/&amp;amp;limit=6 &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn2.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 25 Dec 2016 19:02:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;authorization string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;响应示例&#34;&gt;响应示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Sun, 25 Dec 2016 19:02:00 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;604&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;aa08cf7a43f611e5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;name&amp;#34;: &amp;#34;mybucket&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;uploads&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;created&amp;#34;: &amp;#34;2016-12-25T16:02:05.000Z&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;key&amp;#34;: &amp;#34;Movies/Star-Wars-2015.mp4&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;upload_id&amp;#34;: &amp;#34;44e76b0f5eda308e&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;created&amp;#34;: &amp;#34;2016-12-23T09:15:30.000Z&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;key&amp;#34;: &amp;#34;Movies/The-Godfather-1972.mp4&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;upload_id&amp;#34;: &amp;#34;8c0dc4f83f063d39&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;created&amp;#34;: &amp;#34;2016-12-23T02:17:00.000Z&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;key&amp;#34;: &amp;#34;Movies/The-Matrix-1999.mp4&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;upload_id&amp;#34;: &amp;#34;07ae9cab876a33a3&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;created&amp;#34;: &amp;#34;2016-12-24T09:15:30.000Z&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;key&amp;#34;: &amp;#34;Movies/The-Matrix-1999.mp4&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &amp;#34;upload_id&amp;#34;: &amp;#34;9f58a11f26cce132&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;prefix&amp;#34;: &amp;#34;Movies/&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;delimiter&amp;#34;: &amp;#34;/&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;limit&amp;#34;: 6,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;key_marker&amp;#34;: &amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;upload_id_marker&amp;#34;: &amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;next_key_marker&amp;#34;: &amp;#34;Sci-Fi/&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;next_upload_id_marker&amp;#34;: &amp;#34;&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;#34;common_prefixes&amp;#34;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;Cartoon/&amp;#34;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;#34;Love/&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;sdk&#34;&gt;SDK&lt;/h2&gt;
+&lt;p&gt;此接口所对应的各语言 SDK 可参考 &lt;a href=&#34;/storage/object-storage/sdk/&#34;&gt;SDK 文档&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

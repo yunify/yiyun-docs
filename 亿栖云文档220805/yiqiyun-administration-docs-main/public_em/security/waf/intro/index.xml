@@ -1,0 +1,31 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 产品简介</title>
+    <link>/security/waf/intro/</link>
+    <description>Recent content in 产品简介 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/security/waf/intro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Security: Web应用防火墙简介</title>
+      <link>/security/waf/intro/introduction/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/security/waf/intro/introduction/</guid>
+      <description>
+        
+        
+        &lt;p&gt;WAF (Web 应用防火墙）通过检查 HTTP/HTTPS 流量来实现内容过滤， 可以防止针对 Web 应用程序漏洞的攻击，如 SQL 注入、跨站点脚本（XSS）、文件包含漏洞以及安全配置错误等。 CC 防护功能可以降低攻击对系统的影响，通过自定义规则可以灵活有效的阻止非法流量，保证应用的稳定运行。 WAF 部署在负载均衡器（LoadBalancer）之上，本指南旨在介绍如何通过配置 WAF 来实现内容防护。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

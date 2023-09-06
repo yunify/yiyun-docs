@@ -1,0 +1,2202 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 路由器</title>
+    <link>/development_docs/api/command_list/router/</link>
+    <description>Recent content in 路由器 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/router/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: AddRouterStaticEntries</title>
+      <link>/development_docs/api/command_list/router/add_router_static_entries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/add_router_static_entries/</guid>
+      <description>
+        
+        
+        &lt;p&gt;增加一条路由器规则条目，比如 OpenVPN / PPTP 的账户信息或是隧道规则的网络地址。 注意：在增加路由器规则条目后，你需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 才能使之生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要增加条目的路由器规则ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;entries.n.val1&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val1 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   OpenVPN / PPTP 账户信息：val1 表示账户名&lt;br/&gt;*   三层 GRE 隧道：val1 表示目标网络&lt;br/&gt;*   三层 IPsec 隧道：val1 表示本地网络 (val2 可为空)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;entries.n.val2&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val2 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   OpenVPN / PPTP 账户信息：val2 表示密码&lt;br/&gt;*   三层 IPsec 隧道：val2 表示目标网络 (val1 可为空)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entries&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;新增加的路由器规则条目ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AddRouterStaticEntries
+&amp;amp;router_static=rtrs-hcnwdfwc
+&amp;amp;entries.1.val1=admin
+&amp;amp;entries.1.val2=passwOrd
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AddRouterStaticEntriesResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;router_static_entries&amp;#34;:[
+    &amp;#34;rse-hkzqquga&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: AddRouterStatics</title>
+      <link>/development_docs/api/command_list/router/add_router_statics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/add_router_statics/</guid>
+      <description>
+        
+        
+        &lt;p&gt;增加一条或多条路由器规则，规则包括：端口转发、VPN 、DHCP 、隧道、过滤控制。 注意：在增加路由器规则后，你需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 才能使之生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要增加规则的路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.router_static_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;vxnet id&lt;/td&gt;
+&lt;td&gt;Yes only in VPC&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.static_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;第n条规则的类型。支持的规则类型有：&lt;br/&gt;*   static_type=1：端口转发规则&lt;br/&gt;*   static_type=2：VPN 规则&lt;br/&gt;*   static_type=3：DHCP 选项&lt;br/&gt;*   static_type=4：二层 GRE 隧道&lt;br/&gt;*   static_type=5：过滤控制 (VPC不支持)&lt;br/&gt;*   static_type=6：三层 GRE 隧道&lt;br/&gt;*   static_type=7：三层 IPsec 隧道&lt;br/&gt;*   static_type=8：私网DNS&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val1&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val1 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   端口转发：val1 表示源端口。&lt;br/&gt;*   VPN：val1 表示 VPN 类型，目前支持 “openvpn” 、 “pptp” 、”l2tp”，默认值为 “openvpn”。&lt;br/&gt;*   DHCP 选项：val1 表示 DHCP 云服务器ID。&lt;br/&gt;*   二层 GRE 隧道：val1 表示二层隧道的远端 IP 和密钥，如：gre|1.2.3.4|888。&lt;br/&gt;*   过滤控制：val1 表示『源 IP』&lt;br/&gt;*   三层 GRE 隧道：val1 表示远端 IP 、密钥、本地点对点IP、对端点对点IP，格式如：6.6.6.6|key|1.2.3.4|4.3.2.1。&lt;br/&gt;*   三层 IPsec 隧道：val1 表示远端IP（支持接受任意对端，可填 0.0.0.0） 、加密算法(phase2alg&amp;amp;ike，可为空，默认aes)、密钥和远端设备ID（支持接受任意对端设备ID，可填 %any），格式如：1.2.3.4|passw0rd|device-id&lt;br/&gt;*   私网DNS：val1 表示私网域名，比如node1&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val2&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val2 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   端口转发规则：val2 表示目标 IP 。&lt;br/&gt;*   OpenVPN 规则：val2 表示 VPN 服务端口号，默认为1194。&lt;br/&gt;*   PPTP/L2TP VPN 规则：val2 表示用户名和密码，格式为 user:password&lt;br/&gt;*   DHCP 选项：val2 表示 DHCP 配置内容，格式为key1=value1;key2=value2，例如：”domain-name-servers=8.8.8.8;fixed-address=192.168.1.2”。&lt;br/&gt;*   过滤控制：val2 表示『源端口』&lt;br/&gt;*   三层 GRE 隧道：val2 表示目标网络，多个网络间以 “|” 分隔。注意目标网络不能和路由器已有的私有网络重复。&lt;br/&gt;*   三层 IPsec 隧道：val2 表示本地网络，多个网络间以 “|” 分隔。&lt;br/&gt;*   私网DNS：val2 表示IP地址，格式为ip1;ip2，例如：”192.168.1.2;192.168.1.3”&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val3&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val3 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   端口转发规则：val3 表示目标端口号。&lt;br/&gt;*   OpenVPN 规则：val3 表示 VPN 协议，默认为 “udp”。&lt;br/&gt;*   PPTP VPN 规则：val3 表示最大连接数，连接数范围是 1-253。&lt;br/&gt;*   L2TP VPN 规则：val3 表示IPsec预共享密钥(PSK, preshared secrets),可填入任意字符串。&lt;br/&gt;*   过滤控制：val3 表示『目标 IP』&lt;br/&gt;*   三层 IPsec 隧道：val3 表示目标网络，多个网络间以 “|” 分隔。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val4&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val4 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   端口转发规则：val4 表示端口转发协议，默认为 “tcp” ，目前支持 “tcp” 和 “udp” 两种协议。&lt;br/&gt;*   VPN 规则(包括 OpenVPN 、PPTP、L2TP)：val4 表示 VPN 客户端的网络地址段，目前支持10.255.x.0/24，x的范围是[0-255]，默认为自动分配。&lt;br/&gt;*   过滤控制：val4 表示『目标端口』&lt;br/&gt;*   三层 IPsec 隧道：val4 表示IPsec隧道模式，默认为”main”，支持 主模式（main） 和 野蛮模式（aggrmode）。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val5&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val5 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   OpenVPN VPN 规则：val5 表示 OpenVPN 的验证方式，目前支持 1: 证书验证, 2: 用户名/密码验证, 3: 证书+用户名/密码验证，默认为 “证书验证” 方式。&lt;br/&gt;*   L2TP VPN 规则： val5 表示L2TP服务端口号，默认是1701。&lt;br/&gt;*   过滤控制： val5 表示优先级&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val6&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;第n条规则的 val6 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   过滤控制：val6 表示『行为』，包括： “accept” 和 “drop”&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_statics&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;新增加的路由器规则ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=AddRouterStatics
+&amp;amp;statics.1.static_type=1
+&amp;amp;statics.1.val1=8080
+&amp;amp;statics.1.val2=192.168.1.12
+&amp;amp;statics.1.val3=8080
+&amp;amp;statics.1.val4=tcp
+&amp;amp;statics.2.static_type=2
+&amp;amp;statics.2.val1=openvpn
+&amp;amp;statics.2.val2=1194
+&amp;amp;statics.2.val3=tcp
+&amp;amp;statics.2.val4=10.255.1.0/24
+&amp;amp;statics.3.static_type=3
+&amp;amp;statics.3.val1=i-m163jcqw
+&amp;amp;statics.3.val2=domain-name-servers=8.8.8.8
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;AddRouterStaticsResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;router_statics&amp;#34;:[
+    &amp;#34;rtrs-qihmd2vb&amp;#34;,
+    &amp;#34;rtrs-2w8msd83&amp;#34;,
+    &amp;#34;rtrs-b3epyxu5&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: CopyRouterStatics</title>
+      <link>/development_docs/api/command_list/router/copy_router_statics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/copy_router_statics/</guid>
+      <description>
+        
+        
+        &lt;p&gt;把源路由器的路由规则复制给目的路由器。 如果源路由器和目的路由器都属于网络2.0，且自身的网络地址不同，那么复制IPsec隧道规则时， 会修改规则里的目标网络地址，以适配目的路由器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CopyRouterStatics
+&amp;amp;source_router=rtr-srcsrc11
+&amp;amp;dest_router=rtr-destdest
+&amp;amp;dest_zone=dest
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CopyRouterStaticsResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: CreateRouters</title>
+      <link>/development_docs/api/command_list/router/create_routers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/create_routers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;创建一台或多台路由器。路由器用于受管私有网络之间互联，并提供三项附加服务：DHCP 服务、端口转发、VPN 隧道服务。&lt;/p&gt;
+&lt;p&gt;这个API只负责路由器的创建工作，如果需要通过路由器将自己名下的受管私有网络连接起来，请查看 &lt;a href=&#34;../join_router/&#34;&gt;&lt;em&gt;JoinRouter&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;如果需要配置端口转发规则或打开VPN 隧道服务，请查看 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;路由器类型: 0 - 中型，1 - 小型，2 - 大型，默认为 1&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vpc_network&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;VPC 网络地址范围，目前支持 192.168.0.0/16 或 172.16.0.0/16 。 注：此参数只在济南1区需要且是必填参数。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;创建路由器的数量，默认是1&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;security_group&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要加载到路由器上的防火墙ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;target_user&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;目标用户 ID ，可用于主账号为其子账号创建资源。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;routers&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;新创建的路由器 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=CreateRouters
+&amp;amp;router_name=demo
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;CreateRoutersResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-i76waodo&amp;#34;,
+  &amp;#34;routers&amp;#34;:[
+    &amp;#34;rtr-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteRouters</title>
+      <link>/development_docs/api/command_list/router/delete_routers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/delete_routers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一台或多台路由器。&lt;/p&gt;
+&lt;p&gt;销毁路由器的前提，是此路由器已建立租用信息（租用信息是在创建路由器成功后， 几秒钟内系统自动建立的）。所以正在创建的路由器（状态为 pending ）， 以及刚刚创建成功但还没有建立租用信息的路由器，是不能被销毁的。&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;被删除的路由器会被立即系统回收，不具有可恢复的功能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;routers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteRouters
+&amp;amp;routers.1=rtr-s5nqo8mr
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteRoutersResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-32c66ja8&amp;#34;,
+  &amp;#34;routers&amp;#34;:[
+    &amp;#34;rtr-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteRouterStaticEntries</title>
+      <link>/development_docs/api/command_list/router/delete_router_static_entries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/delete_router_static_entries/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一条或多条路由器规则条目。在删除路由器规则条目之后，你需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 来使规则删除生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entries.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则条目ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entries&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;删掉的路由器规则条目ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteRouterStaticEntries
+&amp;amp;router_static_entries.1=rse-wls7otet
+&amp;amp;router_static_entries.2=rse-b3epyxu5
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteRouterStaticEntriesResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;router_static_entries&amp;#34;:[
+    &amp;#34;rse-wls7otet&amp;#34;,
+    &amp;#34;rse-b3epyxu5&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DeleteRouterStatics</title>
+      <link>/development_docs/api/command_list/router/delete_router_statics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/delete_router_statics/</guid>
+      <description>
+        
+        
+        &lt;p&gt;删除一条或多条路由器规则。在删除路由器规则之后，你需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 来使规则删除生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_statics.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_statics&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;删掉的路由器规则ID列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DeleteRouterStatics
+&amp;amp;router_statics.1=rtrs-wls7otet
+&amp;amp;router_statics.2=rtrs-j1tsul7v
+&amp;amp;router_statics.3=rtrs-b3epyxu5
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DeleteRouterStaticsResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;router_statics&amp;#34;:[
+    &amp;#34;rtrs-wls7otet&amp;#34;,
+    &amp;#34;rtrs-j1tsul7v&amp;#34;,
+    &amp;#34;rtrs-b3epyxu5&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeRouters</title>
+      <link>/development_docs/api/command_list/router/describe_routers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/describe_routers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取一个或多个路由器&lt;/p&gt;
+&lt;p&gt;可根据路由器ID，状态，路由器名称作过滤条件，来获取路由器列表。 如果不指定任何过滤条件，默认返回你所拥有的所有路由器。 如果指定不存在的路由器ID，或非法状态值，则会返回错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;routers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私用网络ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器状态: pending, active, poweroffed, suspended, deleted, ceased&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词，支持路由器ID，路由器名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tags.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;按照标签ID过滤, 只返回已绑定某标签的资源&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，若为1，则返回路由器相关其他资源的详细数据。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的路由器数据列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的路由器总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;路由器类型，目前有效值为 1.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;private_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器内网IP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;is_applied&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;路由器规则是否已更新，1为已更新，0为还未更新。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器状态，有效值为pending, active, poweroffed, suspended, deleted, ceased。&lt;br/&gt;pending： 等待被创建&lt;br/&gt;active： 运行状态&lt;br/&gt;poweroffed： 关闭状态&lt;br/&gt;suspended： 由于欠费，已被暂停使用&lt;br/&gt;deleted： 已被删除，被删除的路由器不可以被恢复&lt;br/&gt;ceased： 已被彻底删除&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;transition_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器过渡状态，有效值为creating, updating, suspending, resuming，poweroffing，poweroning，deleting。&lt;br/&gt;creating： 创建中，由 pending 状态变成 active 状态&lt;br/&gt;updating： 更新路由器规则中&lt;br/&gt;suspending： 欠费暂停中，由 active/poweroffed 状态变成 suspended 状态&lt;br/&gt;resuming： 恢复中，由 suspended 状态变成 active 状态&lt;br/&gt;poweroffing： 关闭中，由 active 状态变成 poweroffed 状态&lt;br/&gt;poweroning： 开启中，由 poweroffed 状态变成 active 状态&lt;br/&gt;deleting： 删除中，由 active/poweroffed/suspended 状态变成 deleted 状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;路由器创建时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;路由器最近一次状态变更时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;security_group_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器的防火墙ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;eip&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;路由器的公网IP信息&lt;br/&gt;eip_id： 公网IP的ID&lt;br/&gt;eip_name： 公网IP名称&lt;br/&gt;eip_addr： 公网IP地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnets&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;路由器连接的私有网络信息&lt;br/&gt;vxnet_id： 私有网络ID&lt;br/&gt;nic_id： 网卡ID&lt;br/&gt;只有在请求参数 verbose=1 时才会返回此信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeRouters
+&amp;amp;routers.1=rtr-b0u6sdj6
+&amp;amp;verbose=1
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeRoutersResponse&amp;#34;,
+  &amp;#34;router_set&amp;#34;:[
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-b0u6sdj6&amp;#34;,
+      &amp;#34;status&amp;#34;:&amp;#34;active&amp;#34;,
+      &amp;#34;is_applied&amp;#34;:1,
+      &amp;#34;description&amp;#34;:null,
+      &amp;#34;eip&amp;#34;:{
+        &amp;#34;eip_name&amp;#34;:&amp;#34;demo&amp;#34;,
+        &amp;#34;eip_id&amp;#34;:&amp;#34;eip-amorzjgv&amp;#34;,
+        &amp;#34;eip_addr&amp;#34;:&amp;#34;192.168.7.69&amp;#34;
+      },
+      &amp;#34;sub_code&amp;#34;:0,
+      &amp;#34;transition_status&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;security_group_id&amp;#34;:&amp;#34;sg-z13kokni&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-30T09:16:21Z&amp;#34;,
+      &amp;#34;private_ip&amp;#34;:&amp;#34;10.50.12.146&amp;#34;,
+      &amp;#34;router_type&amp;#34;:1,
+      &amp;#34;vxnets&amp;#34;:[
+        {
+          &amp;#34;nic_id&amp;#34;:&amp;#34;52:54:c9:e3:9e:cd&amp;#34;,
+          &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ytuyg2q&amp;#34;
+        },
+        {
+          &amp;#34;nic_id&amp;#34;:&amp;#34;52:54:b1:d9:df:96&amp;#34;,
+          &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-0&amp;#34;
+        }
+      ],
+      &amp;#34;router_name&amp;#34;:&amp;#34;demo&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;total_count&amp;#34;:1
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeRouterStaticEntries</title>
+      <link>/development_docs/api/command_list/router/describe_router_static_entries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/describe_router_static_entries/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取路由器规则的条目。&lt;/p&gt;
+&lt;p&gt;可根据路由器规则ID作为过滤条件，来获取路由器规则中的条目列表。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则条目ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的路由器数据列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的路由器规则总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则条目名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则条目ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;val1&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;根据规则类型的不同，代表不同含义：&lt;br/&gt;PPTP 账户信息：val1 表示账户名&lt;br/&gt;三层 GRE 隧道：val1 表示目标网络&lt;br/&gt;三层 IPsec 隧道：val1 表示本地网络&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;val2&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;根据规则类型的不同，代表不同含义：&lt;br/&gt;PPTP 账户信息：val2 表示密码&lt;br/&gt;三层 IPsec 隧道：val2 表示目标网络&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeRouterStaticEntries
+&amp;amp;router_static=rtrs-8e3pgr8r
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeRouterStaticEntriesResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:2,
+  &amp;#34;router_static_entry_set&amp;#34;:[
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-ingyf5po&amp;#34;,
+      &amp;#34;router_static_entry_id&amp;#34;:&amp;#34;rse-27qhl6ma&amp;#34;,
+      &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-8e3pgr8r&amp;#34;,
+      &amp;#34;router_static_entry_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;val2&amp;#34;:&amp;#34;192.168.127.0/24&amp;#34;,
+      &amp;#34;val1&amp;#34;:&amp;#34;&amp;#34;
+    },
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-ingyf5po&amp;#34;,
+      &amp;#34;router_static_entry_id&amp;#34;:&amp;#34;rse-t3u8dhfg&amp;#34;,
+      &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-8e3pgr8r&amp;#34;,
+      &amp;#34;router_static_entry_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;val2&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;val1&amp;#34;:&amp;#34;192.168.100.0/24&amp;#34;
+    },
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-ingyf5po&amp;#34;,
+      &amp;#34;router_static_entry_id&amp;#34;:&amp;#34;rse-rmz0sgbf&amp;#34;,
+      &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-8e3pgr8r&amp;#34;,
+      &amp;#34;router_static_entry_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;val2&amp;#34;:&amp;#34;192.168.111.0/24&amp;#34;,
+      &amp;#34;val1&amp;#34;:&amp;#34;&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeRouterStatics</title>
+      <link>/development_docs/api/command_list/router/describe_router_statics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/describe_router_statics/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取路由器的规则。&lt;/p&gt;
+&lt;p&gt;可根据路由器规则ID，路由器ID，规则类型等作为过滤条件，来获取路由器规则列表。 如果不指定任何过滤条件，默认返回你所拥有的所有路由器规则。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_statics.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器规则ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;static_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则类型。支持的规则类型有：&lt;br/&gt;*   1：端口转发规则&lt;br/&gt;*   2：VPN 规则&lt;br/&gt;*   3：DHCP 选项&lt;br/&gt;*   4：二层 GRE 隧道&lt;br/&gt;*   5：过滤控制&lt;br/&gt;*   6：三层 GRE 隧道&lt;br/&gt;*   7：三层 IPsec 隧道&lt;br/&gt;*   8：私网DNS&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，目前只支持verbose=0。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的路由器规则列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的路由器规则总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeRouterStatics
+&amp;amp;router=rtr-9iy0lt3s
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeRouterStaticsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:2,
+  &amp;#34;router_static_set&amp;#34;:[
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-9iy0lt3s&amp;#34;,
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;static_type&amp;#34;:1,
+      &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-wls7otet&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-26T12:37:56Z&amp;#34;,
+      &amp;#34;val3&amp;#34;:&amp;#34;80&amp;#34;,
+      &amp;#34;val2&amp;#34;:&amp;#34;192.168.1.12&amp;#34;,
+      &amp;#34;val1&amp;#34;:&amp;#34;80&amp;#34;,
+      &amp;#34;val4&amp;#34;:&amp;#34;tcp&amp;#34;
+    },
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-9iy0lt3s&amp;#34;,
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;static_type&amp;#34;:2,
+      &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-y63zh53l&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-26T12:40:06Z&amp;#34;,
+      &amp;#34;val3&amp;#34;:&amp;#34;udp&amp;#34;,
+      &amp;#34;val2&amp;#34;:&amp;#34;1194&amp;#34;,
+      &amp;#34;val1&amp;#34;:&amp;#34;openvpn&amp;#34;,
+      &amp;#34;val4&amp;#34;:&amp;#34;10.255.143.0/24&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeRouterVxnets</title>
+      <link>/development_docs/api/command_list/router/describe_router_vxnets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/describe_router_vxnets/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取路由器管理的私有网络列表。&lt;/p&gt;
+&lt;p&gt;可根据路由器ID，私有网络ID，等作为过滤条件，来获取私有网络列表。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID, “*” 表示显示所有路由器&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息，目前只支持verbose=0。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量，默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_vxnet_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的私有网络列表，每项参数可见下面 &lt;a href=&#34;#responseitemtype&#34;&gt;ResponseItemType&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的私有网络总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ResponseItemType&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;manager_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络管理地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ip_network&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 DHCP 地址范围&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dyn_ip_start&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 DHCP 起始地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dyn_ip_end&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 DHCP 终止地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;features&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;私有网络开启的功能标记位&lt;br/&gt; “0” 表示不开启 DHCP 和内网 DNS 功能。&lt;br/&gt; “1” 表示只开启 DHCP 地址分配功能。&lt;br/&gt; “2” 表示只开启内网 DNS 功能。&lt;br/&gt; “3” 表示同时开启 DHCP 地址分配和内网 DNS 功能。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;私有网络连接路由器的创建时间，为UTC时间，格式可参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeRouterVxnets
+&amp;amp;router=rtr-b0u6sdj6
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeRouterVxnetsResponse&amp;#34;,
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;router_vxnet_set&amp;#34;:[
+    {
+      &amp;#34;router_id&amp;#34;:&amp;#34;rtr-b0u6sdj6&amp;#34;,
+      &amp;#34;manager_ip&amp;#34;:&amp;#34;192.168.1.1&amp;#34;,
+      &amp;#34;ip_network&amp;#34;:&amp;#34;192.168.1.0/24&amp;#34;,
+      &amp;#34;dyn_ip_end&amp;#34;:&amp;#34;192.168.1.254&amp;#34;,
+      &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-ytuyg2q&amp;#34;,
+      &amp;#34;dyn_ip_start&amp;#34;:&amp;#34;192.168.1.2&amp;#34;,
+      &amp;#34;vxnet_name&amp;#34;:&amp;#34;test&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-30T09:17:40Z&amp;#34;,
+      &amp;#34;features&amp;#34;:1
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: JoinRouter</title>
+      <link>/development_docs/api/command_list/router/join_router/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/join_router/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将一个受管私有网络连接到一台路由器。这样受管私有网络可以被路由器管理起来， 受管私有网络里的云服务器也将获得 DHCP 自动分配地址的能力。&lt;/p&gt;
+&lt;p&gt;只有受管私有网络才能连接到路由器，一个受管私有网络可以且仅可以连接到一台路由器。 受管私有网络可以连接到状态为 active 和 poweroffed 的路由器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要连接路由器的受管私有网络ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;受管私有网络需要连接的路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ip_network&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;受管私有网络的网段，目前支持的网段为 192.168.x.0/24 和 172.16.x.0/24，需要满足 &lt;a href=&#34;http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing&#34;&gt;CIDR格式&lt;/a&gt;&lt;br/&gt;注解&lt;br/&gt;同一个路由器下管理的受管私有网络的网段不能重复。&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;features&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;路由器需要开启的功能，默认为1，目前这个值只能填1，表示开启DHCP服务。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;manager_ip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器的管理IP&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dyn_ip_start&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;DHCP服务分配开始IP&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dyn_ip_end&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;DHCP服务分配终止IP&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=JoinRouter
+&amp;amp;vxnet=vxnet-rzg2llb
+&amp;amp;router=rtr-xt37nm9j
+&amp;amp;ip_network=192.168.1.0/24
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;router_id&amp;#34;:&amp;#34;rtr-xt37nm9j&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-lesy0k0k&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;action&amp;#34;:&amp;#34;JoinRouterResponse&amp;#34;,
+  &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-rzg2llb&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: LeaveRouter</title>
+      <link>/development_docs/api/command_list/router/leave_router/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/leave_router/</guid>
+      <description>
+        
+        
+        &lt;p&gt;将一个或多个受管私有网络从一台路由器上断开。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnets.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要从路由器上断开的受管私有网络ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;受管私有网络需要断开的路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=LeaveRouter
+&amp;amp;vxnets.1=vxnet-rzg2llb
+&amp;amp;router=rtr-9iy0lt3s
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;router_id&amp;#34;:&amp;#34;rtr-9iy0lt3s&amp;#34;,
+  &amp;#34;vxnets&amp;#34;:[
+    &amp;#34;vxnet-rzg2llb&amp;#34;
+  ],
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-qqcivo9d&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;action&amp;#34;:&amp;#34;LeaveRouterResponse&amp;#34;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyRouterAttributes</title>
+      <link>/development_docs/api/command_list/router/modify_router_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/modify_router_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改一台路由器的配置。在修改配置之后，为了让配置生效，你可能需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 或者 &lt;a href=&#34;../../sg/apply_security_group/&#34;&gt;&lt;em&gt;ApplySecurityGroup&lt;/em&gt;&lt;/a&gt; 指令。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;eip&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器的公网IP，如果值为 &amp;quot;&amp;quot; ，表示将公网IP从路由器上解绑。&lt;br/&gt;修改这个参数之后，需要执行 &lt;a href=&#34;../update_routers&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 指令才能使得修改生效。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;security_group&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器的防火墙ID。&lt;br/&gt;修改这个参数之后，需要执行 &lt;a href=&#34;../../sg/apply_security_group&#34;&gt;&lt;em&gt;ApplySecurityGroup&lt;/em&gt;&lt;/a&gt; 指令才能使得修改生效。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器的名称。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器的描述。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;features&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;路由器功能项，目前包括 DHCP 和 DNS 。&lt;br/&gt;“1”: 开启 DHCP，开启时还需同时传参数 vxnet, dyn_ip_start, dyn_ip_end (私有网络连接路由器后默认即开启 DHCP)&lt;br/&gt;“2”: 开启私网内 DNS&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vxnet&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;私有网络 ID。当开启、关闭路由器 DHCP 功能时，需指定私有网络。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dyn_ip_start&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;DHCP服务分配开始IP&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dyn_ip_end&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;DHCP服务分配终止IP&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyRouterAttributes
+&amp;amp;router=rtr-9iy0lt3s
+&amp;amp;router_name=demo
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyRouterAttributesResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyRouterStaticAttributes</title>
+      <link>/development_docs/api/command_list/router/modify_router_static_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/modify_router_static_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改某条路由器规则。修改规则后，需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 来使规则生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要修改的路由器规则 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val1&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请参考 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 对应参数说明。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val2&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请参考 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 对应参数说明。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val3&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请参考 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 对应参数说明。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val4&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请参考 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 对应参数说明。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val5&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请参考 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 对应参数说明。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;statics.n.val6&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;请参考 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 对应参数说明。&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;修改的路由器规则ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyRouterStaticAttributes
+&amp;amp;router_static=rtrs-c173g36a
+&amp;amp;router_static_name=new_name,
+&amp;amp;val1=8080
+&amp;amp;val2=192.168.1.12
+&amp;amp;val3=8080
+&amp;amp;val4=tcp
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyRouterStaticAttributesResponse&amp;#34;,
+  &amp;#34;router_static_id&amp;#34;:&amp;#34;rtrs-c173g36a&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: ModifyRouterStaticEntryAttributes</title>
+      <link>/development_docs/api/command_list/router/modify_router_static_entry_attributes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/modify_router_static_entry_attributes/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改路由器规则中的某条条目属性。修改后，需要执行 &lt;a href=&#34;../update_routers/&#34;&gt;&lt;em&gt;UpdateRouters&lt;/em&gt;&lt;/a&gt; 来使规则生效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;需要修改的路由器规则条目 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则条目名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;val1&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则条目的 val1 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   PPTP 账户信息：val1 表示账户名&lt;br/&gt;*   三层 GRE 隧道：val1 表示目标网络&lt;br/&gt;*   三层 IPsec 隧道：val1 表示本地网络&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;val2&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;规则条目的 val2 值，会根据规则类型的不同，代表不同含义：&lt;br/&gt;*   PPTP 账户信息：val2 表示密码&lt;br/&gt;*   三层 IPsec 隧道：val2 表示目标网络&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;router_static_entry&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;修改的路由器规则条目ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ModifyRouterStaticEntryAttributes
+&amp;amp;router_static_entry=rse-c173g36a
+&amp;amp;router_static_entry_name=new_name,
+&amp;amp;val1=192.168.100.0/24
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ModifyRouterStaticEntryAttributesResponse&amp;#34;,
+  &amp;#34;router_static_entry_id&amp;#34;:&amp;#34;rse-c173g36a&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: PowerOffRouters</title>
+      <link>/development_docs/api/command_list/router/poweroff_routers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/poweroff_routers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;关闭一台或多台路由器。&lt;/p&gt;
+&lt;p&gt;路由器只有在运行 active 状态才能被关闭，如果处于非运行状态，则返回错误信息。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;关闭路由器之后，路由器将不再收费。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;routers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=PowerOffRouters
+&amp;amp;routers.1=rtr-s5nqo8mr
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;PowerOffRoutersResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-32c66ja8&amp;#34;,
+  &amp;#34;routers&amp;#34;:[
+    &amp;#34;rtr-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: PowerOnRouters</title>
+      <link>/development_docs/api/command_list/router/poweron_routers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/poweron_routers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;启动一台或多台路由器。&lt;/p&gt;
+&lt;p&gt;路由器只有在关闭 poweroffed 状态才能被启动，如果处于非关闭状态，则返回错误信息。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;启动路由器之后，路由器将开始收费。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;routers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=PowerOnRouters
+&amp;amp;routers.1=rtr-s5nqo8mr
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;PowerOnRoutersResponse&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-32c66ja8&amp;#34;,
+  &amp;#34;routers&amp;#34;:[
+    &amp;#34;rtr-s5nqo8mr&amp;#34;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: UpdateRouters</title>
+      <link>/development_docs/api/command_list/router/update_routers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/update_routers/</guid>
+      <description>
+        
+        
+        &lt;p&gt;更新一台或多台路由器的配置信息。当配置发生变更之后，需要执行本操作使配置生效。&lt;/p&gt;
+&lt;p&gt;可以使路由器配置发生变更的操作为 &lt;a href=&#34;../add_router_statics/&#34;&gt;&lt;em&gt;AddRouterStatics&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;../delete_router_statics/&#34;&gt;&lt;em&gt;DeleteRouterStatics&lt;/em&gt;&lt;/a&gt; 和 &lt;a href=&#34;../modify_router_attributes/&#34;&gt;&lt;em&gt;ModifyRouterAttributes&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;只有在处于 active 状态的路由器才能支持此操作，如果处于非活跃状态，则返回错误信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;routers.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;路由器ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zone&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;区域 ID，注意要小写&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=UpdateRouters
+&amp;amp;routers.1=rtr-xt37nm9j
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;UpdateRoutersResponse&amp;#34;,
+  &amp;#34;job_id&amp;#34;:&amp;#34;j-bdg2109b&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

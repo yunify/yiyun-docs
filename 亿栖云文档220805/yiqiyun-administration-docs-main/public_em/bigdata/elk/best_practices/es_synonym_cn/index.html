@@ -1,0 +1,3099 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>Elasticsearch 同义词搜索 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/bigdata/elk/" class="has-text-primary">ELK</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">最佳实践</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">详情</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">最佳实践</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  大数据引擎 QingMR
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/qingmr/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 QingMR</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/intro/function/"
+      class="menu__title  "
+      data-depth="1">功能特性</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/quickstart/create_cluster/"
+      class="menu__title  "
+      data-depth="1">创建 QingMR 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/cluster_info/"
+      class="menu__title  "
+      data-depth="1">集群信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/mgt_node/"
+      class="menu__title  "
+      data-depth="1">节点管理</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  配置参数
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/config_para/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/config_para/config_para_info/"
+      class="menu__title  "
+      data-depth="2">参数介绍</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/config_para/modify_para/"
+      class="menu__title  "
+      data-depth="2">修改配置参数</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  监控指标与告警
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/metrics_alarm/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/metrics_alarm/config_display_metrics/"
+      class="menu__title  "
+      data-depth="2">监控指标</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/metrics_alarm/set_alarm_rules/"
+      class="menu__title  "
+      data-depth="2">设置监控告警</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/metrics_alarm/view_monitor_metrics/"
+      class="menu__title  "
+      data-depth="2">查看资源和服务监控</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  数据库使用指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/database_userguide/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/database_userguide/database_info/"
+      class="menu__title  "
+      data-depth="2">使用简介</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/database_userguide/smr_spark/"
+      class="menu__title  "
+      data-depth="2">Spark 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/database_userguide/smr_hadoop/"
+      class="menu__title  "
+      data-depth="2">Hadoop 使用指南 </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/database_userguide/smr_hive/"
+      class="menu__title  "
+      data-depth="2">Hive 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/qingmr/manual/database_userguide/smr_flink/"
+      class="menu__title  "
+      data-depth="2">Flink 使用指南</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  大数据服务 ELK
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/elk/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 ELK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/intro/function/"
+      class="menu__title  "
+      data-depth="1">功能特性</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/intro/component/"
+      class="menu__title  "
+      data-depth="1">集群组件说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/quickstart/create_cluster/"
+      class="menu__title  "
+      data-depth="1">创建 ELK 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/manual/migration/"
+      class="menu__title  "
+      data-depth="1">数据迁移</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/manual/cluster_info/"
+      class="menu__title  "
+      data-depth="1">集群信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/manual/mgt_node/"
+      class="menu__title  "
+      data-depth="1">节点管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/manual/config_para/"
+      class="menu__title  "
+      data-depth="1">配置参数</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/manual/metrics_alarm/"
+      class="menu__title  "
+      data-depth="1">监控告警</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  最佳实践
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/best_practices/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/elk_all_cn/"
+      class="menu__title  "
+      data-depth="1">ELK 中文日志搜索</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/elk_all_en/"
+      class="menu__title  "
+      data-depth="1">ELK 英文日志搜索</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/es_split_cn/"
+      class="menu__title  "
+      data-depth="1">Elasticsearch 获取中文分词</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/es_synonym_cn/"
+      class="menu__title active "
+      data-depth="1">Elasticsearch 同义词搜索</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/es_hot_warm_cold/"
+      class="menu__title  "
+      data-depth="1">Elasticsearch 热-温-冷数据架构</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/es_view_logs/"
+      class="menu__title  "
+      data-depth="1">Elasticsearch 日志查看</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/es_plugin/"
+      class="menu__title  "
+      data-depth="1">Elasticsearch 插件列表</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/es_api/"
+      class="menu__title  "
+      data-depth="1">Elasticsearch API 说明</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/ls_install_plugin/"
+      class="menu__title  "
+      data-depth="1">Logstash 安装插件</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/ls_custom_plugin/"
+      class="menu__title  "
+      data-depth="1">Logstash 自定义插件</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/ls_custom_config/"
+      class="menu__title  "
+      data-depth="1">Logstash 自定义启动配置文件</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/ls_syslog_plugin/"
+      class="menu__title  "
+      data-depth="1">Logstash-input-syslog 插件使用说明</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/ls_plugin/"
+      class="menu__title  "
+      data-depth="1">Logstash 插件列表</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/elk/best_practices/ls_app/"
+      class="menu__title  "
+      data-depth="1">App 设计说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  大数据服务 Nifi
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/nifi/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 Nifi</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/intro/function/"
+      class="menu__title  "
+      data-depth="1">功能特性</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/quickstart/create_cluster/"
+      class="menu__title  "
+      data-depth="1">创建 Nifi 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/access_nifi/"
+      class="menu__title  "
+      data-depth="1">连接集群</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/cluster_info/"
+      class="menu__title  "
+      data-depth="1">集群信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/mgt_node/"
+      class="menu__title  "
+      data-depth="1">节点管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/mgt_vxnet/"
+      class="menu__title  "
+      data-depth="1">切换私有网络</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/modify_para/"
+      class="menu__title  "
+      data-depth="1">修改配置参数</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  监控指标与告警
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/metrics_alarm/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/metrics_alarm/config_display_metrics/"
+      class="menu__title  "
+      data-depth="2">监控指标</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/metrics_alarm/set_alarm_rules/"
+      class="menu__title  "
+      data-depth="2">设置监控告警</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/manual/metrics_alarm/view_monitor_metrics/"
+      class="menu__title  "
+      data-depth="2">查看资源和服务监控</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  最佳实践
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/best-practices/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/nifi/best-practices/nifi_process/"
+      class="menu__title  "
+      data-depth="1">创建 Nifi 流程</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  大数据服务 HBase
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/hbase/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 HBase</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/intro/function/"
+      class="menu__title  "
+      data-depth="1">功能特性</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/intro/version/"
+      class="menu__title  "
+      data-depth="1">系列和版本</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/quickstart/create_cluster/"
+      class="menu__title  "
+      data-depth="1">创建 HBase 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/migration/"
+      class="menu__title  "
+      data-depth="1">数据迁移</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/cluster_info/"
+      class="menu__title  "
+      data-depth="1">集群信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/mgt_node/"
+      class="menu__title  "
+      data-depth="1">节点管理</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  配置参数
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/config_para/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/config_para/config_para_info/"
+      class="menu__title  "
+      data-depth="2">参数介绍</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/config_para/modify_para/"
+      class="menu__title  "
+      data-depth="2">修改配置参数</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  监控指标与告警
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/metrics_alarm/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/metrics_alarm/config_display_metrics/"
+      class="menu__title  "
+      data-depth="2">监控指标</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/metrics_alarm/set_alarm_rules/"
+      class="menu__title  "
+      data-depth="2">设置监控告警</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/manual/metrics_alarm/view_monitor_metrics/"
+      class="menu__title  "
+      data-depth="2">查看资源和服务监控</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  HBase 开发指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/developer_manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/database_info/"
+      class="menu__title  "
+      data-depth="1">使用简介</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/hbase_shell/"
+      class="menu__title  "
+      data-depth="1">HBase Shell 基本操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/hbase_pe/"
+      class="menu__title  "
+      data-depth="1">HBase PE 测试</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/hbase_columnfamily/"
+      class="menu__title  "
+      data-depth="1">HBase 压缩和数据块编码</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/hbck2/"
+      class="menu__title  "
+      data-depth="1">修复工具 HBCK 2</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/database_input/"
+      class="menu__title  "
+      data-depth="1">MapReduce 导入数据到 HBase</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/hbase_phoenix/"
+      class="menu__title  "
+      data-depth="1">Phoenix 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/phoenix_map_hbase-copy/"
+      class="menu__title  "
+      data-depth="1">Phoenix 映射 HBase 中已有的表</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/hbase/developer_manual/deploy_filter/"
+      class="menu__title  "
+      data-depth="1">安装自定义 Filter </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  大数据服务 ZooKeeper
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/zookeeper/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 ZooKeeper</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/intro/function/"
+      class="menu__title  "
+      data-depth="1">功能特性</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/quickstart/create_cluster/"
+      class="menu__title  "
+      data-depth="1">创建集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/migration/"
+      class="menu__title  "
+      data-depth="1">数据迁移</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/access_zk/"
+      class="menu__title  "
+      data-depth="1">连接集群</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/cluster_info/"
+      class="menu__title  "
+      data-depth="1">集群信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/mgt_node/"
+      class="menu__title  "
+      data-depth="1">节点管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/mgt_vxnet/"
+      class="menu__title  "
+      data-depth="1">切换私有网络</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  配置参数
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/config_para/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/config_para/config_para_info/"
+      class="menu__title  "
+      data-depth="2">参数介绍</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/config_para/modify_para/"
+      class="menu__title  "
+      data-depth="2">修改配置参数</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  备份与恢复
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/backup_restoration/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/backup_restoration/enable_backup/"
+      class="menu__title  "
+      data-depth="2">创建备份</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/backup_restoration/auto_backup/"
+      class="menu__title  "
+      data-depth="2">开启自动备份</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/backup_restoration/delete_backup/"
+      class="menu__title  "
+      data-depth="2">删除备份</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  监控指标与告警
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/metrics_alarm/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/metrics_alarm/config_display_metrics/"
+      class="menu__title  "
+      data-depth="2">监控指标</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/metrics_alarm/set_alarm_rules/"
+      class="menu__title  "
+      data-depth="2">设置监控告警</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/zookeeper/manual/metrics_alarm/view_monitor_metrics/"
+      class="menu__title  "
+      data-depth="2">查看资源和服务监控</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  大数据服务 Storm
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/storm/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/intro/10_introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 Storm</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/intro/20_deployment_architecture/"
+      class="menu__title  "
+      data-depth="1">部署架构</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/intro/30_scenarios/"
+      class="menu__title  "
+      data-depth="1">常见应用场景</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/quickstart/qs_create_storm/"
+      class="menu__title  "
+      data-depth="1">快速入门</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/bigdata/elk/best_practices/es_synonym_cn/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/10_create_storm/"
+      class="menu__title  "
+      data-depth="1">创建 Storm</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/20_test_storm/"
+      class="menu__title  "
+      data-depth="1">Storm 集群测试</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/30_online_scaling/"
+      class="menu__title  "
+      data-depth="1">在线伸缩</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/40_config_param/"
+      class="menu__title  "
+      data-depth="1">配置参数</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/50_config_alarm/"
+      class="menu__title  "
+      data-depth="1">配置告警</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/60_view_monitoring/"
+      class="menu__title  "
+      data-depth="1">查看监控信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/bigdata/storm/manual/70_computing_framework/"
+      class="menu__title  "
+      data-depth="1">流式计算框架对比分析</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#操作步骤">操作步骤</a></li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">最佳实践</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>Elasticsearch 同义词搜索</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-12-01
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	<div class="lead"></div>
+	
+
+	
+	<p>本小节主要介绍如何配置 Elasticsearch 同义词词典及如何进行同义词搜索。</p>
+<h2 id="操作步骤">操作步骤</h2>
+<ol>
+<li>
+<p>按照每行一组同义词、词语之间以 <strong>半角</strong> 逗号 <code>,</code> 分隔的格式准备名为 <code>synonym.txt</code> 的同义词词典文件，如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>番茄,西红柿 <span style="color:#f92672">=</span>&gt; 西红柿,番茄
+</span></span></code></pre></div><blockquote>
+<p><strong>说明</strong>：</p>
+<p>详细的 synonym.txt 文件配置说明请参考 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.7/analysis-synonym-tokenfilter.html">官方文档</a>。</p>
+</blockquote>
+</li>
+<li>
+<p>通过如下命令在 <strong>所有</strong> Elasticsearch 节点和 Elasticsearch 专有主节点上传词典：</p>
+<blockquote>
+<p><strong>注意</strong>：</p>
+<p>URL最后的 <code>/</code> 不能省略</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -F <span style="color:#e6db74">&#34;file=@-;filename=synonym.txt&#34;</span> $ES_IP/analysis/ <span style="color:#e6db74">&lt;&lt;- EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">番茄,西红柿 =&gt; 西红柿,番茄
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div><p>上传成功后可通过访问 http://$ES_IP/analysis/synonym.txt 来查看同义词文件。</p>
+</li>
+<li>
+<p>进行同义词搜索测试。使用如下 bash 脚本测试同义词搜索功能：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>INDEX<span style="color:#f92672">=</span>synonym-test
+</span></span><span style="display:flex;"><span>MAPPING_TYPE<span style="color:#f92672">=</span>_doc     
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建 索引</span>
+</span></span><span style="display:flex;"><span>curl -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -XPUT http://$ES_IP:9200/$INDEX -d<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;settings&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;index&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;analysis&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;analyzer&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;by_smart&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;type&#34;: &#34;custom&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;tokenizer&#34;: &#34;ik_smart&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;filter&#34;: [&#34;by_tfr&#34;,&#34;by_sfr&#34;],
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;char_filter&#34;: [&#34;by_cfr&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;by_max_word&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;type&#34;: &#34;custom&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;tokenizer&#34;: &#34;ik_max_word&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;filter&#34;: [&#34;by_tfr&#34;,&#34;by_sfr&#34;],
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;char_filter&#34;: [&#34;by_cfr&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;filter&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;by_tfr&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;type&#34;: &#34;stop&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;stopwords&#34;: [&#34; &#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;by_sfr&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;type&#34;: &#34;synonym&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;synonyms_path&#34;: &#34;analysis/synonym.txt&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;char_filter&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &#34;by_cfr&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;type&#34;: &#34;mapping&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;mappings&#34;: [&#34;| =&gt; |&#34;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建 mapping</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>URL<span style="color:#f92672">=</span>$ES_IP:9200/$INDEX
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ELK 6.8.6 及以下版本请使用如下地址</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># URL=$ES_IP:9200/$INDEX/$MAPPING_TYPE</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>curl -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -XPUT $URL/_mapping -d<span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;properties&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;content&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;type&#34;: &#34;text&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;analyzer&#34;: &#34;by_max_word&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;search_analyzer&#34;: &#34;by_smart&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 索引 一些 文档</span>
+</span></span><span style="display:flex;"><span>postData<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  curl -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -d<span style="color:#e6db74">&#39;{&#34;content&#34;:&#34;&#39;</span>$1<span style="color:#e6db74">&#39;&#34;}&#39;</span> $ES_IP:9200/$INDEX/$MAPPING_TYPE; echo
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>phrases<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">我有一个西红柿
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">番茄炒蛋饭
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">西红柿鸡蛋面
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> phrase in $phrases; <span style="color:#66d9ef">do</span> postData $phrase; <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 高亮 查询</span>
+</span></span><span style="display:flex;"><span>sleep 5; curl -s -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> -XPOST http://$ES_IP:9200/$INDEX/_search  -d<span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;query&#34; : { &#34;match&#34; : { &#34;content&#34; : &#34;番茄&#34; }},
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;highlight&#34; : {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;pre_tags&#34; : [&#34;&lt;tag1&gt;&#34;, &#34;&lt;tag2&gt;&#34;],
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;post_tags&#34; : [&#34;&lt;/tag1&gt;&#34;, &#34;&lt;/tag2&gt;&#34;],
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;fields&#34; : {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            &#34;content&#34; : {}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}&#39;</span> | grep --color <span style="color:#e6db74">&#34;&lt;tag1&gt;[^&lt;]*&lt;/tag1&gt;&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>查看同义词搜索结果。如下图所示，搜索结果包含&quot;西红柿&quot;和&quot;番茄&quot;的所有文档。</p>
+<p><img src="../../_images/synonym_result.png" alt="synonym_result"></p>
+<blockquote>
+<p><strong>说明</strong></p>
+<p>对象存储为用户提供了云端可无限扩展的通用数据存储服务，具有安全可靠、简单易用、高性能、低成本等特点。 用户可以将数据、日志、静态资源等多种文件类型，通过多种方式上传至对象存储中，以满足日常数据存储、归档、分析等需求。为了更好的满足用户的需求，提供了Elasticsearch、Logstash 等与对象存储的集成功能。</p>
+</blockquote>
+</li>
+</ol>
+
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+		<a href="/bigdata/elk/best_practices/es_split_cn/" class="prev pl1" title="Elasticsearch 获取中文分词 ">
+			上一页: Elasticsearch 获取中文分词
+		</a>
+		
+
+		
+		<a href="/bigdata/elk/best_practices/es_hot_warm_cold/" class="next pr1" title="Elasticsearch 热-温-冷数据架构">
+			下一页: Elasticsearch 热-温-冷数据架构
+		</a>
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

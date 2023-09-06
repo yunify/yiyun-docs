@@ -1,0 +1,3044 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 网络</title>
+    <link>/network/</link>
+    <description>Recent content in 网络 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/network/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Network: 边界路由器</title>
+      <link>/network/border_router/intro/border_router/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/network/border_router/intro/border_router/</guid>
+      <description>
+        
+        
+        &lt;p&gt;边界路由器是用于连接不同网络的路由器，可以连接多种不同的网络场景：第一种，可以连接不同 VPC 内部的虚拟私有网络；第二种，可以连接虚拟私有网络和物理网络；第三种，可以连接 VPC 与专线或者 SD-WAN。&lt;/p&gt;
+&lt;p&gt;场景一：连接不同 VPC 内部的虚拟私有网络，实现更大规模的云服务器组网，和更高的网络性能。此前最常用的方式是通过隧道来打通不同的VPC，边界路由器可以避免隧道带来的种种弊端，比如隧道必须消耗公网流量费用，带宽受限等等。&lt;/p&gt;
+&lt;p&gt;场景二：连接虚拟私有网络和物理网络，实现虚拟机和物理机混合组网，例如 Oracle 数据库或者 SAP 更希望在 BM 云服务器中运行，与 Web Server所在的虚拟云服务器混合组网。&lt;/p&gt;
+&lt;p&gt;场景三：连接虚拟私有网络和 SD-WAN，实现公有云与您私有部署环境的直联，服务之间的调用与纯内网访问完全一致，让您拥有一套企业专用网络的体验感。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: GRE 隧道</title>
+      <link>/network/vpc/manual/tunnel/gre/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/tunnel/gre/</guid>
+      <description>
+        
+        
+        &lt;p&gt;L3 over L3 是 GRE 最常见用法，得到了所有主流网络设备的支持，也得到了各种操作系统的支持。&lt;/p&gt;
+&lt;p&gt;GRE 隧道是一个很灵活的技术，可以用来组建各种网络拓扑，常见的树型、星型、总线型(串型)、环型和混合型均可实现。本指南不会全部描述，因为配置方法都是一样的。以下选择三种拓扑结构来做描述。&lt;/p&gt;
+&lt;h2 id=&#34;简单的对连拓扑&#34;&gt;简单的对连拓扑&lt;/h2&gt;
+&lt;p&gt;如下图所示，假设您的 VPC 网络使用的公网 IP 是 3.3.3.3，您自己数据中心的网络使用的公网 IP 是 6.6.6.6，这两个网络节点下各连接有两个私有网络（子网），它们将通过 GRE 隧道连接在一起。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/gre_l3_p2p.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-在管理控制台的操作&#34;&gt;1. 在管理控制台的操作&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入 VPC 列表页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找到您的 VPC 网络，点击 VPC 网络名称，进入详情页。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换至&lt;strong&gt;管理配置&lt;/strong&gt;页签，然后点击&lt;strong&gt;隧道服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;添加隧道规则&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在弹出的对话框里，填写配置以下参数，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;../../_images/gre_l3_add_static.png&#34; alt=&#34;添加隧道规则&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;名称: 为该隧道起个名字，比如 tun36。&lt;/li&gt;
+&lt;li&gt;远端路由器 IP: 在本例中为您数据中心路由器的公网 IP： 6.6.6.6。&lt;/li&gt;
+&lt;li&gt;协议: 默认为 GRE 协议。&lt;/li&gt;
+&lt;li&gt;密钥: 一个两端共同使用的约定整型数字，比如 12345。&lt;/li&gt;
+&lt;li&gt;本地点对点 IP: 隧道在亿栖云路由器这边的地址，比如 10.254.0.1。&lt;/li&gt;
+&lt;li&gt;对端点对点 IP: 隧道在您数据中心的地址，比如 10.254.0.2。&lt;/li&gt;
+&lt;li&gt;目标网络: 在本例中为您数据中心的两个私有网络 192.168.5.0/24、192.168.6.0/24。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击页面上方的&lt;strong&gt;应用修改&lt;/strong&gt;，完成 VPC 网络的配置更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前往 VPC 使用的安全组规则中打开 GRE 协议，完成后点击&lt;strong&gt;应用修改&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-在您数据中心设备上的操作&#34;&gt;2. 在您数据中心设备上的操作&lt;/h3&gt;
+&lt;p&gt;因为隧道的对称性，还需要在您自己数据中心的路由器上进行隧道配置，具体配置方法取决于您使用的网络设备，请查询厂商的手册。这里给一个 Huawei 路由器的配置过程，供参考:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Quidway] interface Tunnel 0/0/0
+[Quidway-Tunnel0/0/0] ip address 10.254.0.2 255.255.255.0
+[Quidway-Tunnel0/0/0] tunnel-protocol gre
+[Quidway-Tunnel0/0/0] source 6.6.6.6
+[Quidway-Tunnel0/0/0] destination 3.3.3.3
+[Quidway-Tunnel0/0/0] gre key 12345
+[Quidway-Tunnel0/0/0] quit
+[Quidway] ip route-static 192.168.1.0 255.255.255.0 Tunnel0/0/0
+[Quidway] ip route-static 192.168.2.0 255.255.255.0 Tunnel0/0/0
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;亿栖云作为中心节点的星型拓扑&#34;&gt;亿栖云作为中心节点的星型拓扑&lt;/h2&gt;
+&lt;p&gt;如下图所示，假设您在亿栖云平台中的 VPC 网络使用的公网 IP 是 3.3.3.3，您自己有两个数据中心，它们对外使用的公网 IP 分别是 6.6.6.6、9.9.9.9，这三个 VPC 网络背后各连接有两个私有网络，它们将通过 L3 GRE 隧道连接在一起。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/gre_l3_star.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;上图中，黑色的路由器表示是这个星型网络的中心节点，蓝色的路由器表示接入节点。&lt;/p&gt;
+&lt;h3 id=&#34;1-在管理控制台中的操作&#34;&gt;1. 在管理控制台中的操作&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在 VPC 详情页的&lt;strong&gt;管理配置&lt;/strong&gt;标签页中，参照简单的对连拓扑中 &lt;a href=&#34;#1-%E5%9C%A8%E4%BA%BF%E6%A0%96%E4%BA%91%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C&#34;&gt;1.在亿栖云中的操作&lt;/a&gt; 的部分，创建一条到 6.6.6.6 的隧道。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/gre_l3_statics.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;再次点击&lt;strong&gt;隧道服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;添加隧道规则&lt;/strong&gt;，新建一条到 9.9.9.9 的隧道。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在弹出的对话框里，填写以下项目:&lt;/p&gt;
+&lt;img src=&#34;../../_images/gre_l3_add_static_2.png&#34; alt=&#34;添加隧道规则&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;名称: tun39&lt;/li&gt;
+&lt;li&gt;远端路由器 IP: 9.9.9.9&lt;/li&gt;
+&lt;li&gt;协议: 默认为 GRE 协议&lt;/li&gt;
+&lt;li&gt;密钥: 87654&lt;/li&gt;
+&lt;li&gt;本地点对点 IP: 10.254.0.1&lt;/li&gt;
+&lt;li&gt;对端点对点 IP: 10.254.0.2&lt;/li&gt;
+&lt;li&gt;目标网络: 172.19.1.0/24、172.19.2.0/24&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确认无误后，点击&lt;strong&gt;提交&lt;/strong&gt;，然后点击页面上方的&lt;strong&gt;应用修改&lt;/strong&gt;，以完成 VPC 网络的配置更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前往 VPC 网络使用的安全组规则中打开 GRE 协议。完成后点击&lt;strong&gt;应用修改&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-在您数据中心设备上的操作-1&#34;&gt;2. 在您数据中心设备上的操作&lt;/h3&gt;
+&lt;p&gt;因为隧道的对称性，还需要在您自己数据中心的网络中进行相应的隧道配置，具体配置方法取决于您使用的网络设备，请查询厂商的手册。&lt;/p&gt;
+&lt;h2 id=&#34;亿栖云作为接入节点的星型拓扑&#34;&gt;亿栖云作为接入节点的星型拓扑&lt;/h2&gt;
+&lt;p&gt;如下图所示，网络构成与亿栖云作为中心节点的星型拓扑一节相同，唯一的不同之处是，这次 6.6.6.6 是中心节点，亿栖云网络（3.3.3.3）的身份是一个接入节点。为了醒目，依然用黑色的路由器表示是这个星型网络的中心节点，蓝色的路由器表示接入节点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/gre_l3_star_2.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;参照&lt;a href=&#34;#%E7%AE%80%E5%8D%95%E7%9A%84%E5%AF%B9%E8%BF%9E%E6%8B%93%E6%89%91&#34;&gt;简单的对连拓扑&lt;/a&gt;中&lt;a href=&#34;#1-%E5%9C%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%9A%84%E6%93%8D%E4%BD%9C&#34;&gt;在控制台中的操作&lt;/a&gt;部分，创建一条到 6.6.6.6 的隧道，即完成了在亿栖云中的操作。&lt;/p&gt;
+&lt;p&gt;剩余的各条隧道均需要在您自己数据中心的网络中进行相应的配置，具体配置方法取决于您使用的网络设备，请查询厂商的手册。&lt;/p&gt;
+&lt;h2 id=&#34;使用限制&#34;&gt;使用限制&lt;/h2&gt;
+&lt;p&gt;单个 VPC 可并存的GRE隧道数量为800。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: NAT 网关简介</title>
+      <link>/network/nat_gateway/intro/nat_gateway/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/nat_gateway/intro/nat_gateway/</guid>
+      <description>
+        
+        
+        &lt;p&gt;NAT 网关 (Network Address Transmition Gateway) 是一个分布式的网络地址转换服务。用户的多个私有网络可以通过一个统一的 NAT 网关访问外网，同时通过路由规则来配置网络访问的路径。&lt;/p&gt;
+&lt;p&gt;NAT 网关为私有网络的主机提供了复用公网 IP 的能力，目前支持源 NAT 功能，主机可以通过 NAT 网关绑定的公网 IP 地址访问互联网。NAT网关的SNAT功能还可以作为防火墙使用，因为私有网络的主机可以主动通过 NAT 网关访问互联网，但是互联网的主机不可以主动访问私有网络内的主机。 NAT 网关具备高达 10 Gbps 的转发能力以及 Region 级别的多活容灾能力。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: Windows 云服务器中配置PPTP VPN</title>
+      <link>/network/vpc/faq/how_to_configure_pptp_vpn_for_windows_host/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/how_to_configure_pptp_vpn_for_windows_host/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;项目介绍&#34;&gt;项目介绍&lt;/h2&gt;
+&lt;p&gt;客户希望自己在办公或者家庭网络能拨入到云上VPC的私有网络，以实现内网访问云上部署的业务，因为VPN隧道是加密通讯的，安全性比较可靠，另外使用起来比较方便；以下介绍的是如何在Windows云服务器部署PPTP客户端。&lt;/p&gt;
+&lt;h3 id=&#34;1通过以下步骤找到vpn服务端开启入口&#34;&gt;1.通过以下步骤找到VPN服务端开启入口&lt;/h3&gt;
+&lt;p&gt;通过控制台==&amp;gt;网络==&amp;gt;VPC网络==&amp;gt;详情==&amp;gt;管理配置==&amp;gt;VPN服务==&amp;gt;PPTP服务==&amp;gt;开启&lt;/p&gt;
+&lt;p&gt;备注：可以设置最大连接数、自定义VPN网络地址，如图&lt;/p&gt;
+&lt;img src=&#34;../homer/pptp_01.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;h3 id=&#34;2放行防火墙下行gre协议以及tcp-1723端口协议并应用修改防火墙如图&#34;&gt;2.放行防火墙下行GRE协议以及TCP 1723端口协议，并应用修改防火墙，如图&lt;/h3&gt;
+&lt;img src=&#34;../homer/pptp_02.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;h3 id=&#34;3通过以下步骤找到本地vpn客户端开启入口&#34;&gt;3.通过以下步骤找到本地VPN客户端开启入口&lt;/h3&gt;
+&lt;p&gt;开始==&amp;gt;网络连接==&amp;gt;VPN==&amp;gt;添加VPN连接==&amp;gt;配置VPN连接信息==&amp;gt;保存&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;VPN提供商：Windows内置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;连接名称：自定义&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器名称或者地址：填写VPC的EIP地址&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VPN类型：点对点隧道协议（PPTP）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用户名：填写自己配置的用户名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;密码：填写自己设置的密码&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以参考以下截图&lt;/p&gt;
+&lt;img src=&#34;../homer/pptp_03.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;img src=&#34;../homer/pptp_04.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;h3 id=&#34;4本地拨入vpn测试&#34;&gt;4.本地拨入VPN测试&lt;/h3&gt;
+&lt;img src=&#34;../homer/pptp_05.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;p&gt;​                                      &lt;img src=&#34;../homer/pptp_06.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5使用以下命令检查本地是否拨入成功&#34;&gt;5.使用以下命令检查本地是否拨入成功&lt;/h3&gt;
+&lt;p&gt;备注：拨入成功，虚拟网卡会获取到一个内网IP&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ipconfig /all 
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;6本地测试是否可以与vpc内网互通&#34;&gt;6.本地测试是否可以与VPC内网互通&lt;/h3&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 公网 DNS 转发如何使用</title>
+      <link>/network/vpc/faq/how_to_use_public_network_dns_forwarding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/how_to_use_public_network_dns_forwarding/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;p&gt;已创建 VPC，并绑定公网 IP。&lt;/p&gt;
+&lt;h2 id=&#34;使用场景&#34;&gt;使用场景&lt;/h2&gt;
+&lt;p&gt;VPC 多个主机需要指定相同的 DNS 服务器地址。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;1打开-vpc-下的-dns-服务&#34;&gt;1、打开 VPC 下的 DNS 服务&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/how_to_use_public_network_DNS_forwarding.assets/image-20210517184604163.png&#34; alt=&#34;image-20210517184604163&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里不需要使用 PTR 记录，可以选择不开启&lt;/p&gt;
+&lt;h3 id=&#34;2添加公网-dns-服务器&#34;&gt;2、添加公网 DNS 服务器&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/how_to_use_public_network_DNS_forwarding.assets/image-20210517184803261.png&#34; alt=&#34;image-20210517184803261&#34;&gt;&lt;/p&gt;
+&lt;p&gt;常用的 DNS 服务器有：114.114.114.114、8.8.8.8等。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/how_to_use_public_network_DNS_forwarding.assets/image-20210517184908779.png&#34; alt=&#34;image-20210517184908779&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3主机内部指定-dns-服务器地址&#34;&gt;3、主机内部指定 DNS 服务器地址&lt;/h3&gt;
+&lt;h4 id=&#34;1重启网络&#34;&gt;1、重启网络&lt;/h4&gt;
+&lt;p&gt;以 CentOS 7.9为例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;systemctl restart NetworkManager
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;2直接指定-dns-服务器地址&#34;&gt;2、直接指定 DNS 服务器地址&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim /etc/resolv.conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nameserver 192.168.255.254		&lt;span style=&#34;color:#75715e&#34;&gt;#指定VPC网段最后一个IP地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../_images/how_to_use_public_network_DNS_forwarding.assets/image-20210517185802390.png&#34; alt=&#34;image-20210517185802390&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4移除公网-dns-转发&#34;&gt;4、移除公网 DNS 转发&lt;/h3&gt;
+&lt;p&gt;1、可以删除指定的公网 DNS 服务器地址，使用默认配置。
+&lt;img src=&#34;../_images/how_to_use_public_network_DNS_forwarding.assets/image-20210517190209536.png&#34; alt=&#34;image-20210517190209536&#34;&gt;&lt;/p&gt;
+&lt;p&gt;2、关闭 DNS 服务
+关闭 DNS 服务需要在云服务器内部重启网络、或者重新指定公网 DNS 服务器地址(参照第3步)，否则 DNS 无法正常使用。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 计费指南</title>
+      <link>/network/eip/billing/price/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/billing/price/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;计费模式&#34;&gt;计费模式&lt;/h2&gt;
+&lt;p&gt;公网 IP 支持按带宽计费和按流量计费两种模式。&lt;/p&gt;
+&lt;h3 id=&#34;按带宽计费&#34;&gt;按带宽计费&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;适用于业务流量峰值在不同时间段比较平稳的场景。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;费用说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;实际费用 =  固定带宽价格 * 此带宽使用时间（精确到秒）。&lt;/p&gt;
+&lt;p&gt;您可指定所需要的固定带宽大小，不同带宽对应不同的每小时使用单价。最终使用费用将按照您实际使用的时间，精确到秒进行统计。带宽大小可以在线实时进行调整，满足您对带宽的动态需求。出口带宽的价格会因为可用区的网络环境差异而不同。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;按流量计费&#34;&gt;按流量计费&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;适用于业务流量峰值在不同时间段波动较大的场景。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;费用说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;实际费用 =  IP 地址使用费 + 实际发生的公网流量费用&lt;/p&gt;
+&lt;p&gt;如果公网 IP 的计费模式是按流量计费，则除了固定的 IP 地址价格外， 流量数据会每小时自动统计一次，统计方法为：在即将扣费的时间范围内，分别对进、出数据量求和，然后取其中较大的值作为扣费依据。&lt;/p&gt;
+&lt;p&gt;为了保持跟带宽计费一致的优惠策略（请参见： &lt;a href=&#34;/compute/vm/faq/other_questions/vm_width_equal/&#34;&gt;公网带宽上下行速率是对称相等的吗&lt;/a&gt; ），只有当下行速率超出 10Mbps 时才会对其扣费。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;p&gt;一个按流量计费的、带宽上限是 20Mbps 的公网 IP，在一个扣费周期内有 30 分钟其下行速率一直保持在 18Mbps ，有 10 分钟其上行速率一直保持在 10Mbps ， 则在即将扣费的时间范围内对进、出数据量求和结果如下（这里为了方便举例， 上下行速率假设一直稳定在一个固定值，而实际计算时使用的是采样间隔为1分钟的速率数据）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;进数据量之和 ＝ 8Mbps（18 Mbps 减去优惠的 10 Mbps） * 1800（秒数） / 8 = 1800 MB (megabyte)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;出数据量之和 ＝ 10Mbps * 600（秒数） / 8 = 750 MB (megabyte)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因进数据量之和大于出数据量之和，所以此 1 小时的实际扣费是 1800 MB / 1024 * 流量单价（每GB xx 元）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;公网 IP 计费模式不能频繁切换，24小时内只能改一次。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;费用充值&#34;&gt;费用充值&lt;/h2&gt;
+&lt;p&gt;账户余额不足或欠费后，请及时充值，以保证资源的正常使用。&lt;/p&gt;
+&lt;p&gt;支持多种充值途径：支付宝、网上银行、微信支付、线下汇款。可在&lt;a href=&#34;http://console.yiqiyun.net.cn/finance/wallet/&#34;&gt;充值页面&lt;/a&gt;选择。&lt;/p&gt;
+&lt;p&gt;如果需要发票，请到&lt;strong&gt;费用中心&lt;/strong&gt; &amp;gt; &lt;strong&gt;发票管理&lt;/strong&gt;页面提出申请。&lt;/p&gt;
+&lt;h2 id=&#34;余额不足提醒&#34;&gt;余额不足提醒&lt;/h2&gt;
+&lt;p&gt;系统会定期检查用户余额和当时名下弹性计费资源的消费预估， 如果检查发现余额即将不足，会提前给用户发送通知。&lt;/p&gt;
+&lt;p&gt;通知策略是：分别在提前 15，7，3，2，1 天时发送提醒。&lt;/p&gt;
+&lt;p&gt;默认是发送给账号的注册手机号及通知邮箱，如果用户希望自定义接受者列表，可在账户信息中修改“财务通知”对应的通知列表。&lt;/p&gt;
+&lt;h2 id=&#34;资源欠费&#34;&gt;资源欠费&lt;/h2&gt;
+&lt;p&gt;如果用户余额已不足，资源会被自动暂停。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于通过备案信息验证的公网 IP，我们会在欠费之后为用户保留 10 天， 并发出欠费提醒的邮件。在此期间内用户可随时充值来恢复资源。 如果欠费逾期仍未充值，则资源会被删除，删除的资源会在“回收站”保留2小时，之后便会被彻底删除，无法再恢复。&lt;/li&gt;
+&lt;li&gt;对于不需要备案或备案信息没有通过验证的公网 IP， 一旦欠费就会被系统释放回资源池。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为避免资源删除对您造成损失，请您留意钱余额，并及时充值。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: VPC 网络计费</title>
+      <link>/network/vpc/billing/price/</link>
+      <pubDate>Mon, 24 May 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/network/vpc/billing/price/</guid>
+      <description>
+        
+        
+        &lt;p&gt;VPC目前采用按需计费的方式，产生的费用实时结算扣费。&lt;/p&gt;
+&lt;h2 id=&#34;价格表&#34;&gt;价格表&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;规格&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;转发能力&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;价格&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;折合月价格&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;免费型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;不支持&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;免费&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;免费&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;小型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;100kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.05 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;36 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;中型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;150kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.19 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;136 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;大型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;200kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.39 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;280.8 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;超大型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;250kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.75 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;540 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: IPsec 隧道</title>
+      <link>/network/vpc/manual/tunnel/ipsec/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/network/vpc/manual/tunnel/ipsec/</guid>
+      <description>
+        
+        
+        &lt;p&gt;IPsec 是一种加密的隧道技术，通过使用加密的安全服务在不同的网络之间建立保密而安全的通讯隧道。本指南通过介绍简单的内网对连拓扑来介绍 IPsec 的使用方式， 其他更高级的连接拓扑和 GRE 隧道类似，可参见 &lt;a href=&#34;../gre&#34;&gt;GRE 隧道&lt;/a&gt;，在此不再赘述。&lt;/p&gt;
+&lt;h2 id=&#34;简单的内网对连拓扑&#34;&gt;简单的内网对连拓扑&lt;/h2&gt;
+&lt;p&gt;如下图所示，假设您有两个 VPC 网络 ，位于同一区域，分别为 router1 和 router2，这两个 VPC 网络各连接有两个私有网络，它们将通过 IPsec 隧道连接在一起。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/ipsec-tunnel.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-配置-router1-的-ipsec-隧道&#34;&gt;1. 配置 router1 的 IPsec 隧道&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入 VPC 列表页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找到您的 VPC 网络，点击 VPC 网络名称，进入详情页。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换至&lt;strong&gt;管理配置&lt;/strong&gt;页签，然后点击&lt;strong&gt;隧道服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;添加隧道规则&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在弹出的对话框里，填写以下项目:&lt;/p&gt;
+&lt;img src=&#34;../../_images/ipsec-r1-r2.png&#34; alt=&#34;IPsec隧道规则-2&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;名称: 为该隧道起个名字，比如 “router1 to router2”。&lt;/li&gt;
+&lt;li&gt;远端路由器： 因为是内网互连，在本例中填入远端路由器 ID 即可，如果是公网互连，则需要填入远端路由器的公网 IP 或是域名；如果对端没有固定IP，可填 0.0.0.0，部分设备还必须点选使用 野蛮模式 进行互连。&lt;/li&gt;
+&lt;li&gt;协议:：选择 &lt;strong&gt;IPsec&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;密钥:：一个两端共同约定的密钥，可以为任意字符串。&lt;/li&gt;
+&lt;li&gt;加密方法：选择加密方法，支持AES、3DES及自动匹配。&lt;/li&gt;
+&lt;li&gt;隧道模式：默认&lt;strong&gt;主模式&lt;/strong&gt;，&lt;strong&gt;野蛮模式&lt;/strong&gt;安全性较低，极易受到拒绝服务和暴力攻击，请慎重选择。&lt;/li&gt;
+&lt;li&gt;开启 PFS：开启 PFS(Perfect Forward Secrecy) 安全性更好。&lt;/li&gt;
+&lt;li&gt;IKE 版本：使用 IKEv2 比 IKEv1 更加安全。本例中选择自动匹配。&lt;/li&gt;
+&lt;li&gt;本地网络：至少包括一个路由器已有的私有网络。在本例中该路由器的两个私有网络 192.168.1.0/24、192.168.2.0/24。&lt;/li&gt;
+&lt;li&gt;目标网络：在本例中为远端路由器的两个私有网络 192.168.3.0/24、192.168.4.0/24。&lt;/li&gt;
+&lt;li&gt;远端设备 ID：接勃对端设备的 ID 标识符，默认值与&lt;strong&gt;远端路由器&lt;/strong&gt;项同，如果不确认，可勾选匹配任意 ID。&lt;/li&gt;
+&lt;li&gt;健康检查 IP：用于健康检查的目标地址，必须处于目标网络中且可以 ping 通，也可以同时添加 IP 和端口，例如 192.168.200.2 或者 192.168.200.2:80；检查 IP 可以添加多个，也可以为空。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确认无误后，点击&lt;strong&gt;提交&lt;/strong&gt;，然后点击页面上方的&lt;strong&gt;应用修改&lt;/strong&gt;，以完成路由器的配置更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前往 VPC 网络使用的安全组规则中打开 IPsec 协议需要的端口和协议，分别为 UDP 500, UDP 4500, AH 和 ESP，然后点击&lt;strong&gt;应用更改&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-配置-router2-的-ipsec-隧道&#34;&gt;2. 配置 router2 的 IPsec 隧道&lt;/h3&gt;
+&lt;p&gt;由于隧道的对称性，在 VPC 网络 router2 上也需要有对应的配置。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;管理配置&lt;/strong&gt;页签，点击&lt;strong&gt;隧道服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;添加隧道规则&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在隧道配置对话框里，填写以下项目:&lt;/p&gt;
+&lt;img src=&#34;../../_images/ipsec-r2-r1.png&#34; alt=&#34;IPsec隧道规则-2&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;名称: 为该隧道起个名字，比如 “router2 to router1”。&lt;/li&gt;
+&lt;li&gt;协议: 选择 &lt;strong&gt;IPsec&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;远端路由器: 因为是内网互连，在本例中填入远端路由器 ID 即可，如果是公网互连，则需要填入远端路由器的公网 IP 或是域名。&lt;/li&gt;
+&lt;li&gt;密钥: 一个两端共同约定的密钥，可以为任意字符串。&lt;/li&gt;
+&lt;li&gt;本地网络: 在本例中该路由器的两个私有网络 192.168.3.0/24、192.168.4.0/24。&lt;/li&gt;
+&lt;li&gt;目标网络: 在本例中为远端路由器的两个私有网络 192.168.1.0/24、192.168.2.0/24。&lt;/li&gt;
+&lt;li&gt;其他配置使用默认选项即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;确认无误后，点击&lt;strong&gt;提交&lt;/strong&gt;，然后点击页面上方的&lt;strong&gt;应用修改&lt;/strong&gt;，完成路由器的配置更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前往该 VPC 使用的安全组规则中打开 IPsec 协议需要的端口和协议，分别为 UDP 500, UDP 4500, AH 和 ESP，然后点击&lt;strong&gt;应用更改&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-测试连通性&#34;&gt;3. 测试连通性&lt;/h3&gt;
+&lt;p&gt;在完成两个VPC 网络的隧道配置之后，我们可以通过这两个 VPC 网络下的云服务器进行连通性测试，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/ipsec-r1-r2-ping.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-和物理设备做-ipsec-互联&#34;&gt;4. 和物理设备做 IPsec 互联&lt;/h3&gt;
+&lt;p&gt;以上例子是 VPC 之间做 IPsec 互联。VPC 也可以和具有 IPsec 功能的物理设备（路由器、防火墙等）做互联。&lt;/p&gt;
+&lt;p&gt;以下是现阶段 VPC IPsec 的支持参数，支持参数自动匹配、自动协商。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;MODE:               main[主模式]/aggrmode[野蛮模式]
+TYPE:               tunnel
+IKE:                ikev1(默认)/ikev2
+IKE encrypt:        AES(默认)/3DES
+ESP encrypt:        AES（默认）/3DES/DES/CAST/BLOWFISH/CAMELLIA/SERPENT/TWOFISH
+IKE SA lifetime:    3600s
+IPsec SA lifetime:  28800s
+HASH:               MD5/SHA1(默认)/SHA2
+DH-GROUP:           2/5/14（默认）/15/16/17/18/22/23/24
+PFS:                up
+NAT-Traversal:      up
+AUTH:               PSK
+DPDDelay:           15s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;通常在物理设备上需要显式地定义 IPsec 的加密集(encryption和HASH)、DH group、lifetime、access-list、路由、NAT豁免等。&lt;/p&gt;
+&lt;p&gt;如果对接的物理设备在内网，需要在基于 IPsec 的隧道规则中配置 “对端设备ID”，通常填写所对接内网的网关 IP。&lt;/p&gt;
+&lt;p&gt;假设本地私有网络为 192.168.1.0/24，云上私有网络为 192.168.100.0/24，本地公网地址为 88.88.88.88，云裳 VPC 公网地址为 99.99.99.99。&lt;/p&gt;
+&lt;p&gt;以 Cisco ASA 设备为例，使用 cli 进行配置，主要包含了 crypto-map、access-list、psk、tunnel 的配置文本:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ASA(config)# access-list my_nat extended permit ip 192.168.1.0 255.255.255.0 192.168.100.0 255.255.255.0
+ASA(config)# access-list cisco-to-qiyiyun extended permit ip 192.168.1.0 255.255.255.0 192.168.100.0 255.255.255.0
+ASA(config)# nat (inside) 0 access-list my_nat
+
+ASA(config)# crypto ipsec transform-set ESP-3DES-MD5 esp-3des esp-md5-hmac
+ASA(config)# crypto ipsec security-association lifetime seconds 28800
+ASA(config)# crypto ipsec security-association lifetime kilobytes 4608000
+
+ASA(config)# crypto map my_map 1 match address cisco-to-yiqiyun
+ASA(config)# crypto map my_map 1 set pfs
+ASA(config)# crypto map my_map 1 set peer 99.99.99.99
+ASA(config)# crypto map my_map 1 set transform-set ESP-3DES-MD5
+ASA(config)# crypto map my_map interface outside
+ASA(config)# crypto isakmp enable outside
+ASA(config)# crypto isakmp policy 10
+ASA(config-isakmp)# authentication pre-share
+ASA(config-isakmp)# encryption 3des
+ASA(config-isakmp)# hash md5
+ASA(config-isakmp)# group 2
+ASA(config-isakmp)# lifetime 3600
+ASA(config)# crypto isakmp nat-traversal 60
+
+ASA(config)# tunnel-group 99.99.99.99 type ipsec-l2l
+ASA(config)# tunnel-group 99.99.99.99 ipsec-attributes
+ASA(config-tunnel-ipsec)# pre-shared-key *****
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以 H3C Router 设备为例，使用 cli 进行配置，主要包含了 transform-set、policy、profile、proposal、psk、acl 的配置文本:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#
+acl number 3100
+ rule 10 permit ip source 192.168.1.0 0.0.0.255 destination 192.168.100.0 0.0.0.255
+
+#
+ipsec transform-set tran1
+ esp encryption-algorithm aes-cbc-128
+ esp authentication-algorithm sha1
+ pfs dh-group14
+
+#
+ipsec policy map1 10 isakmp
+ transform-set tran1
+ security acl 3100
+ remote-address 99.99.99.99
+ ike-profile profile1
+ sa duration time-based 28800
+
+#
+ike profile profile1
+ keychain keychain1
+ local-identity address 88.88.88.88
+ match remote identity address 99.99.99.99 255.255.255.255
+ proposal 1
+
+#
+ike proposal 1
+ encryption-algorithm 3des-cbc
+ dh group14
+ sa duration 3600
+#
+ike keychain keychain1
+ pre-shared-key address 99.99.99.99 255.255.255.255 key cipher *****
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;根据物理设备的品牌和型号，IPsec 的配置方法会存在差异性。请参阅设备的用户手册确定正确的配法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;使用限制&#34;&gt;使用限制&lt;/h2&gt;
+&lt;p&gt;单 VPC 可并存的IPSec隧道数量为800。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 操作指南</title>
+      <link>/network/border_router/manual/border_user_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/border_router/manual/border_user_guide/</guid>
+      <description>
+        
+        
+        &lt;p&gt;如下图所示，客户端 1 在私有网络 192.168.128.0/24 中，客户端 2 在私有网络 172.17.0.0/24 中，客户端 3 在私有网络 192.168.130.0/24 中。
+通过以下步骤即可实现客户端 1 与客户端 2 , 3 互联：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建边界路由器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关联边界路由器：将客户端 1 和客户端 2 所在的私有网络关联到边界路由器，将客户端 3 所在的VPC关联到边界路由器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置边界路由器策略：为客户端 1 , 2 , 3 所在的私有网络添加边界路由器策略。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_topology.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建边界路由器&#34;&gt;创建边界路由器&lt;/h2&gt;
+&lt;p&gt;登录控制台，在顶部导航栏里搜索&lt;strong&gt;边界路由器&lt;/strong&gt;，进入详情页面后，点击&lt;strong&gt;创建&lt;/strong&gt;即可创建边界路由器。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;关联边界路由器&#34;&gt;关联边界路由器&lt;/h2&gt;
+&lt;p&gt;第一步：选择已创建好的边界路由器，点击名称链接进入详情页面后，点击&lt;strong&gt;关联 VPC 私有网络&lt;/strong&gt;，以选择需要关联的私有网络。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_detail.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;第二步：勾选客户端 1 和客户端 2 所在的私有网络，将其关联到边界路由器。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;边界路由器 IP 不能与私有网络中已使用的 IP 冲突。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;第三步：在边界路由器的详情页面上方，点击&lt;strong&gt;绑定 VPC 网络&lt;/strong&gt;，选择客户端 3 所在的VPC。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_vpc_detail.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置内网路由策略&#34;&gt;配置内网路由策略&lt;/h2&gt;
+&lt;p&gt;第一步：私有网络关联到边界路由器后，点击&lt;strong&gt;路由设置&lt;/strong&gt;，可进入到内网路由策略配置页面。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_detail_vxnet.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;第二步：点击&lt;strong&gt;添加规则&lt;/strong&gt;，填写规则名称，设置目标网络，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对于本示例，需要添加三次内网路由策略：一是为客户端 1 所在私有网络添加目标网络为 172.17.0.0/24 和目标网络为 192.168.130.0/24 的内网路由，二是为客户端 2 所在私有网络添加目标网络为 192.168.128.0/24 的内网路由，三是为客户端 3 所在的私有网络添加目标网络为 192.168.128.0/24 的内网路由。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_route.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;设置好内网路由策略后,需要点击 VPC 的&lt;strong&gt;应用修改&lt;/strong&gt;以生效。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;测试&#34;&gt;测试&lt;/h2&gt;
+&lt;p&gt;在客户端 1 执行 ping 命令，可以 ping 通客户端 2。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_ping.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在客户端 1 执行 mtr 命令，可以发现数据包经过边界路由器转发到客户端 2。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_mtr.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在客户端 1 执行 ping 命令，可以 ping 通客户端 3。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_ping2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在客户端 1 执行 mtr 命令，可以发现数据包经过边界路由器转发到客户端 3。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_mtr2.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置边界路由器静态路由&#34;&gt;配置边界路由器静态路由&lt;/h2&gt;
+&lt;p&gt;在边界路由详情页，点击&lt;strong&gt;路由设置&lt;/strong&gt;中的&lt;strong&gt;添加路由&lt;/strong&gt;，可以进入静态路由配置页面。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/intranet_router_static_route.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;边界路由器静态静态路由个数默认最大额度为10。&lt;/p&gt;
+&lt;p&gt;设置好内网路由策略后，需要点击&lt;strong&gt;应用修改&lt;/strong&gt;以生效。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;边界路由器静态路由应用场景可见&lt;a href=&#34;/sd-wan/sdwan/quick-start/line_connect_eip/&#34;&gt;专线经 VPC 访问公网&lt;/a&gt;和&lt;a href=&#34;/sd-wan/sdwan/quick-start/cpe_connect_tunnel/&#34;&gt;光盒经 VPC 访问第三方网络&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 操作指南</title>
+      <link>/network/nat_gateway/manual/nat_user_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/nat_gateway/manual/nat_user_guide/</guid>
+      <description>
+        
+        
+        &lt;p&gt;假设2 台云服务器位于私有网络的办公网络中，您可以通过配置实现云服务器共用 NAT 网关的公网 IP 访问互联网。&lt;/p&gt;
+&lt;h2 id=&#34;创建和配置-nat-网关&#34;&gt;创建和配置 NAT 网关&lt;/h2&gt;
+&lt;h3 id=&#34;创建-nat-网关&#34;&gt;创建 NAT 网关&lt;/h3&gt;
+&lt;p&gt;登录管理控制台，在控制台导航栏中，选择 &lt;strong&gt;VPC 网络&lt;/strong&gt; &amp;gt; &lt;strong&gt;NAT 网关&lt;/strong&gt;。在 &lt;strong&gt;NAT 网关&lt;/strong&gt;页面，点击&lt;strong&gt;创建&lt;/strong&gt;按钮。&lt;/p&gt;
+&lt;img src=&#34;../../_images/create_natgw.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;根据性能的需求选择相应规格的 NAT 网关，选择部署方式，并可以在创建时选择需要绑定的公网 IP 和私有网络。&lt;/p&gt;
+&lt;h3 id=&#34;配置-nat-网关&#34;&gt;配置 NAT 网关&lt;/h3&gt;
+&lt;p&gt;创建 NAT 网关后，您还可以右键点击您创建的 NAT 网关，将 NAT 网关绑定到新的公网 IP 和私有网络。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/modify_natgw.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;查看-nat-网关配置&#34;&gt;查看 NAT 网关配置&lt;/h3&gt;
+&lt;p&gt;第一步：点击 NAT 网关详情页面，可以看到 NAT 网关的详细信息。左侧为 NAT 网关的基本信息和网络信息，右侧主要显示与 NAT 网关绑定的私有网络和相关的路由表项，及防火墙信息和监控图表。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/details_natgw.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;第二步：点击&lt;strong&gt;创建和配置路由表或路由规则&lt;/strong&gt;，然后点击&lt;strong&gt;添加路由&lt;/strong&gt;。对于&lt;strong&gt;下一跳&lt;/strong&gt;选择，勾选&lt;strong&gt;NAT网关&lt;/strong&gt;，然后点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;../../_images/add_router_rule.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;添加好路由后，需要点击&lt;strong&gt;应用修改&lt;/strong&gt;以生效。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/details_natgw_rt.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;NAT 网关中的配置的私有网络云服务器可以共用 NAT 网关，&lt;code&gt;路由规则&lt;/code&gt;决定私有网络利用NAT网关可以去访问哪些 IP 地址。&lt;/p&gt;
+&lt;h3 id=&#34;修改-nat-防火墙&#34;&gt;修改 NAT 防火墙&lt;/h3&gt;
+&lt;p&gt;由于 NAT 网关与多个网络连接，所以在各个方向均可以设置单独的安全组，可以对网络流量进行更细粒度的安全管理。&lt;/p&gt;
+&lt;p&gt;在左下角的&lt;strong&gt;网络&lt;/strong&gt;区域，点击&lt;img src=&#34;../../_images/icon.png&#34; alt=&#34;&#34;&gt;，可以修改基础网络和公网安全组：&lt;/p&gt;
+&lt;img src=&#34;../../_images/modify_natgw_fw1.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;在&lt;strong&gt;更多操作&lt;/strong&gt;中，可以修改 NAT 网关与单个私有网络的安全组：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/modify_natgw_fw2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;配置私有网络和路由规则&#34;&gt;配置私有网络和路由规则&lt;/h2&gt;
+&lt;p&gt;在配置完成私有网络以后，需要在私有网路的路由表中添加规则，决定私有网络内的云服务器可以访问哪些 IP 地址。&lt;/p&gt;
+&lt;p&gt;点击查看&lt;a href=&#34;../../../vpc/manual/route_table&#34;&gt;私有网络路由配置详情&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;配置路由规则并应用修改后，即可测试云服务器与互联网的连通情况。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 何种情况下需要手动配置网络</title>
+      <link>/network/vpc/faq/vpc_faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/vpc_faq/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云提供了两种网络配置模式，一种是全自动化的， 您的云服务器的所有网络配置与管理都交给计算平台完成， 称之为受管模式（Managed），另一种是手动的， 您必须自己关心云服务器的网络配置与管理，比如 IP 地址、路由等， 称之为自管模式（Unmanaged）。 显然，当您使用自管模式时，需要手动配置网络。 而当受管网络所连接的路由器上关闭了 DHCP 功能时，也需要手动配置网络。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 计费指南</title>
+      <link>/network/loadbalancer/billing/price/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/loadbalancer/billing/price/</guid>
+      <description>
+        
+        
+        &lt;p&gt;负载均衡目前采用按需计费的方式，产生的费用实时结算扣费。&lt;/p&gt;
+&lt;h2 id=&#34;价格表&#34;&gt;价格表&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;规格&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;转发能力&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;价格&lt;/th&gt;
+&lt;th style=&#34;text-align:left&#34;&gt;折合月价格&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;小型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;100kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.05 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;36 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;中型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;150kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.19 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;136 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;大型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;200kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.39 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;280.8 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;超大型&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;250kpps&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;0.75 元/小时&lt;/td&gt;
+&lt;td style=&#34;text-align:left&#34;&gt;540 元/月&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: strongswan与VPC共同搭建隧道</title>
+      <link>/network/vpc/best-practices/building_tunnel_with_strongswan_and_vpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/best-practices/building_tunnel_with_strongswan_and_vpc/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;项目介绍&#34;&gt;项目介绍&lt;/h2&gt;
+&lt;p&gt;客户业务在往计算平台迁移的过程中，因为两边的数据需要同步，所以需要建立站点到站点ipsec隧道，由于本地IDC设备不支持vpn服务，所以采用自建ipsec的方式互联，采用的是strongswan的方式，以下是模拟客户业务环境，成功搭建ipsec隧道的案例，供参考。&lt;/p&gt;
+&lt;h3 id=&#34;jn1-vpc自身具备ipsec服务&#34;&gt;jn1 （vpc自身具备ipsec服务）&lt;/h3&gt;
+&lt;p&gt;私有网络  172.25.100.0/24&lt;/p&gt;
+&lt;p&gt;公网ip     139.198.120.221&lt;/p&gt;
+&lt;h3 id=&#34;jn2--vm信息模拟本地idc机房服务器&#34;&gt;jn2  vm信息（模拟本地IDC机房服务器）&lt;/h3&gt;
+&lt;p&gt;私有ip  172.20.100.180&lt;/p&gt;
+&lt;p&gt;公网ip   139.198.13.15&lt;/p&gt;
+&lt;p&gt;私有网络 172.20.100.0/24&lt;/p&gt;
+&lt;h3 id=&#34;最终需要实现&#34;&gt;最终需要实现&lt;/h3&gt;
+&lt;p&gt;172.25.100.0/24&amp;lt;==&amp;gt;172.20.100.0/24&lt;/p&gt;
+&lt;h3 id=&#34;1jn2区的vm需要安装strongswan-采用以下命令&#34;&gt;1、jn2区的vm需要安装strongswan ，采用以下命令&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt update
+sudo apt install strongswan strongswan-pki
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2配置内核参数&#34;&gt;2、配置内核参数&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat &amp;gt;&amp;gt; /etc/sysctl.conf &amp;lt;&amp;lt; EOF
+echo net.ipv4.ip_forward = 1
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.all.send_redirects = 0
+EOF
+ 
+$ sysctl -p /etc/sysctl.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3生成预共享秘钥&#34;&gt;3、生成预共享秘钥&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-y862i3l9:~# openssl rand -base64 16
+oCTYi71l0ZU7WcRgLYaspg==
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4jn2-vm的隧道环境配置参数&#34;&gt;4、jn2 vm的隧道环境配置参数&lt;/h3&gt;
+&lt;h4 id=&#34;1配置预共享秘钥&#34;&gt;1、配置预共享秘钥&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-y862i3l9:~# cat /etc/ipsec.secrets
+# This file holds shared secrets or RSA private keys for authentication.
+ 
+# RSA private key for this host, authenticating it to any other host
+# which knows the public part.
+#本地公网出口IP   #对端公网出口IP     #双方约定的秘钥
+139.198.121.220 139.198.13.15 : PSK &amp;#34;oCTYi71l0ZU7WcRgLYaspg==&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;2配置-ipsecconf的配置&#34;&gt;2、配置 ipsec.conf的配置&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# defined by qiyiyun
+ 
+version 2.0
+include /etc/ipsec.d/*.conf
+ 
+config setup
+    cachecrls=yes
+    strictcrlpolicy=yes   
+    plutostderrlog=/var/log/ipsec.log
+     
+conn %default
+    rekey=yes
+    authby=secret
+    auto=start
+    type=tunnel
+    keyexchange=ikev1
+    pfs=no
+    dpddelay=15
+    dpdtimeout=60
+    dpdaction=restart
+    #nat_traversal=yes
+ 
+conn tojn1
+    authby=secret
+    left=172.20.100.180
+    leftid=139.198.13.15
+    leftsubnet=172.20.100.0/24
+    right=139.198.121.220
+    rightsubnet=172.25.100.0/24
+    ike=3des-md5-modp1536!
+    esp=3des-md5-modp1536!
+    ikelifetime=1h
+    lifetime=8h
+    auto=start
+ 
+可以参考官方文档的配置
+https://www.strongswan.org/testing/testresults/ikev2/net2net-cert/moon.ipsec.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;5jn1-vpc的环境配置vpc自身具备ipsec服务&#34;&gt;5、jn1 vpc的环境配置（vpc自身具备ipsec服务）&lt;/h3&gt;
+&lt;img src=&#34;../homer/strongswan_01.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;p&gt;ipsec.conf的配置如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# defined by yiqiyun
+ 
+version 2.0
+include /etc/ipsec.d/*.conf
+ 
+config setup
+    listen=10.160.1.49
+    protostack=netkey
+    nat_traversal=yes
+    keep_alive=60
+    virtual_private=
+    oe=off
+    # debug
+    #plutodebug=&amp;#34;all&amp;#34;
+    # log
+    #plutoopts=&amp;#34;--perpeerlog&amp;#34;
+    #plutostderrlog=/var/log/ipsec.log
+     
+conn %default
+    rekey=yes
+    authby=secret
+    auto=start
+    type=tunnel
+    keyexchange=ike
+    phase2=esp
+    pfs=yes
+    dpddelay=15
+    dpdtimeout=60
+    dpdaction=restart
+ 
+ 
+conn 139.198.13.15
+    left=10.160.1.49
+    leftid=139.198.121.220
+    leftsubnets={172.25.10.0/24}
+    right=139.198.13.15
+    rightid=139.198.13.15
+    rightsubnets={172.20.100.0/24}
+    ike=3des-md5;modp1536
+    phase2alg=3des-md5;modp1536
+    pfs=no
+    ikev2=no
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;6启动strongswan服务&#34;&gt;6、启动strongswan服务&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl start strongswan
+systemctl enable strongswan
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;7查看服务端口监听&#34;&gt;7、查看服务端口监听&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+root@i-y862i3l9:~# netstat -unptl
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name   
+tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      660/systemd-resolve
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      745/sshd           
+tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN      12290/sshd: root@pt
+tcp6       0      0 :::22                   :::*                    LISTEN      745/sshd           
+tcp6       0      0 ::1:6010                :::*                    LISTEN      12290/sshd: root@pt
+udp        0      0 127.0.0.53:53           0.0.0.0:*                           660/systemd-resolve
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           683/dhclient       
+udp        0      0 0.0.0.0:4500            0.0.0.0:*                           25435/charon       
+udp        0      0 0.0.0.0:500             0.0.0.0:*                           25435/charon       
+udp6       0      0 :::4500                 :::*                                25435/charon       
+udp6       0      0 :::500                  :::*                                25435/charon       
+root@i-y862i3l9:~#
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;8启动ipsec服务并查看隧道连接状态&#34;&gt;8、启动ipsec服务，并查看隧道连接状态&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-y862i3l9:~# ipsec start
+root@i-y862i3l9:~# ipsec statusall
+Status of IKE charon daemon (strongSwan 5.6.2, Linux 4.15.0-121-generic, x86_64):
+  uptime: 15 seconds, since Dec 24 12:40:48 2020
+  malloc: sbrk 1626112, mmap 0, used 574896, free 1051216
+  worker threads: 11 of 16 idle, 5/0/0/0 working, job queue: 0/0/0/0, scheduled: 4
+  loaded plugins: charon aes rc2 sha2 sha1 md4 md5 mgf1 random nonce x509 revocation constraints pubkey pkcs1 pkcs7 pkcs8 pkcs12 pgp dnskey sshkey pem openssl fips-prf gmp agent xcbc hmac gcm attr kernel-netlink resolve socket-default connmark stroke updown eap-mschapv2 xauth-generic counters
+Listening IP addresses:
+  172.20.100.180
+Connections:
+      toap2a:  172.20.100.180...139.198.121.220  IKEv1, dpddelay=15s
+      toap2a:   local:  [139.198.13.15] uses pre-shared key authentication
+      toap2a:   remote: [139.198.121.220] uses pre-shared key authentication
+      toap2a:   child:  172.20.100.0/24 === 172.25.100.0/24 TUNNEL, dpdaction=restart
+Security Associations (1 up, 0 connecting):
+      toap2a[1]: ESTABLISHED 15 seconds ago, 172.20.100.180[139.198.13.15]...139.198.121.220[139.198.121.220]
+      toap2a[1]: IKEv1 SPIs: 1e2e0d6dd9f2eab1_i* ea820e636b879f8d_r, pre-shared key reauthentication in 47 minutes
+      toap2a[1]: IKE proposal: 3DES_CBC/HMAC_MD5_96/PRF_HMAC_MD5/MODP_1536
+      toap2a{1}:  INSTALLED, TUNNEL, reqid 1, ESP in UDP SPIs: c79efaad_i 600f945e_o
+      toap2a{1}:  3DES_CBC/HMAC_MD5_96/MODP_1536, 0 bytes_i, 0 bytes_o, rekeying in 7 hours
+      toap2a{1}:   172.20.100.0/24 === 172.25.100.0/24
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;9测试网络是否联通&#34;&gt;9、测试网络是否联通&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-y862i3l9:~# ping 172.25.100.2
+PING 172.25.100.2 (172.25.100.2) 56(84) bytes of data.
+64 bytes from 172.25.100.2: icmp_seq=1 ttl=62 time=37.7 ms
+64 bytes from 172.25.100.2: icmp_seq=2 ttl=62 time=37.8 ms
+64 bytes from 172.25.100.2: icmp_seq=3 ttl=62 time=37.8 ms
+64 bytes from 172.25.100.2: icmp_seq=4 ttl=62 time=37.8 ms
+64 bytes from 172.25.100.2: icmp_seq=5 ttl=62 time=37.7 ms
+^C
+--- 172.25.100.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4003ms
+rtt min/avg/max/mdev = 37.773/37.812/37.883/0.249 ms
+root@i-y862i3l9:~# ip a
+1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:9e:f1:33:76 brd ff:ff:ff:ff:ff:ff
+    inet 172.20.100.180/24 brd 172.20.100.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:9eff:fef1:3376/64 scope link
+       valid_lft forever preferred_lft forever
+root@i-y862i3l9:~#
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: VPC中云服务器之间网络不通</title>
+      <link>/network/vpc/faq/network_between_vms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/network_between_vms/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;strong&gt;1.确认源和目的地址、源和目的实例ID&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;获取源ECS实例和目的ECS的实例ID、IP地址，以便后续步骤使用。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2.检查安全策略相关配置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;检查安全策略相关配置分为同vxnet和跨vxnet场景，以下是具体内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;同私有网络：需要检查：
+    ECS互通的前提是在同一组内互信的安全组下，如未开启组内互信，需要在安全组下放通彼此的IP地址。
+跨私有网络：需要检查：
+    ECS互通的前提是在同一组内互信的安全组下，如未开启组内互信，需要安全组下放通彼此的IP地址。
+    若使用网络ACL，网络ACL的出入方向需要放通彼此的网段或IP地址。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;3.检查VPC层面路由相关配置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;检查VPC层面路由相关配置分为同VPC场景和跨VPC场景，以下是具体内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;同VPC场景：一般情况下，不存在路由问题，可以忽视该场景的隐患。
+跨VPC场景：分为隧道互通和边界路由器互通场景。
+    隧道互通场景下需要关注是否配置了感兴趣流，及隧道规则是否匹配。
+    边界路由器互通场景下需要排查是否正确的添加了内网路由策略或者路由表指向正确的下一跳。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;4.检查ECS内部配置&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;不同操作系统进行以下排查操作：
+    Linux系统中排查ECS内部是否有iptables的drop相关策略。
+    Windows系统中排查是否允许的ICMP回显功能。
+排查系统内是否配置了三方VPN软件、安全软件，吸走流量或者对ICMP存在限制。
+排查是否有自建Docker等，在系统内将远端的路由引流到容器内。
+&lt;/code&gt;&lt;/pre&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 创建私有网络</title>
+      <link>/network/vpc/manual/vxnet/05_create_vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vxnet/05_create_vxnet/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;私有网络（VxNet）用于云服务器之间互联，它类似物理交换机 (L2Switch) 组成的局域网，是组成 VPC 网络的基础网络模块，用来连接不同的云资源。&lt;/p&gt;
+&lt;p&gt;本文介绍如何创建私有网络。成功创建后，您可以在私有网络中创建云资源、绑定路由表或者绑定网络 ACL。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，进入&lt;strong&gt;私有网络&lt;/strong&gt;管理页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;创建&lt;/strong&gt;，弹出&lt;strong&gt;创建私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502005_create_vxnet.png&#34; alt=&#34;create_vxnet&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;按照以下说明配置私有网络信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+  	&lt;th&gt;参数项&lt;/th&gt;
+ 		&lt;th&gt;参数说明&lt;/th&gt;
+    &lt;th&gt;取值样例&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;名称&lt;/td&gt;
+  	&lt;td&gt;私有网络名称。&lt;/td&gt;
+    &lt;td&gt;VxNet01-test&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;数量&lt;/td&gt;
+  	&lt;td&gt;需要创建几个私有网络。&lt;/td&gt;
+    &lt;td&gt;1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  		&lt;td&gt;工作模式&lt;/td&gt;
+  	&lt;td&gt;
+      &lt;li&gt;虚拟机：运行于虚拟机，如云服务器。&lt;/li&gt;
+      &lt;li&gt;弹性裸金属服务器：运行于物理服务器。
+    &lt;/td&gt;
+    &lt;td&gt;虚拟机&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;!-- &lt;tr&gt;
+  		&lt;td&gt;部署方式&lt;/td&gt;
+  	&lt;td&gt;
+      &lt;li&gt;多可用区部署：网络中的云服务器可部署在多个可用区。&lt;/li&gt;
+      &lt;li&gt;单可用区部署：网络的云服务器部署在同一个可用区。&lt;/li&gt;
+      若需要跨可用区容灾，建议选择多可用区部署。
+    &lt;/td&gt;
+    &lt;td&gt;多可用区部署&lt;/td&gt;
+  &lt;/tr&gt; --&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;高级选项&lt;/td&gt;
+  	&lt;td&gt;点击&lt;b&gt;显示高级选项&lt;/b&gt;，设置管理方式。
+      &lt;li&gt;受管：受管私有网络可使用VPC网络来配置和管理其网络。&lt;/li&gt;
+      &lt;li&gt;自管：自管私有网络需要您自行配置和管理其网络。&lt;/li&gt;
+    &lt;/td&gt;
+    &lt;td&gt;受管&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 公网IP网络延迟增大</title>
+      <link>/network/eip/faq/high_ping/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/faq/high_ping/</guid>
+      <description>
+        
+        
+        &lt;p&gt;公网 IP 作为云平台各个资源访问互联网的桥梁，经常会出现通过云服务器访问互联网或者互联网访问云服务响应慢，有延迟的情况，本文将介绍如何处理云服务器公网 IP 网络延迟大的情况。&lt;/p&gt;
+&lt;h2 id=&#34;1确认公网ip的带宽上限&#34;&gt;1.确认公网IP的带宽上限&lt;/h2&gt;
+&lt;p&gt;用户申请公网IP都是有带宽上限的，我们可以在控制台界面进行查看公网IP的带宽上限&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/high_ping1.png&#34; alt=&#34;high_ping&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到，这个公网IP的带宽上限为10Mbps。&lt;/p&gt;
+&lt;h2 id=&#34;2查看网络延迟&#34;&gt;2.查看网络延迟&lt;/h2&gt;
+&lt;p&gt;正常情况下，我们在互联网对一个公网IP的延迟，可以通过ping来进行测试&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#ping 139.198.188.188&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;正在 Ping 139.198.188.187 具有 &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 字节的数据:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;39ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;39ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;39ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;39ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;保持一段时间的输出内容，只要时间这一列不超过100ms，且没有太大的波动，位置在某个范围内，就说明客户端到云平台公网IP的网络环境比较稳定。&lt;/p&gt;
+&lt;h2 id=&#34;3延迟大的原因&#34;&gt;3.延迟大的原因&lt;/h2&gt;
+&lt;p&gt;当出现通过云服务器访问互联网或者互联网访问云服务响应慢时，通常有如下几个原因：我们正在上传文件到云服务器或者在云服务器从互联网下载数据；我们对外提供的业务，有大量流量进出（既有用户在访问您的业务）等原因。&lt;/p&gt;
+&lt;p&gt;我们现在以上传文件到云服务器的场景为例：&lt;/p&gt;
+&lt;p&gt;假如现在遇到了访问云服务器对外提供的WEB服务卡顿的问题，我们通过ping来检测下客户端到云服务器的网络延迟&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#ping 139.198.188.188 -t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;正在 Ping 139.198.188.187 具有 &lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 字节的数据:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;163ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;145ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;145ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;138ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;154ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;143ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;139ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;来自 139.198.188.187 的回复: 字节&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;32&lt;/span&gt; 时间&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;139ms TTL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;52&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;139.198.188.188 的 Ping 统计信息:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    数据包: 已发送 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 8，已接收 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 8，丢失 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0% 丢失&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;，
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;往返行程的估计时间&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;以毫秒为单位&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    最短 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 138ms，最长 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;163ms，平均 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 145ms
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们发现延迟在150ms左右，我们进入控制台看下公网IP的带宽监控&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/high_ping2.png&#34; alt=&#34;high_ping&#34;&gt;&lt;/p&gt;
+&lt;p&gt;通过监控我们可以看到有较高的进带宽，已经将10Mbps的带宽都占满了，此时我们为了快速恢复WEB服务器的访问，需要提高公网IP的带宽上限，来尽快完成数据的传输，等数据传输完毕，再将带宽调成原来的10Mbps即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../_images/high_ping3.png&#34; alt=&#34;high_ping&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果没有下载或者上传，但是也出现了较高的带宽占用，这个很有可能是有大量的业务访问，此时需要排查下业务层的日志，看下是不是正常的业务流量，如果是恶意攻击，可以在云服务器绑定的安全组对应端口添加一个优先级较高的拒绝规则，源IP填写日志中恶意访问业务的客户端IP，然后需要重启下业务来断开之前已经建立的连接。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 什么是公网 IP</title>
+      <link>/network/eip/intro/introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/intro/introduction/</guid>
+      <description>
+        
+        
+        &lt;p&gt;公网 IP 是在互联网上合法的静态 IP 地址。在亿栖云平台中，公网 IP 地址与账户而非特定的资源关联，因此可以将申请到的公网 IP 地址与任意云服务器（包括私有网络内的云服务器）/路由器/负载均衡器绑定，并且可以解绑、再分配到其他资源上。&lt;/p&gt;
+&lt;p&gt;公网 IP 的绑定模式分为两类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;外部绑定&lt;/strong&gt;：是指在云服务器外部通过网络地址转换  (NAT) 方式将公网 IP 地址转换成用户私有网络地址或基础网络地址，从而实现云服务器与公网互通。通过外部绑定方式分配公网IP给服务器后，便可实现云服务器公网访问，无须再做额外配置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内部绑定&lt;/strong&gt;：是指通过在云服务器内部添加一块可连接到公网网关的网卡的方式来绑定公网IP。通过内部绑定方式分配公网IP给服务器后，还需要用户手动配置网卡 IP 地址及相关路由，才能实现云服务器的公网访问。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 加入 VPC 网络</title>
+      <link>/network/vpc/manual/vxnet/08_addto_vpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vxnet/08_addto_vpc/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;创建私有网络后，需要将私有网络加入到VPC网络，并设置其网络参数，才可进行网络通信。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;p&gt;已创建私有网络且未连接到任何一个VPC网络。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，进入&lt;strong&gt;私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击待加入的私有网络，选择&lt;strong&gt;加入VPC网络&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在弹出的页面中，选择需要加入的 VPC 网络，并配置私有网络的 IPv4 地址、网络 ACL 及其他高级参数。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502008_addto_vpc.png&#34; alt=&#34;addto_vpc&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: VPC 网络简介</title>
+      <link>/network/vpc/intro/10_intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/intro/10_intro/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;产品概述&#34;&gt;产品概述&lt;/h2&gt;
+&lt;p&gt;VPC 网络，即虚拟专属私有网络（Virtual Private Cloud，以下简称 VPC 网络），是亿栖云提供的云上私有网络空间，为用户在云上创建的云资源提供隔离的虚拟网络环境。不同 VPC 网络之间逻辑隔离，以保障用户云上资源的安全性。在 VPC 网络内，您可以自定义 IP 地址段、路由表、安全策略等，快速部署及灵活管理属于自己的云上网络。&lt;/p&gt;
+&lt;h2 id=&#34;产品优势&#34;&gt;产品优势&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;超大规模&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个 VPC 网络可以连接254个私有网络（Vxnet），每个私有网络最多可以容纳252台云服务器，每个 VPC 可以支持60000+云服务器。所以，VPC 网络可以承载超大规模的用户业务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;安全可靠&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;支持同区域跨可用区容灾。在由多个可用区（Availability Zone）组成的区域中创建的 VPC 网络 ，默认支持多可用区部署（ Multi-AZ deployment，简称 MZ ），可实现同一个私有网络的云服务器位于不同的可用区节点。在单个可用区的业务故障后，可以配合负载均衡器和虚拟IP将业务快速切换到正常的可用区，切换过程不用更换私有网络及业务IP地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;超高性能&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VPC网络采用分布式路由器和虚拟二层链路技术，采用智能网卡对网络负载进行卸载，可实现超高性能的网络性能，满足有严苛性能的业务需求。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;全面支持虚拟IP&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;虚拟 IP通常用于不同云服务器之间的切换，例如主从切换，是业务连续性的重要基础。VPC 内所有IP地址均可以作为虚拟 IP 使用，并且支持对虚拟IP的预留申请及查看功能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;支持组播广播&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 VPC 中创建的私有网络是一个二层网络，私有网络中的云服务器可以通过“广播”功能和全网内的其他云服务器通信，或以广播的方式组建组播。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;跨用户共享&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VPC 网络支持通过“项目”方式与其他用户共享，实现跨用户协同。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;图形化操作&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;支持图形化查看和编辑网络拓扑，可让用户对整体网络一目了然，形成形象认知。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;产品功能&#34;&gt;产品功能&lt;/h2&gt;
+&lt;p&gt;VPC 网络拥有众多的二层三层网络功能，以及隧道、VPN 等高级功能。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;VPC网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;提供管理 VPC 网络的功能，包括：创建 VPC 网络、修改 VPC 网络基本信息、删除VPC网络、VPC 健康探测、为 VPC 网络绑定告警策略和将 VPC 网络添加到项目。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;私有网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;私有网络（Vxnet）是 VPC 网络中的子网，用于云服务器之间互联，它类似物理交换机 (L2Switch) 组成的局域网。不同用户的私有网络之间100%隔离。私有网络是一个二层网络，在私有网络中的云服务器可以通过“广播”功能和全网内的其他云服务器通信，也可以接收到来自其他云服务器的广播。私有网络支持多种功能，为用户提供高度的自定义网络：DHCP、IPv4/IPv6双栈、网络 ACL、路由表、虚拟IP管理、跨可用区多活、自定义网关/边界路由地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;路由表&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;创建VPC网络的同时，会自动创建一个一定规格（支持小型/中型/大型/超大型）的虚拟路由器，路由器具备一个私有的B段（例如192.168.0.0/24）网络地址空间。在路由器中有默认的直联路由表，以保证同一个私有网络下的所有子网互通。用户也在路由器中自定义路由表，并且选择应用到私有网络中。亿栖云提供了管理路由表的功能：添加自定义路由、查询路由、修改路由和删除路由等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;地址转换（NAT）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;NAT ( Network Address Translation )是将一个公网IP转换为很多个内网 IP 的技术，最常见的IP复用技术之一。亿栖云提供的 VPC 网络支持源地址转换（SNAT）和目的地址转换（DNAT）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网络隧道&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;网络隧道通过加密/非加密通道将多地或者多个网络安全连接起来，例如连接企业数据中心、企业办公网络、 Internet 终端以及 VPC 和 VPC 互通 。&lt;/p&gt;
+&lt;p&gt;亿栖云支持2种网络隧道：IPsec隧道和GRE隧道。IPsec 是一种加密的隧道技术，通过使用加密的安全服务在不同的网络之间建立保密而安全的通讯隧道。GRE 隧道是 L3 over L3 的技术，不对传输数据加密，但是使用起来更加简单灵活，可以用来组建各种网络拓扑，常见的树型、星型、总线型(串型)、环型和混合型均可实现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;VPN服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VPN 服务是基于 Internet 的传输加密方式，在单台机器而非整个网络连接到 VPC 网络时可以通过密码或者证书的方式简单实现。&lt;/p&gt;
+&lt;p&gt;亿栖云支持 OpenVPN、PPTP、 L2TP 三种不同的VPN服务，用户可以根据自身的使用习惯进行选择。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;DNS服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VPC网络为用户提供内网 DNS 和公网 DNS 转发服务。内网DNS可以为私有网络中的资源绑定域名，支持一个域名绑定多个私网IP。在 VPC 绑定公网IP后，可以为其中的私有网络提供公网 DNS 转发服务，未指定公网DNS转发时将采用亿栖云平台的默认配置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;路由推送&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;VPC 还可以为其中的每个云服务器推送静态/默认路由，云服务器路由在所有的路由中优先级最高，用户在自定义云服务器路由时应确保设定正确，以免网络不通。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;网关过滤控制（ACL）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;网关过滤控制仅对虚拟路由器中的流量进行控制，包含 NAT、隧道、VPN 流量会经过虚拟路由器。虚拟网络内部，或者虚拟网络与虚拟网络间的流量均不经过虚拟路由器。虚拟网络内部的流量可以通过安全组进行访问控制，虚拟网络之间的流量通过网络 ACL 来进行访问控制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 产品动态</title>
+      <link>/network/border_router/news/prodoct_news/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/border_router/news/prodoct_news/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 产品动态</title>
+      <link>/network/eip/news/prodoct_news/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/news/prodoct_news/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 产品动态</title>
+      <link>/network/loadbalancer/news/prodoct_news/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/loadbalancer/news/prodoct_news/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 产品动态</title>
+      <link>/network/nat_gateway/news/prodoct_news/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/nat_gateway/news/prodoct_news/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 创建 VPC 网络</title>
+      <link>/network/vpc/manual/vpcnet/10_create_vpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vpcnet/10_create_vpc/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;在 VPC 网络中使用云资源前，您必须先创建一个 VPC 网络和私有网络。VPC 网络具有地域属性，私有网络具有可用区属性，一个 VPC 网络内至少包含一个私有网络，您也可以在一个 VPC 网络中创建多个私有网络来划分子网，同一个 VPC 内的子网默认私网互通。&lt;/p&gt;
+&lt;p&gt;本章节用于指导您创建一个新的VPC网络。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC网络&lt;/strong&gt;，进入&lt;strong&gt;VPC网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;创建VPC网络&lt;/strong&gt;，弹出&lt;strong&gt;创建VPC网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/501010_create_vpc.png&#34; alt=&#34;501010_create_vpc&#34; style=&#34;zoom:70%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置 VPC 网络信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+  	&lt;th style=&#34;text-align: center; width: 120px&#34;&gt;参数项目&lt;/th&gt;
+ 		&lt;th style=&#34;text-align: center&#34;&gt;参数说明&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;名称&lt;/td&gt;
+  	&lt;td&gt;VPC 网络的名称。&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;IPv4 地址范围&lt;/td&gt;
+  	&lt;td&gt;选择 VPC 的 IPv4 网段。为 VPC 网络划分子网时，子网必须在该地址范围内。&lt;br&gt;目前支持网段范围：192.168.0.0/16、172.16.0.0/16-172.31.0.0/16。&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;IPv6网络地址&lt;/td&gt;
+  	&lt;td&gt;选择是否为 VPC 网络分配 IPv6 网段。&lt;li&gt;&lt;b&gt;关闭IPv6&lt;/b&gt;：默认选项，即不分配IPv6网段&lt;/li&gt;&lt;li&gt;&lt;b&gt;系统自动分配&lt;/b&gt;：开启 IPv6 功能，并自动为子网分配 IPv6 网段。&lt;/li&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+  	&lt;td colspan=&#34;2&#34;&gt;管理路由器属性&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;类型&lt;/td&gt;
+  	&lt;td&gt;支持免费型、小型、中型、大型及超大型，不同类型可支持的管理流量转发能力不同。 &lt;br&gt;
+     &lt;div style=&#34;background-color: #D8ECDE;padding: 10px 24px; margin: 10px 0;border-left:3px solid #00a971;&#34;&gt;&lt;b&gt;说明&lt;/b&gt;：
+       &lt;li&gt;当前，免费型 VPC 的创建及使用仅对2021年6月2日及之后时间注册的新用户开放。&lt;/li&gt;
+       &lt;li&gt;若需要 VPC 具备访问公网能力，请勿选择&lt;b&gt;免费型&lt;/b&gt;。免费型 VPC 仅具有内网通信功能，不支持绑定公网 IP 和转发公网流量，且暂不支持在免费型 VPC 中创建弹性容器实例(QCI)、AppCenter 集群和边界路由器。&lt;/li&gt;
+      &lt;/div&gt;
+   	&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+  	&lt;td&gt;安全组&lt;/td&gt;
+    &lt;td&gt;选择安全组。若未创建安全组，可选择默认安全组，可以根据需要自行创建，具体操作参见&lt;a  href=&#34;/security/security_group/manual/sg_create&#34;&gt;创建安全组&lt;/a&gt;。&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;点击&lt;strong&gt;创建&lt;/strong&gt;，等待创建成功。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 连接问题</title>
+      <link>/network/eip/faq/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/faq/faq/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;ip-ip-ssh-ping-ip&#34;&gt;云服务器绑定了公网 IP 之后，为什么我无法通过 IP SSH 登录，也不能 ping 通该 IP？&lt;/h2&gt;
+&lt;p&gt;为了加强位于基础网络 vxnet-0 中的云服务器的安全性， 系统在云服务器之前放置了一个防火墙（Security Group）。 初始状态下，每个防火墙都不包含任何规则，即，全部端口都是封闭的， 您需要建立规则以打开相应的端口。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果你的云服务器使用的是默认防火墙，那么 ping 和 ssh 的端口都是默认打开的，你无需再进行操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;例如您需要访问云服务器的22号端口，需要手动为云服务器的防火墙添加一条 接受 tcp 22 端口 的下行规则，然后再点击 更新规则 使其应用到云服务器。&lt;/p&gt;
+&lt;p&gt;同理，如果你想开启 ping 功能， 需要在防火墙里头添加 接受 ICMP echo request 的下行规则。&lt;/p&gt;
+&lt;h2 id=&#34;ip&#34;&gt;如果我有多台云服务器需要访问外网，是不是每台云服务器都需要绑定一个公网 IP？&lt;/h2&gt;
+&lt;p&gt;当然不是这样。您可以将需要访问外网的云服务器加入到您的某个受管私有网络中 然后再给私有网络所属的 VPC 网络绑定一个公网 IP。这样， 位于受管私有网络中的所有云服务器都可以连接互联网了，既节省钱，也节约 IP 地址。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 什么是负载均衡</title>
+      <link>/network/loadbalancer/intro/introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/loadbalancer/intro/introduction/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;负载均衡器&#34;&gt;负载均衡器&lt;/h2&gt;
+&lt;p&gt;负载均衡器可以将来自多个公网地址的访问流量分发到多台云服务器上， 并支持自动检测并隔离不可用的云服务器，从而提高业务的服务能力和可用性。 同时，你还可以随时通过添加或删减云服务器来调整你的服务能力，而且这些操作不会影响业务的正常访问。
+负载均衡器支持包括 TCP/UDP 协议的四层代理和 HTTP/HTTPS/SSL 协议的七层代理。
+并且四层、七层都支持透明代理，可以让后端云服务器不做任何更改，直接获取客户端真实IP。
+另外，负载均衡器还支持灵活配置多种转发策略，实现高级的自定义转发控制功能。&lt;/p&gt;
+&lt;h2 id=&#34;负载均衡器类型&#34;&gt;负载均衡器类型&lt;/h2&gt;
+&lt;h3 id=&#34;公网负载均衡器&#34;&gt;公网负载均衡器&lt;/h3&gt;
+&lt;p&gt;公网负载均衡器通过公网IP对外提供服务，将来自公网的客户端请求按照指定的负载均衡策略分发到后端云服务器进行处理。&lt;/p&gt;
+&lt;h3 id=&#34;私有网络负载均衡器&#34;&gt;私有网络负载均衡器&lt;/h3&gt;
+&lt;p&gt;私网负载均衡器通过虚IP对外提供服务，将来自同一个VPC的客户端请求按照指定的负载均衡策略分发到后端进行处理。&lt;/p&gt;
+&lt;h3 id=&#34;公网私网负载均衡器集群&#34;&gt;公网+私网负载均衡器集群&lt;/h3&gt;
+&lt;p&gt;即可以通过公网IP对外提供服务，也支持通过虚IP对外提供服务，将来自同一个VPC的客户端请求按照指定的负载均衡策略分发到后端进行处理&lt;/p&gt;
+&lt;h2 id=&#34;基本原理&#34;&gt;基本原理&lt;/h2&gt;
+&lt;p&gt;负载均衡器可以将来自多个公网地址的访问流量分发到多台云服务器上， 并支持自动检测并隔离不可用的云服务器，从而提高业务的服务能力和可用性。&lt;/p&gt;
+&lt;p&gt;负载均衡支持以下三种调度算法：&lt;/p&gt;
+&lt;h3 id=&#34;轮询算法&#34;&gt;轮询算法&lt;/h3&gt;
+&lt;p&gt;依据后端服务器的权重，将请求轮流发送给后端服务器，常用于短连接服务，例如 HTTP 等服务。&lt;/p&gt;
+&lt;h3 id=&#34;最少连接&#34;&gt;最少连接&lt;/h3&gt;
+&lt;p&gt;优先将请求发给拥有最少连接数的后端服务器，常用于长连接服务，例如数据库连接等服务。&lt;/p&gt;
+&lt;h3 id=&#34;源ip算法&#34;&gt;源IP算法&lt;/h3&gt;
+&lt;p&gt;将请求的源IP地址进行Hash运算，得到一个具体的数值，同时对后端服务器进行编号，按照运算结果将请求分发到对应编号的服务器上。这可以使得对不同源IP的访问进行负载分发，同时使得同一个客户端IP的请求始终被派发至某特定的服务器。该方式适合负载均衡无cookie功能的TCP协议。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 外部绑定公网 IP</title>
+      <link>/network/eip/manual/ipv4/outband_ipv4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/manual/ipv4/outband_ipv4/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;外部绑定是指在云服务器外部通过网络地址转换 (NAT) 方式将公网 IP 地址转换成用户私有网络地址或基础网络地址，从而实现云服务器与公网互通。&lt;/p&gt;
+&lt;p&gt;通过申请一个外部绑定公网 IP，然后分配公网IP给服务器，便可实现云服务器公网访问，无须再做额外配置。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;申请外部绑定的-ipv4-公网-ip&#34;&gt;申请外部绑定的 IPv4 公网 IP&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台，在顶部菜单栏中点击&lt;strong&gt;产品与服务&lt;/strong&gt;，选择 &lt;strong&gt;网络&lt;/strong&gt; &amp;gt; &lt;strong&gt;公网 IP&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;公网 IPv4&lt;/strong&gt; 页面，点击&lt;strong&gt;申请&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;填写公网 IP 信息。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/create_eip.png&#34; alt=&#34;填写申请公网IP信息&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;名称：为您申请的 IP 地址取个名字，方便记忆与使用。可选。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模式：计费模式，可以选择&lt;strong&gt;按带宽计费&lt;/strong&gt;或&lt;strong&gt;按流量计费&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IP 组：使用默认设置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;带宽上限：输入所需要的互联网带宽。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;绑定方式：选择&lt;strong&gt;外部绑定&lt;/strong&gt;。&lt;/p&gt;
+&lt;!--备案： ICP 备案。若您打算做公开的网站，在中国大陆需要备案。--&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数量：输入所需要的 IP 个数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;带宽上限是指云服务器互联网访问的带宽，云服务器与云服务器之间的内网带宽与云服务器规格有关，云服务器规格越高，内网带宽越高，详情请参阅 &lt;a href=&#34;/compute/vm/intro/instance/&#34;&gt;云服务器&lt;/a&gt;。&lt;/p&gt;
+&lt;!--若您在表单中标示了需要 ICP 备案， 那么您申请到的公网 IP 不能立刻投入使用，需要完成政府备案后才可以使用； 若您在表单中标示了不需要 ICP 备案，那么您申请到的公网 IP 可以立刻开始使用。--&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击 &lt;strong&gt;提交&lt;/strong&gt; 即可完成公网 IP 的申请。&lt;/p&gt;
+&lt;p&gt;申请到的公网 IP 会在右边公网 IP 列表中显示，当状态显示为“可用”，则表示公网 IP 申请完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;为云服务器绑定公网-ip&#34;&gt;为云服务器绑定公网 IP&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;右键点击需要分配的公网 IP， 选择&lt;strong&gt;分配到云服务器&lt;/strong&gt; ，在弹出的对话框中选择需要绑定的云服务器。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/already_eip_for_host2.png&#34; alt=&#34;绑定公网IP至云服务器&#34; style=&#34;zoom:60%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;即可将申请到的公网 IP 绑定给相应云服务器。&lt;/p&gt;
+&lt;p&gt;绑定完成后，该公网 IP 条目的状态将显示为&lt;strong&gt;已分配&lt;/strong&gt;，并显示绑定到的资源。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 外部绑定公网 IP</title>
+      <link>/network/eip/manual/ipv6/outband_ipv6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/manual/ipv6/outband_ipv6/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;云服务器通过 VPC的 DHCP 获取 IPv6 地址，然后接入公网，使云服务器同时具备公网和 VPC 内网的访问能力。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;已创建开启 IPv6 的VPC网络及私有网络。具体操作可参见&lt;a href=&#34;/network/eip/quickstart/ipv6_quick_start/#%E5%88%9B%E5%BB%BA%E6%94%AF%E6%8C%81-ipv4-ipv6-%E5%8F%8C%E6%A0%88%E7%9A%84%E7%BD%91%E7%BB%9C&#34;&gt;创建支持 IPv4/ IPv6 双栈的网络&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已在IPV6 私有网络中创建支持 IPv6 自动化配置的云服务器。具体操作可参见&lt;a href=&#34;/network/eip/quickstart/ipv6_quick_start/#%E5%88%9B%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E5%8A%A0%E5%85%A5%E5%88%B0%E5%90%AF%E7%94%A8-ipv6-%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C&#34;&gt;创建云服务器并加入到启用IPv6的私有网络&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;右键点击云服务器，在弹出菜单中依次选择&lt;strong&gt;公网 IPv6&lt;/strong&gt; &amp;gt; I&lt;strong&gt;Pv6 接入公网&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在弹出的对话框中，为 IPv6 公网 IP 选择计费模式，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/log-ipv6-connect.png&#34; style=&#34;zoom:80%;&#34; /&gt;
+&lt;p&gt;接入公网后，可以在 &lt;strong&gt;公网IP&lt;/strong&gt; &amp;gt;&lt;strong&gt;公网IPv6&lt;/strong&gt; 页面中看到接入公网的 IPv6 地址详情，点击ID号，可进一步查看公网 IP 的计费及监控信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 网络规划</title>
+      <link>/network/vpc/quick-start/10_qs_net_plan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/quick-start/10_qs_net_plan/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为避免后续临时扩容带来的不便及问题，请您在创建 VPC 网络前，根据您的实际业务需求合理的规划 VPC 网络和私有网络（子网）的数量及网段等。&lt;/p&gt;
+&lt;h2 id=&#34;应该使用几个-vpc-网络&#34;&gt;应该使用几个 VPC 网络？&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;一个 VPC 网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果您没有多地域部署系统的要求且各系统之间也不需要通过 VPC 网络进行隔离，那么推荐使用一个 VPC 网络。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;多个 VPC 网络&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果您有以下任何一个需求，推荐您使用多个 VPC 网络：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多地域部署系统&lt;/p&gt;
+&lt;p&gt;VPC 网络是地域级别的资源，是不能跨地域部署的。当您有多地域部署系统的需求时，就必须使用多个 VPC 网络。您可以通过使用 VPN 服务、VPC 边界路由器或者 SDWAN 等产品实现 VPC 网络互通。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多业务系统隔离&lt;/p&gt;
+&lt;p&gt;如果在一个地域的多个业务系统需要通过 VPC 进行严格隔离，例如生产环境和测试环境，那么也需要使用多个 VPC。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;应该使用几个私有网络&#34;&gt;应该使用几个私有网络？&lt;/h2&gt;
+&lt;p&gt;使用多少个私有网络与系统规模及系统规划有关。一个 VPC 网络可以连接254个私有网络，每个私有网络最多可容纳252台云服务器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;若您只使用一个 VPC 网络，建议您至少使用两个私有网络，并且将两个私有网络分布在不同可用区，这样可以实现跨可用区容灾。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;同一地域不同可用区之间的网络通信延迟很低，但也需经过业务系统的适配和验证。由于系统调用复杂、系统处理时间长、跨可用区调用等原因可能产生期望之外的网络延迟。建议您进行系统优化和适配，在高可用和低延迟之间找到平衡。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若前端系统可以被公网访问并且有主动访问公网的需求，考虑到容灾，可将不同的前端系统部署在不同的私有网络下，将后端系统部署在另外的私有网络。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;应该选择什么网段&#34;&gt;应该选择什么网段？&lt;/h2&gt;
+&lt;p&gt;在创建 VPC 网络及连接私有网络时，您需要以无类域间路由块（CIDR block）的形式为您的网络划分私网网段。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;VPC 及私有网络网段掩码一旦设定后，则无法修改。因此，请结合业务规模和通信场景合理地规划私有网络和子网，这将有利于后期业务的平滑扩展和运维。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;规划 VPC 网段&lt;/strong&gt;&lt;/p&gt;
+&lt;!--VPC 网络支持192.168.0.0/16、172.16.0.0/16-172.31.0.0/16这些网段及其子网作为私网地址范围。--&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果云上只有一个 VPC 网络并且不需要和本地数据中心互通时，可以选择上述私网网段中的任何一个网段或其子网。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果您需要建立多个 VPC 网络，或者有 VPC 网络和本地数据中心构建混合云的需求，建议使用以上标准网段的子网作为 VPC 的网段，掩码建议不超过16位。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;规划私有网络网段&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;私有网络的网段必须是其所属 VPC 网络网段的子集，且私有网络支持的子网掩码范围为16～29，可提供8~65536个地址。例如 VPC 的网段是192.168.0.0/16，则该 VPC 下的私有网络的网段可以是192.168.0.0/17～192.168.0.0/29。&lt;/p&gt;
+&lt;p&gt;规划私有网络网段时，请注意：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;私有网络网段的确定需要考虑该私有网络私有网络下所能容纳云服务器实例数量。&lt;/li&gt;
+&lt;li&gt;每个私有网络中的第一个和最后三个IP地址为系统保留地址。以192.168.1.0/24为例，192.168.1.0、 192.168.1.253、192.168.1.254和192.168.1.255这些地址是系统保留地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;vpc-网络间互通或-vpc-网络与本地数据中心互通有什么要求&#34;&gt;VPC 网络间互通或 VPC 网络与本地数据中心互通有什么要求？&lt;/h2&gt;
+&lt;p&gt;当您 VPC 网络间互通或 VPC 网络与本地数据中心互通的需求时，请确保 VPC 网络的网段与互通网段均不冲突。&lt;/p&gt;
+&lt;p&gt;在多 VPC 网络的情况下，建议遵循以下网段规划原则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;尽量做到不同 VPC 网络的网段不同，不同 VPC 网络可以使用标准网段的子网来增加 VPC 网络可用的网段数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果无法做到不同 VPC 网络的网段不同，则尽量保证不同 VPC 网络的私有网络网段不同。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果也无法做到私有网络网段不同，则需要保证通信的私有网络网段不同。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 修改私有网络基本信息</title>
+      <link>/network/vpc/manual/vxnet/10_mdfy_vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vxnet/10_mdfy_vxnet/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;修改私有网络的名称、描述、标签及所属项目。&lt;/p&gt;
+&lt;p&gt;本节的操作指导以&lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;页面的操作为例进行介绍。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;•  若私有网络未连接到 VPC 网络，只能通过&lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，对私有网络进行操作。&lt;br&gt;•  若私有网络已连接到 VPC 网络，可进入&lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，对私有网络进行操作，也可进入&lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;后，点击 VPC 网络，进入 VPC 网络的&lt;strong&gt;私有网络&lt;/strong&gt;页签进行操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;修改名称及描述&#34;&gt;修改名称及描述&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，进入&lt;strong&gt;私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;右键单击需要修改的私有网络，选择&lt;strong&gt;修改&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新输入私有网络的名称及描述。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502010_mdfy_vxnet_1.png&#34; alt=&#34;mdfy_vxnet_1&#34; style=&#34;zoom:40%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;绑定及解绑标签&#34;&gt;绑定及解绑标签&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;登录管理控制台。&lt;/li&gt;
+&lt;li&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，进入&lt;strong&gt;私有网络&lt;/strong&gt;页面。&lt;/li&gt;
+&lt;li&gt;右键单击需要操作的私有网络，根据需要执行：
+&lt;ul&gt;
+&lt;li&gt;绑定标签：选择&lt;strong&gt;标签&lt;/strong&gt; &amp;gt; &lt;strong&gt;绑定&lt;/strong&gt;，然后选择需要绑定的标签（可多选），点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;解绑标签：选择&lt;strong&gt;标签&lt;/strong&gt; &amp;gt; &lt;strong&gt;解绑&lt;/strong&gt;，然后选择需要解绑的标签（可多选），点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;加入及移出项目&#34;&gt;加入及移出项目&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;私有网络&lt;/strong&gt;，进入&lt;strong&gt;私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;右键单击需要操作的私有网络，根据需要执行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;加入项目：选择&lt;strong&gt;项目&lt;/strong&gt; &amp;gt; &lt;strong&gt;加入&lt;/strong&gt;，选择一个需要加入的项目，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;移出项目：单击&lt;strong&gt;项目&lt;/strong&gt; &amp;gt; &lt;strong&gt;离开&lt;/strong&gt;，点击&lt;strong&gt;确认&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 费用问题</title>
+      <link>/network/eip/faq/bill_faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/faq/bill_faq/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;公网-ip-流量计费的具体统计方法是什么&#34;&gt;公网 IP 流量计费的具体统计方法是什么？&lt;/h2&gt;
+&lt;p&gt;如果公网 IP 的计费模式是按流量计费，则除了固定的 IP 地址价格外， 流量数据会每小时自动统计一次，统计方法为：在即将扣费的时间范围内，分别对进、出数据量求和，然后取其中较大的值作为扣费依据。&lt;/p&gt;
+&lt;p&gt;详细说明，请参见&lt;a href=&#34;../../billing/price/&#34;&gt;公网 IP 计费指南&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;欠费后的公网-ip-会被如何处理&#34;&gt;欠费后的公网 IP 会被如何处理？&lt;/h2&gt;
+&lt;p&gt;对于通过备案信息验证的公网 IP，我们会在欠费之后为用户保留 10 天， 并发出欠费提醒的邮件；对于不需要备案或备案信息没有通过验证的公网 IP， 一旦欠费就会被系统释放回资源池。&lt;/p&gt;
+&lt;p&gt;详细说明，请参见&lt;a href=&#34;../../billing/price/#%E8%B5%84%E6%BA%90%E6%AC%A0%E8%B4%B9&#34;&gt;公网 IP 计费指南&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;为什么会收取-ip-地址附加费&#34;&gt;为什么会收取 IP 地址附加费?&lt;/h2&gt;
+&lt;p&gt;IP 地址附加费是 IP 地址的占用费。每个主账户名下都有免费的 IP 地址额度，当申请的 IP 地址个数超过免费额度时，我们会按照 IP 地址的成本收取 IP 地址附加费，并且该费用记在主账户名下。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 连接私有网络</title>
+      <link>/network/vpc/manual/vpcnet/15_bind_vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vpcnet/15_bind_vxnet/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;一个 VPC 网络内至少包含一个私有网络，您也可以在创建 VPC 网络后，添加多个私有网络来划分子网，同一个 VPC 内的子网默认私网互通。&lt;/p&gt;
+&lt;h2 id=&#34;创建私有网络并连接&#34;&gt;创建私有网络并连接&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击需要添加私有网络的 VPC，进入到该 VPC 的管理页面。&lt;/p&gt;
+&lt;p&gt;页面下方默认展示&lt;strong&gt;私有网络&lt;/strong&gt;页签。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;img src=&#34;../../../_images/501030_bind_vxnet_2.png&#34; alt=&#34;bind_vxnet_2&#34; style=&#34;zoom:50%;&#34; /&gt;，弹出&lt;strong&gt;创建/连接私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/501030_bind_vxnet_3.png&#34; alt=&#34;bind_vxnet_3&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置私有网络信息，包括名称、部署方式、IPv4 网络地址、网络 ACL 及其他高级选项。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;部署方式：&lt;strong&gt;多可用区部署&lt;/strong&gt;即网络中的云服务器可部署在多个可用区，&lt;strong&gt;单可用区部署&lt;/strong&gt;即网络的云服务器部署在同一个可用区。若需要做跨可用区容灾，建议选择&lt;strong&gt;多可用区部署&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;IPv4 网络地址：私有网络的地址范围，需要在 VPC 网络的地址范围内。&lt;/li&gt;
+&lt;li&gt;网络 ACL：网络访问控制规则。您可以自定义网络 ACL 规则，然后绑定私有网络。&lt;/li&gt;
+&lt;li&gt;高级选项：点击&lt;strong&gt;显示高级选项&lt;/strong&gt;，可设置管理地址、边界路由器地址、DHCP 起止地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;连接已有私有网络&#34;&gt;连接已有私有网络&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击需要添加私有网络的 VPC，进入到该 VPC 的管理页面。&lt;/p&gt;
+&lt;p&gt;页面下方默认展示&lt;strong&gt;私有网络&lt;/strong&gt;页签。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;img src=&#34;../../../_images/501030_bind_vxnet_2.png&#34; alt=&#34;bind_vxnet_2&#34; style=&#34;zoom:50%;&#34; /&gt;，弹出&lt;strong&gt;创建/连接私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;连接已有私有网络&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/501030_bind_vxnet_4.png&#34; alt=&#34;bind_vxnet_4&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;选择要加入的私有网络&lt;/strong&gt;，选择一个私有网络，并设置 IPv4 地址、网络ACL及其他高级选项。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IPv4 网络地址：私有网络的地址范围，需要在 VPC 网络的地址范围内。&lt;/li&gt;
+&lt;li&gt;网络 ACL：网络访问控制规则。您可以自定义网络 ACL 规则，然后绑定私有网络。&lt;/li&gt;
+&lt;li&gt;高级选项：点击显示高级选项，可设置管理地址、边界路由器地址、DHCP 起止地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: OpenVPN 客户端启用服务端推送的 DNS 配置</title>
+      <link>/network/vpc/faq/openvpn_dns_push/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/openvpn_dns_push/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;需求背景&#34;&gt;需求背景&lt;/h2&gt;
+&lt;p&gt;客户希望vpc内网配置的域名解析，通过vpn拨入到本地生效，无需手动去配置hosts解析，以下是具体案例的实践过程。&lt;/p&gt;
+&lt;h3 id=&#34;1配置内网解析的域名如下&#34;&gt;1.配置内网解析的域名如下&lt;/h3&gt;
+&lt;img src=&#34;../homer/openvpn_dns_push_01.png&#34; width=&#34;60%&#34; height=&#34;60%&#34;&gt;
+&lt;h3 id=&#34;2vpn服务---openvpn修改在附加配置里增加以下内容&#34;&gt;2.vpn服务&amp;mdash;openvpn—修改，在附加配置里增加以下内容&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;push &amp;#34;route 172.20.0.0 255.255.0.0&amp;#34;
+push &amp;#34;dhcp-option DNS 172.20.255.254&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;备注：push的路由需要按照指定的格式&lt;/p&gt;
+&lt;h3 id=&#34;3本地拨入vpn以后查看是否生效如果没有生效&#34;&gt;3.本地拨入vpn以后查看是否生效，如果没有生效&lt;/h3&gt;
+&lt;h3 id=&#34;4刷新一下dns缓存&#34;&gt;4.刷新一下dns缓存&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ipconfig /flushdns
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如截图，解析已经生效&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_dns_push_02.png&#34;&gt;
+&lt;p&gt;如内网dns配置没有生效，需要离开私有网络重新加入私有网络时手动指定内网ip地址；或者手动更改/etc/resolv.conf的配置，格式如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@i-tqzv58ti ~]# cat /etc/resolv.conf
+# Generated by NetworkManager
+search localdomain zw2.qiyiyun.net.cn
+nameserver 172.20.255.254
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: OpenVPN添加虚拟网卡</title>
+      <link>/network/vpc/faq/openvpn_add_virtual_network_adapter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/openvpn_add_virtual_network_adapter/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;问题背景&#34;&gt;问题背景&lt;/h2&gt;
+&lt;p&gt;用户在安装openvpn时，默认会创建一块虚拟网卡，若需要同时访问多个OpenVPN server，会有相应报错 “All TAP-Windows adapters on this system are currently in use.”，此时需要创建多块虚拟网卡来访问。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_add_virtual_network_adapter/openvpn_add_virtual_network_adapter_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;p&gt;进入 C:\Program Files\TAP-Windows\bin 目录，以管理员身份运行 addtop.bat 文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_add_virtual_network_adapter/openvpn_add_virtual_network_adapter_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;显示如下界面则已创建成功，可以在适配器中查看创建的网卡 TAP-Windows Adapter V9 #2。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_add_virtual_network_adapter/openvpn_add_virtual_network_adapter_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_add_virtual_network_adapter/openvpn_add_virtual_network_adapter_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;此时，可以连接多个 VPN Server。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_add_virtual_network_adapter/openvpn_add_virtual_network_adapter_5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: Windows客户端拨入VPN实现跨多个VPC之间的内网互通</title>
+      <link>/network/vpc/best-practices/win_multi_vpcs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/best-practices/win_multi_vpcs/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;项目介绍&#34;&gt;项目介绍&lt;/h2&gt;
+&lt;p&gt;客户的两个VPC之间通过IPSec或者GRE隧道打通了私有网络，希望本地拨入VPC A 能同时与VPC B的私有网络互通，具体拓扑如下&lt;/p&gt;
+&lt;img src=&#34;../homer/build_gre_tunnel_05.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;h3 id=&#34;1以下环境配置如下&#34;&gt;1.以下环境配置如下&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;VPC A
+
+资源id :  rtr-d5651a81
+
+内网 IP:   10.140.68.224
+
+私有网络  172.20.100.0/24  
+
+VPC B
+
+资源id :  rtr-0qtg9gh8
+
+内网 IP:   10.140.67.101
+
+私有网络  172.21.100.0/24
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;2vpc-a与-vpc-b之间通过gre隧道打通&#34;&gt;2.VPC A与 VPC B之间通过GRE隧道打通&lt;/h3&gt;
+&lt;p&gt;配置步骤请参考&lt;a href=&#34;../../manual/tunnel/gre/&#34;&gt;GRE隧道&lt;/a&gt;。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;172.20.0.0/16&amp;lt;==&amp;gt;172.21.0.0/16
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;3vpc-a配置openvpn并配置路由推送如图所示&#34;&gt;3.VPC A配置OpenVPN，并配置路由推送，如图所示&lt;/h3&gt;
+&lt;img src=&#34;../homer/build_gre_tunnel_07.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;push &amp;#34;route 172.21.0.0 255.255.0.0&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;4本地拨入vpn以后检查一下路由是否推送成功如图所示&#34;&gt;4.本地拨入VPN以后，检查一下路由是否推送成功，如图所示&lt;/h3&gt;
+&lt;img src=&#34;../homer/build_gre_tunnel_06.png&#34; width=&#34;60%&#34; height=&#34;100%&#34;&gt;
+&lt;h3 id=&#34;5实测可以同时ping通两个私有网络的云服务器了如图所示&#34;&gt;5.实测可以同时ping通两个私有网络的云服务器了，如图所示&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:\Users\myhomer&amp;gt;ping 172.20.100.20
+ 
+正在 Ping 172.20.100.20 具有 32 字节的数据:
+来自 172.20.100.20 的回复: 字节=32 时间=24ms TTL=62
+来自 172.20.100.20 的回复: 字节=32 时间=25ms TTL=62
+来自 172.20.100.20 的回复: 字节=32 时间=25ms TTL=62
+来自 172.20.100.20 的回复: 字节=32 时间=25ms TTL=62
+ 
+172.20.100.20 的 Ping 统计信息:
+数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+最短 = 24ms，最长 = 25ms，平均 = 24ms
+ 
+C:\Users\myhomer&amp;gt;ping 172.21.100.2
+ 
+正在 Ping 172.21.100.2 具有 32 字节的数据:
+来自 172.21.100.2 的回复: 字节=32 时间=25ms TTL=61
+来自 172.21.100.2 的回复: 字节=32 时间=26ms TTL=61
+来自 172.21.100.2 的回复: 字节=32 时间=25ms TTL=61
+来自 172.21.100.2 的回复: 字节=32 时间=27ms TTL=61
+ 
+172.21.100.2 的 Ping 统计信息:
+数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+最短 = 25ms，最长 = 27ms，平均 = 25ms
+ 
+C:\Users\myhomer&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 绑定私有网络限制</title>
+      <link>/network/nat_gateway/intro/net_quota/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/nat_gateway/intro/net_quota/</guid>
+      <description>
+        
+        
+        &lt;p&gt;NAT 网关绑定私有网络个数限制如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;NAT 网关类型&lt;/th&gt;
+&lt;th&gt;可绑私有网络个数&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;小型&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;中型&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;大型&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;若用户超过绑定个数限制将提示报错。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 产品特性</title>
+      <link>/network/loadbalancer/intro/advantage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/loadbalancer/intro/advantage/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;集群节点多活&#34;&gt;集群节点多活&lt;/h3&gt;
+&lt;p&gt;负载均衡实例采用集群部署，来自公网的请求通过等价多路径路由（ECMP）到达集群内的负载均衡节点，以消除服务器单点故障，提升冗余，保证服务的稳定性。&lt;/p&gt;
+&lt;h3 id=&#34;region网络跨数据中心多活&#34;&gt;Region网络跨数据中心多活&lt;/h3&gt;
+&lt;p&gt;由多个可用区（Availability Zone）组成的区域（Region）中创建的负载均衡集群（LB Cluster），默认支持多可用区部署（ Multi-AZ deployment，简称 MZ ），可实现将来自公网的访问以灵活的策略分发到不同可用区节点，从而快速隔离位于故障区域的后端资源。&lt;/p&gt;
+&lt;h3 id=&#34;弹性集群&#34;&gt;弹性集群&lt;/h3&gt;
+&lt;p&gt;负载均衡器采用集群化技术，支持将一个公网 IP 的流量，分散到多个负载均衡器节点做并发处理，负载均衡集群性能不足时，支持对负载均衡节点进行实时扩容。用户可根据需求扩展，节点数量不设限。&lt;/p&gt;
+&lt;h3 id=&#34;超高性能&#34;&gt;超高性能&lt;/h3&gt;
+&lt;p&gt;负载均衡器集群（Load Balancer Cluster）可以将一个公网 IP 的流量，分散到多个负载均衡器节点做并发处理，每个节点每秒新建连接数 (CPS) 50,000个，突破单负载均衡器节点的能力瓶颈，用户可根据需求扩展集群节点数量，集群总体性能不设限。&lt;/p&gt;
+&lt;h3 id=&#34;公私网一体-all-in-one&#34;&gt;公私网一体 All in One&lt;/h3&gt;
+&lt;p&gt;负载均衡器支持公私网一体架构，采用同一套负载均衡集群，同时对内和对外提供服务。更好支撑微服务化，中台化的业务架构，节省成本和时间，管理更加方便。&lt;/p&gt;
+&lt;h3 id=&#34;灵活的转发策略&#34;&gt;灵活的转发策略&lt;/h3&gt;
+&lt;p&gt;负载均衡的后端服务器可根据业务需求设置为对等或不对等两种模式。如果后端不对等，可以通过自定义转发策略来进行更高级转发控制。目前，可支持 “按域名转发” 、“按URL转发” 、“按源地址转发” 和 “按 HTTP Header 转发”两种规则，每条转发策略可配置多条规则，并可以自定义规则之间的匹配方式。&lt;/p&gt;
+&lt;h3 id=&#34;waf-安全防护&#34;&gt;WAF 安全防护&lt;/h3&gt;
+&lt;p&gt;负载均衡器自带Web 应用防火墙能力，通过检查 HTTP/HTTPS 流量来实现内容过滤，可用来保护您的 Web 应用程序免受 SQL 注入，XSS等攻击的损害，可降低 CC 攻击对系统的影响。您还可以通过自定义规则灵活有效的阻止非法流量，保证应用的稳定运行。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 搭建 IPv4 VPC 网络</title>
+      <link>/network/vpc/quick-start/20_qs_ipv4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/quick-start/20_qs_ipv4/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;本文旨在指引您快速搭建一个具有 IPv4 CIDR 的 VPC 网络，并为 VPC 网络中的云服务器绑定一个公网 IP，实现公网访问的目的。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;已注册亿栖云账号并通过实名认证。&lt;/li&gt;
+&lt;li&gt;确保账户有足够金额。若需要充值，请前往&lt;a href=&#34;http://console.yiqiyun.net.cn/finance/wallet/&#34;&gt;充值页面&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;步骤1创建-vpc-网络及私有网络&#34;&gt;步骤1：创建 VPC 网络及私有网络&lt;/h3&gt;
+&lt;p&gt;按照以下操作，创建一个 VPC 网络并在 VPC 网络中添加一个私有网络。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;创建 VPC 网络&lt;/strong&gt;，打开&lt;strong&gt;创建 VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;img src=&#34;../../_images/501010_create_vpc.png&#34;  style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置 VPC 网络基本信息，然后点击&lt;strong&gt;创建&lt;/strong&gt;。
+详细配置说明，请参见&lt;a href=&#34;/network/vpc/manual/vpcnet/10_create_vpc/&#34;&gt;创建 VPC 网络&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击创建好的 VPC 网络 ID 号，进入 VPC 详情页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在私有网络页签，点击&lt;img src=&#34;../../_images/501030_bind_vxnet_2.png&#34; alt=&#34;bind_vxnet_2&#34; style=&#34;zoom:50%;&#34; /&gt;，弹出&lt;strong&gt;创建/连接私有网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择&lt;strong&gt;创建私有网络并连接&lt;/strong&gt;，配置私有网络信息，然后点击&lt;strong&gt;提交&lt;/strong&gt;。
+具体配置说明，可参见&lt;a href=&#34;../../manual/vpcnet/15_bind_vxnet/#%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C%E5%B9%B6%E8%BF%9E%E6%8E%A5&#34;&gt;连接私有网络&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;!-- 8. 配置 VPC 网络基本信息及初始私有网络信息。
+
+   &gt; **说明**：
+   &gt;
+   &gt; 以下配置为本操作中使用的示例，若您有其他特别需求，可参见[创建 VPC 网络](/network/vpc/manual/vpcnet/10_create_vpc/)查看详细配置说明。
+
+   &lt;img src=&#34;/network/vpc/_images/4020_create_vpc_info.png&#34; alt=&#34;基本信息&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+   **基本信息**：
+
+   - 区域：选择靠近您客户的区域。
+   - 名称：输入 VPC 网络的名称。如：vpc-test。
+   - IPv4 地址范围：选择 VPC 网络的 IPv4 网段。
+   - IPv6 网络地址：选择**关闭 IPv6**。
+   - 类型：使用**小型**。注意**免费型**不支持绑定公网 IP。
+   - 公网 IP：选择**暂不绑定**。
+   - 安全组：使用默认安全组。
+
+   &lt;img src=&#34;/network/vpc/_images/4020_create_vpc_vxnet.png&#34; alt=&#34;初始私有网络&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+   **初始私有网络**：
+
+   - 名称：私有网络名称，如：Vxnet-test。
+   - 部署方式：选择**多可用区部署**。
+   - IPV4 地址范围：私有网络的地址范围，需要在 VPC 网络的地址范围内。
+   - 网络 ACL：选择**无**。
+   - 高级选项：使用默认设置。
+
+9. 点击**立即创建**，等待创建完成。
+ --&gt;
+&lt;h3 id=&#34;步骤2在私有网络中创建云服务器&#34;&gt;步骤2：在私有网络中创建云服务器&lt;/h3&gt;
+&lt;p&gt;按照以下操作，在&lt;a href=&#34;#%E6%AD%A5%E9%AA%A41%E5%88%9B%E5%BB%BA-vpc-%E7%BD%91%E7%BB%9C%E5%8F%8A%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C&#34;&gt;步骤1&lt;/a&gt;中创建的私有网络中创建云服务器。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在顶部菜单栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击在&lt;a href=&#34;#%E6%AD%A5%E9%AA%A41%E5%88%9B%E5%BB%BA-vpc-%E7%BD%91%E7%BB%9C%E5%8F%8A%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C&#34;&gt;步骤1&lt;/a&gt;中已创建好的 VPC 网络，进入 VPC 详情页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;私有网络&lt;/strong&gt; &amp;gt; &lt;strong&gt;资源列表&lt;/strong&gt;区，点击&lt;strong&gt;创建资源&lt;/strong&gt; &amp;gt; &lt;strong&gt;云服务器&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置云服务器信息。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;本操作中，云服务器的网络配置使用默认配置，即云服务器使用我们在&lt;a href=&#34;#%E6%AD%A5%E9%AA%A41%E5%88%9B%E5%BB%BA-vpc-%E7%BD%91%E7%BB%9C%E5%8F%8A%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C&#34;&gt;步骤1&lt;/a&gt;中所创建的私有网络“Vxnet-test”进行通信。其他配置说明请参见&lt;a href=&#34;/compute/vm/manual/vm_instance/#%E5%88%9B%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8&#34;&gt;创建云服务器&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;创建&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;创建完成后，资源列表中将显示云服务器信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;步骤3申请公网-ip-并绑定到云服务器&#34;&gt;步骤3：申请公网 IP 并绑定到云服务器&lt;/h3&gt;
+&lt;p&gt;按照以下操作，申请一个公网IP并绑定到&lt;a href=&#34;#%E6%AD%A5%E9%AA%A42%E5%9C%A8%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8&#34;&gt;步骤2&lt;/a&gt;中所创建的云服务器。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在顶部菜单栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;公网 IP&lt;/strong&gt;，进入&lt;strong&gt;公网 IP&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;申请&lt;/strong&gt;，进入&lt;strong&gt;申请公网 IP&lt;/strong&gt; 页面。&lt;/p&gt;
+&lt;img src=&#34;/network/vpc/_images/4020_add_net_ip_1.png&#34; alt=&#34;add_net_ip_1&#34;  /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置公网 IP 参数，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;以下配置为本操作中使用的示例，若您有其他特别需求，可参见 &lt;a href=&#34;/network/eip/manual/ipv4/outband_ipv4/&#34;&gt;外部绑定公网 IP&lt;/a&gt; 查看详细配置说明。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;名称：公网 IP 名称。如：IPv4-test。&lt;/li&gt;
+&lt;li&gt;模式：选择&lt;strong&gt;按带宽计费&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;带宽上限：设置为“10Mbps”。&lt;/li&gt;
+&lt;li&gt;IP组：使用默认值。&lt;/li&gt;
+&lt;li&gt;绑定方式：选择&lt;strong&gt;外部绑定&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;数量：设置为“1”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;公网 IPv4&lt;/strong&gt;管理页面，找到已申请的公网IP“IPv4-test”，右键单击，选择&lt;strong&gt;分配到云服务器&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择在&lt;a href=&#34;#%E6%AD%A5%E9%AA%A42%E5%9C%A8%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8&#34;&gt;步骤2&lt;/a&gt;中所创建的云服务器，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在提示框中，点击&lt;strong&gt;确认&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;步骤4启动实例验证公网连通性&#34;&gt;步骤4：启动实例验证公网连通性&lt;/h3&gt;
+&lt;p&gt;按照以下操作，测试云服务器的网络连通性。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;启动并登录已绑定公网IP的云服务器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行&lt;code&gt;ping&lt;/code&gt;命令验证是否可公网通信。 如 &lt;code&gt;ping www.baidu.com&lt;/code&gt; 测试公网连通性。&lt;/p&gt;
+&lt;p&gt;如果能接收到回复报文，表示连接成功。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 内部绑定公网 IP</title>
+      <link>/network/eip/manual/ipv4/inband_ipv4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/manual/ipv4/inband_ipv4/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;内部绑定是指通过在云服务器内部添加一块可连接到公网网关的网卡的方式来绑定公网IP。&lt;/p&gt;
+&lt;p&gt;需要先申请一个内部绑定的公网 IP 并分配给云服务器，然后手动配置网卡 IP 地址及相关路由，以实现云服务器的公网访问。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;目前内部绑定仅允许绑定到云服务器，不允许绑定到路由器与负载均衡器。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;申请内部绑定的-ipv4-公网-ip&#34;&gt;申请内部绑定的 IPv4 公网 IP&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录 WEB 控制台，在顶部菜单栏中点击&lt;strong&gt;产品与服务&lt;/strong&gt;，选择 &lt;strong&gt;网络&lt;/strong&gt; &amp;gt; &lt;strong&gt;公网 IP&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;公网 IPv4&lt;/strong&gt; 页面，点击&lt;strong&gt;申请&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;填写公网 IP 信息。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/allocate_inbind_eip.png&#34; alt=&#34;内部绑定公网IP&#34; style=&#34;zoom:70%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;名称：为您申请的 IP 地址取个名字，方便记忆与使用。可选。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模式：计费模式，可以选择&lt;strong&gt;按带宽计费&lt;/strong&gt;或&lt;strong&gt;按流量计费&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IP 组：使用默认设置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;带宽上限：输入所需要的互联网带宽。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;绑定方式：选择&lt;strong&gt;内部绑定&lt;/strong&gt;。&lt;/p&gt;
+&lt;!--备案： ICP 备案。若您打算做公开的网站，在中国大陆需要备案。--&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数量：输入所需要的 IP 个数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;带宽上限是指云服务器互联网访问的带宽，云服务器与云服务器之间的内网带宽与云服务器规格有关，云服务器规格越高，内网带宽越高，详情请参阅 &lt;a href=&#34;/compute/vm/intro/instance/&#34;&gt;云服务器&lt;/a&gt;。&lt;/p&gt;
+&lt;!--若您在表单中标示了需要 ICP 备案， 那么您申请到的公网 IP 不能立刻投入使用，需要完成政府备案后才可以使用； 若您在表单中标示了不需要 ICP 备案，那么您申请到的公网 IP 可以立刻开始使用。--&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;为云服务器绑定公网-ip&#34;&gt;为云服务器绑定公网 IP&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;右键点击刚刚申请到的的 IPv4公网 IP， 选择&lt;strong&gt;分配到云服务器&lt;/strong&gt; ，在弹出的对话框中选择需要绑定的云服务器。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/already_eip_for_host2.png&#34; alt=&#34;绑定公网IP至云服务器&#34; style=&#34;zoom:60%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;即可将申请到的公网 IP 绑定给相应云服务器。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;内部绑定的公网 IP 目前只允许绑定到主网卡，并且不能与其他绑定到主网卡的公网 IP 同时存在。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;linux-云服务器网络配置&#34;&gt;Linux 云服务器网络配置&lt;/h3&gt;
+&lt;p&gt;将公网 IP 分配到云服务器后可以看到云服务器内多出一块还未分配 IP 地址的公网网卡。如下图所示，此时云服务器中一共有两块网卡，其中 eth0 为主网卡， IP 地址为 192.168.0.2 ； eth1 为刚刚绑定的公网网卡。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/inbind_eip_nic.png&#34; alt=&#34;绑定公网IP至网卡&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在以内部绑定方式绑定公网 IP 后，还需要手动为云服务器内的公网网卡进行网络配置，主要包括 IP 地址配置及路由配置。这里仅以 Ubuntu 为例来进行说明，其他系统的配置原理与此类似。&lt;/p&gt;
+&lt;h4 id=&#34;网络地址配置&#34;&gt;网络地址配置&lt;/h4&gt;
+&lt;p&gt;假设刚才绑定的公网 IP 地址为 202.120.111.159 ，在配置文件 /etc/network/interfaces 中添加如下配置来将公网 IP 地址分配到 eth1 ：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;auto eth1
+iface eth1 inet static
+  address 202.120.111.159
+  netmask 255.255.255.0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将配置文件保存之后，使用如下命令将配置应用到网卡 eth1 ：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#sudo ifup eth1
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;如果云服务器中运行了NetworkManager服务，需要在进行上述配置后重启NetworkManager服务，以避免 eth1 的网络配置被擦除。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;路由配置&#34;&gt;路由配置&lt;/h4&gt;
+&lt;p&gt;为了让 eth1 可以正常访问公网，还需要进行路由配置。同样在配置文件 /etc/network/interfaces 中添加路由信息，使用 eth1 的网关做为默认路由，网关地址通常为该网段的第一个 IP 地址，添加路由信息后的完整配置如下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;auto eth1
+iface eth1 inet static
+  address 202.120.111.159
+  netmask 255.255.255.0
+  post-up ip route replace default via 202.120.111.1 dev eth1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时在云服务器中可以访问公网，但是对私有网络及基础网络的访问会出现问题，因此还需要在 eth0 上配置到私有网络及基础网络的路由。&lt;/p&gt;
+&lt;p&gt;系统中的基础网络地址为 10.0.0.0/8 ，并且假设用户创建的 VPC 网络地址为 192.168.0.0/16 。在配置文件中添加如下配置，将对这些网络的访问的下一跳设置成 eth0 所在网络的网关（默认 IP 地址为 192.168.0.1 ）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;auto eth0
+iface eth0 inet dhcp
+  post-up ip route replace 192.168.0.0/16 via 192.168.0.1 dev eth0
+  post-up ip route replace 10.0.0.0/8 via 192.168.0.1 dev eth0
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;如需在 Ubuntu Server 16.04.2 LTS 版本中进行网络配置，还需要在 /etc/network/interfaces 文件中将以下语句进行注释:&lt;code&gt; source /etc/network/interfaces.d/*&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;内网-dns-路由配置&#34;&gt;内网 DNS 路由配置&lt;/h4&gt;
+&lt;p&gt;为了访问内网域名地址，需要再添加一条内网 DNS 的路由信息。内网 DNS 服务器的 IP 地址可以在 /etc/resolv.conf 文件中查看，其中以 100 开头的 IP 地址为内网的 DNS 服务器地址，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/inbind_dns.png&#34; alt=&#34;DNS配置&#34;&gt;&lt;/p&gt;
+&lt;p&gt;假设 DNS 服务器地址为 100.3.3.3 ，将该 IP 地址的路由信息添加到 eth0 网卡对应的配置信息下，如下所示：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;post-up ip route replace 100.3.3.3/32 via 192.168.0.1 dev eth0
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;公网-ip-切换绑定&#34;&gt;公网 IP 切换绑定&lt;/h4&gt;
+&lt;p&gt;公网 IP 切换绑定功能适用于绑定已经处于绑定状态的公网 IP 到新的虚拟机上。工作原理是: 从源节点上解绑公网 IP，同时在目标节点上进行绑定。&lt;/p&gt;
+&lt;p&gt;公网 IP 绑定功能可以使用在高可用环境中。一旦绑定公网 IP 的主节点出现宕机或者服务无法使用，可以在从节点中发起切换绑定的请求，这样从节点上会绑定之前主节点使用的公网 IP 。这样的使用可以保证服务不宕机。具体的 api 使用方法可以参考 &lt;a href=&#34;/development_docs/api/command_list/eip/associate_eip/&#34;&gt;&lt;em&gt;AssociateEip&lt;/em&gt;&lt;/a&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在同一个 VPC 中创建两台虚拟机, VPC 绑定公网 IP A, 另外对外服务的虚拟机绑定公网 IP B。在防火墙中放行 VRRP 协议。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚拟机上安装配置 keepalived。&lt;/p&gt;
+&lt;p&gt;以 keepalived 1.3.9 版本为例：&lt;/p&gt;
+&lt;p&gt;主节点配置如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/keepalived_master.png&#34; alt=&#34;管理节点配置&#34;&gt;&lt;/p&gt;
+&lt;p&gt;从节点配置如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/keepalived_backup.png&#34; alt=&#34;从节点配置&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同时运行之后, EIP B 会绑定在主节点上。可到 console 页面查看。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关闭主节点的 keepalived 服务，触发主备切换，此时公网 EIP B 会绑定到新的主节点上。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/keepalived_switch.png&#34; alt=&#34;公网IP自动切换&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;windows-云服务器网络配置&#34;&gt;Windows 云服务器网络配置&lt;/h3&gt;
+&lt;p&gt;这里仍然假设绑定的公网 IP 地址为 202.120.111.159 ，网关为 202.120.111.1 ； 用户创建的 VPC 网络地址为 192.168.0.0/16 ，云服务器在私有网络中的 IP 地址为 192.168.0.2 ，网关为 192.168.0.1 。以 Windows Server 2016 为例来说明网络配置的步骤。&lt;/p&gt;
+&lt;h4 id=&#34;网络地址配置-1&#34;&gt;网络地址配置&lt;/h4&gt;
+&lt;p&gt;为新加入的公网网卡配置 IP 地址，如下图所示。其中，只需要配置 IP 地址及子网掩码，不需要配置网关地址， DNS 地址也可不填。在配置完成后，点击确认保存。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/inbind_windows_ip.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;路由配置-1&#34;&gt;路由配置&lt;/h4&gt;
+&lt;p&gt;打开 Windows 命令行终端进行路由配置。首先使用 route 命令查看网卡的编号：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;route print -4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;输出结果如下图所示，其中第一行与第二行分别为私有网络的网络连接与公网的网络连接，每行的第一个数字为网卡的编号。在本示例中，私有网络的网卡编号为 4 ，公网的网卡编号为 6 。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/inbind_windows_if.png&#34; alt=&#34;绑定信息查看&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用如下命令添加路由信息，使用公网网卡的网关做为默认路由，其中 if 指定的参数为公网网卡编号 6 ：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;route -p add 0.0.0.0 mask 0.0.0.0 202.120.111.1 metric 1 if 6
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用如下命令添加私有网络及基础网络的路由信息，其中 if 指定为私有网络的网卡编号 4 ：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;route -p add 192.168.0.0 mask 255.255.0.0 192.168.0.1 metric 1 if 4
+route -p add 10.0.0.0 mask 255.0.0.0 192.168.0.1 metric 1 if 4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最后需要修改私有网络默认路由的优先级，以保证对于公网的访问使用公网网卡的默认路由：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;route -p change 0.0.0.0 mask 0.0.0.0 192.168.0.1 metric 100 if 4
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在配置完成后使用 route print -4 查看完整的路由信息，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/inbind_windows_route.png&#34; alt=&#34;查看路由信息&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;内网-dns-路由配置-1&#34;&gt;内网 DNS 路由配置&lt;/h4&gt;
+&lt;p&gt;首先在网卡详细信息页面中查看 DNS 服务器的 IP 地址，如下图所示，其中以 100 开头的 IP 地址为内网的 DNS 服务器地址：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/inbind_windows_dns.png&#34; alt=&#34;内网DNS&#34;&gt;&lt;/p&gt;
+&lt;p&gt;假设 DNS 服务器地址为 100.3.3.3 ，添加路由信息，指定 if 为私有网络的网卡编号 4 ：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;route -p add 100.3.3.3 mask 255.255.255.255 192.168.0.1 metric 1 if 4
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;基础网络中云服务器的网络配置&#34;&gt;基础网络中云服务器的网络配置&lt;/h3&gt;
+&lt;p&gt;以上示例中假设用户云服务器加入到了 VPC 网络，并以 192.168.0.1 做为访问内网资源的网关。如果用户云服务器加入的是基础网络，则需要将上述配置中的 192.168.0.1 修改为基础网络的网关地址，网关地址通常为该网段的第一个 IP 地址。&lt;/p&gt;
+&lt;p&gt;例如用户云服务器加入基础网络后的 IP 地址为 10.140.10.15 ，则网关地址为 10.140.10.1 ，并以此 IP 地址做为访问内网资源的网关地址来进行网络配置。&lt;/p&gt;
+&lt;h3 id=&#34;防火墙设置&#34;&gt;防火墙设置&lt;/h3&gt;
+&lt;p&gt;由于内部绑定的公网 IP 是绑定到云服务器的主网卡上，因此对主网卡应用的防火墙规则都会被应用到公网网卡。当删除主网卡的防火墙时，公网网卡的防火墙也会被同时删除。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 内部绑定公网 IP</title>
+      <link>/network/eip/manual/ipv6/inband_ipv6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/eip/manual/ipv6/inband_ipv6/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;手动申请静态的公网 IPv6 地址，然后在云服务器中配置静态 IPv6 并与网络同步路由信息。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;已创建开启 IPv6 的VPC网络及私有网络。具体操作可参见&lt;a href=&#34;/network/eip/quickstart/ipv6_quick_start/#%E5%88%9B%E5%BB%BA%E6%94%AF%E6%8C%81-ipv4-ipv6-%E5%8F%8C%E6%A0%88%E7%9A%84%E7%BD%91%E7%BB%9C&#34;&gt;创建支持 IPv4/ IPv6 双栈的网络&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已在 IPV6 私有网络中创建支持 IPv6 自动化配置的云服务器。具体操作可参见&lt;a href=&#34;/network/eip/quickstart/ipv6_quick_start/#%E5%88%9B%E5%BB%BA%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E5%8A%A0%E5%85%A5%E5%88%B0%E5%90%AF%E7%94%A8-ipv6-%E7%9A%84%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C&#34;&gt;创建云服务器并加入到启用IPv6的私有网络&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;申请-ipv6-公网-ip-并分配给云服务器&#34;&gt;申请 IPv6 公网 IP 并分配给云服务器&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录 WEB 控制台，在顶部菜单栏中点击&lt;strong&gt;产品与服务&lt;/strong&gt;，选择 &lt;strong&gt;网络&lt;/strong&gt; &amp;gt; &lt;strong&gt;公网 IP&lt;/strong&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;公网 IPv6&lt;/strong&gt; 页签，进入到公网IPv6的管理页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;申请&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;填写公网 IPv6 信息。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/IPv6_inbind_ip_create.png&#34; style=&#34;zoom:70%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;名称：为您申请的 IPV6 地址取个名字，方便记忆与使用。可选。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模式：计费模式，可以选择&lt;strong&gt;按带宽计费&lt;/strong&gt;或&lt;strong&gt;按流量计费&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;带宽上限：输入所需要的互联网带宽。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IP 组：使用默认设置。&lt;/p&gt;
+&lt;!--备案： ICP 备案。若您打算做公开的网站，在中国大陆需要备案。--&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数量：输入所需要的 IPv6 地址个数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;带宽上限是指云服务器互联网访问的带宽，云服务器与云服务器之间的内网带宽与云服务器规格有关，云服务器规格越高，内网带宽越高，详情请参阅 &lt;a href=&#34;/compute/vm/intro/instance/&#34;&gt;云服务器&lt;/a&gt;。&lt;/p&gt;
+&lt;!--若您需要 ICP 备案， 那么您申请到的公网 IPv6 需要完成政府备案后才可以使用； 若您不需要 ICP 备案，那么申请到的公网 IPv6 可以立刻开始使用。--&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;，完成申请。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;公网 IPv6&lt;/strong&gt; 页面，右键点击上述申请的公网 IPv6，选择&lt;strong&gt;分配到云服务器&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择需要绑定的云服务器，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;配置-ipv6-公网-ip&#34;&gt;配置 IPv6 公网 IP&lt;/h3&gt;
+&lt;p&gt;完成申请 IPv6 公网 IP 并分配给云服务器后，登录云服务器使用 &lt;code&gt;ip -a&lt;/code&gt;命令可查看到云服务器内多出一块还未分配 IP 地址的网卡，您需要为这块网卡配置 IP地址。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_nic.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;下面以镜像 CentOS 7.5 / CentOS 6.8 / Ubuntu 18.04 及 Windows Server 2008/2012/2016 为例，介绍如何配置 IPv6 弹性 IP。在&lt;code&gt;[Your IPv6 Address]&lt;/code&gt;处请填入您在平台申请并绑定到云服务器的 IPv6 地址&lt;/p&gt;
+&lt;h4 id=&#34;centos-75&#34;&gt;Centos 7.5&lt;/h4&gt;
+&lt;p&gt;1.修改网卡配置。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@ipv6-eip ~]# vi /etc/sysconfig/network-scripts/ifcfg-eth1
+
+TYPE=Ethernet
+NAME=eth1
+DEVICE=eth1
+ONBOOT=yes
+BOOTPROTO=static
+NM_CONTROLLED=yes
+IPV6INIT=yes
+IPV6_AUTOCONF=no
+IPV6_FAILURE_FATAL=no
+IPV6ADDR=[Your IPv6 Address]/128
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2.在目录 /etc/NetworkManager/dispatcher.d 下增加网络控制脚本。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@ipv6-eip ~]# cd /etc/NetworkManager/dispatcher.d
+[root@ipv6-eip dispatcher.d]# vi interface-up-hook.sh 
+#!/bin/sh
+
+RUN=&amp;#34;yes&amp;#34;
+if [ &amp;#34;${RUN}&amp;#34; != &amp;#34;yes&amp;#34; ]; then
+exit 0
+fi
+
+if [ &amp;#34;${NM_DISPATCHER_ACTION}&amp;#34; != &amp;#34;up&amp;#34; ]; then
+exit 0
+fi
+
+interface=${DEVICE_IFACE}
+
+sysctl -w net.ipv6.conf.${interface}.accept_ra=1 
+sysctl -w net.ipv6.conf.${interface}.accept_ra_defrtr=1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.执行脚本，然后重启网卡 eth1。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@ipv6-eip dispatcher.d]# chmod +x interface-up-hook.sh
+[root@ipv6-eip dispatcher.d]# ifdown eth1
+[root@ipv6-eip dispatcher.d]# ifup eth1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4.查看您的 IP 和 ping6 测试网路的畅通情况。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ping6&lt;/code&gt; 是 Linux 对 IPv6 网络探测的命令。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_nic_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;centos-68&#34;&gt;Centos 6.8&lt;/h4&gt;
+&lt;p&gt;1.修改网卡配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@ipv6-eip ~]# vi /etc/sysconfig/network-scripts/ifcfg-eth1
+
+TYPE=Ethernet
+NAME=eth1
+DEVICE=eth1
+BOOTPROTO=static
+ONBOOT=yes
+NM_CONTROLLED=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_FAILURE_FATAL=no
+IPV6ADDR=[Your IPv6 Address]/128
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2.启动网卡&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@ipv6-eip dispatcher.d]# ifup eth1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.查看您的 IP 和 ping6 测试网路的畅通情况&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_nic_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ubuntu-1804&#34;&gt;Ubuntu 18.04&lt;/h4&gt;
+&lt;p&gt;1.编辑/etc/network/interfaces文件，添加 eth1 的静态 IPv6 地址配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+auto eth1
+iface eth1 inet6 static
+  address 2402:e7c0:0:80::1
+  netmask 128
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2.将配置文件保存之后，使用如下命令将配置应用到网卡 eth1。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@ipv6-eip-ubuntu ~]# sudo ifup eth1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.查看您的 IP 和 ping6 测试网路的畅通情况。&lt;/p&gt;
+&lt;h4 id=&#34;debian-buster-106&#34;&gt;Debian Buster 10.6&lt;/h4&gt;
+&lt;p&gt;1.编辑/etc/network/interfaces文件，添加 eth1 的静态 IPv6 地址配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;auto eth1
+iface eth1 inet6 static
+  address 2402:e7c0:400:80::41
+  netmask 128
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2.将配置文件保存之后，使用如下命令将配置应用到网卡 eth1。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-pvr20syg:~# ifup eth1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.查看您的 IP 和 ping6 测试网路的畅通情况。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-pvr20syg:~# ip a
+1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 52:54:99:c0:74:87 brd ff:ff:ff:ff:ff:ff
+    inet 10.120.75.15/24 brd 10.120.75.255 scope global dynamic eth0
+       valid_lft 81981sec preferred_lft 81981sec
+    inet6 fe80::5054:99ff:fec0:7487/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether 52:54:99:12:48:d2 brd ff:ff:ff:ff:ff:ff
+    inet6 2402:e7c0:400:80::41/128 scope global 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:99ff:fe12:48d2/64 scope link 
+       valid_lft forever preferred_lft forever
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;root@i-pvr20syg:~# ping6 www.taobao.com
+PING www.taobao.com(240e:cf:9000:1::3fb (240e:cf:9000:1::3fb)) 56 data bytes
+64 bytes from 240e:cf:9000:1::3fb (240e:cf:9000:1::3fb): icmp_seq=1 ttl=49 time=64.1 ms
+64 bytes from 240e:cf:9000:1::3fb (240e:cf:9000:1::3fb): icmp_seq=2 ttl=49 time=63.10 ms
+64 bytes from 240e:cf:9000:1::3fb (240e:cf:9000:1::3fb): icmp_seq=3 ttl=49 time=64.1 ms
+64 bytes from 240e:cf:9000:1::3fb (240e:cf:9000:1::3fb): icmp_seq=4 ttl=49 time=64.0 ms
+64 bytes from 240e:cf:9000:1::3fb (240e:cf:9000:1::3fb): icmp_seq=5 ttl=49 time=64.1 ms
+^C
+--- www.taobao.com ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 9ms
+rtt min/avg/max/mdev = 63.990/64.061/64.129/0.167 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如有其它 Linux 发行版的需求，欢迎您通过提工单来技术交流。&lt;/p&gt;
+&lt;h4 id=&#34;windows-server-200820122016&#34;&gt;Windows Server 2008/2012/2016&lt;/h4&gt;
+&lt;p&gt;1.禁用 IPv6 随机标识。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:\Users\Administrator&amp;gt;netsh
+netsh&amp;gt;interface ipv6
+netsh interface ipv6&amp;gt;set global randomizeidentifiers=disabled
+确定。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2.配置静态 IPv6 地址。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_ip_windows_0.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;此时 Windows Server 应具备2个网卡，其中没有 IPv4 地址的是用于连接 IPv6 网络的网卡&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_ip_windows_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击 IPv6 网卡的属性&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_ip_windows_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改 IPv6 网卡的 IPv6 协议属性&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_ip_windows_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Windows Server 默认自动获取 IPv6 地址，这里需要修改成指定 IPv6 地址的方式，然后填入在控制台中申请并绑定的 IPv6 地址。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../_images/IPv6_inbind_ip_windows_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;3.测试 IPv6 网络。&lt;/p&gt;
+&lt;p&gt;通过浏览器访问 IPv6 only 的网站，或者通过 ping ipv6 地址测试网络的连通性。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 使用端口转发功能</title>
+      <link>/network/vpc/faq/methods_of_port_forwarding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/methods_of_port_forwarding/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;端口转发的功能介绍&#34;&gt;端口转发的功能介绍&lt;/h2&gt;
+&lt;p&gt;vpc网络提供端口转发（DNAT）功能，将NAT网关上的公网IP映射给私有网络的云服务器使用，使云服务器可以面向互联网提供服务，比如http/https等&lt;/p&gt;
+&lt;h3 id=&#34;配置方法&#34;&gt;配置方法&lt;/h3&gt;
+&lt;p&gt;vpc网络==&amp;gt;管理配置==&amp;gt;端口转发==&amp;gt;添加规则，如图所示&lt;/p&gt;
+&lt;img src=&#34;../homer/vpc_dnat_01.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;名称&lt;/strong&gt;：自定义的名称，便于区分转发规则&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;协议&lt;/strong&gt;：可以设置tpc/udp两种类型的协议&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;源端口&lt;/strong&gt;：NAT网关会将以指定协议和端口访问该公网IP的请求转发到目标云服务器的内网端口上&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内网 IP&lt;/strong&gt;：云服务器获取的私有网络ip地址&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内网端口&lt;/strong&gt;：云服务器需要对公网暴露的端口服务，比如http/https/ssh等&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;案例一&#34;&gt;案例一&lt;/h3&gt;
+&lt;h4 id=&#34;比如以下的配置就可以将公网8000端口的请求转发到192168102这个云服务器的22号端口如截图所示&#34;&gt;比如以下的配置就可以将公网8000端口的请求转发到192.168.10.2这个云服务器的22号端口，如截图所示&lt;/h4&gt;
+&lt;img src=&#34;../homer/vpc_dnat_02.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;p&gt;另外需要放行vpc所在安全组源端口对应的下行规则，并应用修改安全组，如图&lt;/p&gt;
+&lt;img src=&#34;../homer/vpc_dnat_09.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;/br&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1.可以针对同一个内网云服务器的内网端口添加多条转发规则，只要采用不同的源端口即可，添加完成后需要在 VPC 详情页点击&lt;strong&gt;应用修改&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;2.可以针对同一个内网云服务器的多个内网服务添加多条转发规则。&lt;/p&gt;
+&lt;p&gt;3.如果想实现指定 IP 或者 IP 段访问源端口的服务，可以在安全组的源 IP 处进行配置。（相当于白名单）如下图所示。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;img src=&#34;../homer/vpc_dnat_06.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;img src=&#34;../homer/vpc_dnat_05.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;h3 id=&#34;案例二&#34;&gt;案例二&lt;/h3&gt;
+&lt;h3 id=&#34;配置端口转发规则&#34;&gt;配置端口转发规则&lt;/h3&gt;
+&lt;p&gt;比如需要本地通过公网访问数据库服务，数据库节点的ip地址为:192.168.10.2，就需要配置一条端口转发的规则将数据库服务的3306端口暴露给公网（这种做法是有风险的，容易被攻击，建议加上源ip）。&lt;/p&gt;
+&lt;img src=&#34;../homer/vpc_dnat_08.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;h3 id=&#34;需要放行安全组下行3336号端口否则公网将无法访问&#34;&gt;需要放行安全组下行3336号端口，否则公网将无法访问&lt;/h3&gt;
+&lt;img src=&#34;../homer/vpc_dnat_11.png&#34; width=&#34;100%&#34; height=&#34;60%&#34;&gt;
+&lt;h3 id=&#34;验证公网访问是否正常&#34;&gt;验证公网访问是否正常&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@i-b6s3dvje ~]# telnet 139.198.19.41 3336
+Trying 139.198.19.41...
+Connected to 139.198.19.41.
+Escape character is &amp;#39;^]&amp;#39;.
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 使用内网DNS功能</title>
+      <link>/network/vpc/faq/intranet_dns_guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/intranet_dns_guide/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;内网dns的使用场景&#34;&gt;内网dns的使用场景&lt;/h2&gt;
+&lt;p&gt;对 VPC 内部提供域名解析的服务，可以开启/关闭内网 DNS 服务，同时支持开启/关闭 PTR 解析类型-反向 DNS 解析。&lt;/p&gt;
+&lt;h3 id=&#34;1开启此功能的路径&#34;&gt;1.开启此功能的路径&lt;/h3&gt;
+&lt;p&gt;通过vpc详情界面&amp;mdash;管理配置&amp;mdash;dns服务&amp;mdash;打开dns服务，可以参考截图&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_dns_push_03.png&#34; width=&#34;60%&#34; height=&#34;60%&#34;&gt;
+&lt;h3 id=&#34;2应用修改vpc网络&#34;&gt;2.应用修改vpc网络&lt;/h3&gt;
+&lt;p&gt;点击&lt;strong&gt;应用修改&lt;/strong&gt;使配置之生效。&lt;/p&gt;
+&lt;h3 id=&#34;3添加一条内网dns解析并应用修改vpc网络&#34;&gt;3.添加一条内网dns解析，并应用修改vpc网络&lt;/h3&gt;
+&lt;img src=&#34;../homer/openvpn_dns_push_05.png&#34; width=&#34;60%&#34; height=&#34;60%&#34;&gt;
+&lt;h3 id=&#34;4验证一下配置的内网dns解析是否生效&#34;&gt;4.验证一下配置的内网dns解析是否生效&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;PING localhost (127.0.0.1) 56(84) bytes of data.
+64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.030 ms
+64 bytes from localhost (127.0.0.1): icmp_seq=2 ttl=64 time=0.059 ms
+64 bytes from localhost (127.0.0.1): icmp_seq=3 ttl=64 time=0.058 ms
+^C
+--- localhost ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 1999ms
+rtt min/avg/max/mdev = 0.030/0.049/0.059/0.013 ms
+[root@i-b6s3dvje ~]# ping test
+ping: test: Name or service not known
+[root@i-b6s3dvje ~]# 
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;5如内网dns配置没有生效可以参考以下办法&#34;&gt;5.如内网dns配置没有生效，可以参考以下办法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;重启云服务器的网络&#34;&gt;重启云服务器的网络&lt;/h4&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;systemctl restart networking
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;离开私有网络重新加入&#34;&gt;离开私有网络，重新加入&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;重启云服务器&#34;&gt;重启云服务器&lt;/h4&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;或者手动更改dns配置，参考格式如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@i-tqzv58ti ~]# cat /etc/resolv.conf
+# Generated by NetworkManager
+search localdomain zw2.yiqiyun.net.cn
+nameserver 172.20.255.254
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;6重新验证一下dns配置是否生效&#34;&gt;6.重新验证一下dns配置是否生效&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[root@i-b6s3dvje ~]# ping test.localdomain
+PING test.localdomain (172.20.100.100) 56(84) bytes of data.
+64 bytes from test.localdomain (172.20.100.100): icmp_seq=1 ttl=64 time=0.027 ms
+64 bytes from test.localdomain (172.20.100.100): icmp_seq=2 ttl=64 time=0.061 ms
+64 bytes from test.localdomain (172.20.100.100): icmp_seq=3 ttl=64 time=0.060 ms
+^C
+--- test.localdomain ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2000ms
+rtt min/avg/max/mdev = 0.027/0.049/0.061/0.016 ms
+[root@i-b6s3dvje ~]# ping test
+PING test.localdomain (172.20.100.100) 56(84) bytes of data.
+64 bytes from test.localdomain (172.20.100.100): icmp_seq=1 ttl=64 time=0.028 ms
+64 bytes from test.localdomain (172.20.100.100): icmp_seq=2 ttl=64 time=0.057 ms
+64 bytes from test.localdomain (172.20.100.100): icmp_seq=3 ttl=64 time=0.097 ms
+^C
+--- test.localdomain ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2000ms
+rtt min/avg/max/mdev = 0.028/0.060/0.097/0.029 ms
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 修改 VPC 基本信息</title>
+      <link>/network/vpc/manual/vpcnet/20_modify_vpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vpcnet/20_modify_vpc/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;修改 VPC 网络的名称、描述、标签及所属项目。&lt;/p&gt;
+&lt;h2 id=&#34;修改名称及描述&#34;&gt;修改名称及描述&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找到需要修改的 VPC 网络，单击&lt;strong&gt;更多操作&lt;/strong&gt; &amp;gt; &lt;strong&gt;修改&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新输入 VPC 网络的名称及描述。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/501020_mdy_vpc.png&#34; alt=&#34;mdy_vpc&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;绑定及解绑标签&#34;&gt;绑定及解绑标签&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;登录管理控制台。&lt;/li&gt;
+&lt;li&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/li&gt;
+&lt;li&gt;找到需要修改的 VPC 网络，在 VPC 的&lt;strong&gt;基础属性&lt;/strong&gt;区域，将鼠标移到&lt;strong&gt;标签&lt;/strong&gt;处。&lt;/li&gt;
+&lt;li&gt;根据需要执行：
+&lt;ul&gt;
+&lt;li&gt;绑定标签：点击&lt;img src=&#34;../../../_images/501020_del_icon.png&#34; alt=&#34;del_icon&#34; style=&#34;zoom:50%;&#34; /&gt;，选择需要绑定的标签，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;解绑标签：点击&lt;img src=&#34;../../../_images/501020_add_icon.png&#34; alt=&#34;add_icon&#34; style=&#34;zoom:50%;&#34; /&gt;，选择需要解绑的标签，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;加入及移出项目&#34;&gt;加入及移出项目&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找到需要添加项目的 VPC 网络，根据需要执行：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;加入项目：单击&lt;strong&gt;更多操作&lt;/strong&gt; &amp;gt; &lt;strong&gt;添加到项目&lt;/strong&gt;，选择需要加入的项目，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;移出项目：单击&lt;strong&gt;更多操作&lt;/strong&gt; &amp;gt; &lt;strong&gt;从项目中移除&lt;/strong&gt;，点击&lt;strong&gt;确认&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 在Linux客户端中配置OpenVPN</title>
+      <link>/network/vpc/faq/openvpn_building_linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/openvpn_building_linux/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;需求背景&#34;&gt;需求背景&lt;/h2&gt;
+&lt;p&gt;客户希望自己在办公或者家庭网络能拨入到vpc的私有网络，以实现内网访问云上部署的业务，因为vpn隧道是加密通讯的，安全性比较可靠，另外使用起来比较方便。以下介绍的是如何在Linux云服务器部署OpenVPN客户端，以Cent OS镜像为例。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;1-安装openvpn&#34;&gt;1. 安装OpenVPN&lt;/h3&gt;
+&lt;p&gt;Cent OS 7.9 安装OpenVPN&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum install epel-release
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum -y install OpenVPN
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其他发行版本，如 Ubuntu 16.04 安装OpenVPN&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;apt-get install OpenVPN
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-配置openvpn服务端&#34;&gt;2. 配置OpenVPN服务端&lt;/h3&gt;
+&lt;p&gt;默认采用的是udp协议1194端口，推荐使用tcp协议1194端口，会比较稳定，采用默认证书的验证方式即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_building_linux/openvpn_building_linux_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;配置提交以后需要点击&lt;strong&gt;应用修改&lt;/strong&gt;更新 vpc 才能生效。&lt;/p&gt;
+&lt;p&gt;以上配置完成以后，需要配置安全组的策略，在vpc详情界面找到安全组，添加下行TCP 1194端口协议，并更新安全组。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_building_linux/openvpn_building_linux_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_building_linux/openvpn_building_linux_4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-配置openvpn客户端&#34;&gt;3. 配置OpenVPN客户端&lt;/h3&gt;
+&lt;p&gt;下载OpenVPN客户端证书配置文件，可以存放在/etc/openvpn 目录下。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_building_linux/openvpn_building_linux_5.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;解压文件到当前目录。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum -y install unzip
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unzip rtr-bs82amzk-certs.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后需要将 conf 文件中的 user 和 group 字段设置为本地用户和组。本文设置为 root/root，其余参数均保持不变。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat rtr-bs82amzk.conf 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# openvpn client linux configuration sample&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;client
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dev tun
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;proto tcp
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;remote &amp;lt;x.x.x.x&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1194&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;#&amp;lt;x.x.x.x&amp;gt;为vpc绑定的公网ip&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;resolv-retry infinite
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nobind
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;user root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;group root
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;persist-key
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;persist-tun
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ca yunify-ca.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert rtr-bs82amzk.crt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;key rtr-bs82amzk.key
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tls-auth rtr-bs82amzk.takey &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#auth-user-pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cipher AES-256-CBC
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;comp-lzo
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mssfix &lt;span style=&#34;color:#ae81ff&#34;&gt;1400&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后通过配置文件启动OpenVPN，下面为正常启动的日志.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;openvpn rtr-bs82amzk.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;../openvpn_building_linux/openvpn_building_linux_6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-验证网络是否正常&#34;&gt;4. 验证网络是否正常&lt;/h3&gt;
+&lt;p&gt;通过ip命令可以看到网卡已正常获取到，也能正常ping通vpc下的主机。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../openvpn_building_linux/openvpn_building_linux_7.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 在Windows客户端中配置OpenVPN</title>
+      <link>/network/vpc/faq/openvpn_building/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/faq/openvpn_building/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;需求背景&#34;&gt;需求背景&lt;/h2&gt;
+&lt;p&gt;客户希望自己在办公或者家庭网络能拨入到vpc的私有网络，以实现内网访问云上部署的业务，因为vpn隧道是加密通讯的，安全性比较可靠，另外使用起来比较方便；以下介绍的是如何在windows云服务器部署openvpn客户端。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;h3 id=&#34;1下载openvpn客户端windows版本&#34;&gt;1、下载openvpn客户端windows版本&lt;/h3&gt;
+&lt;h3 id=&#34;2安装openvpn步骤&#34;&gt;2、安装openvpn步骤&lt;/h3&gt;
+&lt;p&gt;缺省情况下，OpenVPN 将被安装到 &lt;code&gt;C:\Program Files\OpenVPN&lt;/code&gt; 目录中，按照默认选项安装即可，安装时选择”OpenVPN GUI”模块即可安装客户端，以下是完整的安装过程截图。&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_building_01.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_02.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_03.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_04.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_05.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_06.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_07.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_08.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;h3 id=&#34;3配置openvpn服务端&#34;&gt;3、配置openvpn服务端&lt;/h3&gt;
+&lt;p&gt;默认采用的是udp协议1194端口，推荐使用tcp协议1194端口，会比较稳定；采用默认证书的验证方式即可。&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_building_09.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;p&gt;配置提交以后需要点击&lt;strong&gt;应用修改&lt;/strong&gt;更新 vpc 才能生效。&lt;/p&gt;
+&lt;p&gt;以上配置完成以后，需要配置安全组的策略，在vpc详情界面找到安全组&lt;/p&gt;
+&lt;p&gt;添加下行1194端口协议，并更新安全组。&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_building_13.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;h3 id=&#34;4配置openvpn客户端&#34;&gt;4、配置openvpn客户端&lt;/h3&gt;
+&lt;p&gt;下载openvpn客户端证书配置文件，并保存在默认的&lt;code&gt;C:\Program Files\OpenVPN&lt;/code&gt; 目录；&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_building_15.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;p&gt;解压即可&lt;/p&gt;
+&lt;img src=&#34;../homer/openvpn_building_16.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_17.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_18.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_19.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;img src=&#34;../homer/openvpn_building_20.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;h3 id=&#34;5验证网络是否正常&#34;&gt;5、验证网络是否正常&lt;/h3&gt;
+&lt;h4 id=&#34;首先检查openvpn的网卡是否正常获取到ip地址一般为10255xx&#34;&gt;首先检查openvpn的网卡是否正常获取到ip地址，一般为10.255.x.x&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;以太网适配器 以太网:
+
+   连接特定的 DNS 后缀 . . . . . . . :
+   描述. . . . . . . . . . . . . . . : TAP-Windows Adapter V9
+   物理地址. . . . . . . . . . . . . : 00-FF-18-31-F0-75
+   DHCP 已启用 . . . . . . . . . . . : 是
+   自动配置已启用. . . . . . . . . . : 是
+   本地链接 IPv6 地址. . . . . . . . : fe80::3461:44e1:d1f9:ece3%39(首选)
+   IPv4 地址 . . . . . . . . . . . . : 10.255.1.6(首选)
+   子网掩码  . . . . . . . . . . . . : 255.255.255.252
+   获得租约的时间  . . . . . . . . . : 2021年2月16日 23:42:22
+   租约过期的时间  . . . . . . . . . : 2022年2月16日 23:42:22
+   默认网关. . . . . . . . . . . . . :
+   DHCP 服务器 . . . . . . . . . . . : 10.255.1.5
+   DHCPv6 IAID . . . . . . . . . . . : 654376728
+   DHCPv6 客户端 DUID  . . . . . . . : 00-01-00-01-26-78-97-2B-00-0C-29-27-F1-0C
+   DNS 服务器  . . . . . . . . . . . : fec0:0:0:ffff::1%1
+                                       fec0:0:0:ffff::2%1
+                                       fec0:0:0:ffff::3%1
+   TCPIP 上的 NetBIOS  . . . . . . . : 已启用
+
+C:\Users\admin&amp;gt;
+
+C:\Users\admin&amp;gt;ping 10.255.1.6
+
+正在 Ping 10.255.1.6 具有 32 字节的数据:
+来自 10.255.1.6 的回复: 字节=32 时间&amp;lt;1ms TTL=128
+来自 10.255.1.6 的回复: 字节=32 时间&amp;lt;1ms TTL=128
+来自 10.255.1.6 的回复: 字节=32 时间&amp;lt;1ms TTL=128
+来自 10.255.1.6 的回复: 字节=32 时间&amp;lt;1ms TTL=128
+
+10.255.1.6 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 0ms，最长 = 0ms，平均 = 0ms
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;验证vpc私有网络下的vm看是否能正常联通&#34;&gt;验证vpc私有网络下的vm，看是否能正常联通&lt;/h4&gt;
+&lt;img src=&#34;../homer/openvpn_building_21.png&#34; width=&#34;60%&#34; height=&#34;40%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C:\Users\admin&amp;gt;ping 172.25.10.2
+
+正在 Ping 172.25.10.2 具有 32 字节的数据:
+来自 172.25.10.2 的回复: 字节=32 时间=73ms TTL=62
+来自 172.25.10.2 的回复: 字节=32 时间=36ms TTL=62
+来自 172.25.10.2 的回复: 字节=32 时间=33ms TTL=62
+来自 172.25.10.2 的回复: 字节=32 时间=32ms TTL=62
+
+172.25.10.2 的 Ping 统计信息:
+    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+    最短 = 32ms，最长 = 73ms，平均 = 43ms
+
+C:\Users\admin&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 在私有网络中创建资源</title>
+      <link>/network/vpc/manual/vxnet/20_add_resource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vxnet/20_add_resource/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;云资源不可以直接部署在 VPC 网络下，必须属于 VPC 网络内的一个私有网络（子网）。您可以在私有网络中创建云资源。&lt;/p&gt;
+&lt;h2 id=&#34;前提条件&#34;&gt;前提条件&lt;/h2&gt;
+&lt;p&gt;已创建私有网络并连接到 VPC 网络。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击私有网络所属的VPC网络，进入到该 VPC 的私有网络管理页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;strong&gt;资源列表&lt;/strong&gt;区域，点击&lt;strong&gt;创建资源&lt;/strong&gt;，然后选择要创建的资源。&lt;/p&gt;
+&lt;p&gt;支持在私有网络中创建的云资源包括云服务器、共享存储 vSAN 及 NAS。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502020_add_resource.png&#34; alt=&#34;add_resource&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在资源创建页面，按照页面提示配置资源参数，点击&lt;strong&gt;提交&lt;/strong&gt;完成创建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 绑定网络 ACL</title>
+      <link>/network/vpc/manual/vxnet/25_bind_acl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vxnet/25_bind_acl/</guid>
+      <description>
+        
+        
+        &lt;p&gt;网络 ACL 是 VPC 网络中的网络访问控制功能，您可以自定义网络 ACL 规则，然后将网络 ACL 与私有网络绑定，实现对私有网络中中弹性网卡 ENI（Elastic Network Interface）的流量的访问控制。&lt;/p&gt;
+&lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;您已经创建了网络 ACL 后，可以在私有网络中绑定、更改、解绑网络 ACL。每个私有网络仅允许绑定一个网络 ACL。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击私有网络所属的 VPC 网络，进入到该 VPC 的私有网络管理页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在页面左侧的私有网络列表中，右键单击待绑定网络ACL的私有网络，选择 &lt;strong&gt;网络 ACL&lt;/strong&gt;  &amp;gt; &lt;strong&gt;绑定&lt;/strong&gt;，便可绑定已创建的网络 ACL。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502025_bind_acl.png&#34; alt=&#34;bind_acl&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击私有网络列表右侧 &lt;strong&gt;网络 ACL&lt;/strong&gt; 页签，便可查看到具体的 ACL 规则。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502025_acl_page.png&#34; alt=&#34;acl_page&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;后续操作&#34;&gt;后续操作&lt;/h2&gt;
+&lt;p&gt;根据需要，您还可在当前页面执行如下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;切换网络 ACL：点击&lt;strong&gt;切换 ACL&lt;/strong&gt;，选择需要绑定的其他网络 ACL，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;解绑网络 ACL：点击&lt;strong&gt;解除绑定&lt;/strong&gt;，在提示框中点击&lt;strong&gt;确认&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;添加 ACL 规则：点击&lt;strong&gt;添加 ACL 规则&lt;/strong&gt;，可创建新的网络 ACL 规则。&lt;/li&gt;
+&lt;li&gt;修改 ACL 规则：勾选待修改的网络 ACL 规则，点击&lt;strong&gt;更多操作&lt;/strong&gt; &amp;gt; &lt;strong&gt;修改 ACL&lt;/strong&gt; 规则，可修改所选 ACL 规则。&lt;/li&gt;
+&lt;li&gt;删除 ACL 规则：勾选待删除的网络 ACL 规则，点击&lt;strong&gt;更多操作&lt;/strong&gt; &amp;gt; &lt;strong&gt;删除 ACL&lt;/strong&gt; 规则，可删除所选 ACL 规则。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 修改 VPC 规格类型</title>
+      <link>/network/vpc/manual/vpcnet/25_mdy_type/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vpcnet/25_mdy_type/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;当已创建 VPC 网络已不适用您当前的网络规模，您可以对 VPC 网络进行规格升级或降级。&lt;/p&gt;
+&lt;h2 id=&#34;操作须知&#34;&gt;操作须知&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;免费型 VPC 不支持直接升级到其他规格。&lt;/li&gt;
+&lt;li&gt;若您当前使用的非免费型 VPC 网络绑定了公网 IP 或告警策略，降为免费型 VPC 过程中，将自动进行解绑，且降级后无法恢复。&lt;/li&gt;
+&lt;li&gt;若您当前使用的非免费型 VPC 网络中运行着弹性容器实例（ECI）、AppCenter 集群、边界路由器等需要访问外网的业务，降为免费型 VPC 后将无法访问外网。&lt;/li&gt;
+&lt;li&gt;若因误操作导致部署在 VPC 网络中的业务无法访问外网或无法被外网访问，您可以 &lt;a href=&#34;http://console.yiqiyun.net.cn/tickets/&#34;&gt;提交工单&lt;/a&gt; 向技术支持寻求帮助。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;找到需要更改的 VPC 网络，点击&lt;strong&gt;更多操作&lt;/strong&gt; &amp;gt; &lt;strong&gt;扩容&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在弹出的页面中，修改类型，点击&lt;strong&gt;提交&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;若修改为免费型 ，将在页面下方显示如下图所示提示信息，请仔细阅读提示信息，谨慎修改。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/501025_mdy_type.png&#34; alt=&#34;mdy_type&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 绑定公网 IP</title>
+      <link>/network/vpc/manual/vpcnet/26_bind_eip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vpcnet/26_bind_eip/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;您可以为您的VPC 网络绑定一个公网 IP，实现 VPC 网络中的云资源对公网的访问。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;免费型&lt;/strong&gt; VPC 不支持绑定公网 IP。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入&lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在 VPC 名称下方的&lt;strong&gt;管理路由器属性&lt;/strong&gt;区域，可查看到当前VPC网络的&lt;strong&gt;公网 IPV4&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;/network/vpc/_images/501025_mdy_route_para.png&#34; alt=&#34;mdy_route_para&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将鼠标移至公网IPv4，点击&lt;img src=&#34;/network/vpc/_images/501020_add_icon.png&#34; alt=&#34;add_icon&#34; style=&#34;zoom:50%;&#34; /&gt;图标。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择需要绑定的公网 IP，点击&lt;strong&gt;提交&lt;/strong&gt;完成绑定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;后续操作&#34;&gt;后续操作&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;修改公网IP：在VPC网络的&lt;strong&gt;管理路由器属性&lt;/strong&gt;区域，将鼠标移至&lt;strong&gt;公网 IPv4&lt;/strong&gt;，点击&lt;img src=&#34;/network/vpc/_images/501020_mdfy_icon.png&#34; alt=&#34;mdfy_icon&#34; style=&#34;zoom:50%;&#34; /&gt;图标，选择其他公网 IP，点击&lt;strong&gt;提交&lt;/strong&gt;完成修改。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解绑公网IP：在VPC网络的&lt;strong&gt;管理路由器属性&lt;/strong&gt;区域，将鼠标移至&lt;strong&gt;公网 IPv4&lt;/strong&gt;，点击&lt;img src=&#34;/network/vpc/_images/501020_del_icon.png&#34; alt=&#34;del_icon&#34; style=&#34;zoom:50%;&#34; /&gt;图标，弹出提示框，点击&lt;strong&gt;确认&lt;/strong&gt;完成解绑。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Network: 绑定路由表</title>
+      <link>/network/vpc/manual/vxnet/30_bind_route/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/network/vpc/manual/vxnet/30_bind_route/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;操作场景&#34;&gt;操作场景&lt;/h2&gt;
+&lt;p&gt;创建路由表后，您可以在私有网络中绑定或解绑路由表。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;一个私有网络只能绑定一张路由表，但一张路由表可以绑定到多个私有网络。当路由表绑定给多个私有网络时，请您谨慎增删或者修改规则，建议您在复制后的路由表中修改。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在控制台导航栏中，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;网络服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;VPC 网络&lt;/strong&gt;，进入 &lt;strong&gt;VPC 网络&lt;/strong&gt;页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击私有网络所属的 VPC 网络，进入到该 VPC 的私有网络管理页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在私有网络列表点击需要绑定路由表的私有网络，再点击右侧的&lt;strong&gt;路由表&lt;/strong&gt;页签。&lt;/p&gt;
+&lt;img src=&#34;../../../_images/502030_bind_route.png&#34; alt=&#34;bind_route&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击&lt;strong&gt;绑定路由表&lt;/strong&gt;，选择要绑定的路由表，点击&lt;strong&gt;提交&lt;/strong&gt;，完成绑定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;后续操作&#34;&gt;后续操作&lt;/h2&gt;
+&lt;p&gt;根据需要，您还可在当前页面对路由表执行如下操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加路由规则：点击&lt;strong&gt;添加路由&lt;/strong&gt;，在弹出的页面中填写路由规则，点击&lt;strong&gt;提交&lt;/strong&gt;。添加路由规则后，&lt;/li&gt;
+&lt;li&gt;解绑路由表：点击&lt;strong&gt;移除路由表&lt;/strong&gt;，即可解除路由表与私有网络的绑定。&lt;/li&gt;
+&lt;li&gt;更新路由表：当路由表信息发生变化时，点击&lt;strong&gt;应用修改&lt;/strong&gt;即可更新路由表状态应用最新路由规则或路由策略。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

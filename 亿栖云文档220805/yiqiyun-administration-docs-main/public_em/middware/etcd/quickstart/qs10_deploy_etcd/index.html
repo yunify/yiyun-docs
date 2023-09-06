@@ -1,0 +1,1570 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="keywords" content="etcd">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>创建 etcd 集群 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/middware/etcd/" class="has-text-primary">存储服务 etcd</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">快速入门</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">创建 etcd 集群</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">快速入门</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  消息队列 Kafka
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/kafka/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/news/prodoct_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是消息队列 Kafka</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quick-start/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/quick-start/quick_start/"
+      class="menu__title  "
+      data-depth="1">创建 Kafka 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/kafka_manager/"
+      class="menu__title  "
+      data-depth="1">Kafka-manager 配置</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/cluster_use/"
+      class="menu__title  "
+      data-depth="1">集群使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/kafka_client/"
+      class="menu__title  "
+      data-depth="1">Kafka 客户端命令行简介</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/notice/"
+      class="menu__title  "
+      data-depth="1">注意事项</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  消息队列 RabbitMQ
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/rabbitmq/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/news/prodoct_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是 RabbitMQ</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/intro/func/"
+      class="menu__title  "
+      data-depth="1">产品优势</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/intro/artic/"
+      class="menu__title  "
+      data-depth="1">产品架构</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/quickstart/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/quickstart/quick_start/"
+      class="menu__title  "
+      data-depth="1">创建 RabbitMQ 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/cluster_use/"
+      class="menu__title  "
+      data-depth="1">集群使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmq_management/"
+      class="menu__title  "
+      data-depth="1">rabbitmq_management 使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmqcli/"
+      class="menu__title  "
+      data-depth="1">rabbitmqcli 使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmq_admin/"
+      class="menu__title  "
+      data-depth="1">rabbitmqadmin 使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmq_web_http/"
+      class="menu__title  "
+      data-depth="1">rabbitmq web http 命令使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/setup_mirror/"
+      class="menu__title  "
+      data-depth="1">设置镜像队列 HA</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/faq/notice/"
+      class="menu__title  "
+      data-depth="1">消息数据如何持久化</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  消息队列 RocketMQ
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/rocketmq/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/news/prodoct_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是消息队列 RocketMQ</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quick-start/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/quick-start/quick_start/"
+      class="menu__title  "
+      data-depth="1">创建 RocketMQ</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/cluster_use/"
+      class="menu__title  "
+      data-depth="1">集群使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/rocketmq_console/"
+      class="menu__title  "
+      data-depth="1">RocketMQ Console使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/rocketmq_cli/"
+      class="menu__title  "
+      data-depth="1">RocketMQ CLI命令示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/base_test/"
+      class="menu__title  "
+      data-depth="1">基准测试</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/faq/how_get_log/"
+      class="menu__title  "
+      data-depth="1">如何自助获取日志？</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  存储服务 etcd
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/etcd/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 etcd 服务</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/billing/main/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/quickstart/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/quickstart/qs10_deploy_etcd/"
+      class="menu__title active "
+      data-depth="1">创建 etcd 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/etcd/quickstart/qs10_deploy_etcd/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/manual/man05_main_operation/"
+      class="menu__title  "
+      data-depth="1">etcd 集群操作</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#创建-etcd-集群">创建 etcd 集群</a>
+      <ul>
+        <li><a href="#基本设置">基本设置</a></li>
+        <li><a href="#etcd-节点配置">etcd 节点配置</a></li>
+        <li><a href="#代理节点设置">代理节点设置</a></li>
+        <li><a href="#网络设置">网络设置</a></li>
+        <li><a href="#服务环境参数设置">服务环境参数设置</a></li>
+        <li><a href="#用户协议">用户协议</a></li>
+      </ul>
+    </li>
+    <li><a href="#配置访问规则">配置访问规则</a>
+      <ul>
+        <li><a href="#添加安全组规则">添加安全组规则</a></li>
+        <li><a href="#添加端口转发规则">添加端口转发规则</a></li>
+      </ul>
+    </li>
+    <li><a href="#连接测试">连接测试</a></li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">快速入门</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>创建 etcd 集群</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-12-01
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	
+	
+
+	
+	<h2 id="创建-etcd-集群">创建 etcd 集群</h2>
+<ol>
+<li>
+<p>登录管理控制台。</p>
+</li>
+<li>
+<p>在顶部菜单栏中，选择<strong>产品与服务</strong> &gt; <strong>消息队列与中间件</strong> &gt; <strong>存储服务 etcd</strong>。</p>
+</li>
+<li>
+<p>点击<strong>立即部署</strong>，进入 etcd 服务的部署页面。</p>
+</li>
+<li>
+<p>在顶部<strong>区域</strong>下拉框中，选择部署区域。</p>
+</li>
+</ol>
+<h3 id="基本设置">基本设置</h3>
+<ol>
+<li>设置 etcd 服务的基本信息，包括集群名称、描述、版本、快速配置、计费方式以及自动备份时间。
+<img src="/middware/etcd/images/basic1.png" alt="basic_info">
+快速配置：若选择<strong>开发测试</strong>或<strong>正式生产</strong>，系统将自动完成节点配置；若选择<strong>自定义</strong>，则需要手动进行<a href="#">etcd节点配置</a><a href="#%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE">及代理节点设置</a>。</li>
+</ol>
+<h3 id="etcd-节点配置">etcd 节点配置</h3>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>仅选择自定义部署时才需要配置。</p>
+</blockquote>
+<p><img src="/middware/etcd/images/etcd_node1.png" alt="etcd_node1"></p>
+<p>设置 etcd 节点的 CPU 、内存、数量、实例类型及硬盘容量。</p>
+<h3 id="代理节点设置">代理节点设置</h3>
+<p><img src="/middware/etcd/images/proxyconf1.png" alt="proxyconf"></p>
+<p>设置代理节点的 CPU 、内存、数量及实例类型。</p>
+<h3 id="网络设置">网络设置</h3>
+<p><img src="/middware/etcd/images/netconf.png" alt="net"></p>
+<p>选择VPC 网络、私有网络、安全组及节点 IP。</p>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>若无可选的 VPC 网络或私有网络，请根据界面提示新建。</p>
+</blockquote>
+<h3 id="服务环境参数设置">服务环境参数设置</h3>
+<p><img src="/middware/etcd/images/envconf1.png" alt="envconf"></p>
+<ul>
+<li>
+<p><strong>etcd autocompact</strong>：表示自动清理历史数据的时间间隔，单位是小时，比如 1 表示每隔一小时清理一次数据；默认为 0 表示不自动清除。</p>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>每次对 etcd 键值的更新或设置操作都会被记录在数据文件中，可开启定时自动进行数据清理以防止性能下降和空间耗尽。相关原理可参考官方说明文档 <a href="https://github.com/etcd-io/etcd/blob/release-3.2/Documentation/op-guide/maintenance.md#history-compaction">Compaction</a>。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>etcd quota-backend-bytes</strong>：存储大小限制，单位是字节，范围为 2147483648 - 8589934592，默认大小为 2147483648字节（即2GB）。</p>
+</li>
+</ul>
+<h3 id="用户协议">用户协议</h3>
+<p>确认接受并勾选用户协议，点击<strong>提交</strong>，开始创建 etcd 集群。</p>
+<p>etcd 创建完成之后，您可以查看每个节点的运行状态。当节点的服务状态显示为<strong>正常</strong>状态，表示该节点启动正常。 当每个节点都启动正常后 etcd 集群显示为“活跃”状态，表示您已经可以正常使用 etcd 服务了。</p>
+<h2 id="配置访问规则">配置访问规则</h2>
+<h3 id="添加安全组规则">添加安全组规则</h3>
+<p>选择<strong>产品与服务</strong> &gt; <strong>安全服务</strong> &gt; <strong>安全组</strong>，进入安全组页面，找到节点所属安全组，添加安全组规则。</p>
+<p><img src="/middware/etcd/images/firewall1.png" alt="firewall1"></p>
+<p>起始端口设置为目标端口，协议根据需求选择（UDP/TCP)。</p>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>添加后需要点击<strong>应用修改</strong>将设置同步，否则不会生效。</p>
+</blockquote>
+<h3 id="添加端口转发规则">添加端口转发规则</h3>
+<p>选择<strong>产品与服务</strong> &gt; <strong>网络服务</strong> &gt; <strong>VPC 网络</strong>，进入VPC 网络管理页面，找到节点所属 VPC，在 VPC 详情页，点击<strong>管理配置</strong> &gt; <strong>端口转发</strong> &gt; <strong>添加规则</strong>， 添加端口转发规则。</p>
+<p><img src="/middware/etcd/images/portforward.png" alt="portforward"></p>
+<p>源端口选择协议，端口，然后填入私网 IP 的地址，协议和端口。</p>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>添加后点击<strong>应用修改</strong>将设置同步，否则不会生效。</p>
+</blockquote>
+<h2 id="连接测试">连接测试</h2>
+<p>您可以在与 etcd 集群节点同一私有网络或跨网络的客户端上进行连接测试。</p>
+<p>测试前请先下载 <a href="https://github.com/etcd-io/etcd/releases/tag/v3.2.24">etcd</a> 并解压。</p>
+<p>现假设客户端和 etcd 在同一私有网络，etcd 集群有三个节点，IP 地址分别为192.168.100.10、192.168.100.11、192.168.100.12， 您可以通过如下命令连接 etcd：</p>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>etcdctl 支持 v2 和 v3 两个版本，以下以 v3 为例，详细说明请查阅<a href="https://github.com/etcd-io/etcd/tree/v3.2.24/etcdctl">官方文档</a>。</p>
+</blockquote>
+<pre tabindex="0"><code># ETCDCTL_API=3 ./etcdctl --endpoints http://192.168.100.10:2379,http://192.168.100.11:2379,http://192.168.100.12:2379 endpoint health
+</code></pre><p>同时该应用也提供了 REST 接口，详情请参考<a href="https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html#reading-and-writing-to-etcd">官方文档</a>。</p>
+
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

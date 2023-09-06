@@ -1,0 +1,64 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 运维工具</title>
+    <link>/operation/tools/</link>
+    <description>Recent content in 运维工具 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/operation/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Operation: 动态与公告</title>
+      <link></link>
+      <pubDate>Sun, 28 Feb 2021 10:08:56 +0900</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Operation: 产品简介</title>
+      <link>/operation/tools/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/operation/tools/intro/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;运维工具&#34;&gt;运维工具&lt;/h2&gt;
+&lt;p&gt;运维管理的工具包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定时器&lt;/li&gt;
+&lt;li&gt;标签&lt;/li&gt;
+&lt;li&gt;操作日志&lt;/li&gt;
+&lt;li&gt;回收站&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Operation: 操作指南</title>
+      <link></link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

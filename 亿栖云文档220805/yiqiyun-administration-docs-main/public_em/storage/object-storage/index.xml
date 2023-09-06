@@ -1,0 +1,245 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 对象存储</title>
+    <link>/storage/object-storage/</link>
+    <description>Recent content in 对象存储 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/storage/object-storage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: 动态与公告</title>
+      <link></link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 产品简介</title>
+      <link></link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 计费指南</title>
+      <link></link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 操作指南</title>
+      <link>/storage/object-storage/manual/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/manual/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云对象存储服务为用户提供了一个在线文件存储和访问的平台。用户可以将数据、日志、静态分发资源等多种文件类型，通过控制台传到一个 Bucket 中，以供 HTTP 访问或数据分析使用。与此同时，亿栖云对象存储还提供非常丰富的 API 以及 SDK，用于操作及管理相应的资源。&lt;/p&gt;
+&lt;p&gt;详细操作步骤可参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/storage/object-storage/manual/console/overview/&#34;&gt;Console 操作指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/storage/object-storage/manual/tool/&#34;&gt;客户端工具&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/storage/object-storage/manual/third_party_integration/&#34;&gt;第三方数据集成&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 最佳实践</title>
+      <link>/storage/object-storage/beat-practices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/beat-practices/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云对象存储服务提供了一个在线文件存储和访问平台，您可以将数据、日志、静态分发资源等多种文件类型，通过管理控制台或 Object Storage API 传到一个 Bucket 中，以供 HTTP 访问或数据分析使用。&lt;/p&gt;
+&lt;p&gt;本文档描述对象存储的最佳实践方式，以下是涉及的主要内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;migrate/&#34;&gt;数据迁移方案&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;migrate/#id2&#34;&gt;被动触发迁移 - 外部镜像&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;migrate/#fetch-api&#34;&gt;用户主动迁移 - Fetch API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;migrate/#qscamel&#34;&gt;用户主动迁移 - qscamel&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;migrate/#id4&#34;&gt;推荐迁移步骤&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;backup/&#34;&gt;实时增量数据备份解决方案&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;backup/#id2&#34;&gt;环境要求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;backup/#id3&#34;&gt;软件配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;backup/#id4&#34;&gt;使用方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;app_integration/&#34;&gt;移动 App 接入方案&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;app_integration/#id1&#34;&gt;准备工作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;app_integration/&#34;&gt;使用亿栖云 SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;app_integration/#id2&#34;&gt;开发者实现签名服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;app_integration/#post&#34;&gt;表单 POST 上传&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;app_integration/#id3&#34;&gt;请求参数签名&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;web_hosting/&#34;&gt;静态网站托管方案&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;web_hosting/#id2&#34;&gt;主要优势&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;web_hosting/#id3&#34;&gt;应用场景&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;web_hosting/#id4&#34;&gt;静态网站托管使用流程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;web_hosting/#id5&#34;&gt;对比传统部署方式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;web_hosting/#web&#34;&gt;Web 服务静态化拆分样例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: API 参考</title>
+      <link>/storage/object-storage/api/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./overview&#34;&gt;概述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./common_header&#34;&gt;公共字段&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./metadata&#34;&gt;对象元数据&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./error_code&#34;&gt;错误信息&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../api/bucket/&#34;&gt;Bucket 相关操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../api/object/&#34;&gt;Object 相关操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../api/service/&#34;&gt;Service 相关操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../api/practices/&#34;&gt;API 使用示例&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 常见问题</title>
+      <link></link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: AWS S3 兼容</title>
+      <link>/storage/object-storage/s3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/s3/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为了使众多基于 AWS S3 开发的应用程序、SDK、及第三方服务在不修改代码的前提下，更容易的接入到亿栖云对象存储，亿栖云对象存储兼容了 AWS S3 的接口。&lt;/p&gt;
+&lt;p&gt;由于亿栖云对象存储和 AWS S3 所提供的功能有部分差异，且两者所依托的基础架构和账号体系也不尽相同，所以并没有做到完全兼容 AWS S3 所有接口，但已经做到重要的功能已都兼容。每个接口的兼容程度将在后文列出。&lt;/p&gt;
+&lt;p&gt;AWS S3 兼容接口的设计目标，是为了尽可能的方便那些曾基于 AWS S3 而开发的应用接入到亿栖云对象存储。如果您的应用刚刚着手开发，或者比较容易修改，强烈建议您基于亿栖云对象存储的原生接口进行开发，因为原生接口更加简洁易用，且能在第一时间体验到亿栖云对象存储的最新、最完整的功能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;备注：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;更多 AWS S3 接口使用指南可查阅 &lt;a href=&#34;http://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html&#34;&gt;AWS 官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;AWS S3 兼容接口暂不支持自定义域名访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;访问方式&#34;&gt;访问方式&lt;/h2&gt;
+&lt;p&gt;和亿栖云对象存储原生接口一样，AWS S3 兼容接口也支持两种形式的访问地址。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;地址格式&lt;/th&gt;
+&lt;th&gt;示例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Path&lt;/td&gt;
+&lt;td&gt;s3.&lt;zone-id&gt;.is.yiqiyun.com/&lt;bucket-name&gt;/&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://s3.jn1.is.yiqiyun.com/mybucket/mykey&#34;&gt;https://s3.jn1.is.yiqiyun.com/mybucket/mykey&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Virtual-host&lt;/td&gt;
+&lt;td&gt;&lt;bucket-name&gt;.s3.&lt;zone-id&gt;.is.yiqiyun.com/&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://mybucket.s3.jn1.is.yiqiyun.com/mykey&#34;&gt;https://mybucket.s3.jn1.is.yiqiyun.com/mykey&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;访问地址&lt;/strong&gt; 在 AWS S3 语境里被称为 &lt;a href=&#34;http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region&#34;&gt;Endpoint&lt;/a&gt;。当您的请求地址定为以上任何一种风格时，您将开始使用 AWS S3 接口访问亿栖云对象存储服务。&lt;/p&gt;
+&lt;p&gt;除了请求 Host 不同，所有请求头、请求正文、签名方式都应该符合 AWS S3 的规范。您的应用看到的仿佛是 AWS S3 服务，但实际上操作的是亿栖云对象存储。&lt;/p&gt;
+&lt;h2 id=&#34;兼容签名验证&#34;&gt;兼容签名验证&lt;/h2&gt;
+&lt;p&gt;AWS S3 兼容接口同时支持签名方法 AWS Signature Version 2 和 AWS Signature Version 4，均实现了请求头签名和参数签名方式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS Signature V2 签名方法请查阅 &lt;a href=&#34;http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html&#34;&gt;Signing and Authenticating REST Requests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;AWS Signature V4 签名方法请查阅 &lt;a href=&#34;http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html&#34;&gt;Authenticating Requests (AWS Signature Version 4)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;在签名过程中，使用亿栖云密钥对代替 AWS 密钥对 (AWS Access Key)。Signature V4 版本中，使用亿栖云 Zone 代替 AWS Region。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;兼容api&#34;&gt;兼容API&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;compatible_apis/&#34;&gt;兼容API列表&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;兼容请求头&#34;&gt;兼容请求头&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;compatible_headers/&#34;&gt;兼容请求头列表&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用示例&#34;&gt;使用示例&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;examples/&#34;&gt;使用示例&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: SDK</title>
+      <link>/storage/object-storage/sdk/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/sdk/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云对象存储提供了覆盖主流编程语言的 SDK，开发者可以利用它们来快速便捷地接入亿栖云对象存储服务。&lt;/p&gt;
+&lt;p&gt;在使用以下 SDK 之前，用户需创建并修改相应的配置文件，以便能正确的使用相应的 SDK。详细步骤可参考 &lt;a href=&#34;/storage/object-storage/manual/tool/qsctl/#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE&#34;&gt;配置文件说明&lt;/a&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./go&#34;&gt;Go SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./python&#34;&gt;Python SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./ruby&#34;&gt;Ruby SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./cpp/&#34;&gt;C/C++ SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./java&#34;&gt;Java SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./javascript&#34;&gt;JavaScript SDK&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./php&#34;&gt;PHP SDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

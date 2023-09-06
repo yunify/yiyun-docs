@@ -1,0 +1,487 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – API指令列表</title>
+    <link>/development_docs/api/command_list/</link>
+    <description>Recent content in API指令列表 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: 云服务器</title>
+      <link>/development_docs/api/command_list/instance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/instance/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云提供一种随时获取的、弹性的计算能力， 这种计算能力的体现就是云服务器 (Instance)。云服务器就是一台配置好了的服务器， 它有您期望的硬件配置、操作系统和网络配置。通常情况下， 您的请求可以在10秒到60秒的时间之内完成，所以您完全可以动态地、弹性使用计算能力。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 硬盘</title>
+      <link>/development_docs/api/command_list/volume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/volume/</guid>
+      <description>
+        
+        
+        &lt;p&gt;硬盘 (Volume) 为云服务器提供块存储设备，它独立于云服务器的生命周期而存在， 可以被连接到任意运行中的云服务器上。注意，硬盘附加到云服务器上后， 您还需要登录到您的云服务器的操作系统中去加载该硬盘。当然， 也可以从云服务器上卸载硬盘、并转至其他云服务器。 注意，请先在您的云服务器的操作系统中卸载硬盘，然后再在亿栖云系统中卸载。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 网卡</title>
+      <link>/development_docs/api/command_list/nic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/nic/</guid>
+      <description>
+        
+        
+        &lt;p&gt;网卡管理接口，可以创建，并挂载网卡到云服务器。它独立于云服务器的生命周期而存在， 可以被连接到任意运行中的云服务器上。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 私有网络</title>
+      <link>/development_docs/api/command_list/vxnet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vxnet/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过亿栖云的SDN（软件定义网络）技术，您可以快速地搭建您专属的私有云环境。 相比于基础网络而言，这个网络可以提供100%的安全隔离，而且有丰富的工具帮助您进行自动化管理。 要使用亿栖云网络，请创建一个路由器 ( 路由器相关 API 可参见 &lt;a href=&#34;../router/&#34;&gt;&lt;em&gt;路由器&lt;/em&gt;&lt;/a&gt; )， 然后再创建一个或多个私有网络并连接到这个路由器， 最后创建云服务器并加入到这些私有网络即可。&lt;/p&gt;
+&lt;p&gt;私有网络用于云服务器之间互联，它类似物理世界中使用交换机（L2 Switch）组成的局域网。 私有网络之间是100%隔离的。&lt;/p&gt;
+&lt;p&gt;亿栖云私有网络有两种类型&lt;/p&gt;
+&lt;p&gt;受管私有网络： 可以使用亿栖云路由器来配置和管理其网络，使网络搭建更方便快捷。&lt;/p&gt;
+&lt;p&gt;自管私有网络： 需要您自行配置和管理网络，适用于对底层网络有特殊需求的用户。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 路由器</title>
+      <link>/development_docs/api/command_list/router/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/router/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过亿栖云的SDN（软件定义网络）技术，您可以快速地搭建您专属的私有云环境。 相比于基础网络而言，这个网络可以提供100%的安全隔离，而且有丰富的工具帮助您进行自动化管理。 要使用亿栖云网络，请创建一个路由器，然后再创建一个或多个私有网络 ( 私有网络相关 API 可参见 &lt;a href=&#34;../vxnet/&#34;&gt;&lt;em&gt;私有网络&lt;/em&gt;&lt;/a&gt; ) 并连接到这个路由器， 最后创建云服务器并加入到这些私有网络即可。&lt;/p&gt;
+&lt;p&gt;亿栖云路由器用于 &lt;strong&gt;受管私有网络&lt;/strong&gt; 之间互联，并提供三项附加服务： DHCP 服务、端口转发、VPN 隧道服务。如果您还希望路由器能接入互联网， 请捆绑一个公网 IP 给该路由器即可。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 公网 IP</title>
+      <link>/development_docs/api/command_list/eip/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/eip/</guid>
+      <description>
+        
+        
+        &lt;p&gt;公网 IP 地址是在互联网上合法的静态 IP 地址。 在亿栖云系统中，公网 IP 地址与您的账户而非特定的资源（云服务器或路由器）关联， 您可以将申请到的公网 IP 地址分配到任意位于基础网络 vxnet-0 中的云服务器或路由器， 并随时可以解绑、再分配到其他云服务器或路由器，如此可以快速替换您的对外云服务器或路由器。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 防火墙</title>
+      <link>/development_docs/api/command_list/sg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sg/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为了加强位于基础网络 vxnet-0 中的云服务器或路由器的安全性， 可以在云服务器或路由器之前放置一个防火墙 (Security Group)。 亿栖云系统为每个用户提供了一个缺省防火墙（ID 之后带有星标）。当然， 您也可以新建更多的防火墙。初始状态下，每个防火墙都不包含任何规则， 即，任何端口都是封闭的，您需要建立规则以打开相应的端口。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;如果你的云服务器使用的是默认防火墙，那么 ping 和 ssh 的端口都是默认打开的，你无需再进行操作。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: WAF</title>
+      <link>/development_docs/api/command_list/waf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/waf/</guid>
+      <description>
+        
+        
+        &lt;p&gt;可配置策略针对Ｗeb流量进行安全防护，以域名为防护单位，支持自定义规则和黑白名单功能。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: SSH 密钥</title>
+      <link>/development_docs/api/command_list/keypair/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/keypair/</guid>
+      <description>
+        
+        
+        &lt;p&gt;该功能仅对 Linux 云服务器有效。亿栖云官方提供的 Linux 镜像是不允许使用密码来 SSH 登录的， 只接受 SSH 公钥/私钥验证身份。您可以新建一个 SSH 密钥，并立刻下载其私钥。 请保管好私钥，因为亿栖云是不保存您的私钥的。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 镜像</title>
+      <link>/development_docs/api/command_list/image/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/image/</guid>
+      <description>
+        
+        
+        &lt;p&gt;镜像 (Image) 是带有操作系统的云服务器模板。 亿栖云官方会提供主流的 Linux、Windows 模板，并根据上游厂商更新版本时及时制作新模板。 用户也可以在将自己名下的云服务器制作成模板，以备后用。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: NFV网络功能虚拟化</title>
+      <link>/development_docs/api/command_list/nfv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/nfv/</guid>
+      <description>
+        
+        
+        &lt;p&gt;网络功能虚拟化，可以创建、删除、修改、查看一个网络组件(NFV)。网络组件用于将多个私有网络中的云服务器连接到外网；它可以加入多个私有网络，绑定多个公网 IP ；各个不同的私有网络可以绑定不同的路由表和防火墙。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 负载均衡器</title>
+      <link>/development_docs/api/command_list/lb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/lb/</guid>
+      <description>
+        
+        
+        &lt;p&gt;负载均衡器可以将来自多个公网地址的访问流量分发到多台云服务器上， 并支持自动检测并隔离不可用的云服务器，从而提高业务的服务能力和可用性。 同时，你还可以随时通过添加或删减云服务器来调整你的服务能力，而且这些操作不会影响业务的正常访问。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 路由表</title>
+      <link>/development_docs/api/command_list/routing_table/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/routing_table/</guid>
+      <description>
+        
+        
+        &lt;p&gt;路由表 (Routing Table) 用于根据目标网络指定不同的下一跳地址，从而实现网络路径的连通和优化。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 资源监控</title>
+      <link>/development_docs/api/command_list/monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取亿栖云资源的监控数据，可设定时间范围及时间间隔， 目前支持对云服务器、硬盘、网络、路由器、负载均衡器的监控。&lt;/p&gt;
+&lt;p&gt;为减少数据传输，在保持数据结构清晰的前提下，我们对监控数据做了压缩处理。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 监控告警</title>
+      <link>/development_docs/api/command_list/alarm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/alarm/</guid>
+      <description>
+        
+        
+        &lt;p&gt;监控告警功能是基于资源层面的监控数据，设置告警条件和通知列表， 有助于及时了解资源使用情况和处理突发事件。&lt;/p&gt;
+&lt;p&gt;AlarmPolicy:&lt;/p&gt;
+&lt;p&gt;监控告警策略，包括设置告警条件和告警行为。 当告警策略跟资源关联后，会为每个关联的资源生成针对此资源的监控告警实体，即 Alarm 。&lt;/p&gt;
+&lt;p&gt;Alarm:&lt;/p&gt;
+&lt;p&gt;具体某个资源的监控告警实体，会根据告警策略中设置的检查周期，定期获取资源监控数据， 判断是否满足告警条件，满足则出发告警行为，并记录到告警历史中。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 备份</title>
+      <link>/development_docs/api/command_list/snapshot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/snapshot/</guid>
+      <description>
+        
+        
+        &lt;p&gt;备份(Snapshot)用于在块设备级别(block device level)上进行硬盘的备份与恢复， 可以同时对多张硬盘做备份（包括系统盘和数据盘），也可以对正在运行的云服务器做在线备份。 一张硬盘可以有多个备份链，每条备份链包括一个全量备份点以及多个增量备份点， 您可以随时从任意一个备份点恢复数据。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: User Data</title>
+      <link>/development_docs/api/command_list/userdata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/userdata/</guid>
+      <description>
+        
+        
+        &lt;p&gt;User Data，即用户自定义数据，帮助用户在创建云服务器时上传一部分用户自己定义的数据，让用户可以创建具有一定定制化的云服务器。 目前支持两种上传模式：字符串和压缩包。 字符串会放置于云服务器 /etc//userdata/userdata.string 文件中；压缩包会解压于根目录。&lt;/p&gt;
+&lt;p&gt;当用户开启 User Data 功能时，同时还提供云服务器的一些系统信息，称为 MetaData。 MetaData 会作为文件放置于 /etc//userdata/ 下，metadata.json 为 JSON 格式，metadata.env 为环境变量格式。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 内网域名别名</title>
+      <link>/development_docs/api/command_list/dns_alias/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/dns_alias/</guid>
+      <description>
+        
+        
+        &lt;p&gt;对于基础网络的云服务器或者路由器，除了提供的默认内网域名，您还可以自定义内网域名的别名 （DNS Alias）。 内网域名别名有更好的可读性，同时可以作为您内网服务的统一域名来访问，避免内网 IP 地址变动及资源 ID 变化带来的影响。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 操作日志</title>
+      <link>/development_docs/api/command_list/job/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/job/</guid>
+      <description>
+        
+        
+        &lt;p&gt;操作日志 (Job) 是用户触发的异步执行动作，比如创建云服务器，销毁云服务器，挂载硬盘等。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 标签</title>
+      <link>/development_docs/api/command_list/tag/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/tag/</guid>
+      <description>
+        
+        
+        &lt;p&gt;标签(Tag) 用于分类分组您的云资源, 更方便日常管理。例如给资源分别绑定生产环境 , 测试环境的标签.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 区域</title>
+      <link>/development_docs/api/command_list/zone/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/zone/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: AppCenter</title>
+      <link></link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 缓存服务</title>
+      <link>/development_docs/api/command_list/cache/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/cache/</guid>
+      <description>
+        
+        
+        &lt;p&gt;缓存服务 (Cache) 可以为您提供高性能的缓存集群，目前支持 Redis 和 Memcached 两种缓存。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: Virtual SAN / NAS</title>
+      <link>/development_docs/api/command_list/s2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/s2/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过亿栖云的 SDS（软件定义存储）技术，您可以快速地搭建您专属的基于 iSCSI 协议的 Virtual SAN 服务。 首先需要创建一个 Virtual SAN 服务器；然后再在其上创建一个或多个目标； 最后在云服务器客户端登录这些目标即可使用。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: Virtual SAN</title>
+      <link>/development_docs/api/command_list/vsan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vsan/</guid>
+      <description>
+        
+        
+        &lt;p&gt;通过亿栖云的 SDS（软件定义存储）技术，您可以快速地搭建您专属的基于 iSCSI 协议的 Virtual SAN 服务。 首先需要创建一个 Virtual SAN 服务器；然后再在其上创建一个或多个目标； 最后在云服务器客户端登录这些目标即可使用。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 资源协作</title>
+      <link>/development_docs/api/command_list/resource_acl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/resource_acl/</guid>
+      <description>
+        
+        
+        &lt;p&gt;我们收到过很多用户各种各样的需求，有说，“希望主账号能管理子账号的资源”， 或者是“开发人员只能使用云桌面功能”，或者是“提供资源分组”等等。总结起来，用户 希望能够在亿栖云控制台上灵活地权限配置，达到不同部门以不同权限访问不同资源的效果。&lt;/p&gt;
+&lt;p&gt;Collaboration 正是这样一种功能。&lt;/p&gt;
+&lt;p&gt;通过 Collaboration ，可以让亿栖云用户通过更细粒度的权限控制，将资源授权给其他用户，实现管理和协作。&lt;/p&gt;
+&lt;p&gt;用一句话概括 Collaboration ，就是可以 将任意资源的特定权限授权给任意用户（包括子账号和其他亿栖云账号） 。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 消息中心及通知列表</title>
+      <link>/development_docs/api/command_list/notification_center/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/notification_center/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: SPAN (Switched Port Analyzer)</title>
+      <link>/development_docs/api/command_list/span/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/span/</guid>
+      <description>
+        
+        
+        &lt;p&gt;定义网络流量镜像的目标地址，一般可以用于网络监控，分析。 加入SPAN的成员都会把网络流量按照SPAN定义的封装方式发送到目标地址。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 子帐户</title>
+      <link>/development_docs/api/command_list/subuser/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/subuser/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 计费</title>
+      <link>/development_docs/api/command_list/billing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/billing/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: SD-WAN</title>
+      <link>/development_docs/api/command_list/sdwan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sdwan/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 边界路由器</title>
+      <link>/development_docs/api/command_list/vpc_border/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/vpc_border/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 其它</title>
+      <link>/development_docs/api/command_list/misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/misc/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

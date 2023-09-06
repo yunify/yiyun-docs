@@ -1,0 +1,33 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 产品简介</title>
+    <link>/container/qci/intro/</link>
+    <description>Recent content in 产品简介 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/container/qci/intro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Container: 什么是容器实例服务 ECI</title>
+      <link>/container/qci/intro/introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/container/qci/intro/introduction/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;容器实例服务&#34;&gt;容器实例服务&lt;/h1&gt;
+&lt;p&gt;近年来，随着容器技术的广泛普及，容器技术与云原生这些术语也越来越频繁地进入到人们的视野。由于 Serverless 与容器技术天然的亲和性， Serverless 容器运行服务顺理成章地成为了践行容器技术以及云原生生态的必经之路。&lt;/p&gt;
+&lt;p&gt;容器实例服务 ECI (Elastic Container Instance) 是借助于亿栖云平台构建的 Serverless 容器运行服务，在提供 vm 级别的安全和资源隔离能力的同时，针对容器运行环境进行了相关优化。只需要提供相应的镜像，无需管理底层底层服务器，即可以低成本，免运维地运行相关业务，从而将复杂的基础设施维护和业务开发解耦开来。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

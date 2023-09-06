@@ -1,0 +1,4163 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>云服务器修改DNS地址 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/compute/vm/" class="has-text-primary">云服务器</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">常见问题</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">常见操作</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">网络配置</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">详情</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">网络配置</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  云服务器
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/vm/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/news/announcements/"
+      class="menu__title  "
+      data-depth="1">安全公告</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/intro/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/intro/instance/"
+      class="menu__title  "
+      data-depth="1">云服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/intro/basic/"
+      class="menu__title  "
+      data-depth="1">入门级云服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/intro/enterprise/"
+      class="menu__title  "
+      data-depth="1">企业级云服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/intro/professional/"
+      class="menu__title  "
+      data-depth="1">专业级云服务器</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/billing/reserved_contract/"
+      class="menu__title  "
+      data-depth="1">计费模式</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  计费方式变更
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/change/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/billing/change/change1/"
+      class="menu__title  "
+      data-depth="2">包年包月转按需</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/billing/change/change2/"
+      class="menu__title  "
+      data-depth="2">按需转包年包月</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/quickstart/create_vm/"
+      class="menu__title  "
+      data-depth="1">云服务器快速创建流程</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/manual/gpu_instance/"
+      class="menu__title  "
+      data-depth="1">GPU 云服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/manual/bm_instance/"
+      class="menu__title  "
+      data-depth="1">弹性裸金属服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/manual/connect_instance/"
+      class="menu__title  "
+      data-depth="1">连接实例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/manual/vm_instance/"
+      class="menu__title  "
+      data-depth="1">云服务器操作指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/manual/nic/"
+      class="menu__title  "
+      data-depth="1">云服务器网卡</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/manual/userdata/"
+      class="menu__title  "
+      data-depth="1">自定义数据</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  最佳实践
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/best-practices/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Windows云服务器
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/windows/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/remote_port/"
+      class="menu__title  more-space"
+      data-depth="2">修改windows云服务器远程桌面的访问端口</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/change_screen_resolution/"
+      class="menu__title  "
+      data-depth="2">调整屏幕分辨率</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_loggin/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器配置多用户同时登录</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/method_of_inner_associateeip/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器内部绑定公网IP</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/iis/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器安装IIS Web服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/iis_web/"
+      class="menu__title  "
+      data-depth="2">使用 IIS 搭建网站服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/windows_audio/"
+      class="menu__title  "
+      data-depth="2"> Windows 开启音频功能</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/configntp/"
+      class="menu__title  "
+      data-depth="2">如何配置 NTP 服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_install_nfs/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器安装NFS客户端</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_install_telnet/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器安装telnet客户端</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_deploy_ftp/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器搭建FTP服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/windows_multi_user/"
+      class="menu__title  "
+      data-depth="2">Windows 云服务器多用户配置管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win2008r2_tls1_2/"
+      class="menu__title  "
+      data-depth="2">Windows Server 2008 R2 配置 HTTPS TLS1.2</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_install_net45/"
+      class="menu__title  "
+      data-depth="2">Windows 云服务器安装.NET Framework 4.5</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_nfs/"
+      class="menu__title  "
+      data-depth="2">Windows 云服务器配置 NFS 服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_samba/"
+      class="menu__title  "
+      data-depth="2">Windows 云服务器配置 samba 服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_qsftpd_use/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器搭建FTP并使用对象存储</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/win_mysql_install/"
+      class="menu__title  "
+      data-depth="2">Windows云服务器配置MySQL</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/windows/reset_instance_password/"
+      class="menu__title  "
+      data-depth="2">重置Windows云服务器密码</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Linux云服务器
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/linux/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/centos_install_lnmp/"
+      class="menu__title  "
+      data-depth="2">CentOS 7系统安装部署 LNMP</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/install_python3/"
+      class="menu__title  "
+      data-depth="2">CentOS7系统安装Python3</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/ipwhiz/"
+      class="menu__title  "
+      data-depth="2">Linux云服务器配置多网卡</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/disabled_ping/"
+      class="menu__title  "
+      data-depth="2">设置云服务器禁 ping</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/grub_open/"
+      class="menu__title  "
+      data-depth="2">开启 Linux 启动项</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/shut_selinux/"
+      class="menu__title  "
+      data-depth="2">关闭SeLinux</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/sftp/"
+      class="menu__title  "
+      data-depth="2">开启SFTP</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/centos7_install_nv_driver/"
+      class="menu__title  "
+      data-depth="2">CentOS 7 安装nvidia GPU驱动</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/centos6_yum/"
+      class="menu__title  "
+      data-depth="2">CentOS6更新yum源</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/kernel_upgrade/"
+      class="menu__title  "
+      data-depth="2">Linux系统升级内核版本</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/how_to_avoid_ssh_session_disconnection/"
+      class="menu__title  "
+      data-depth="2">Linux云服务器开启SSH会话保持</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/how_to_deploy_ssh_trust/"
+      class="menu__title  more-space"
+      data-depth="2">Linux云服务器之间配置SSH互信（SSH免密码登录）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/static_ip/"
+      class="menu__title  "
+      data-depth="2">Linux云服务器配置静态IP</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/centos_gui/"
+      class="menu__title  "
+      data-depth="2">Centos安装图形化桌面</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/haproxy_ssl/"
+      class="menu__title  "
+      data-depth="2">HAProxy 如何配置 SSL</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/ubuntu_gui/"
+      class="menu__title  "
+      data-depth="2">Ubuntu安装图形化桌面</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/avoidcloselogin/"
+      class="menu__title  "
+      data-depth="2">配置Linux云服务器免密登录</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/centos6_yum_program/"
+      class="menu__title  "
+      data-depth="2">CentOS 6 无法使用 yum 解决办法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/confighttpdssl/"
+      class="menu__title  "
+      data-depth="2">httpd 服务配置SSL</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/linux_ftp/"
+      class="menu__title  "
+      data-depth="2">Linux部署FTP服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/ubuntu20_network/"
+      class="menu__title  "
+      data-depth="2">Ubuntu 20 配置多网卡方法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/configure_the_gateway_server/"
+      class="menu__title  more-space"
+      data-depth="2">配置云服务器为网关服务器(外部绑定公网 IP)</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/auto_mount_vsan/"
+      class="menu__title  "
+      data-depth="2">云服务器重启后自动挂载 Virtual SAN</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/ecs2qing/"
+      class="menu__title  "
+      data-depth="2">将ECS迁移到云平台</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/docker_deployment/"
+      class="menu__title  "
+      data-depth="2">Linux云服务器部署Docker</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/linux_qsftpd_use/"
+      class="menu__title  "
+      data-depth="2">Linux云服务器搭建FTP并使用对象存储</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/linux_mysql_install/"
+      class="menu__title  "
+      data-depth="2">Linux云服务器配置MySQL</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/liunx_use_vi/"
+      class="menu__title  "
+      data-depth="2">Liunx 中 vi 快捷键编辑</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/lvm_datarecovery/"
+      class="menu__title  "
+      data-depth="2">LVM逻辑卷VG卷组丢失的处理流程</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/nginx_multiple_sites/"
+      class="menu__title  "
+      data-depth="2">nginx配置多个站点使用同一端口</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/configuring_ssh_key_login_for_non_root_users/"
+      class="menu__title  "
+      data-depth="2">非root用户配置SSH密钥登录</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/extend_swap/"
+      class="menu__title  "
+      data-depth="2">扩容swap大小</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/routing_policy/"
+      class="menu__title  "
+      data-depth="2">配置多网卡路由策略</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/instance_to_gateway_server/"
+      class="menu__title  "
+      data-depth="2">配置云服务器为网关服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/delete_swap_partition/"
+      class="menu__title  "
+      data-depth="2">屏蔽Swap分区</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/best-practices/linux/wordpress/"
+      class="menu__title  more-space"
+      data-depth="2">使用云服务器搭建一个基于LNMP的Wordpress博客</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/faq/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/faq_linkpage/"
+      class="menu__title  "
+      data-depth="1">高频问题导航</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/_images/windows_event_log/"
+      class="menu__title  "
+      data-depth="1">Windows 查看本地登录日志</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="2">
+  常见操作
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/common_operations/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  云服务器功能
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/server_func/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_func/cpu_instruction_set/"
+      class="menu__title  "
+      data-depth="3">CPU体系结构指令集</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_func/rescue_instance/"
+      class="menu__title  "
+      data-depth="3">如何使用救援云服务器</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  云服务器管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/server_manage/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_manage/how_to_change_the_type_of_host/"
+      class="menu__title  "
+      data-depth="3">更改云服务器类型</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_manage/how_to_change_the_configuration_of_the_host/"
+      class="menu__title  "
+      data-depth="3">更改云服务器配置</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_manage/change_promote_os/"
+      class="menu__title  "
+      data-depth="3">更换云服务器操作系统</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_manage/create_vm_based_on_contracts/"
+      class="menu__title  "
+      data-depth="3">基于合约创建云服务器</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  云服务器安全
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/server_security/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_security/instance_malicious_resolution/"
+      class="menu__title  "
+      data-depth="3">云服务器被非法域名恶意指向</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_security/ipandport/"
+      class="menu__title  "
+      data-depth="3">配置IP/端口集合</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_security/user_record/"
+      class="menu__title  "
+      data-depth="3">Linux系统下查看系统用户登录记录</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_security/linux_security/"
+      class="menu__title  "
+      data-depth="3">Linux 操作系统安全设置</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/server_security/disable_ie_enhance/"
+      class="menu__title  "
+      data-depth="3">如何关闭IE增强的安全配置</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  操作系统功能
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/os_func_manage/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/os_func_manage/port_80_disabled/"
+      class="menu__title  "
+      data-depth="3">为什么80端口被禁用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/os_func_manage/windows_language/"
+      class="menu__title  "
+      data-depth="3">更改Windows云服务器系统语言</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/os_func_manage/winserver_os_func_asset/"
+      class="menu__title  "
+      data-depth="3">Windows云服务器常见系统配置</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/os_func_manage/start_win_remo_desk/"
+      class="menu__title  "
+      data-depth="3">开启Windows云服务器远程登录</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/os_func_manage/close_linux_firewalld/"
+      class="menu__title  "
+      data-depth="3">关闭Linux云服务器内部防火墙</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/os_func_manage/close_windows_firewalld/"
+      class="menu__title  "
+      data-depth="3">关闭Windows云服务器内部防火墙</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  磁盘管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/disk_manage/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/disk_manage/disk-_mount-_problem/"
+      class="menu__title  "
+      data-depth="3">云服务器挂载硬盘时注意事项</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/disk_manage/init_harddisk/"
+      class="menu__title  "
+      data-depth="3">Windows 云服务器硬盘初始化</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/disk_manage/linux_restore_partition/"
+      class="menu__title  "
+      data-depth="3">Linux 恢复误删除分区</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/disk_manage/disk_expansion/"
+      class="menu__title  "
+      data-depth="3">云服务器怎么扩容磁盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  文件同步
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/file_sync/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/file_sync/rzandsz/"
+      class="menu__title  "
+      data-depth="3">安装及使用rz/sz工具</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/file_sync/win_share/"
+      class="menu__title  "
+      data-depth="3">Windows 云服务器文件共享</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/file_sync/how_to_upload_files_to_the_cloud_server/"
+      class="menu__title  "
+      data-depth="3">上传文件到云服务器</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="3">
+  网络配置
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/net_config/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/net_config/route_to_network/"
+      class="menu__title  "
+      data-depth="3">自定义路由表配置网关服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/net_config/win_static_ip_config/"
+      class="menu__title  "
+      data-depth="3">Windows云服务器配置静态IP地址</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/net_config/modify_dns/"
+      class="menu__title active "
+      data-depth="3">云服务器修改DNS地址</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/net_config/default_route/"
+      class="menu__title  "
+      data-depth="3">多网卡默认路由配置</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  其他功能
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/other_func/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/other_func/slow_download/"
+      class="menu__title  "
+      data-depth="3">云服务器测试带宽速度</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/common_operations/other_func/instance_connect_cluster/"
+      class="menu__title  "
+      data-depth="3">云服务器如何连接数据库集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  故障排查
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/troubleshooting/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  Windows云服务器操作系统类
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/windows_server_os/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/activation_of_winos/"
+      class="menu__title  "
+      data-depth="3">激活 Windows 系统云服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/expand_disk_capacity/"
+      class="menu__title  "
+      data-depth="3">扩容磁盘后，实际使用空间并未增加</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_install_ad_error/"
+      class="menu__title  more-space"
+      data-depth="3">Windows Server 安装 AD 域服务报错：请求添加或删除指定服务器上的功能失败</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/reset_network/"
+      class="menu__title  "
+      data-depth="3">Windows 重置网络</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_system_time_is_not_synchronized/"
+      class="menu__title  "
+      data-depth="3">Windows云服务器同步网络时间</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_cpu_exception/"
+      class="menu__title  "
+      data-depth="3">CPU使用率过高</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_login_log/"
+      class="menu__title  "
+      data-depth="3">查询远程登录日志</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_not_work/"
+      class="menu__title  more-space"
+      data-depth="3">启用密码保护共享导致 Windows 系统远程访问出现“凭据无法工作”错误</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/iis_500_erro/"
+      class="menu__title  more-space"
+      data-depth="3">IIS搭建的网站显示“500 - 内部服务器错误”</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_not_work2/"
+      class="menu__title  more-space"
+      data-depth="3">远程控制 Windows 出现凭据无法工作问题</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_log/"
+      class="menu__title  "
+      data-depth="3">查看Windows云服务器系统日志</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_not_work3/"
+      class="menu__title  "
+      data-depth="3">远程控制Windows 远程桌面无法连接</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_packet_loss/"
+      class="menu__title  "
+      data-depth="3">Windows实例网络访问丢包延时高</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/bluescreen/"
+      class="menu__title  "
+      data-depth="3">Windows云服务器蓝屏</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_event_log/"
+      class="menu__title  "
+      data-depth="3">Windows 查看本地登录日志</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/lose_harddisk/"
+      class="menu__title  "
+      data-depth="3">Windows云服务器磁盘脱盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_guest_agent/"
+      class="menu__title  "
+      data-depth="3">Windows 云服务器监控服务异常</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_cant_loggin3/"
+      class="menu__title  more-space"
+      data-depth="3">远程连接报错：两台计算机无法在分配的时间内连接</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_cant_loggin/"
+      class="menu__title  "
+      data-depth="3">远程登录提示“内部错误”</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_cant_loggin2/"
+      class="menu__title  "
+      data-depth="3">远程连接报错：您的连接已丢失</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/windows_splash_method/"
+      class="menu__title  more-space"
+      data-depth="3">Windows  配置多用户登录后，登录出现闪屏怎么办？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win_time/"
+      class="menu__title  "
+      data-depth="3">Windows 时间不同步解决办法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/win2019_use_samba/"
+      class="menu__title  "
+      data-depth="3">Windows Server 无法访问 samba 服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/vm_windows_ip/"
+      class="menu__title  more-space"
+      data-depth="3">如何为 Windows 云服务器配置静态 IP 地址？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/vm_windows_unconnect/"
+      class="menu__title  more-space"
+      data-depth="3">为什么我的 Windows 主机远程桌面连接不上？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/vm_windows_share/"
+      class="menu__title  "
+      data-depth="3">如何开启 Windows 的共享功能？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/windows_server_os/vm_windows_disk_mount/"
+      class="menu__title  "
+      data-depth="3">主机之间的网络带宽是多少？ </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  Linux云服务器操作系统类
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/linux_server_os/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/softlock/"
+      class="menu__title  "
+      data-depth="3">Soft lockup说明</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/liunx_check_dhclient/"
+      class="menu__title  "
+      data-depth="3">Liunx 云服务器重启后无法获取 IP</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/load_sshserect/"
+      class="menu__title  "
+      data-depth="3"> 云服务器加载 SSH 秘钥失败</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/repair_method_of_ext4_file_system_damage/"
+      class="menu__title  "
+      data-depth="3">Linux云服务器ext4文件系统损坏</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/how_to_repair_the_damage_of_xfs_file_system/"
+      class="menu__title  "
+      data-depth="3">Linux云服务器xfs文件系统损坏</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/cloud_server_delete_file_space_does_not_release/"
+      class="menu__title  "
+      data-depth="3">删除文件后磁盘空间不释放</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/delet_snap/"
+      class="menu__title  more-space"
+      data-depth="3">云服务器 /dev/loop0 磁盘100%监控告警处理方法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/virus/"
+      class="menu__title  "
+      data-depth="3">Linux 云服务器中毒排查思路</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/cpu_and_memory_info/"
+      class="menu__title  "
+      data-depth="3">Linux云服务器查看CPU和内存信息</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/tcpdump/"
+      class="menu__title  "
+      data-depth="3">网络异常时如何抓取数据包</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_setlinux_close/"
+      class="menu__title  "
+      data-depth="3"> Linux 系统因开启 SELinux 导致登录错误</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_login_timeout/"
+      class="menu__title  "
+      data-depth="3">Linux 服务器登录缓慢</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_time/"
+      class="menu__title  "
+      data-depth="3">Linux 时间不同步解决办法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linus_packet_loss/"
+      class="menu__title  "
+      data-depth="3">Linux实例网站访问丢包延时高</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_instance_system/"
+      class="menu__title  "
+      data-depth="3">Linux实例系统总体负载查询及分析</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_login_error_nologin/"
+      class="menu__title  more-space"
+      data-depth="3">使用 SSH 命令登录 Linux 系统时出现报错</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/fsck/"
+      class="menu__title  "
+      data-depth="3">文件系统扫描工具 fsck</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_system_log/"
+      class="menu__title  more-space"
+      data-depth="3">详解 Linux 中的日志及用日志来排查错误的方法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/ntp_service/"
+      class="menu__title  "
+      data-depth="3">Linux云服务器同步NTP时间</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/inodes/"
+      class="menu__title  "
+      data-depth="3">inodes被占满</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/linux_gapd/"
+      class="menu__title  "
+      data-depth="3">Linux 云服务器 gapd 服务异常</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/nic_loss_ip/"
+      class="menu__title  "
+      data-depth="3">Linux云服务器网卡丢失IP</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/treatment_of_insufficient_disk_space/"
+      class="menu__title  "
+      data-depth="3">磁盘空间容量不足</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/the_solution_of_read_only_file_system/"
+      class="menu__title  "
+      data-depth="3">文件系统只读的处理方法</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/vm_linux_ip/"
+      class="menu__title  more-space"
+      data-depth="3">如何为 Linux 云服务器配置静态 IP 地址？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/vm_linux_ssh/"
+      class="menu__title  more-space"
+      data-depth="3">如何启用 SSH 密码登录 Linux 云服务器？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/df_no_file_systems_processed/"
+      class="menu__title  "
+      data-depth="3">解决 df: no file systems processed</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/linux_server_os/slow_linux/"
+      class="menu__title  "
+      data-depth="3">Linux云服务器系统卡顿</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  连接管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/connect_manage/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/connect_manage/ssh_problems/"
+      class="menu__title  "
+      data-depth="3">ssh连接基本问题排查</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/connect_manage/ssh_key/"
+      class="menu__title  "
+      data-depth="3">如何通过ssh密钥方式访问云服务器</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/connect_manage/default_user_pwd/"
+      class="menu__title  more-space"
+      data-depth="3">云服务器的远程连接的默认登录用户名和密码</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/connect_manage/root_login_permission_denie/"
+      class="menu__title  more-space"
+      data-depth="3">root用户通过ssh登录Linux实例报“Permission denied, please try again”</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/connect_manage/connectionrefused/"
+      class="menu__title  "
+      data-depth="3">端口无法连接</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/connect_manage/passwordauthentication/"
+      class="menu__title  more-space"
+      data-depth="3">Linux云服务器密钥登录下如何开启密码登录</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  网络配置
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/network_config/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/network_config/check_port_80_worked/"
+      class="menu__title  "
+      data-depth="3">80端口无法访问</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/network_config/check_ping/"
+      class="menu__title  "
+      data-depth="3">ping 不通或丢包时如何进行链路测试</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/network_config/httpserror/"
+      class="menu__title  "
+      data-depth="3">HTTPS访问报错400</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/network_config/reset_dns/"
+      class="menu__title  "
+      data-depth="3">resolv 文件的 DNS 被重置怎么办？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/network_config/foreign_website/"
+      class="menu__title  "
+      data-depth="3">访问国外网站加载缓慢怎么？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/network_config/ip_traffic_-problems/"
+      class="menu__title  "
+      data-depth="3">公网IP带宽占用高</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  其他服务部署
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/other_service_deploy/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/other_service_deploy/mysql_problem/"
+      class="menu__title  "
+      data-depth="3">自建MySQL无法远程访问排查思路</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/other_service_deploy/instances_to_mysql/"
+      class="menu__title  "
+      data-depth="3">活动主机内网连接活动数据库</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/troubleshooting/other_service_deploy/sqlserver_change_default_port/"
+      class="menu__title  "
+      data-depth="3">如何修改SQL Server默认端口</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/vpn_vpc/"
+      class="menu__title  "
+      data-depth="1">登录VPN，远程连接云主机</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/nic_multi_queue/"
+      class="menu__title  more-space"
+      data-depth="1">网卡多队列 Nic Multi Queue 功能如何使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/shanhe_flow/"
+      class="menu__title  "
+      data-depth="1">资源使用指引</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  其他问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/other_questions/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/domestic_to_github/"
+      class="menu__title  "
+      data-depth="2">国内云服务器无法访问 GitHub</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_free_after_shutdown/"
+      class="menu__title  "
+      data-depth="2">云服务器关机后云服务器是否收费</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_outside/"
+      class="menu__title  "
+      data-depth="2">为什么我的云服务器不能访问外网？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_ping_ssh/"
+      class="menu__title  more-space"
+      data-depth="2">云服务器绑定了公网 IP 之后，为什么我无法通过 IP SSH 登录，也不能 ping 通该 IP？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_numbers/"
+      class="menu__title  more-space"
+      data-depth="2">如果我有多台云服务器需要访问外网，是不是每台云服务器都需要绑定一个公网 IP？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_ip-address/"
+      class="menu__title  more-space"
+      data-depth="2">为什么我的云服务器无法获取 IP 地址？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_username/"
+      class="menu__title  more-space"
+      data-depth="2">连接远程终端时的默认登录用户名和密码是什么？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_ssh_entrance/"
+      class="menu__title  "
+      data-depth="2">如何使用 SSH 密钥来访问云服务器？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_ssh_timeout/"
+      class="menu__title  "
+      data-depth="2">SSH 客户端连接 timeout 问题 ？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_forget_password/"
+      class="menu__title  "
+      data-depth="2">忘记云服务器密码怎么办 ？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_ip_change/"
+      class="menu__title  more-space"
+      data-depth="2">为什么我的云服务器的私有 IP 会发生变化？ </a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_width_equal/"
+      class="menu__title  more-space"
+      data-depth="2">公网带宽上下行速率是对称相等的吗？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/nic_multi/"
+      class="menu__title  more-space"
+      data-depth="2">网卡多队列 Nic Multi Queue 功能如何使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_io/"
+      class="menu__title  "
+      data-depth="2">主机的 IO 限制是多少？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/vm/faq/other_questions/vm_miss_cancel/"
+      class="menu__title  more-space"
+      data-depth="2">我的云服务器由于误操作不小心销毁了，还可以恢复吗？</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  HPC高性能计算
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/hpc/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  HPC简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/intro/intro/"
+      class="menu__title  "
+      data-depth="1">产品简介</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/intro/advantage/"
+      class="menu__title  "
+      data-depth="1">产品优势</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/intro/hpc_ehpc/"
+      class="menu__title  "
+      data-depth="1">HPC 及 EHPC</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费指南</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  HPC 快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quick-start/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/quick-start/base/"
+      class="menu__title  "
+      data-depth="1">HPC 快速入门</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  HPC 用户指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/base/"
+      class="menu__title  "
+      data-depth="1">创建集群</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/node/"
+      class="menu__title  "
+      data-depth="1">节点管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/job/"
+      class="menu__title  "
+      data-depth="1">作业管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/software/"
+      class="menu__title  "
+      data-depth="1">软件管理</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  AIP 用户指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/aip/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/aip/software/"
+      class="menu__title  "
+      data-depth="2">集群管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/aip/show_job/"
+      class="menu__title  "
+      data-depth="2">查看作业</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/aip/submit_job/"
+      class="menu__title  "
+      data-depth="2">提交作业</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/aip/kill_job/"
+      class="menu__title  "
+      data-depth="2">杀作业</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  SPACK 用户指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/spack/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/spack/intro/"
+      class="menu__title  "
+      data-depth="2">公共软件管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/spack/install/"
+      class="menu__title  "
+      data-depth="2">软件安装</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/manual/spack/faq/"
+      class="menu__title  "
+      data-depth="2">常见问题</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  最佳实践
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/best-practices/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/best-practices/edu/"
+      class="menu__title  "
+      data-depth="1">教学科研</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/faq/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/hpc/faq/faq/"
+      class="menu__title  "
+      data-depth="1">常见问题</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  镜像
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/image/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/intro/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/image/intro/image/"
+      class="menu__title  "
+      data-depth="1">镜像</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/manual/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/image/manual/image/"
+      class="menu__title  "
+      data-depth="1">捕获镜像</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/image/manual/copy_resource/"
+      class="menu__title  "
+      data-depth="1">自有镜像跨区复制</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  SSH密钥
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/ssh/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/intro/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/ssh/intro/ssh/"
+      class="menu__title  "
+      data-depth="1">SSH密钥</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/manual/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/ssh/manual/ssh/"
+      class="menu__title  "
+      data-depth="1">SSH密钥</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  安置策略组
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/instance_group/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/instance_group/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/intro/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/instance_group/intro/instance_group/"
+      class="menu__title  "
+      data-depth="1">安置策略组</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/manual/ data-link=/compute/vm/faq/common_operations/net_config/modify_dns/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/compute/instance_group/manual/instance_group/"
+      class="menu__title  "
+      data-depth="1">安置策略组</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows-云服务器修改dns地址">Windows 云服务器修改DNS地址</a>
+      <ul>
+        <li><a href="#进入网络适配器界面">进入网络适配器界面</a></li>
+        <li><a href="#修改网卡属性">修改网卡属性</a></li>
+      </ul>
+    </li>
+    <li><a href="#linux云服务器修改dns地址">Linux云服务器修改DNS地址</a>
+      <ul>
+        <li><a href="#修改dns配置文件">修改DNS配置文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">网络配置</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>云服务器修改DNS地址</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-04-02
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	<div class="lead"></div>
+	
+
+	
+	<p>云平台每个区都有内网DNS Server为云服务器提供域名解析服务，这个DNS地址会在云服务器中自动获取，若有特殊需求需要更改DNS Server，可以参考如下内容：</p>
+<h2 id="windows-云服务器修改dns地址">Windows 云服务器修改DNS地址</h2>
+<h3 id="进入网络适配器界面">进入网络适配器界面</h3>
+<p>打开控制台面板-查看网络状态和任务
+<img src="../../../_images/dns1.png" alt="dns"></p>
+<p>选择更改适配器设置
+<img src="../../../_images/dns2.png" alt="dns"></p>
+<h3 id="修改网卡属性">修改网卡属性</h3>
+<p>右键以太网 &gt; 属性
+<img src="../../../_images/dns3.png" alt="dns"></p>
+<p>双击Internet协议版本4（TCP/IPV4）
+<img src="../../../_images/dns4.png" alt="dns"></p>
+<p>选择使用下面的DNS服务器地址，并填写想使用的DNS服务器地址，修改完之后点击确定即可。
+<img src="../../../_images/dns5.png" alt="dns"></p>
+<h2 id="linux云服务器修改dns地址">Linux云服务器修改DNS地址</h2>
+<h3 id="修改dns配置文件">修改DNS配置文件</h3>
+<p>登陆云服务器，编辑DNS配置文件，在第二行添加nameserver</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#vi /etc/resolv.conf</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e"># Generated by NetworkManager</span>
+</span></span><span style="display:flex;"><span>   nameserver 114.114.114.114
+</span></span><span style="display:flex;"><span>   search localdomain sh1.yiqiyun.com
+</span></span><span style="display:flex;"><span>   nameserver 192.168.255.254
+</span></span></code></pre></div><blockquote>
+<p>注释：如果修改的云服务器为Ubuntu，还需要再执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#chattr +i /etc/resolv.conf</span>
+</span></span></code></pre></div><p>该命令是给该文件增加只读权限，resolv.conf文件在系统重启时会被重置，这是因为该文件由NM管理，通过加权，禁止NM进行修改。</p>
+</blockquote>
+
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+		<a href="/compute/vm/faq/common_operations/net_config/win_static_ip_config/" class="prev pl1" title="Windows云服务器配置静态IP地址 ">
+			上一页: Windows云服务器配置静态IP地址
+		</a>
+		
+
+		
+		<a href="/compute/vm/faq/common_operations/net_config/default_route/" class="next pr1" title="多网卡默认路由配置">
+			下一页: 多网卡默认路由配置
+		</a>
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 操作指南</title>
+    <link>/compute/ssh/manual/</link>
+    <description>Recent content in 操作指南 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/compute/ssh/manual/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Compute: SSH密钥</title>
+      <link>/compute/ssh/manual/ssh/</link>
+      <pubDate>Thu, 30 Jan 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/compute/ssh/manual/ssh/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;通过-ssh-密钥连接云服务器&#34;&gt;通过 SSH 密钥连接云服务器&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;相对于用户名密码方式，密钥方式拥有更强的安全性，也可以很大程度阻止暴力破解的发生。目前常用的密钥都是非对称性的加密方式，云服务器内置公钥，而用户则拥有私钥。由于采用非对称加密，入侵者试图通过公钥去破解私钥难度会远远超出密码的破解。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;1-准备密钥&#34;&gt;1. 准备密钥&lt;/h3&gt;
+&lt;p&gt;首先，需要在控制台创建密钥，您也可以使用自己原有的密钥。&lt;/p&gt;
+&lt;img src=&#34;../_images/creat-sshkey.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;h3 id=&#34;2-云服务器加载上密钥&#34;&gt;2. 云服务器加载上密钥&lt;/h3&gt;
+&lt;p&gt;您可以在创建云服务器时选择密钥&lt;/p&gt;
+&lt;img src=&#34;../_images/creat-instance-key.png&#34; style=&#34;zoom:30%;&#34; /&gt;
+&lt;p&gt;也可以给现有云服务器加载密钥,选择云服务器右键 - ssh 密钥 - 加载&lt;/p&gt;
+&lt;img src=&#34;../_images/add-instance-key.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;h3 id=&#34;3-配置好弹性-ip-和防火墙&#34;&gt;3. 配置好弹性 IP 和防火墙&lt;/h3&gt;
+&lt;p&gt;在连接云服务器之前，请确保您的云服务器已经绑定了弹性公网 IP，&lt;a href=&#34;/security/security_group/manual/sg_setting/&#34;&gt;防火墙放行&lt;/a&gt; TCP 22 端口。&lt;/p&gt;
+&lt;h3 id=&#34;4-将密钥转换为正确的格式&#34;&gt;4. 将密钥转换为正确的格式&lt;/h3&gt;
+&lt;p&gt;如果您用的是 PuTTY ，您需要用 PuTTYgen 将私钥转换为 PuTTY 支持的格式 ( .ppk ) ，点击 Load 加载您的私钥&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/compute/ssh/manual/_images/putty-key-transmit.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;5-打开软件选择密钥&#34;&gt;5. 打开软件，选择密钥&lt;/h3&gt;
+&lt;p&gt;然后在 PuTTY 的配置页面 &lt;code&gt;Connection&lt;/code&gt; 的 &lt;code&gt;Auth&lt;/code&gt; 选择您的私钥&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/compute/ssh/manual/_images/putty-ssh.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;6-输入-ip-地址&#34;&gt;6. 输入 IP 地址&lt;/h3&gt;
+&lt;p&gt;最后，在 &lt;code&gt;Session&lt;/code&gt; 页面输入 IP 地址，点击 Open&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/compute/ssh/manual/_images/putty-session.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果您已经尝试采用上述的步骤，仍然无法连接至您的云服务器。建议您提交工单，我们的工程师会尽快帮您解决问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

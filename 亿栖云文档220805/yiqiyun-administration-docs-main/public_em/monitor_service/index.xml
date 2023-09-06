@@ -1,0 +1,1890 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 监控服务</title>
+    <link>/monitor_service/</link>
+    <description>Recent content in 监控服务 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/monitor_service/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Monitor_service: 常见问题</title>
+      <link>/monitor_service/cloudsat/faq/faq/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/faq/faq/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;上传自定义监控数据代码示例&#34;&gt;上传自定义监控数据代码示例&lt;/h2&gt;
+&lt;p&gt;目前提供了Golang和Python两种语言的&lt;a href=&#34;/monitor_service/cloudsat/manual/upload_monitor_data/&#34;&gt;上传自定义监控数据代码示例&lt;/a&gt; 供参考。&lt;/p&gt;
+&lt;h2 id=&#34;为什么自定义监控上传数据成功页面没有显示&#34;&gt;为什么自定义监控上传数据成功，页面没有显示？&lt;/h2&gt;
+&lt;p&gt;自定义页面监控列表中涉及到一些时间区间内的监控数据计算，最小统计周期为5分钟，因此需连续发送一段时间（不小于5分钟）页面才有数据显示。&lt;/p&gt;
+&lt;p&gt;如持续发送超过五分钟仍未正常显示，请检查上传数据的meter（监控指标）字段是否和在自定义监控页面下该命名空间下创建的监控指标名称一致。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 监控概览</title>
+      <link>/monitor_service/cloudsat/manual/monitoring_overview/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/monitoring_overview/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;监控概览操作步骤&#34;&gt;监控概览操作步骤&lt;/h2&gt;
+&lt;p&gt;用户登陆控制台后，点击 「云监控」服务，进入「监控概览」，即可看到所有已经统计好的监控数据情况。&lt;/p&gt;
+&lt;p&gt;如下1图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/monitoring-overview.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实时展示资源类型与总数统计&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;监控概览页面以实时刷新为标准，为用户提供参考价值最大的资源监控数据。除此之外，无需用户做额外的操作，云监控可自动获取到平台上的所有资源情况，并全部展示在概览界面上，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/resource_overview_1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;各资源告警、正常、未配置告警策略数据统计展示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在按资源类型统计整体资源数量之后，则是对某一类资源告警情况的图形化与数据化展示了。&lt;/p&gt;
+&lt;p&gt;资源概览中分别支持资源监控的「告警中」、「正常」、「未知」、「未配置」四大类统计结果。用户可直观地看到所有的资源，各类监控状态下的数据占比。如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/resource_overview_2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;除此之外，若用户账户内涵盖的资源类型很多，则可对「资源概览」切换展示形式，以供用户更加直观的了解到所有资源的情况，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/resource_overview_3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;近24小时指标/事件/告警统计数据展示，如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/alert_statistics.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;「监控概览」功能中的「近24小时指标告警统计」部分，对指标告警的“高级别”、“低级别”的所有告警次数进行了统计整合，用户可直观地看到账户内不同时间点上的「不同等级的指标告警」数据统计结论，有助于用户评估平台所有资源的整体健康状态。&lt;/p&gt;
+&lt;p&gt;「监控概览」的「近24小时事件监控统计」部分，对24小时内的资源触发的“异常事件”、“状态变更”两大类事件进行了统计展示。&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;资源核心指标数据总和以及Top5统计展示&lt;/p&gt;
+&lt;p&gt;在「资源使用排行」模块内，为用户统计出了云服务器、硬盘、EIP等核心基础资源的用量排序。如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/resource_rank.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;目前支持的具体指标包括：&lt;/p&gt;
+&lt;p&gt;1）云服务器：CPU使用率排序、内存使用率排序&lt;/p&gt;
+&lt;p&gt;2）硬盘：读吞吐率排序、写吞吐率排序、IOPS读排序、IOPS写排序&lt;/p&gt;
+&lt;p&gt;3）网络：进速率排序、出速率排序&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: Dashboard</title>
+      <link>/monitor_service/cloudsat/manual/dashboard/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/dashboard/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Dashboard提供了多资源类型、跨指标类型、跨分区的自定义集中监控服务，用户可根据业务需求，将各类维度的数据集中在同一个面板下，进行统一可视化监控。&lt;/p&gt;
+&lt;h2 id=&#34;dashboard操作步骤&#34;&gt;Dashboard操作步骤&lt;/h2&gt;
+&lt;p&gt;登录管理控制台，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;监控服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;云监控 CloudSat&lt;/strong&gt;，进入&lt;strong&gt;云监控&lt;/strong&gt;页签。选择&lt;strong&gt;Dashboard&lt;/strong&gt;即可进入。&lt;/p&gt;
+&lt;h2 id=&#34;创建监控面板&#34;&gt;创建监控面板&lt;/h2&gt;
+&lt;p&gt;进入Dashborad后，系统默认为用户创建一个面板，用户可直接在该面板上进行监控图表的创建。如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/create_dashboard.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;用户也可以点击上图“创建面板”按钮，重新创建一个空面板。&lt;/p&gt;
+&lt;h2 id=&#34;修改监控面板&#34;&gt;修改监控面板&lt;/h2&gt;
+&lt;p&gt;进入监控Dashboard内，在左侧监控Dashboard面板目录管理列内，可对需要修改的面板进行操作。 如下图，鼠标悬浮在需要修改的面板名称上，点击右侧按钮，可选择具体要执行的修改操作 – 重命名。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/modify_dashboard.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;删除监控面板&#34;&gt;删除监控面板&lt;/h2&gt;
+&lt;p&gt;按上一步操作方式，可在修改操作功能上选择“删除”，可删除所选面板。 注：该操作会同步删除面板内的所有图表。&lt;/p&gt;
+&lt;h2 id=&#34;创建监控图表&#34;&gt;创建监控图表&lt;/h2&gt;
+&lt;p&gt;点击面板内“创建图表”按钮。&lt;/p&gt;
+&lt;p&gt;选择资源所属区域，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/create_dashboard_chart.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;查看监控图表&#34;&gt;查看监控图表&lt;/h2&gt;
+&lt;p&gt;面板上的图表根据所选时间周期，联动展示具体的监控时间间隔与监控粒度，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/view_dashboard_chart.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;将鼠标悬浮于某个图表上，点击某一个时间刻度，会自动展开图表上的所有监控数据，如下图，点击图表上的一个时间点，下方自动展开资源详情信息，可查看具体数据：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/specific_metric.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;基于上一步已展开的资源详情页，可继续对指标数据信息进行排序，点击最后一列指标列名上的排序按钮，可按监控指标的升序/降序排列出所监控的实例，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/specific_metric2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;基于第二步已展开的资源详情页，若监控实例的指标数据分布过于密集，不便于定位问题，可取消部分资源的指标数据显示。在资源详情页内点击某实例行，即可取消此条折线，如下图，取消后两个实例的监控，图表内只剩一个实例的指标数据信息，再次点击可恢复数据：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/specific_metric3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;图表二次操作&#34;&gt;图表二次操作&lt;/h2&gt;
+&lt;p&gt;可对已创建的图表进行二次操作，包含修改、删除、导出。点击图表上的按钮可选择具体要执行的操作，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/chart_second_ope.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;(1). 修改&lt;/p&gt;
+&lt;p&gt;支持修改的内容有：&lt;/p&gt;
+&lt;p&gt;a) 重命名&lt;/p&gt;
+&lt;p&gt;b) 可增加、删除监控指标&lt;/p&gt;
+&lt;p&gt;c) 可增加、删除监控实例&lt;/p&gt;
+&lt;p&gt;点击「修改」按钮，可在编辑格式下进行修改，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/modify_chart_02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;(2). 删除 点击「删除」按钮，图表以及图表内的数据会被一并删除，此操作不可逆。&lt;/p&gt;
+&lt;p&gt;(3). 导出 为了方便用户对有效监控数据的再次利用，平台提供导出监控数据功能，点击「导出」按钮，即可完成。&lt;/p&gt;
+&lt;h2 id=&#34;查看监控大屏&#34;&gt;查看监控大屏&lt;/h2&gt;
+&lt;p&gt;待监控面板内的图表基本确定之后，可点击「全屏」按钮，在全屏模式下进行统一监控。 上述图表的所有查看功能，包括具体时间点监控数据详情查看、图表详情页内的排序、取消等，都可支持。如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/view_dashboard.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 分组管理</title>
+      <link>/monitor_service/cloudsat/manual/group_management/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/group_management/</guid>
+      <description>
+        
+        
+        &lt;p&gt;用户可根据业务需求对账号内的各类资源进行跨区域、跨资源类型的自定义分组，继而集中管理组内的监控服务，达到分批监控、快速定位的运维目标，有效提升运维效率。&lt;/p&gt;
+&lt;h2 id=&#34;创建实例分组&#34;&gt;创建实例分组：&lt;/h2&gt;
+&lt;p&gt;首先我们需要创建一个实例分组，指定实例分组名称，添加资源类型等。之后可以根据选择资源类型关联相应资源，开始监控。下面以云服务器资源类型为例，介绍创建的步骤。&lt;/p&gt;
+&lt;p&gt;在控制台导航中点击『云监控CloudSat』进入，左侧菜单栏选择『分组管理』进入分组管理页面，然后点击『创建实例分组』开始创建。
+&lt;img src=&#34;../_images/20201104213502.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数设置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参数设置可输入名称，添加资源，选择资源类型。 其中添加资源可以选择直接添加或从项目导入，添加资源方式决定了下面添加资源类型及对应资源类型的关联不同资源项，不同的资源类型支持不同的监控项 ， 在指定了资源类型后，这个资源类型只能关联相应资源。 
+如下图我们选『直接添加』方式，新增资源类型『云服务器』。&lt;/p&gt;
+&lt;img src=&#34;../_images/20201029111448.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;为了与云平台现有的资源分组功能进行互通共用，支持直接从已有的项目内直接批量导入资源。如下图所示
+&lt;img src=&#34;../_images/20201104213235.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关联资源&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;可以对参数设置中的资源类型添加关联资源，确认即可成功创建实例分组。&lt;/p&gt;
+&lt;h2 id=&#34;查看实例监控&#34;&gt;查看实例监控&lt;/h2&gt;
+&lt;p&gt;分组管理可以对自定义实例分组进行集中管理。包括分组总体概览、分组资源概览、告警服务等。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实例分组概览&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;实例分组概览主要展示该实例分组的组名、资源类型、配置资源数、监控资源状态（告警中、正常、未知、未配置）统计等。也可以对该实例分组进行修改或删除操作。&lt;/p&gt;
+&lt;img src=&#34;../_images/20201029113911.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;可对分组内的实例资源进增删改的操作，保证分组的最终运维效果最佳。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;分组资源概览&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;分组资源概览主要用于实例组绑定的相关资源的监控，分组资源概览详情页可以看到已关联资源的列表。每一条关联资源记录信息包括资源ID、名称、状态、区域、告警服务、操作等，也可以在该页面增加删除实例组资源，绑定移除指标告警策略等。&lt;/p&gt;
+&lt;img src=&#34;../_images/20201029143452.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;告警服务&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在分组详情页面内，可统一查看某一个分组内的所有资源的告警信息，包括告警资源服务名称、监控类型、资源类型、状态、告警规则、资源数量、告警数量等。
+&lt;img src=&#34;../_images/202011042138.png&#34; alt=&#34;&#34;&gt;
+如需查询正在告警的具体资源，点击「告警数量」列内的红色数字，即可为用户精准定位到告警中的资源。用户可针对告警的异常资源进行进一步的异常排查工作。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 事件监控</title>
+      <link>/monitor_service/cloudsat/manual/event_monitor/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/event_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;事件监控对云平台核心资源的部分关键操作行为进行了事件级定义，并按不同时间周期对其进行统一汇总统计与展示。除此之外，用户可对关注的事件进行告警策略的设置，在被监控事件触发后可通过云平台完整地监控告警服务，及时通知、定位并处理问题。&lt;/p&gt;
+&lt;h2 id=&#34;操作指南&#34;&gt;操作指南&lt;/h2&gt;
+&lt;h3 id=&#34;查看事件监控&#34;&gt;查看事件监控&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查询方式
+登录管理控制台，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;监控服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;云监控 CloudSat&lt;/strong&gt;，进入&lt;strong&gt;云监控&lt;/strong&gt;页签。选择事件监控，即可看到当前账号下的所有事件统计信息，如下图：
+&lt;img src=&#34;../_images/202011041743.png&#34; style=&#34;zoom:25%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;事件监控分别从多种统计时间周期、多类查看模式、快速绑定告警策略等功能上，为用户提供全面、直观地查看体验。以下为具体操作指南：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;按时间周期选择并查看各时间周期下的监控事件，如下图：
+&lt;img src=&#34;../_images/202011041745.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;按关联条件过滤查询所关注的事件内容，如下图：
+&lt;img src=&#34;../_images/202011041746.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可选择任意柱状图，点击后即可按柱状图下钻细查，如下图：
+&lt;img src=&#34;../_images/202011041747.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;详情列表查看模式
+&lt;strong&gt;概要视图模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;概要模式以事件内容为统计单元，将同类事件汇总展示，可展开「操作」栏内，查看各具体事件的详细信息。
+&lt;img src=&#34;../_images/202011041750.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;概要视图模式列表核心信息介绍：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;style&gt;
+table th:first-of-type {
+    width: 4cm;
+}
+table th:nth-of-type(2) {
+    width: 150pt;
+}
+table th:nth-of-type(3) {
+    width: 8em;
+}
+&lt;/style&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;列名&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;内容介绍&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;产品类型&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;云平台的资源类型，如，云服务器、硬盘、负载均衡器等&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;事件内容&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;对一个产品类型的触发事件进行状态级的描述，如，将「删除云服务器」事件细化为，删除云服务器开始/删除云服务器结束，两类事件内容&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;事件数量&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;该列事件内容发生的资源数量统计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;操作&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;创建告警策略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;区域&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;触发事件的资源区域&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;产品类型&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;云平台的资源类型，如，云服务器、硬盘、负载均衡器等&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;事件类型&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;平台对事件定义的类型，如，状态变更、异常等&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;资源&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;触发事件具体资源的id和名称&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;创建时间&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;触发事件具体资源的创建时间&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;操作&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;创建或修改告警策略 / 查看事件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;详细视图模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将所有事件全部展示出来，在触发平台预置事件较多的情况下，可能会出现列表信息过多的情况，建议您根据资源实际情况选择合适的模式
+&lt;img src=&#34;../_images/202011041802.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;详细视图模式列表核心信息介绍：&lt;/p&gt;
+&lt;style&gt;
+table th:first-of-type {
+    width: 4cm;
+}
+table th:nth-of-type(2) {
+    width: 150pt;
+}
+table th:nth-of-type(3) {
+    width: 8em;
+}
+&lt;/style&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;列名&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;内容介绍&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;区域&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;触发事件的资源区域&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;产品类型&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;云平台的资源类型，如，云服务器、硬盘、负载均衡器等&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;事件类型&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;平台对事件定义的类型，如，状态变更、异常等&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;事件内容&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;对一个产品类型的触发事件进行状态级的描述，如，将「删除云服务器」事件细化为，删除云服务器开始/删除云服务器结束，两类事件内容&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;资源&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;触发事件具体资源的id和名称&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;创建时间&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;触发事件具体资源的创建时间&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;操作&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;创建或修改告警策略 / 查看事件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;设置告警策略方式&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方式1&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;基于列表详情页「操作」栏内提供的功能入口，直接创建事件监控告警策略，如下图:
+&lt;img src=&#34;../_images/202011041806.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击事件记录列表详情页「操作」栏内的“创建告警策略”，即可在弹框内创建告警策略。
+&lt;img src=&#34;../_images/202011041807.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;方式2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;利用「监控告警」服务常规创建事件监控告警：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;点击左侧菜单栏「云监控 CloudSat」- 「告警服务」，进入监控告警服务界面，如下图：
+&lt;img src=&#34;../_images/202011041808.png&#34; style=&#34;zoom:23%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点击「创建」按钮，选择事件监控，可创建事件监控告警策略，如下图：
+&lt;img src=&#34;../_images/202011041810.png&#34; style=&#34;zoom:40%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;绑定告警策略方式&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方式1：「监控告警」服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;从上述两种路径下创建出的告警策略会统一展示在告警策略列表内，可点击需要绑定具体资源的策略id，如下图，进入策略详情页进行资源绑定。&lt;/p&gt;
+&lt;img src=&#34;../_images/202011041811.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;&lt;strong&gt;方式2: 基于资源列表绑定告警规则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在资源详情列表上，右键资源id，选择「告警策略」 - 「绑定事件告警策略」，即可在弹框内选择需要绑定的具体策略，如下图：&lt;/p&gt;
+&lt;img src=&#34;../_images/202011041825.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;img src=&#34;../_images/202011041827.png&#34; style=&#34;zoom:43%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看告警信息&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方式1: 通知服务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;满足告警策略规则的监控数据会按照策略内设置的通知形式发出告警通知信息，用户可及时查收并定位解决问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;方式2: 资源详情页查看告警信息&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在资源详情页内，可查看到资源的两大类告警信息，如下图，选择「事件告警」即可查看相关告警信息：
+&lt;img src=&#34;../_images/202011041828.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 告警服务</title>
+      <link>/monitor_service/cloudsat/manual/alarm_service/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/alarm_service/</guid>
+      <description>
+        
+        
+        &lt;p&gt;告警功能提供对监控指标的告警服务支持，用户对云服务的核心监控指标设置告警规则，当监控指标触发用户设置的告警规则阈值时，则会按照用户设置的查收通知形式，收取告警信息。目前平台支持以邮箱、短信、等方式通知用户，让用户可以在第一时间得知云资源发生的异常情况，快速准确定位，并迅速处理故障，避免因资源问题或者外部操作原因，造成业务上的损失。&lt;/p&gt;
+&lt;h2 id=&#34;告警服务操作步骤&#34;&gt;告警服务操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建告警策略&lt;/p&gt;
+&lt;p&gt;首先我们需要创建一个告警策略，指定资源类型、检查周期、告警条件、通知列表等信息。 之后便可将其与资源关联，开始监控。下面以云服务器监控告警为例，介绍创建的步骤。
+在控制台导航中点击『监控告警』进入告警页面，然后点击『创建』按钮开始创建。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数设置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参数设置可输入名称，资源类型和监控周期。 其中资源类型决定了这个告警策略可支持哪些监控项，不同的资源支持不同的监控项，在指定了资源类型后，这个告警策略只能关联同类型资源。 此例中我们选『云服务器』。
+&lt;img src=&#34;../_images/20201109144653.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;告警规则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这一步可对资源支持的监控项设置多条告警规则，任何一条满足条件都会触发告警。
+&lt;img src=&#34;../_images/202011041716.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;监控数据采样间隔都是1分钟，所以在设置阈值时，可能需要考虑这个时间因素。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;告警行为&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;最后一步作为可选项，可设置发送通知到 通知列表 ， 在资源的告警状态发生变化时收到通知。
+目前告警行为仅支持发送通知，以后还会支持更多操作。
+&lt;img src=&#34;../_images/202011041717.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+到此告警策略便创建完成了，如果之后需要修改或调整，都可在告警策略详情页中操作。 需要注意的是，告警策略一旦创建完成，其『资源类型』属性便不可改变了。 如果需要其他资源类型的告警，请另行创建相应的策略。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加监控资源&lt;/p&gt;
+&lt;p&gt;告警策略创建完成后，便可给它添加监控资源。如下图所示，在告警策略详情页的基本属性菜单中点击 『添加监控资源』，之后在弹窗中选择要监控的资源即可。&lt;/p&gt;
+&lt;img src=&#34;../_images/202011041719.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;img src=&#34;../_images/202011041720.png&#34; style=&#34;zoom:35%;&#34; /&gt;
+&lt;p&gt;添加监控资源后，监控服务便会自动对资源开始监控。 如果资源被删除，其所关联的监控告警也会随之解除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看告警历史&lt;/p&gt;
+&lt;p&gt;资源监控过程中的重要事件都会记录在告警历史中。告警历史可在资源详情页中看到，历史记录包括：&lt;/p&gt;
+&lt;p&gt;当修改了告警策略，并应用修改后，历史中会有一条配置变化的记录。&lt;/p&gt;
+&lt;p&gt;当资源监控状态发生变化时，会有相应的记录，&lt;/p&gt;
+&lt;p&gt;当执行告警事件时，也会有相应的记录，
+&lt;img src=&#34;../_images/202011041721.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;监控告警有三个状态：正常，告警，监控数据不足。其中监控数据不足是指没有取到监控数据， 这通常是因为资源已关闭，或公网 IP 已解绑导致。&lt;/p&gt;
+&lt;p&gt;负载均衡器监听器或后端服务的告警历史的查看需要鼠标点击『操作』或者右键某个后端服务，再选『监控告警』。 如图所示：
+&lt;img src=&#34;../_images/202011041722.png&#34; style=&#34;zoom:40%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;监控历史会保留最近 50 条记录，更早的记录会定期删除。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通知列表&lt;/p&gt;
+&lt;p&gt;用户可以将一组手机号、邮箱和webhook保存到通知列表中，用以接收系统发送的通知。 目前监控告警功能使用了通知列表，在资源发生告警时第一时间将受监控的资源情况通知用户。
+本指南将详细介绍如何新建和管理你的通知列表。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建通知列表&lt;/p&gt;
+&lt;p&gt;每个亿栖云账户（包括子账户）都可以创建、管理自己的通知列表。你可以在控制台左侧导 航拦中找到 “通知列表 (Notification Lists)”一项，点击即进入通知列表管理界面。
+点击 “创建” 按钮，在弹出框中将需要添加的手机和邮箱逐项录入。通常可以按你的工作人员组别列入不同的通知列表，例如建立开发团队、运维团队、产品团队等列表。如果在创建告警策略时还没有一个通知列表，在添加告警行为时点击 “新列表”，也能弹出新建通知列表的窗口完成创建。&lt;/p&gt;
+&lt;p&gt;点击 “对勾” 图标添加一条手机号/邮箱后，会自动通过短信或邮件发出验证码。手机号和邮箱的验证可以后续完成，不影响通知列表的创建，但只有验证成功的手机号/邮箱才可以接受告警通知，相同的手机号/邮箱只需要验证一次，再次添加时无需验证。
+&lt;img src=&#34;../_images/202011041724.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;每个通知列表的手机和邮箱数量总和上限是20个。点击 “提交” 按钮，即可完成通知列表 的创建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改通知列表&lt;/p&gt;
+&lt;p&gt;你可以在通知列表界面修改通知列表的内容，点击 ID 号或 “修改” 按钮都可以弹出修改框。 与创建时一样，如果还没有达到总和上限，你可以继续往列表中添加手机号/邮箱。也可以 将通知列表中的手机号/邮箱从列表中移除。&lt;/p&gt;
+&lt;img src=&#34;../_images/202011041725.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建 Webhook&lt;/p&gt;
+&lt;p&gt;Webhook 可以让你的系统直接收到通知。当监控告警发生时，系统会以 HTTP POST 的方式将通知信息发送到指定 URL ，你可以在这个 URL 的接收逻辑中自行处理通知信息。
+每加入一条新的 Webhook URL 都需要先进行验证。验证方法是在 URL Response 中返回指定的 token ，一旦通过验证就无需再在 Response 中保留这个 token 。 每个 URL 对于同一个用户只需验证一次。
+&lt;img src=&#34;../_images/202011041727.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;当监控告警发生时，URL 会收到来自亿栖云主动推送的通知，推送方式是 POST ，POST form 携带的参数如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+    &amp;#34;alarm_policy&amp;#34;: &amp;#34;inst&amp;#34;,                         # 监控告警策略名称
+    &amp;#34;resource&amp;#34;: {                                   # 资源信息
+      &amp;#34;resource_id&amp;#34;: &amp;#34;i-fsda5aiv&amp;#34;,
+      &amp;#34;resource_name&amp;#34;: &amp;#34;&amp;#34;,
+      &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;
+    },
+    &amp;#34;rules&amp;#34;: {                                      # 监控告警规则列表
+      &amp;#34;alpr-lr3gv19q&amp;#34;: {
+        &amp;#34;alarm_policy_id&amp;#34;: &amp;#34;alp-7x97ldud&amp;#34;,          # 监控告警策略 ID
+        &amp;#34;alarm_policy_rule_id&amp;#34;: &amp;#34;alpr-lr3gv19q&amp;#34;,    # 告警规则 ID
+        &amp;#34;alarm_policy_rule_name&amp;#34;: &amp;#34;&amp;#34;,               # 告警规则名称
+        &amp;#34;condition_type&amp;#34;: &amp;#34;gt&amp;#34;,                     # 判断条件：gt (&amp;gt;), lt (&amp;lt;)
+        &amp;#34;consecutive_periods&amp;#34;: 1,                   # 连续周期数
+        &amp;#34;create_time&amp;#34;: &amp;#34;2015-06-05T16:28:55&amp;#34;,
+        &amp;#34;disabled&amp;#34;: 0,                              # 是否禁用
+        &amp;#34;meter&amp;#34;: &amp;#34;disk-us&amp;#34;,                         # 资源监控项
+        &amp;#34;owner&amp;#34;: &amp;#34;usr-qkMLt5Oo&amp;#34;,
+        &amp;#34;recent_monitor_data&amp;#34;: {&amp;#34;/&amp;#34;: [[1433771551, 6]]},
+        &amp;#34;status&amp;#34;: &amp;#34;ok&amp;#34;,                             # 此监控项的状态：ok 正常，alarm 告警中，insufficient 无监控数据
+        &amp;#34;data_processor&amp;#34;: &amp;#34;raw&amp;#34;,                    # 监控阈值类型：raw - 阈值即为监控数据值，percent - 阈值表示的是『百分比』(百分比目前只用于 IP 带宽告警)
+        &amp;#34;thresholds&amp;#34;: &amp;#34;90&amp;#34;                          # 监控阈值
+      },
+      &amp;#34;alpr-u8vue5g6&amp;#34;: {
+        &amp;#34;alarm_policy_id&amp;#34;: &amp;#34;alp-7x97ldud&amp;#34;,
+        &amp;#34;alarm_policy_rule_id&amp;#34;: &amp;#34;alpr-u8vue5g6&amp;#34;,
+        &amp;#34;alarm_policy_rule_name&amp;#34;: &amp;#34;&amp;#34;,
+        &amp;#34;condition_type&amp;#34;: &amp;#34;lt&amp;#34;,
+        &amp;#34;consecutive_periods&amp;#34;: 1,
+        &amp;#34;create_time&amp;#34;: &amp;#34;2015-06-05T16:28:55&amp;#34;,
+        &amp;#34;data_processor&amp;#34;: &amp;#34;raw&amp;#34;,
+        &amp;#34;disabled&amp;#34;: 0,
+        &amp;#34;meter&amp;#34;: &amp;#34;memory&amp;#34;,
+        &amp;#34;owner&amp;#34;: &amp;#34;usr-qkMLt5Oo&amp;#34;,
+        &amp;#34;recent_monitor_data&amp;#34;: [[1433771500, 10.3],
+         [1433771510, 10.4],
+         [1433771520, 10.3],
+         [1433771530, 10.4],
+         [1433771540, 10.3]],
+        &amp;#34;status&amp;#34;: &amp;#34;alarm&amp;#34;,
+        &amp;#34;thresholds&amp;#34;: &amp;#34;90&amp;#34;
+      },
+      &amp;#34;alpr-wkjaaqvh&amp;#34;: {
+        &amp;#34;alarm_policy_id&amp;#34;: &amp;#34;alp-7x97ldud&amp;#34;,
+        &amp;#34;alarm_policy_rule_id&amp;#34;: &amp;#34;alpr-wkjaaqvh&amp;#34;,
+        &amp;#34;alarm_policy_rule_name&amp;#34;: &amp;#34;&amp;#34;,
+        &amp;#34;condition_type&amp;#34;: &amp;#34;gt&amp;#34;,
+        &amp;#34;consecutive_periods&amp;#34;: 1,
+        &amp;#34;create_time&amp;#34;: &amp;#34;2015-06-05T16:28:55&amp;#34;,
+        &amp;#34;data_processor&amp;#34;: &amp;#34;raw&amp;#34;,
+        &amp;#34;disabled&amp;#34;: 0,
+        &amp;#34;meter&amp;#34;: &amp;#34;cpu&amp;#34;,
+        &amp;#34;owner&amp;#34;: &amp;#34;usr-qkMLt5Oo&amp;#34;,
+        &amp;#34;recent_monitor_data&amp;#34;: [[1433771500, 0.2],
+         [1433771510, 0.5],
+         [1433771520, 0.2],
+         [1433771530, 0.4],
+         [1433771540, 0.2]],
+        &amp;#34;status&amp;#34;: &amp;#34;ok&amp;#34;,
+        &amp;#34;thresholds&amp;#34;: &amp;#34;90&amp;#34;
+      }
+    },
+    &amp;#34;trigger_status&amp;#34;: &amp;#34;alarm&amp;#34;,                      # 通知触发条件：ok，alarm，insufficient
+    &amp;#34;zone&amp;#34;: &amp;#34;beta&amp;#34;
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;因为通知列表不仅用于监控告警，还可用于接收自动伸缩和定时器的通知， 而不同服务推送的 webhook 数据也不同，这里一并说明。
+当自动伸缩触发通知时，webhook 携带的参数如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;zone&amp;#34;: &amp;#34;beta&amp;#34;,
+  &amp;#34;autoscaling_rules&amp;#34;: {                         # 自动伸缩规则属性
+    &amp;#34;autoscaling_policy_rule_id&amp;#34;: &amp;#34;aspr-96lss7vs&amp;#34;,
+    &amp;#34;history_type&amp;#34;: &amp;#34;scale_success&amp;#34;,             # 执行结果
+    &amp;#34;description&amp;#34;: &amp;#34;&amp;#34;,
+    &amp;#34;scale_direction&amp;#34;: &amp;#34;decrease&amp;#34;                # increase: 上调, decrease: 下调
+  },
+  &amp;#34;autoscaling_policy&amp;#34;: {                        # 自动伸缩策略属性
+    &amp;#34;autoscaling_policy_id&amp;#34;: &amp;#34;asp-36fcf6sb&amp;#34;,
+    &amp;#34;resource&amp;#34;: {                                # 自动伸缩调整的资源
+      &amp;#34;resource_name&amp;#34;: &amp;#34;&amp;#34;,
+      &amp;#34;eip_addr&amp;#34;: &amp;#34;192.168.7.88&amp;#34;,
+      &amp;#34;resource_type&amp;#34;: &amp;#34;eip&amp;#34;,
+      &amp;#34;resource_id&amp;#34;: &amp;#34;eip-5irjjfki&amp;#34;
+    },
+    &amp;#34;description&amp;#34;: &amp;#34;&amp;#34;,
+    &amp;#34;autoscaling_policy_name&amp;#34;: &amp;#34;&amp;#34;,
+    &amp;#34;scale_type&amp;#34;: &amp;#34;eip_bandwidth&amp;#34;                # 自动伸缩策略类型
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当定时器触发通知时，webhook 携带的参数如下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;tasks&amp;#34;: [{                                    # 定时器任务属性
+      &amp;#34;scheduler_task_id&amp;#34;: &amp;#34;st-jtwx7hqt&amp;#34;,
+      &amp;#34;history_type&amp;#34;: &amp;#34;task_fail&amp;#34;,               # 任务执行结果
+      &amp;#34;task_type&amp;#34;: &amp;#34;start_instances&amp;#34;,            # 任务类型
+      &amp;#34;scheduler_task_name&amp;#34;: &amp;#34;&amp;#34;
+  }],
+  &amp;#34;scheduler&amp;#34;: {                                 # 定时器属性
+    &amp;#34;scheduler_name&amp;#34;: u&amp;#34;scheduler&amp;#34;,
+    &amp;#34;scheduler_id&amp;#34;: &amp;#34;schd-x0v8l9x9&amp;#34;
+  },
+  &amp;#34;zone&amp;#34;: &amp;#34;beta&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 自定义监控</title>
+      <link>/monitor_service/cloudsat/manual/custom_monitor/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/custom_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;自定义监控的功能支持，可满足亿栖云已有用户、非亿栖云用户对基础资源的指标监控需求，可与CloudSAT服务内的其他功能结合使用，形成完整的立体化监控告警服务。&lt;/p&gt;
+&lt;h2 id=&#34;自定义监控操作步骤&#34;&gt;自定义监控操作步骤&lt;/h2&gt;
+&lt;p&gt;如果您需要使用自定义相关功能，请按照下述步骤进行。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;上报监控数据&lt;/p&gt;
+&lt;p&gt;登陆控制台，点击「自定义监控」导航入口，进入自定义监控页面创建自定义监控。按照初始页面的提示，进行数据上报工作，上报数据请参照&lt;a href=&#34;../upload_monitor_data&#34;&gt;自定义监控上报数据规范&lt;/a&gt;
+进行上传。&lt;/p&gt;
+&lt;p&gt;创建自定义监控如下图所示：&lt;/p&gt;
+&lt;img src=&#34;../_images/20201102102144.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;在界面上，按照弹框内的提示进行信息填写，创建成功后即可，如下图：&lt;/p&gt;
+&lt;img src=&#34;../_images/20201102102405.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;创建成功提示&lt;/p&gt;
+&lt;img src=&#34;../_images/20201102102644.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;统一管理自定义上报数据&lt;/p&gt;
+&lt;p&gt;自定义监控界面会汇总所有用户自主创建过的命名空间，各个命名空间之间相互独立，但可以在一个界面上统一管理，如下图所示：&lt;/p&gt;
+&lt;img src=&#34;../_images/20201102102921.png&#34; style=&#34;zoom:30%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;管理各组空间内的自定义指标&lt;/p&gt;
+&lt;p&gt;除了统一管理之外，也可进入到某一个具体的空间内，对该空间内的、自主上报的指标进行统一的管理。若还未上报数据，则可看到如下空白页面：&lt;/p&gt;
+&lt;img src=&#34;../_images/20201102102943.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;若用户已经完成上报了来自其他平台的基础监控数据，则会在指定的空间详情页面内展示出来，这些指标的各类关键信息，如下图所示：&lt;/p&gt;
+&lt;img src=&#34;../_images/20201210144511.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;在上表内，可以对异常的监控指标进行直观的显示，如下图所示：&lt;/p&gt;
+&lt;img src=&#34;../_images/20201210144621.png&#34; style=&#34;zoom:30%;&#34; /&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;细查异常监控数据&lt;/p&gt;
+&lt;p&gt;(1)若需要对异常情况进行下钻与细查，可以点击指标所在列，进入该这指标的监控详情视图页面，如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/20201210144823.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;（2）平台也支持对自定义监控数据的配置修改，可按照实际业务需求灵活调整统计方式、命名等信息，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/20201210144822.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看告警信息&lt;/p&gt;
+&lt;p&gt;除了对监控数据的展示之外，该功能页面也支持对「告警规则」的统一汇总与查询，如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../_images/20201210144923.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 自定义监控上报数据规范</title>
+      <link>/monitor_service/cloudsat/manual/upload_monitor_data/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/manual/upload_monitor_data/</guid>
+      <description>
+        
+        
+        &lt;p&gt;目前上报自定义监控数据通过cloudsat中UploadMonitorData接口进行上报，需遵循自定义监控上报url构造规范和接口数据规范。用户可以通过UploadMonitorData接口上报自定义的数据，然后进行监控数据分析和告警。&lt;/p&gt;
+&lt;h3 id=&#34;uploadmonitordata接口url构造规范&#34;&gt;UploadMonitorData接口url构造规范&lt;/h3&gt;
+&lt;p&gt;上传数据UploadMonitorData接口说明，接口采用post方法发送请求，请求url需要构造，构造方法如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;构造url方法&lt;/strong&gt;：构造前url + &amp;ldquo;?&amp;rdquo; + 构造验证请求串&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;构造前url&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://console.yiqiyun.net.cn/api/:zone/v1/custom/UploadMonitorData
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注：构造完成之后请求url即最终UploadMonitorData接口请求url，url里面:zone，请根据具体分区信息填写，如上海1区sh1，文中其他地方类似。&lt;/p&gt;
+&lt;p&gt;分区信息参考：北京3区（pek3）、北京3区-A（pek3a）、上海1区（sh1）、广东2区（gd2）、亚太2区-A（ap2a）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;构造验证请求串示例&lt;/strong&gt;：构造验证请求串方法详见下面说明(下方为示例，请自行参照后文构造验证请求串方法进行构造)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id=CCDJRDKCCKZYTEXANZJD&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2020-12-23T13%3A32%3A34Z&amp;amp;version=1&amp;amp;zone=sh1&amp;amp;signature=sOdokWwvYJ80mM%2FxYbBTsgTgQl3iu%2F2WDXWjgKFPNNs%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注：这部分请根据实际参数进行构造&lt;/p&gt;
+&lt;p&gt;由于上面构造前url上传监控数据需要对请求进行验证，这里采用类似&lt;a href=&#34;/development_docs/api/signature/&#34;&gt;API 请求中签名 ( signature )&lt;/a&gt; 的生成方法，构造验证请求串，拼接在上面构造前url后面。由于需要去iaas对用户信息进行确认，所以这里选择DescribeUsers这个action去构造签名信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最终构造完成之后请求url示例为&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://console.yiqiyun.net.cn/api/:zone/v1/custom/UploadMonitorData?access_key_id=CCDJRDKCCKZYTEXANZJD&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2020-12-23T13%3A32%3A34Z&amp;amp;version=1&amp;amp;zone=sh1&amp;amp;signature=sOdokWwvYJ80mM%2FxYbBTsgTgQl3iu%2F2WDXWjgKFPNNs%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;下面为在上海1区，完成构建验证请求串之后拼接生成的一个最终api请求url实例，请根据实际分区信息和构造的验证串拼接构造相应的最终api请求url&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://console.yiqiyun.net.cn/api/sh1/v1/custom/UploadMonitorData?access_key_id=CCDJRDKCCKZYTEXANZJD&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2020-12-23T13%3A32%3A34Z&amp;amp;version=1&amp;amp;zone=sh1&amp;amp;signature=sOdokWwvYJ80mM%2FxYbBTsgTgQl3iu%2F2WDXWjgKFPNNs%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;uploadmonitordata接口数据规范&#34;&gt;UploadMonitorData接口数据规范&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;描述&lt;/strong&gt;：上传监控数据&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;请求类型&lt;/strong&gt;：POST&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;请求url&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://console.yiqiyun.net.cn/api/:zone/v1/custom/UploadMonitorData?access_key_id=QEJMCFROGCAPHUOAJMRN&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2020-10-13T10%3A28%3A33Z&amp;amp;version=1&amp;amp;zone=test&amp;amp;signature=SO9ZufFb69Om21bK%2BH7Gs6f%2FuuDljHh41STgIX%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注：请仔细阅读上文说明，根据实际情况构造验证请求串，拼接成最终api请求url并替换:zone信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Headers&lt;/strong&gt;：&lt;/p&gt;
+&lt;style&gt;
+table th:first-of-type {
+	width: 600px;
+}
+&lt;/style&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;参数名称&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;参数值&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;是否必须&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;示例&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Content-Type&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;application/json&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&amp;lsquo;Content-Type&amp;rsquo;: &amp;lsquo;application/json&amp;rsquo;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不可缺少&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;请求body格式例如&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+    &amp;#34;user_id&amp;#34;: &amp;#34;usr-123456&amp;#34;,
+    &amp;#34;namespace&amp;#34;: &amp;#34;namespace-1&amp;#34;,
+    &amp;#34;data&amp;#34;: [
+      {
+          &amp;#34;source&amp;#34;: &amp;#34;test&amp;#34;,
+          &amp;#34;user_id&amp;#34;: &amp;#34;usr-KJ8DrfQT&amp;#34;,
+          &amp;#34;tags&amp;#34;: &amp;#34;role=master,interface=eth10&amp;#34;,
+          &amp;#34;group_id&amp;#34;: &amp;#34;group10&amp;#34;,
+          &amp;#34;resource_id&amp;#34;: &amp;#34;i-instance-10&amp;#34; ,
+          &amp;#34;resource_name&amp;#34;: &amp;#34;name10&amp;#34;,
+          &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;,
+          &amp;#34;root_user_id&amp;#34;: &amp;#34;usr-KJ8DrfQ&amp;#34;,
+          &amp;#34;meter&amp;#34;: &amp;#34;disk_ri&amp;#39;&amp;#34;,
+          &amp;#34;region&amp;#34;: &amp;#34;sh1&amp;#34;,
+          &amp;#34;value&amp;#34;: 99,
+          &amp;#34;value_type&amp;#34;: &amp;#34;percent&amp;#34;,
+           &amp;#34;time_stamp&amp;#34;:&amp;#34;2020-11-03T09:58:44Z&amp;#34;
+         },{
+          &amp;#34;source&amp;#34;: &amp;#34;test&amp;#34;,
+          &amp;#34;user_id&amp;#34;: &amp;#34;usr-KJ8DrfQT&amp;#34;,
+          &amp;#34;tags&amp;#34;: &amp;#34;role=master,interface=eth10&amp;#34;,
+          &amp;#34;group_id&amp;#34;: &amp;#34;group10&amp;#34; ,
+          &amp;#34;resource_id&amp;#34;: &amp;#34;i-instance-10&amp;#34;,
+          &amp;#34;resource_name&amp;#34;: &amp;#34;name10&amp;#34; ,
+          &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;,
+          &amp;#34;root_user_id&amp;#34;: &amp;#34;usr-KJ8DrfQ&amp;#34;,
+           &amp;#34;meter&amp;#34;: &amp;#34;diskio&amp;#34;,
+          &amp;#34;region&amp;#34;: &amp;#34;sh1&amp;#34;,
+          &amp;#34;value&amp;#34;: 88,
+          &amp;#34;value_type&amp;#34;: &amp;#34;percent&amp;#34;,
+          &amp;#34;time_stamp&amp;#34;:&amp;#34;2020-11-03T09:58:44Z&amp;#34;
+         }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;字段说明&lt;/strong&gt;&lt;/p&gt;
+&lt;style&gt;
+table th:first-of-type {
+    width: 3cm;
+}
+table th:nth-of-type(2) {
+    width: 150pt;
+}
+table th:nth-of-type(3) {
+    width: 8em;
+}
+&lt;/style&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;字段&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;举例&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;必填&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;namespace&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;namespace-1&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;命名空间&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;region&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;sh1&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;region id&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;source&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;custom&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控数据的来源&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;group_id&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;group_1&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;否&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控数据的group，或者分组标记&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;resource_id&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;i-12345678&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控数据关联的资源id&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;resource_name&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;roger-test&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;否&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控数据关联的资源名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;resource_type&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;instance&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;资源类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;user_id&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;usr-123456&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控资源资源对应用户的id&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;root_user_id&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;usr-123456&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;否&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;主账户id&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;meter&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;cpu&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控指标,请于该命名空间下监控配置中的监控指标名称保持一致&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;value_type&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;raw&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;指标值的类型，例如raw(原格式)percent(百分比)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;value&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;int&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;80&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控的数据，整型的数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;time_stamp&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2019-12-16T11:14:32Z&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;是&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;监控数据时间(UTC)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;tags&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;string&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;role=master,cln-node=node-1,interface=eth0&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;否&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;数据的tags，用于归类,都是key，value的形式，用于like查询，理论上存储的key都是按层级往后排，比如资源的下一级是role，role的下一级是节点，节点下有网卡。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;返回结果&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+    &amp;#34;data&amp;#34;: {
+        &amp;#34;upload_count&amp;#34;: 2
+    },
+    &amp;#34;ret_code&amp;#34;: 0
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;结果说明：ret_code为0时表示上传数据成功，data中upload_count表示上传数据条数。&lt;/p&gt;
+&lt;p&gt;自定义页面监控列表中涉及到一些时间区间内的监控数据计算，最小统计周期为5分钟，因此需连续发送一段时间（不小于5分钟）页面才有数据显示。&lt;/p&gt;
+&lt;p&gt;数据格式例如：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+    &amp;#34;user_id&amp;#34;: &amp;#34;usr-12345678&amp;#34;,
+    &amp;#34;namespace&amp;#34;: &amp;#34;ns1&amp;#34;,
+    &amp;#34;data&amp;#34;: [
+     {
+        &amp;#34;region&amp;#34;: &amp;#34;sh1&amp;#34;,
+        &amp;#34;source&amp;#34;: &amp;#34;custom&amp;#34;,
+        &amp;#34;user_id&amp;#34;: &amp;#34;testuser&amp;#34;,
+        &amp;#34;group_id&amp;#34;: &amp;#34;group_1&amp;#34;,
+        &amp;#34;resource_id&amp;#34;: &amp;#34;resource_id1&amp;#34;,
+        &amp;#34;resource_name&amp;#34;: &amp;#34;resource_name2&amp;#34;,
+        &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;,
+        &amp;#34;root_user_id&amp;#34;: &amp;#34;root_user&amp;#34;,
+        &amp;#34;meter&amp;#34;: &amp;#34;cpu&amp;#34;,
+        &amp;#34;value&amp;#34;: &amp;#34;100&amp;#34;,
+        &amp;#34;value_type&amp;#34;: &amp;#34;raw&amp;#34;,
+        &amp;#34;tags&amp;#34;:&amp;#34;role=master,interface=eth0&amp;#34;,
+        &amp;#34;time_stamp&amp;#34;: &amp;#34;2019-12-16T11:14:32Z&amp;#34;
+    },
+    {
+        &amp;#34;region&amp;#34;: &amp;#34;sh1&amp;#34;,
+        &amp;#34;source&amp;#34;: &amp;#34;custom&amp;#34;,
+        &amp;#34;user_id&amp;#34;: &amp;#34;testuser&amp;#34;,
+        &amp;#34;group_id&amp;#34;: &amp;#34;group_2&amp;#34;,
+        &amp;#34;resource_id&amp;#34;: &amp;#34;resource_id1&amp;#34;,
+        &amp;#34;resource_name&amp;#34;: &amp;#34;resource_name2&amp;#34;,
+        &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;,
+        &amp;#34;root_user_id&amp;#34;: &amp;#34;root_user&amp;#34;,
+        &amp;#34;meter&amp;#34;: &amp;#34;memory&amp;#34;,
+        &amp;#34;value&amp;#34;: &amp;#34;90&amp;#34;,
+        &amp;#34;value_type&amp;#34;: &amp;#34;raw&amp;#34;,
+        &amp;#34;tags&amp;#34;:&amp;#34;role=master,interface=eth0&amp;#34;,
+        &amp;#34;time_stamp&amp;#34;: &amp;#34;2019-12-16T11:14:32Z&amp;#34;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;构造请求串方法&#34;&gt;构造请求串方法&lt;/h3&gt;
+&lt;p&gt;您需要先在控制台创建 API密钥 ，获得 accesss_key_id 和 secret_access_key，这里我们假设，&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id = &amp;#39;QYACCESSKEYIDEXAMPLE&amp;#39;
+secret_access_key = &amp;#39;SECRETACCESSKEY&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;例如我们的请求参数如下:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;zone&amp;#34;:&amp;#34;sh1&amp;#34;,
+  &amp;#34;signature_version&amp;#34;:1,
+  &amp;#34;signature_method&amp;#34;:&amp;#34;HmacSHA256&amp;#34;,
+  &amp;#34;version&amp;#34;:1,
+  &amp;#34;access_key_id&amp;#34;:&amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeUsers&amp;#34;,
+  &amp;#34;time_stamp&amp;#34;:&amp;#34;2013-08-27T14:30:10Z&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;实际使用过程中请替换成你自己的AccessKeyId，切换相应区间信息。签名验证可以参考&lt;a href=&#34;/development_docs/api/signature/&#34;&gt;API 请求中签名 ( signature )&lt;/a&gt;，使用链接文档中数据签名结果如果和链接中的一致代表签名方法正确。&lt;/p&gt;
+&lt;p&gt;签名步骤&lt;/p&gt;
+&lt;p&gt;(1) &lt;strong&gt;按参数名进行升序排列&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;排序后的参数为:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;access_key_id&amp;#34;:&amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeUsers&amp;#34;,
+  &amp;#34;signature_method&amp;#34;:&amp;#34;HmacSHA256&amp;#34;,
+  &amp;#34;signature_version&amp;#34;:1,
+  &amp;#34;time_stamp&amp;#34;:&amp;#34;2013-08-27T14:30:10Z&amp;#34;,
+  &amp;#34;version&amp;#34;:1,
+  &amp;#34;zone&amp;#34;:&amp;#34;sh1&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(2) &lt;strong&gt;对参数名称和参数值进行URL编码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;编码后的请求串为:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;access_key_id&amp;#34;:&amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeUsers&amp;#34;,
+  &amp;#34;signature_method&amp;#34;:&amp;#34;HmacSHA256&amp;#34;,
+  &amp;#34;signature_version&amp;#34;:1,
+  &amp;#34;time_stamp&amp;#34;:&amp;#34;2013-08-27T14%3A30%3A10Z&amp;#34;,
+  &amp;#34;version&amp;#34;:1,
+  &amp;#34;zone&amp;#34;:&amp;#34;sh1&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;警告
+编码时空格要转换成 “%20” , 而不是 “+”警告&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;转码部分的字符要用大写，如 ”:” 应转成 “%3A”，而不是 “%3a”&lt;/p&gt;
+&lt;p&gt;(3) &lt;strong&gt;构造URL请求&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参数名和参数值之间用 “=” 号连接，参数和参数之间用 “＆” 号连接，构造后的URL请求为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;zone=sh1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(4) &lt;strong&gt;构造被签名串&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;被签名串的构造规则为: 被签名串 = HTTP请求方式 + “\n” + uri + “\n” + url 请求串&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;“\n” 是换行符，不要将 “\” 转义。也就是说，不要用 “\n” ，有些语言，比如 php 和 ruby ，请用 “\n” , 而不是 ‘\n’&lt;/p&gt;
+&lt;p&gt;假设 HTTP 请求方法为 GET 请求的uri路径为 “/iaas/” , 则被签名串为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;GET\n/iaas/\naccess_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;zone=sh1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(5) &lt;strong&gt;计算签名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;计算被签名串的签名 signature。&lt;/p&gt;
+&lt;p&gt;将API密钥的私钥 ( secret_access_key ) 作为key，生成被签名串的 HMAC-SHA256 或者 HMAC-SHA1 签名，更多信息可参见 RFC2104
+将签名进行 Base64 编码
+将 Base64 编码后的结果进行 URL 编码&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;当 Base64 编码后存在空格时，不要对空格进行 URL 编码，而要直接将空格转为 “+”
+以 Python (版本 2.7) 代码为例 (其他语言类似，需要使用 sha256 + base64 编码，最后需要再进行 URL 编码，URL 编码时需要将原有的空格 ” ” 转为 “+”)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import base64
+import hmac
+import urllib
+from hashlib import sha256
+  
+  
+# 前面生成的被签名串
+string_to_sign = &amp;#39;GET\n/iaas/\naccess_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;zone=sh1&amp;#39;
+h = hmac.new(secret_access_key, digestmod=sha256)
+h.update(string_to_sign)
+sign = base64.b64encode(h.digest()).strip()
+signature = urllib.quote_plus(sign)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(6) &lt;strong&gt;添加签名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将签名参数附在原有请求串的最后面。 最终的HTTP请求串为(为了查看方便，我们人为地将参数之间用回车分隔开)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id=QYACCESSKEYIDEXAMPLE
+&amp;amp;action=DescribeUsers
+&amp;amp;signature_method=HmacSHA256
+&amp;amp;signature_version=1
+&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z
+&amp;amp;version=1
+&amp;amp;zone=sh1
+&amp;amp;signature=bOQMI8wJ4ikFnadNXc%2BpnVMcUyf83C7b9JO5%2FAvkGyk%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;完整的请求串为(为了查看方便，我们人为地将参数之间用回车分隔开)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id=QYACCESSKEYIDEXAMPLE
+&amp;amp;action=DescribeUsers
+&amp;amp;signature_method=HmacSHA256
+&amp;amp;signature_version=1
+&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z
+&amp;amp;version=1
+&amp;amp;zone=sh1
+&amp;amp;signature=bOQMI8wJ4ikFnadNXc%2BpnVMcUyf83C7b9JO5%2FAvkGyk%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;示例代码&#34;&gt;示例代码&lt;/h3&gt;
+&lt;p&gt;示例代码以golang、python语言为例，其他语言类似&lt;/p&gt;
+&lt;h4 id=&#34;golang示例&#34;&gt;Golang示例&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;构造验证请求串代码示例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;请根据实际数据替换AccessKeyID、SecretAccessKey、Zone等信息&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;package main
+
+import (
+	&amp;#34;crypto/hmac&amp;#34;
+	&amp;#34;crypto/sha256&amp;#34;
+	&amp;#34;encoding/base64&amp;#34;
+	&amp;#34;encoding/json&amp;#34;
+	&amp;#34;fmt&amp;#34;
+	&amp;#34;net/url&amp;#34;
+	&amp;#34;sort&amp;#34;
+	&amp;#34;strconv&amp;#34;
+	&amp;#34;strings&amp;#34;
+	&amp;#34;time&amp;#34;
+)
+
+type verifyInfo struct {
+	httpMothod      string
+	path            string
+	secretAccessKey string
+	describeUsers   *describeUsers
+}
+
+type describeUsers struct {
+	AccessKeyID      string `json:&amp;#34;access_key_id&amp;#34;`
+	Action           string `json:&amp;#34;action&amp;#34;`
+	SignatureMethod  string `json:&amp;#34;signature_method&amp;#34;`
+	SignatureVersion int    `json:&amp;#34;signature_version&amp;#34;`
+	Version          int    `json:&amp;#34;version&amp;#34;`
+	Zone             string `json:&amp;#34;zone&amp;#34;`
+	TimeStamp        string `json:&amp;#34;time_stamp&amp;#34;`
+}
+
+func hmacSha256(data string, secret string) []byte {
+	h := hmac.New(sha256.New, []byte(secret))
+	h.Write([]byte(data))
+	return h.Sum(nil)
+}
+
+func formatParams(v interface{}) (map[string]interface{}, error) {
+	paramMap := make(map[string]interface{})
+	jsonBuf, err := json.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(jsonBuf, &amp;amp;paramMap)
+	if err != nil {
+		return nil, err
+	}
+	return paramMap, nil
+}
+
+func sortParams(params map[string]interface{}) string {
+	var keys []string
+	for k := range params {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	var parts []string
+	for _, key := range keys {
+		value := url.QueryEscape(strVal(params[key]))
+		value = strings.Replace(strings.Replace(value, &amp;#34;:&amp;#34;, &amp;#34;%3A&amp;#34;, -1), &amp;#34; &amp;#34;, &amp;#34;%20&amp;#34;, -1)
+		parts = append(parts, key+&amp;#34;=&amp;#34;+value)
+	}
+	return strings.Join(parts, &amp;#34;&amp;amp;&amp;#34;)
+}
+
+func constructSignature(httpMothod, reqUrl, requestStr, key string) string {
+	signaturePre := httpMothod + &amp;#34;\n&amp;#34; + reqUrl + &amp;#34;\n&amp;#34; + requestStr
+	hmacShaStr := hmacSha256(signaturePre, key)
+	base64Str := base64.StdEncoding.EncodeToString(hmacShaStr)
+	signature := strings.TrimSpace(base64Str)
+	signature = strings.Replace(signature, &amp;#34; &amp;#34;, &amp;#34;+&amp;#34;, -1)
+	signature = url.QueryEscape(signature)
+	return signature
+}
+
+func strVal(value interface{}) string {
+	var key string
+	if value == nil {
+		return key
+	}
+	switch value.(type) {
+	case int:
+		it := value.(int)
+		key = strconv.Itoa(it)
+	case string:
+		key = value.(string)
+	default:
+		newValue, _ := json.Marshal(value)
+		key = string(newValue)
+	}
+	return key
+}
+
+func (v *verifyInfo) buildVerifyStr() (string, error) {
+	params, err := formatParams(v.describeUsers)
+	if err != nil {
+		return &amp;#34;&amp;#34;, err
+	}
+	sortParams := sortParams(params)
+	signature := constructSignature(v.httpMothod, v.path, sortParams, v.secretAccessKey)
+	rsqParams := sortParams + &amp;#34;&amp;amp;signature=&amp;#34; + signature
+	return rsqParams, nil
+}
+
+
+func main() {
+	vi := &amp;amp;verifyInfo{
+		httpMothod:      &amp;#34;GET&amp;#34;,
+		path:            &amp;#34;/iaas/&amp;#34;,
+		secretAccessKey: &amp;#34;SECRETACCESSKEY&amp;#34;,
+		describeUsers: &amp;amp;describeUsers{
+			AccessKeyID:      &amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+			Action:           &amp;#34;DescribeUsers&amp;#34;,
+			SignatureMethod:  &amp;#34;HmacSHA256&amp;#34;,
+			SignatureVersion: 1,
+			Version:          1,
+			Zone:             &amp;#34;sh1&amp;#34;,
+			TimeStamp:        time.Now().Format(&amp;#34;2006-01-02T15:04:05Z&amp;#34;),
+		},
+	}
+
+	result, _ := vi.buildVerifyStr()
+	fmt.Println(result)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;代码证result结果即构造的验证请求串，由于验证信息有时效性，如中断数据发送后重新发送时间间隔大于5分钟，请重新构造验证请求串。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;验证所构造的验证请求串是否正确&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用自己构造的验证请求串替换下面代码中代码中result，执行下面代码。打印结果为1,验证请求串构造错误；打印结果为0，验证请求串构造正确。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;type successRespJson struct {
+	Message interface{} `json:&amp;#34;message,required&amp;#34;`
+	RetCode int         `json:&amp;#34;ret_code,required&amp;#34;`
+}
+
+func Verify(url string) int {
+	req, err := http.NewRequest(&amp;#34;GET&amp;#34;, url, nil)
+	if err != nil {
+		return 1
+	}
+	tr := &amp;amp;http.Transport{
+		TLSClientConfig: &amp;amp;tls.Config{InsecureSkipVerify: true, Renegotiation: tls.RenegotiateOnceAsClient},
+	}
+	cli := http.Client{
+		Transport:     tr,
+		CheckRedirect: nil,
+		Jar:           nil,
+		Timeout:       0,
+	}
+	response, _:= cli.Do(req)
+	defer response.Body.Close()
+	body, _:= ioutil.ReadAll(response.Body)
+	var vr successRespJson
+	if response.StatusCode == http.StatusOK {
+		if err := json.Unmarshal(body, &amp;amp;vr); err != nil {
+			return 1
+		}
+	}
+	return vr.RetCode
+}
+
+func main() {
+	result := &amp;#34;access_key_id=CCDJRDKCCKZYTEXANZJD&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2020-12-23T14%3A03%3A44Z&amp;amp;version=1&amp;amp;zone=sh1&amp;amp;signature=d6eMFDgO3E6wBqbbn2AydX%2BxQws7iD%2BtSgfGF6Lq7Uo%3D&amp;#34;
+	url := &amp;#34;https://api.yiqiyun.net.cn/iaas/&amp;#34; + &amp;#34;?&amp;#34; + result
+	fmt.Println(Verify(url))
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;上传自定义数据代码示例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;上传自定义数据需要预先在cloudsat自定义监控中创建命名空间和监控配置，并根据实际情况替换下面代码中一些数据如UserId、Namespace、Region、Meter等。Meter请与对应命名空间上监控配置中的监控指标保持一致。时间使用UTC时间，所有上传数据字段严格遵守接口数据规范中字段说明规范。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;package main
+
+import (
+	&amp;#34;bytes&amp;#34;
+	&amp;#34;encoding/json&amp;#34;
+	&amp;#34;fmt&amp;#34;
+	&amp;#34;math/rand&amp;#34;
+	&amp;#34;net/http&amp;#34;
+	&amp;#34;strconv&amp;#34;
+	&amp;#34;time&amp;#34;
+)
+
+type monitorData struct {
+	UserId    string  `json:&amp;#34;user_id&amp;#34;`
+	Namespace string  `json:&amp;#34;namespace&amp;#34;`
+	Data      []meters `json:&amp;#34;data&amp;#34;`
+}
+
+type meters struct {
+	Source       string `json:&amp;#34;source&amp;#34;`
+	UserId       string `json:&amp;#34;user_id&amp;#34;`
+	Tags         string `json:&amp;#34;tags&amp;#34;`
+	GroupId      string `json:&amp;#34;group_id&amp;#34;`
+	ResourceId   string `json:&amp;#34;resource_id&amp;#34;`
+	ResourceName string `json:&amp;#34;resource_name&amp;#34;`
+	ResourceType string `json:&amp;#34;resource_type&amp;#34;`
+	RootUserId   string `json:&amp;#34;root_user_id&amp;#34;`
+	Meter        string `json:&amp;#34;meter&amp;#34;`
+	Region       string `json:&amp;#34;region&amp;#34;`
+	Value        int    `json:&amp;#34;value&amp;#34;`
+	ValueType    string `json:&amp;#34;value_type&amp;#34;`
+	TimeStamp    string `json:&amp;#34;time_stamp&amp;#34;`
+}
+
+type date struct {
+	UploadCount int `json:&amp;#34;upload_count&amp;#34;`
+}
+
+type ret struct {
+	Data date `json:&amp;#34;data&amp;#34;`
+	RetCode int `json:&amp;#34;ret_code&amp;#34;`
+}
+
+
+var client = http.Client{
+	Timeout: 10 * time.Second,
+}
+
+func HttpPostJson(url string, data interface{}, result interface{}) error {
+	buf := bytes.NewBuffer(nil)
+	encoder := json.NewEncoder(buf)
+	if err := encoder.Encode(data); err != nil {
+		return err
+	}
+
+	request, err := http.NewRequest(http.MethodPost, url, buf)
+	if err != nil {
+		return err
+	}
+
+	request.Header.Add(&amp;#34;Content-Type&amp;#34;, &amp;#34;application/json&amp;#34;)
+	request.Header.Add(&amp;#34;Content-Type&amp;#34;, &amp;#34;charset=UTF-8&amp;#34;)
+	response, err := client.Do(request)
+	if err != nil {
+		return err
+	}
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(response.Body)
+	if err = decoder.Decode(&amp;amp;result); err != nil {
+		return err
+	}
+	fmt.Println(result)
+	return nil
+}
+
+
+func main() {
+
+    for {
+	    timeStamp := time.Now().UTC().Format(&amp;#34;2006-01-02T15:04:05Z&amp;#34;)
+		rand.Seed(time.Now().UnixNano())
+		flag := strconv.Itoa(rand.Intn(16))
+		p := monitorData{
+			UserId: &amp;#34;usr-12345678&amp;#34;,
+			Namespace: &amp;#34;cloudsat-test&amp;#34;,
+			Data: []meters{
+				{
+					Source: &amp;#34;dylan-test&amp;#34;,
+					UserId: &amp;#34;usr-12345678&amp;#34;,
+					Tags: &amp;#34;role=master,interface=eth10&amp;#34;,
+					GroupId: &amp;#34;group1&amp;#34;,
+					ResourceId: &amp;#34;i-instance-&amp;#34;+flag ,
+					ResourceName: &amp;#34;name&amp;#34;+flag,
+					ResourceType: &amp;#34;instance&amp;#34;,
+					RootUserId: &amp;#34;usr-12345678&amp;#34;,
+					Meter: &amp;#34;cpu&amp;#34;,
+					Region: &amp;#34;sh1&amp;#34;,
+					Value: rand.Intn(100),
+					ValueType: &amp;#34;percent&amp;#34;,
+					TimeStamp:timeStamp,
+				},{
+					Source: &amp;#34;dylan-test&amp;#34;,
+					UserId: &amp;#34;usr-12345678&amp;#34;,
+					Tags: &amp;#34;role=master,interface=eth10&amp;#34;,
+					GroupId: &amp;#34;group1&amp;#34; ,
+					ResourceId: &amp;#34;i-instance-&amp;#34;+flag ,
+					ResourceName: &amp;#34;name&amp;#34;+flag,
+					ResourceType: &amp;#34;instance&amp;#34;,
+					RootUserId: &amp;#34;usr-12345678&amp;#34;,
+					Meter: &amp;#34;memory&amp;#34;,
+					Region: &amp;#34;sh1&amp;#34;,
+					Value: rand.Intn(100),
+					ValueType: &amp;#34;percent&amp;#34;,
+					TimeStamp:timeStamp,
+				},
+			},
+		}
+		var r ret
+
+		url := `http://console.yiqiyun.net.cn/api/sh1/v1/custom/UploadMonitorData?access_key_id=CCDJRDKCCKZYTEXANZJD&amp;amp;action=DescribeUsers&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2020-12-23T09%3A52%3A10Z&amp;amp;version=1&amp;amp;zone=sh1&amp;amp;signature=vorfODyQzKD0v4En7y5mdwkvUe4OZGQcDdQU5xBSjio%3D`
+		err := HttpPostJson(url,p,r)
+		if err != nil {
+			fmt.Println(err)
+		}
+		time.Sleep(time.Duration(1)*time.Second)
+	}
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;python完整上传自定义数据示例&#34;&gt;python完整上传自定义数据示例&lt;/h4&gt;
+&lt;p&gt;请根据实际，使用自己的access_key_id、secret_access_key、user_id、namespace、region、meter替换代码中相应变量，这里以上海1区（sh1）为例,实际应用中需要同步更新self.CloudSatUrl中对应的区间信息，详情参见上文。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import hmac
+import json
+import base64
+import datetime
+import time
+from hashlib import sha256
+from collections import OrderedDict
+
+try:
+    import urllib.parse as urllib
+except:
+    import urllib
+import requests
+
+
+def sort_value(old_dict):
+    items = sorted(old_dict.items())
+    new_dict = OrderedDict()
+    for item in items:
+        new_dict[item[0]] = old_dict[item[0]]
+    return new_dict
+
+
+class UploadMonitorData(object):
+    def __init__(self, access_key_id, secret_access_key):
+        self.access_key_id = access_key_id
+        self.secret_access_key = secret_access_key
+
+        nowtime = datetime.datetime.now()
+        self.signature_time = datetime.datetime.strftime(nowtime, &amp;#34;%Y-%m-%dT%H:%M:%SZ&amp;#34;)
+
+        self.time_stamp = datetime.datetime.utcnow().strftime(&amp;#34;%Y-%m-%dT%H:%M:%SZ&amp;#34;)
+        self.time = datetime.datetime.now().strftime(&amp;#34;%Y-%m-%dT%H:%M:%SZ&amp;#34;)
+        self.url = &amp;#34;https://api.yiqiyun.net.cn/iaas/&amp;#34;
+        self.CloudSatUrl = &amp;#34;http://console.yiqiyun.net.cn/api/sh1/v1/custom/UploadMonitorData&amp;#34;
+        self.url_path = &amp;#39;/iaas/&amp;#39;
+        self.methods = &amp;#39;GET&amp;#39;
+
+    def post_request(self, post_url):
+        headers = {&amp;#34;Content-Type&amp;#34;: &amp;#34;application/json; charset=UTF-8&amp;#34;}
+        body = {
+            &amp;#34;user_id&amp;#34;: &amp;#34;usr-8Ljvov6I&amp;#34;,
+            &amp;#34;namespace&amp;#34;: &amp;#34;pt-test&amp;#34;,
+            &amp;#34;data&amp;#34;: [
+                {
+                    &amp;#34;source&amp;#34;: &amp;#34;custom&amp;#34;,
+                    &amp;#34;user_id&amp;#34;: &amp;#34;usr-8Ljvov6I&amp;#34;,
+                    &amp;#34;resource_id&amp;#34;: &amp;#34;i-ets7af6q&amp;#34;,
+                    &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;,
+                    &amp;#34;root_user_id&amp;#34;: &amp;#34;usr-8Ljvov6I&amp;#34;,
+                    &amp;#34;meter&amp;#34;: &amp;#34;cpu&amp;#34;,
+                    &amp;#34;region&amp;#34;: &amp;#34;sh1&amp;#34;,
+                    &amp;#34;value&amp;#34;: 99,
+                    &amp;#34;value_type&amp;#34;: &amp;#34;percent&amp;#34;,
+                    &amp;#34;time_stamp&amp;#34;: self.time_stamp
+                }, {
+                    &amp;#34;source&amp;#34;: &amp;#34;custom&amp;#34;,
+                    &amp;#34;user_id&amp;#34;: &amp;#34;usr-8Ljvov6I&amp;#34;,
+                    &amp;#34;resource_id&amp;#34;: &amp;#34;i-ets7af6q&amp;#34;,
+                    &amp;#34;resource_type&amp;#34;: &amp;#34;instance&amp;#34;,
+                    &amp;#34;root_user_id&amp;#34;: &amp;#34;usr-8Ljvov6I&amp;#34;,
+                    &amp;#34;meter&amp;#34;: &amp;#34;memory&amp;#34;,
+                    &amp;#34;region&amp;#34;: &amp;#34;sh1&amp;#34;,
+                    &amp;#34;value&amp;#34;: 96,
+                    &amp;#34;value_type&amp;#34;: &amp;#34;percent&amp;#34;,
+                    &amp;#34;time_stamp&amp;#34;: self.time_stamp
+                }
+            ]
+        }
+        result = requests.post(url=post_url, headers=headers, data=json.dumps(body))
+        print(result.status_code)
+        print(result.reason)
+        print(result.text)
+
+    def post_monitor_data(self):
+        od = OrderedDict()
+        od[&amp;#39;access_key_id&amp;#39;] = self.access_key_id
+        od[&amp;#39;action&amp;#39;] = &amp;#34;DescribeUsers&amp;#34;
+        od[&amp;#39;signature_method&amp;#39;] = &amp;#34;HmacSHA256&amp;#34;
+        od[&amp;#39;signature_version&amp;#39;] = 1
+        od[&amp;#39;time_stamp&amp;#39;] = self.signature_time
+        od[&amp;#39;version&amp;#39;] = 1
+        od[&amp;#39;zone&amp;#39;] = &amp;#34;sh1&amp;#34;
+
+        od_sort = sort_value(od)
+        data = urllib.urlencode(od_sort)
+        string_to_sign = self.methods + &amp;#34;\n&amp;#34; + self.url_path + &amp;#34;\n&amp;#34; + data
+        print(string_to_sign)
+        h = hmac.new(self.secret_access_key.encode(), digestmod=sha256)
+        h.update(string_to_sign.encode())
+        sign = base64.b64encode(h.digest()).strip()
+        signature = urllib.quote_plus(sign)
+        post_url = self.CloudSatUrl + &amp;#34;?&amp;#34; + data + &amp;#34;&amp;amp;signature=&amp;#34; + signature
+        self.post_request(post_url)
+
+
+if __name__ == &amp;#39;__main__&amp;#39;:
+    access_key_id = &amp;#39;ACCESSKEYID&amp;#39;
+    secret_access_key = &amp;#39;SECRETACCESSKEY&amp;#39;
+
+    while True:
+        upload_struct_object = UploadMonitorData(access_key_id, secret_access_key)
+        upload_struct_object.post_monitor_data()
+        time.sleep(3)
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: CloudSat简介</title>
+      <link>/monitor_service/cloudsat/intro/intro/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/intro/intro/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;产品概述&#34;&gt;产品概述&lt;/h1&gt;
+&lt;p&gt;云监控服务CloudSat为云上用户提供开箱即用的企业级开放型一站式监控解决方案。涵盖了用户账户内的所有核心IT设施基础监控。支持基于指标、事件、自定义指标等各类监控与告警服务。利用云监控告警服务内的各项功能，可实现全闭环、全链路的立体化监控系统。&lt;/p&gt;
+&lt;p&gt;使用云监控服务CloudSat，可以有效降低企业IT运维监控成本。也可及时了解业务的运行状况和健康度，及时收到异常报警做出反应，保证应用顺畅运行。&lt;/p&gt;
+&lt;h1 id=&#34;功能简介&#34;&gt;功能简介&lt;/h1&gt;
+&lt;h2 id=&#34;监控概览&#34;&gt;监控概览&lt;/h2&gt;
+&lt;p&gt;监控概况模块主要对云产品的整体监控情况进行整体的汇总与展示，为用户提供一个查看入口。用户可从全局视角来查看账号内所有云资源的监控状况，以及核心资源的用量排序。&lt;/p&gt;
+&lt;h3 id=&#34;功能概述&#34;&gt;功能概述&lt;/h3&gt;
+&lt;p&gt;监控概览为用户提供实时查看整体监控数据的功能，将云平台最核心的服务监控指标使用率情况集中呈现在一张监控大屏里，根据用户的资源运行与监控状态进行实时的监测与更新，为用户定制一个立体化监控平台，供用户进行全局管理。&lt;/p&gt;
+&lt;p&gt;监控概览内，提供了资源整体监控告警情况统计、告警统计、云服务器核心指标使用量监控与排序、网络核心指标的监控与排序、存储关键指标的监控与排序等。
+通过查看监控概览，让用户实时了解各云服务的资源使用情况和告警情况。
+监控概览的主要展示信息分为以下四大类：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实时展示资源类型与总数统计&lt;/li&gt;
+&lt;li&gt;各资源告警、正常、未配置告警策略数据统计展示&lt;/li&gt;
+&lt;li&gt;近24小时 事件/告警统计数据展示&lt;/li&gt;
+&lt;li&gt;资源核心指标数据总和以及Top5统计展示&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;适用场景&#34;&gt;适用场景&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;在日常运维工作中，满足用户对账号下全部基础资源的全局监控状态视角概览需求，可了解并把控所有资源的整体运行健康情况。&lt;/li&gt;
+&lt;li&gt;在进行运维工作整体优化评估时，可参考所有资源的报警数据趋势图，分析并发现资源出现异常时的高峰时段，加以应对与防范。&lt;/li&gt;
+&lt;li&gt;可通过资源用量排序了解核心基础资源的使用情况，有助于用户及时执行配置调整。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;dashboard&#34;&gt;Dashboard&lt;/h2&gt;
+&lt;p&gt;云监控的Dashboard功能为用户提供自定义查看监控数据、定位异常资源的功能。用户可跨区域、跨资源类型创建自定义监控图表与面板。该功能可灵活、高效地适用于各类监控场景下，实现对同类指标的对比监控需求。用户可以在一张监控大盘中跨资源类型、跨实例查看监控数据，并将相同业务的不同资源指标集中展现。&lt;/p&gt;
+&lt;h3 id=&#34;功能概述-1&#34;&gt;功能概述&lt;/h3&gt;
+&lt;p&gt;监控Dashboard为用户提供了可跨资源类型、跨指标类型、跨可用区的自定义集中监控服务，用户可根据业务需求，将各类维度的数据集中在同一个面板下，进行统一可视化监控。&lt;/p&gt;
+&lt;p&gt;监控Dashboard支持丰富的监控时间周期，在每种监控周期下对应的的监控间隔粒度都有所不同，用户可根据监控场景选择符合需求的时间周期。同时，若需要对某一个时间周期下的关键时间点进行进一步操作，可选择‘暂停’刷新的设置，面板将停止自动刷新。&lt;/p&gt;
+&lt;h3 id=&#34;术语解释&#34;&gt;术语解释&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;指标：指标作为具体监控资源中的变量值，如云服务器的CPU使用率，也是本次监控Dashboard最核心的变量。&lt;/li&gt;
+&lt;li&gt;面板：可自定义图表的面板区域，一个账号可创建多个面板，可对面板进行重命名、删除等操作。&lt;/li&gt;
+&lt;li&gt;图表：一张监控图表由资源所属区域、某一类具体资源、该资源的某一个具体指标、需要监控的资源实例（上限10个），四个主要因素构成，最终集成为图形化数据，本期支持折线图+列表详述。&lt;/li&gt;
+&lt;li&gt;监控周期：监控指标的时间范围，目前分别支持：最近6小时、最近一天、最近两周、最近一个月、最近六个月、用户自定义周期。按面板页面级统一控制。&lt;/li&gt;
+&lt;li&gt;监控粒度：实时监控指标的时间粒度，具体监控的时间粒度与对应的时间周期有关。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;适用场景-1&#34;&gt;适用场景&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;监控面板: 监控面板是可供用户自定义编辑的监控视图区，可向监控面板内加入不同区域、不同资源、不同指标的监控图表。&lt;/li&gt;
+&lt;li&gt;监控图表: 用户可在某一区域内自行创建该区内某类资源的多个实例、单个指标集成的数据图形。创建完成后，可对已创建的图表进行查看、修改、数据导出、删除等操作。&lt;/li&gt;
+&lt;li&gt;面板全屏: 用户可在面板图表生成之后进行集中监控，若暂时不再操作图表以及面板的其他功能，仅需要盯屏查看监控图表以及数据，可选择“全屏”显示模式，进入全屏式面板。全屏式面板的监控可视化图表效果更佳，同时依然可以支持在监控面板上的数据查看、时间周期切换等功能。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;分组管理&#34;&gt;分组管理&lt;/h2&gt;
+&lt;p&gt;可根据云资源的实际业务划分，对资源实例进行分组监控，集中配置告警策略，提升运维效率。在实例分组功能内，提供了跨云产品、跨地域的云产品资源分组管理功能，支持用户从业务角度/组织结构/资源规划视角，集中管理业务线等涉及各类资源的健康状态与告警规则。极大的减少了基于业务场景的运维成本。&lt;/p&gt;
+&lt;h3 id=&#34;功能概述-2&#34;&gt;功能概述&lt;/h3&gt;
+&lt;p&gt;实例分组提供了跨云产品、跨地域的云产品资源分组管理功能，可支持用户从业务角度、组织架构角度等，集中管理业务线涉及到的云服务器、硬盘、数据库、负载均衡、网络等各类核心资源。从而按业务线、组织架构等分类，来管理资源涉及到的报警规则，并高效查看监控数据，从而可以迅速提升运维效率。&lt;/p&gt;
+&lt;p&gt;以下为资源分组的核心功能介绍：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;列表汇总所有的分组信息，展示组内的关键统计信息，如：资源类型、资源总数、告警资源数/未告警资源数/未配置告警规则的资源数、创建类型、操作等。&lt;/li&gt;
+&lt;li&gt;管理实例分组&lt;/li&gt;
+&lt;li&gt;管理告警规则&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;目前资源组支持的监控资源包括：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【云服务器】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;云服务器状态&lt;/li&gt;
+&lt;li&gt;告警服务&lt;/li&gt;
+&lt;li&gt;告警状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;【VPC网络】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VPC状态&lt;/li&gt;
+&lt;li&gt;告警服务&lt;/li&gt;
+&lt;li&gt;告警状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;【公网IP】&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公网IP状态&lt;/li&gt;
+&lt;li&gt;告警服务&lt;/li&gt;
+&lt;li&gt;告警状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;适用场景-2&#34;&gt;适用场景&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;购买了多类型云产品的客户，需要利用分组功能将同一业务相关的云服务器、数据库、对象存储、缓存等资源添加到同一分组中进行集中管理。在分组维度内集中去管理报警规则，查看监控数据，可以极大地降低管理复杂度，提高云监控使用效率。&lt;/li&gt;
+&lt;li&gt;客户在购买了云资源后，所部署的业务重要程度不同，对核心系统需要最高标准的监控告警服务；对非核心的业务系统则需要相对中级的告警策略设置，此类场景，适合将不同重要度的资源集中起来，统一管理、统一批量设置与绑定告警策略。&lt;/li&gt;
+&lt;li&gt;云资源运维人员若需要对不同部门、不同业务使用资源的情况进行分组查看与管理，则可使用实例分组，按照部门或者业务进行资源划分，清晰了解到各组内的资源情况。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;事件监控&#34;&gt;事件监控&lt;/h2&gt;
+&lt;p&gt;事件监控模块汇集了云产品各类运维事件，以及用户业务的异常事件。对各类事件进行整体统计与展示，提供多种细查方式与查询模式，提供按资源类型、事件类型、事件名称等多种筛选模式下的事件汇总统计结果，便于关联业务与问题复盘。除此之外，可直接在事件监控列表上进行告警策略的设置与修改工作。&lt;/p&gt;
+&lt;h3 id=&#34;功能概述-3&#34;&gt;功能概述&lt;/h3&gt;
+&lt;p&gt;云监控服务中的「事件监控」功能作为云平台事件信息中枢，产品化了各类基础资源的生命周期与运转中的重要事件信息，并构建完善的事件消费渠道与流程，支撑客户云上监控与运维。&lt;/p&gt;
+&lt;p&gt;事件监控功能支持以下主要的核心能力：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;集中统计展示系统预置的云产品关键事件&lt;/li&gt;
+&lt;li&gt;支持不同视图形式下的事件信息展示&lt;/li&gt;
+&lt;li&gt;支持对用户关注的事件进行告警策略设置&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;适用场景-3&#34;&gt;适用场景&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;为日常运维工作，提供更加完善的云上资源监控信息维度，为监控运维提供更全面数据支撑。&lt;/li&gt;
+&lt;li&gt;在对监控数据进行数据消费的环节，提供事件信息消费渠道，帮助用户转化监控信息价值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;告警服务&#34;&gt;告警服务&lt;/h2&gt;
+&lt;p&gt;告警功能提供对监控指标的告警服务支持，用户对云服务的核心监控指标设置告警规则，当监控指标触发用户设置的告警规则阈值时，则会按照用户设置的查收通知形式，收取告警信息。目前平台支持以邮箱、短信等方式通知用户，让用户可以在第一时间得知云资源发生的异常情况，快速准确定位，并迅速处理故障，避免因资源问题或者外部操作原因，造成业务上的损失。&lt;/p&gt;
+&lt;h3 id=&#34;功能概述-4&#34;&gt;功能概述&lt;/h3&gt;
+&lt;p&gt;监控告警功能是对资源层面的监控数据，设置告警条件和通知列表， 有助于及时了解资源使用情况和处理突发事件。具体包含以下几个核心的功能点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;设置告警策略规则&lt;/li&gt;
+&lt;li&gt;绑定资源到具体的告警规则内&lt;/li&gt;
+&lt;li&gt;设置告警通知联系人&lt;/li&gt;
+&lt;li&gt;设置联系人接收方式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;适用场景-4&#34;&gt;适用场景&lt;/h3&gt;
+&lt;p&gt;目前支持的监控项包括：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;云服务器&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU 使用百分比&lt;/li&gt;
+&lt;li&gt;内存使用百分比&lt;/li&gt;
+&lt;li&gt;磁盘空间使用百分比，检查范围包括云服务器中所有已挂载（mount）的分区&lt;/li&gt;
+&lt;li&gt;云服务器网卡的进流量，检查范围包括云服务器所有网卡&lt;/li&gt;
+&lt;li&gt;云服务器网卡的出流量，检查范围包括云服务器所有网卡&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;公网IP&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公网进流量&lt;/li&gt;
+&lt;li&gt;公网出流量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;路由器&lt;/strong&gt;
+注： 路由器新增针对网络 PPS 和路由器 CPU / 内存的监控告警仅支持新的区域和可用区&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;路由器所连网络的进流量，检查范围包括所有与此路由器连接的私有网络&lt;/li&gt;
+&lt;li&gt;路由器所连网络的出流量，检查范围包括所有与此路由器连接的私有网络&lt;/li&gt;
+&lt;li&gt;路由器所连网络的入口 PPS，检查范围包括所有与此路由器连接的私有网络&lt;/li&gt;
+&lt;li&gt;路由器所连网络的出口 PPS，检查范围包括所有与此路由器连接的私有网络&lt;/li&gt;
+&lt;li&gt;路由器自身的 CPU 利用率&lt;/li&gt;
+&lt;li&gt;路由器自身的内存利用率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;私有网络&lt;/strong&gt;
+注： 私有网络监控告警仅支持新的区域和可用区&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;私有网络所有网卡的进流量，检查范围包括私有网络内的所有网卡&lt;/li&gt;
+&lt;li&gt;私有网络所有网卡的出流量，检查范围包括私有网络内的所有网卡&lt;/li&gt;
+&lt;li&gt;私有网络所有网卡的入口 PPS，检查范围包括私有网络内的所有网卡&lt;/li&gt;
+&lt;li&gt;私有网络所有网卡的出口 PPS，检查范围包括私有网络内的所有网卡&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;负载均衡器&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;监听器 HTTP/HTTPS 协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;请求数：接收到的请求数&lt;/li&gt;
+&lt;li&gt;平均响应延迟时间：监听器下所有后端的响应时间&lt;/li&gt;
+&lt;li&gt;平均并发数：并发连接数&lt;/li&gt;
+&lt;li&gt;后端1xx/2xx/3xx/4xx/5xx响应数：监听器下所有后端返回的，对应状态码的响应数&lt;/li&gt;
+&lt;li&gt;后端服务器可用个数&lt;/li&gt;
+&lt;li&gt;后端服务器不可用个数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;监听器 TCP 协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;连接数：监听器下所有后端的 TCP 连接数&lt;/li&gt;
+&lt;li&gt;平均并发数：并发连接数&lt;/li&gt;
+&lt;li&gt;后端服务器可用个数&lt;/li&gt;
+&lt;li&gt;后端服务器不可用个数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;后端服务 HTTP 协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;平均响应延迟时间：监听器下所有后端的响应时间&lt;/li&gt;
+&lt;li&gt;服务状态：后端服务器是否异常&lt;/li&gt;
+&lt;li&gt;后端1xx/2xx/3xx/4xx/5xx响应数：此后端返回的，对应状态码的响应数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;后端服务 TCP 协议&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;连接数：此后端的 TCP 连接数&lt;/li&gt;
+&lt;li&gt;服务状态：后端服务器是否异常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;关系型数据库&lt;/strong&gt;
+关系型数据库的监控告警只会监控 “主节点” ，包括如下监控项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU：CPU 使用百分比&lt;/li&gt;
+&lt;li&gt;内存：内存使用百分比&lt;/li&gt;
+&lt;li&gt;磁盘使用率：磁盘空间使用百分比&lt;/li&gt;
+&lt;li&gt;活跃连接数：数据库的活跃连接数&lt;/li&gt;
+&lt;li&gt;查询请求：数据库执行的所有查询请求的次数&lt;/li&gt;
+&lt;li&gt;慢查询：根据数据库配置的慢查询标准，监控慢查询的次数&lt;/li&gt;
+&lt;li&gt;全表扫描次数：发生全表扫描的次数。 (全表扫描是数据库服务器用来搜寻表的每一条记录的过程， 直到所有符合给定条件的记录返回为止，大多发生在对无索引的表进行查询)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;MongoDB&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU：CPU 使用百分比&lt;/li&gt;
+&lt;li&gt;内存：内存使用百分比&lt;/li&gt;
+&lt;li&gt;磁盘使用率：磁盘空间使用百分比&lt;/li&gt;
+&lt;li&gt;连接数：数据库的连接数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Redis/Memcached&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内存利用率：内存使用百分比&lt;/li&gt;
+&lt;li&gt;被拒绝 key 个数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Zookeeper&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU：CPU 使用百分比&lt;/li&gt;
+&lt;li&gt;内存：内存使用百分比&lt;/li&gt;
+&lt;li&gt;集群服务是否可用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Kafka&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU：CPU 使用百分比&lt;/li&gt;
+&lt;li&gt;内存：内存使用百分比&lt;/li&gt;
+&lt;li&gt;磁盘使用率：磁盘空间使用百分比&lt;/li&gt;
+&lt;li&gt;出现未复制分区或离线分区&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Hadoop/Spark/Storm/ElasticSearch/HBase&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU：CPU 使用百分比&lt;/li&gt;
+&lt;li&gt;内存：内存使用百分比&lt;/li&gt;
+&lt;li&gt;磁盘使用率：磁盘空间使用百分比&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;自定义监控&#34;&gt;自定义监控&lt;/h2&gt;
+&lt;p&gt;自定义监控的功能支持，可满足已有用户、非亿栖云用户对基础资源的指标监控需求，可与CloudSAT服务内的其他功能结合使用，形成完整的立体化监控告警服务。
+在自定义监控功能模块内，需要完成以下几个目标：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对体量较大的客户，可上报非平台预置、其他云平台上的监控数据&lt;/li&gt;
+&lt;li&gt;对非亿栖云用户，在自定义功能内，提供轻量、简易的数据上报与监控管理能力&lt;/li&gt;
+&lt;li&gt;可接入Zabbix的基础监控数据，运用cloudsat的告警服务、dashboard、图形化指标数据展示等各类功能，简化运维人员运维工作，实现通过云平台达成全面监控的目标弹性裸金属服务器是即将推出的一款全新产品。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;功能概述-5&#34;&gt;功能概述&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;上报数据：按规定路径与参数规范，进行监控指标数据上报。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据上报状态：系统会对上报的监控数据的各种状态进行及时的反馈与同步，包括延迟/上报失败原因等，保证用户对自定义上报的数据的可控性。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上报后数据展示样式/展示条件/限制/功能：数据归属（组）/图形展示，按数据归属组（命名空间）/维度等过滤查询，数据保存时间/数据类型要求/设置告警规则/查看数据/图形等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;适用场景-5&#34;&gt;适用场景&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;自定义监控是提供给用户可自由定义监控项及报警规则的能力。用户可以针对自己关心的业务指标进行监控，将采集到监控数据上报至云监控，由云监控来进行数据的处理，并根据处理结果进行报警。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;兼容亿栖云用户、非亿栖云用户对基础资源的指标监控需求，可与CloudSAT服务内的其他功能关联使用，形成全面的立体化监控告警服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: webhook 配置钉钉通知</title>
+      <link>/monitor_service/cloudsat/best-practices/webhook-dtalk/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/best-practices/webhook-dtalk/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;日常运维中，如何在问题出现前或出现问题后及时解决掉问题，监控告警成为必不可少的手段，而如何及时收到告警信息又是关键中的关键。传统的邮件通知会出现时效慢、无法即时查看、垃圾邮件过多等因素，使运维人员时刻提心吊胆。而短信通知则会产生费用，且告警人数单一。支持使用钉钉机器人进行通知告警，配置简单，节省成本，群告警。&lt;/p&gt;
+&lt;h2 id=&#34;配置步骤&#34;&gt;配置步骤&lt;/h2&gt;
+&lt;h3 id=&#34;一添加钉钉机器人&#34;&gt;一、添加钉钉机器人&lt;/h3&gt;
+&lt;p&gt;在钉钉群组中—群设置—智能群助手—添加机器人，群机器人选择“自定义”。&lt;br&gt;
+&lt;img src=&#34;../best-practices.assets/webhook_dtalk1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;在安全设置中需添加自定义关键词“告警”、“自动伸缩” 、“定时器”。&lt;/code&gt;&lt;br&gt;
+&lt;img src=&#34;../best-practices.assets/webhook_dtalk2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;二获取-webhook-地址&#34;&gt;二、获取 webhook 地址&lt;/h3&gt;
+&lt;p&gt;方法1、在创建机器人时获取 webhook 地址。
+&lt;img src=&#34;../best-practices.assets/webhook_dtalk3.png&#34; alt=&#34;&#34;&gt;&lt;br&gt;
+方法2、通过群设置—智能群助手—查看机器人对应的 webhook地址。
+&lt;img src=&#34;../best-practices.assets/webhook_dtalk4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;三设置-webhook-通知地址&#34;&gt;三、设置 webhook 通知地址&lt;/h3&gt;
+&lt;p&gt;在控制台—消息中心—消息接收管理—接收人管理中，添加消息接收人，将钉钉机器人的 webhook 地址填写进去后保存。&lt;br&gt;
+&lt;img src=&#34;../best-practices.assets/webhook_dtalk5.png&#34; alt=&#34;&#34;&gt;
+验证 webhook 通知地址&lt;br&gt;
+&lt;img src=&#34;../best-practices.assets/webhook_dtalk6.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;四配置告警服务&#34;&gt;四、配置告警服务&lt;/h3&gt;
+&lt;p&gt;参照文档&lt;a href=&#34;/monitor_service/cloudsat/manual/alarm_service/&#34;&gt;告警服务&lt;/a&gt;，配置监控告警项。&lt;/p&gt;
+&lt;h2 id=&#34;验证效果&#34;&gt;验证效果&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;../best-practices.assets/webhook_dtalk7.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 计费说明</title>
+      <link>/monitor_service/cloudsat/billing/price/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/billing/price/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;cloudsat计费的说明&#34;&gt;CloudSat计费的说明&lt;/h1&gt;
+&lt;p&gt;CloudSat目前未单独计费，页面上的费用预览计费仅包括基础资源费用，通过使用时指定的外部基础资源使用情况计算费用。CloudSat相关服务使用时指定的外部资源即云服务器、硬盘、防火墙、公网 IP、 VPC 网络等资源费用。所有基础资源费用的计算周期以资源创建时间为起点，以资源销毁时间为终点。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 全栈资源监控统一展示</title>
+      <link>/monitor_service/cloudsat/best-practices/show-all-resource/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/best-practices/show-all-resource/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;问题&#34;&gt;问题：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;需监控业务资源量大、运维成本高，监控运维支持人员有限。&lt;/li&gt;
+&lt;li&gt;基于各类资源上所部署业务的不同，对资源监控管理的需求也有区别，需要从资源层进行分组分类管理。&lt;/li&gt;
+&lt;li&gt;监控运维工作操作路径分散，无法进行「发现问题-定位问题- 解决问题」全链路的运维监控工作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;解决方案&#34;&gt;解决方案：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;利用监控Dashboard的自定义监控面板创建所有IaaS、PaaS资源的统一监控界面。&lt;/li&gt;
+&lt;li&gt;对资源进行分组监控，根据业务系统的不同分组，实施精准高效的故障处理流程，迅速追溯到故障资源组。&lt;/li&gt;
+&lt;li&gt;针对云资源中不同数据类型的监控告警服务进行统一管理，快速对关键事件和核心指标进行告警策略的设置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;方案优势&#34;&gt;方案优势：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;运用监控系统中的各类功能实现集中监控的业务需求。&lt;/li&gt;
+&lt;li&gt;流程完善、功能全面，可覆盖大多数基础资源的运维需求。&lt;/li&gt;
+&lt;li&gt;可满足集中全局统览与详细追溯具体资源两方面的监控场景，实现云平台的全量监控服务。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 通过分组管理和告警功能构建大批量资源监控告警机制</title>
+      <link>/monitor_service/cloudsat/best-practices/resource-alarm/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/best-practices/resource-alarm/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;简介&#34;&gt;简介&lt;/h3&gt;
+&lt;p&gt;随着客户的业务发展，企业上云会面临大规模多类型的云产品资源监控运维问题，日常监控往往分布在多地，多业务，多资源无法统一高效监控。本篇实践旨在帮助您使用 CloudSat 提供分组管理和告警服务，可以帮助您的资源进行按业务有效分组，以及规模化的构建告警体系，迅速提升运维效率。&lt;/p&gt;
+&lt;h3 id=&#34;主要概念&#34;&gt;主要概念&lt;/h3&gt;
+&lt;p&gt;分组管理：指对平台所有IaaS、PaaS资源的分组，可在分组后集中管理组内的监控告警服务。更多信息，请参阅什么是分组管理服务？&lt;/p&gt;
+&lt;p&gt;告警服务：由资源类型、检查周期、告警条件/规则、通知列表等信息组成的具体策略，将策略绑定到具体资源上即可生效。更多信息，请参阅什么是告警服务？&lt;/p&gt;
+&lt;h3 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h3&gt;
+&lt;p&gt;以以下场景为例：&lt;/p&gt;
+&lt;p&gt;假设我们有多种资源，一部分用于开发项目组(开发项目正式服务01和开发项目正式服务02)，一部分用于测试项目组，业务涉及资源分散于北京3区和上海1区。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;登录管理控制台，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;监控服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;云监控 CloudSat&lt;/strong&gt;，进入&lt;strong&gt;云监控&lt;/strong&gt;页签。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;单击&lt;strong&gt;分组管理&lt;/strong&gt;，进入分组管理页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;单击&lt;strong&gt;新建&lt;/strong&gt;，配置如下选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;分组名：输入分组名称，例如：业务命名
+添加资源：根据您的实际需求可选择直接添加或从项目导入。&lt;/p&gt;
+&lt;img src=&#34;../best-practices.assets/20201029111448.png&#34; style=&#34;zoom:25%;&#34; /&gt;
+&lt;p&gt;支持批量从项目导入资源，为用户免去重复配置业务分组的繁琐流程。
+支持多区资源混合管理，帮助用户在全局的情况下了解自己的资源概况。
+支持资源列表搜索、一键全选以及多选功能；友好的批量操作为用户大批量选取资源带来便利，提升配置效率&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;完成后可明确了解当前各业务线资源整体概况，例如：哪些资源未配置告警服务，哪些资源正在告警&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;通过分组管理的功能可以迅速定位分组内资源的关系，快速了解资源的监控告警状态，迅速察觉异常情况&lt;/p&gt;
+&lt;img src=&#34;../best-practices.assets/20201029111450.png&#34; style=&#34;zoom:30%;&#34; /&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;汇聚视图中发现正在告警的资源，并迅速定位具体异常对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过告警状况进行针对性排障，如资源超载可以通过扩展资源的方式进行解决。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;汇聚视图中发现未配置告警服务的资源，可在分组内进行快速绑定告警策略。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在告警服务中可查看当前分组内已绑定的告警策略状况。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;../best-practices.assets/20201029111460.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;快速查看分组内告警策略的规则&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在上图显示的当前组告警策略状况状况中，选择某一条告警策略，点击告警规则下的查看，即可查看分组内该告警策略的规则。&lt;/p&gt;
+&lt;img src=&#34;../best-practices.assets/20201214133458.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 异常处理排查</title>
+      <link>/monitor_service/cloudsat/best-practices/panic-check/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/best-practices/panic-check/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;问题&#34;&gt;问题：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;传统监控告警支持的资源不够全面，导致部分资源的故障信息无法第一时间获取。&lt;/li&gt;
+&lt;li&gt;传统告警信息通知方式单一，无法方便快捷进行告警信息的发送。&lt;/li&gt;
+&lt;li&gt;不同资源的所属部门不同，对应资源的异常需要发送至相关业务联系人。&lt;/li&gt;
+&lt;li&gt;监控资源量级较大时快速进行故障资源定位难度大。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;解决方案&#34;&gt;解决方案：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;云平台资源统一监控，集中批量设置告警策略。&lt;/li&gt;
+&lt;li&gt;多种告知方式，包括邮件、短信、微信等，在设置通知策略时可以建立不同的联系人组，信息触发准确及时。&lt;/li&gt;
+&lt;li&gt;在监控告警界面上快速发现异常资源信息，并下钻定位到问题资源。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;方案价值&#34;&gt;方案价值：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;配置告警的资源覆盖全面， 减少通过各个分散的监控系统完成对各类资源监控的建设成本。&lt;/li&gt;
+&lt;li&gt;实时反馈系统的异常情况，保障业务稳定运行。&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 周期时间内重大事件统计</title>
+      <link>/monitor_service/cloudsat/best-practices/event-statistic/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/best-practices/event-statistic/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;问题&#34;&gt;问题：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;账户内的资源数量较多，可视化地查看核心资源上面的一些行为操作。&lt;/li&gt;
+&lt;li&gt;被监控事件触发后快速完整地监控告警服务，及时通知、定位并处理问题。&lt;/li&gt;
+&lt;li&gt;按不同时间周期对其进行统一汇总统计与展示。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;解决方案&#34;&gt;解决方案：&lt;/h3&gt;
+&lt;p&gt;根据「事件监控」上的事件监控功能，直接查看选择周期内核心事件记录，事件详情，集中统计展示系统预置的云产品关键事件。&lt;/p&gt;
+&lt;p&gt;绑定告警策略还可对核心事件提供告警服务。&lt;/p&gt;
+&lt;img src=&#34;../best-practices.assets/20201205155532.png&#34; style=&#34;zoom:30%;&#34; /&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 资源用量排行</title>
+      <link>/monitor_service/cloudsat/best-practices/resource-tops/</link>
+      <pubDate>Tue, 01 Dec 2020 00:38:25 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/best-practices/resource-tops/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;账户内的资源数量较多，资源使用情况无法实现可视化地汇总查看。&lt;/li&gt;
+&lt;li&gt;部分资源的核心指标直接影响到业务，用户对此关注度较高，需要根据准确的实时指标值了解资源负载情况&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;解决方案&#34;&gt;解决方案&lt;/h3&gt;
+&lt;p&gt;根据「监控概览」上的资源排序功能，直接查看核心资源重要指标的Top5实时排序列表。
+&lt;img src=&#34;../best-practices.assets/20201104142142.png&#34; style=&#34;zoom:30%;&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Monitor_service: 产品动态</title>
+      <link>/monitor_service/cloudsat/news/product_news/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/monitor_service/cloudsat/news/product_news/</guid>
+      <description>
+        
+        
+        &lt;!-- 设置上述参数可生成产品动态页  --&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

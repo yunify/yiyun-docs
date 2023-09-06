@@ -1,0 +1,61 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 数据处理</title>
+    <link>/storage/object-storage/manual/console/data_process/</link>
+    <description>Recent content in 数据处理 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 28 Feb 2020 10:08:56 +0900</lastBuildDate>
+    
+	  <atom:link href="/storage/object-storage/manual/console/data_process/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: 图片处理</title>
+      <link>/storage/object-storage/manual/console/data_process/image_process/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/manual/console/data_process/image_process/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+&lt;p&gt;亿栖云对象存储提供了格式转换、旋转、添加水印等多种图片处理功能。用户可以根据需求在管理控制台配置处理参数，并将生成的处理参数代码拼接至图片的 URL 后面，以获得经过处理的图片。&lt;/p&gt;
+&lt;p&gt;亿栖云对象存储目前暂不支持对加密图片进行处理，且处理的单张图片最大尺寸为 10MB。&lt;/p&gt;
+&lt;h2 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;进入亿栖云对象存储的主页面，点击对应的 Bucket 名：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/console_main.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;进入 Bucket 详情页面，点击 &lt;strong&gt;数据处理&lt;/strong&gt;，选择 &lt;strong&gt;图片处理&lt;/strong&gt;，点击 &lt;strong&gt;打开&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/data_image_pro1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;进入 &lt;strong&gt;图片处理&lt;/strong&gt; 详情页面，图片处理详情界面分为预览、操作面板以及处理参数三个部分。各部分操作简单直观，如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/data_image_pro2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;各部分功能说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预览：显示经过当前操作处理后得到的示例图片以及该图片的基本信息，目前提供三张常用尺寸的示例图片，用户可根据需要切换不同的示例图片。&lt;/li&gt;
+&lt;li&gt;操作面板：目前提供五种基本图片处理操作，用户可对其进行搭配，图片处理将按照操作顺序生成处理参数代码。&lt;/li&gt;
+&lt;li&gt;处理参数：图片处理最终将生成一段处理参数代码，将该代码拼接至图片的 URL 后面，以获得经过处理的图片。同时可以将处理参数保存在浏览器本地，方便再次编辑使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;操作面板说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;裁剪：指定裁剪区域尺寸和位置在图片中裁剪出不同尺寸的图片。&lt;/li&gt;
+&lt;li&gt;旋转：对图片进行旋转。&lt;/li&gt;
+&lt;li&gt;缩放：将图片缩放到指定尺寸，可选择是否保持原有比例进行缩放。&lt;/li&gt;
+&lt;li&gt;水印：增加文字或图片水印。&lt;/li&gt;
+&lt;li&gt;格式：将图片转换成指定格式。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

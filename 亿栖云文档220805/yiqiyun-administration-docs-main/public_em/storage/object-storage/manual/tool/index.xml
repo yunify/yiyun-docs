@@ -1,0 +1,901 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 客户端工具</title>
+    <link>/storage/object-storage/manual/tool/</link>
+    <description>Recent content in 客户端工具 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/storage/object-storage/manual/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: qsctl</title>
+      <link>/storage/object-storage/manual/tool/qsctl/</link>
+      <pubDate>Mon, 17 May 2021 10:08:56 +0800</pubDate>
+      
+      <guid>/storage/object-storage/manual/tool/qsctl/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+&lt;p&gt;qsctl 是亿栖云对象存储提供的客户端高级命令行工具，用于管理亿栖云对象存储资源。qsctl 提供了强大的类 UNIX 命令，所有的 qsctl 命令均支持批量操作。&lt;/p&gt;
+&lt;p&gt;目前 qsctl 已更新至 v2.4.3 版本，若您仍需查看 qsctl v1.x 版本的相关文档，请点击 &lt;a href=&#34;v1&#34;&gt;qsctl v1 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;h3 id=&#34;下载安装&#34;&gt;下载安装&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;直接&lt;a href=&#34;https://releases.qingstor.dev/#qsctl&#34;&gt;点击此处&lt;/a&gt;，根据客户端操作系统版本，下载相应安装包。当前 qsctl 最新版本为 v2.4.3，若无特殊要求，建议下载最新版本。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/qsctl_install1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;本地解压安装包后，即可运行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/qsctl_install2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;修改配置&#34;&gt;修改配置&lt;/h3&gt;
+&lt;p&gt;在正式使用 qsctl 工具前，用户需修改相应的配置文件，从而使其能正常工作。在载入配置文件时，qsctl 会按照如下顺序进行尝试，一旦读取成功便不再尝试下一个配置文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户通过 &lt;code&gt;-c&lt;/code&gt; 参数指定的配置文件&lt;/li&gt;
+&lt;li&gt;配置文件：&lt;code&gt;~/.qingstor/config.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置文件：&lt;code&gt;~/.config/qingstor/config.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置文件：&lt;code&gt;/etc/qingstor/config.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上为类 Unix 系统下的配置文件路径，对于 Windows 用户而言，配置文件路径为 &lt;code&gt;C:\User\{\%USERPROFILE\%}\.qingstor\config.yaml&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;详细操作步骤如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在管理控制台申请 API 密钥，并下载保存。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;根据前文信息，依次查看是否存在默认配置文件：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat ~/.qingstor/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat ~/.config/qingstor/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat /etc/qingstor/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;若以上文件均不存在，即说明无默认配置文件，需按照如下步骤手动创建配置文件：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch qsctl_config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;按如下格式填写配置相关信息：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ACCESS_KEY_ID_EXAMPLE&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SECRET_ACCESS_KEY_EXAMPLE&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;host&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;qingstor.com&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;protocol&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;access_key_id&lt;/code&gt; 与 &lt;code&gt;secret_access_key&lt;/code&gt; 根据步骤 1 中下载的 API 密钥进行填写。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;host&lt;/code&gt;，&lt;code&gt;port&lt;/code&gt; 与 &lt;code&gt;protocol&lt;/code&gt; 参数为待访问的对象存储的域名，端口号及协议类型。公有云维持默认即可，私有云环境需根据实际情况进行填写。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置文件默认使用 HTTPS 访问方式，若需修改为 HTTP 访问方式，可按照如下内容填写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;protocol&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;升级&#34;&gt;升级&lt;/h2&gt;
+&lt;h3 id=&#34;变更日志&#34;&gt;变更日志&lt;/h3&gt;
+&lt;p&gt;详见 &lt;a href=&#34;https://github.com/qingstor/qsctl/blob/master/CHANGELOG.md&#34;&gt;qsctl changelog&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;升级指南&#34;&gt;升级指南&lt;/h3&gt;
+&lt;p&gt;亿栖云对象存储建议您升级至 qsctl v2.4.3 版本。详细操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;执行如下命令行，删除历史版本的 qsctl ：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo pip uninstall qsctl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;参考上文安装配置 &lt;a href=&#34;#%E5%AE%89%E8%A3%85&#34;&gt;qsctl&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;兼容性说明&#34;&gt;兼容性说明&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;配置文件中，相关字段更新如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 原字段&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qs_access_key_id：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qs_secret_access_key：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 更新为如下字段：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;access_key_id：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;secret_access_key：
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;qsctl v2.4.3 不再从如下路径读取配置文件：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;~/.qingcloud/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;对相关命令做出的变更说明如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;命令&lt;/th&gt;
+    &lt;th&gt;说明&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td rowspan=&#34;2&#34;&gt;cp，mv&lt;/td&gt;
+    &lt;td&gt;暂时取消对 include，exclude，--rate-limit 和 workers 选项的支持&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;对本地文件夹的操作在路径结尾是否添加 `/` 时行为有所不同&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td rowspan=&#34;3&#34;&gt;sync&lt;/td&gt;
+    &lt;td&gt;暂时取消对 include，exclude，--rate-limit 和 workers 选项的支持&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;暂未添加对 --delete 选项的支持&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;默认修改为非递归操作，如果需要递归同步子目录，请添加 -r 选项&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ls&lt;/td&gt;
+    &lt;td&gt;默认修改为只显示文件名的操作；如需显示详细信息，请添加 -l 选项&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;rm&lt;/td&gt;
+    &lt;td&gt;暂时取消对 include，exclude，--rate-limit 和 workers 选项的支持&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;qsctl v2.2.0 中移除了之前添加的交互式的配置程序。若您仍需要进行交互式配置，建议使用 v2.1.2 版本。
+v2.1.2 版本中，在您首次使用 qsctl 且未在默认目录下检索到配置文件时，便会启动该交互配置。您只需要根据命令行的提示输入或选择配置内容即可。配置完成后，配置程序会根据您输入的信息，在系统中生成如下配置文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;主目录&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;/.qingstor/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;具体的配置文件的位置会根据您的系统而有所不同。&lt;/li&gt;
+&lt;li&gt;在类 Unix 操作系统下，配置文件会生成在 &lt;code&gt;~/.qingstor/config.yaml&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;在 Windows 操作系统下，配置文件会生成在 &lt;code&gt;C:\User\{\%USERPROFILE\%}\.qingstor\config.yaml&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;命令列表&#34;&gt;命令列表&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;cat&lt;/td&gt;
+&lt;td&gt;输出远程对象内容至标准输出。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cp&lt;/td&gt;
+&lt;td&gt;复制本地文件至亿栖云对象存储的 Bucket，或从亿栖云对象存储的 Bucket 复制对象至本地。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ls&lt;/td&gt;
+&lt;td&gt;列出本用户下创建的所有亿栖云对象存储的 Bucket，或列出给定亿栖云对象存储的 Bucket 中给定前缀下的所有对象。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mb&lt;/td&gt;
+&lt;td&gt;在亿栖云对象存储服务端创建一个新的 Bucket。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mv&lt;/td&gt;
+&lt;td&gt;移动本地文件至亿栖云对象存储的 Bucket，或移动亿栖云对象存储 Bucket 中的对象至本地。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;presign&lt;/td&gt;
+&lt;td&gt;生成亿栖云对象存储的 Bucket 指定对象的临时下载链接。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rb&lt;/td&gt;
+&lt;td&gt;从亿栖云对象存储删除 Bucket。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rm&lt;/td&gt;
+&lt;td&gt;从亿栖云对象存储 Bucket 删除一个对象或给定前缀下的所有对象。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;stat&lt;/td&gt;
+&lt;td&gt;查看一个指定的亿栖云对象存储的对象信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;sync&lt;/td&gt;
+&lt;td&gt;同步本地目录和亿栖云对象存储目录。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tee&lt;/td&gt;
+&lt;td&gt;从标准输入读取内容并上传至亿栖云对象存储的 Bucket。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;查看帮助文件&#34;&gt;查看帮助文件&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;查看 qsctl 的命令列表和简易教程，可以通过 &lt;code&gt;-h&lt;/code&gt; 参数打印出来:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl -h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;查看 qsctl 的某个命令的详细说明和示例，请运行:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl &amp;lt;command&amp;gt; --help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;上传文件&#34;&gt;上传文件&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;将本地文件上传至亿栖云对象存储的 Bucket 中:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl cp /path/to/file qs://mybucket/filename
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若不指定 &lt;code&gt;-c&lt;/code&gt; 参数，则使用默认配置文件。&lt;/li&gt;
+&lt;li&gt;命令行中 &lt;code&gt;/path/to/file&lt;/code&gt; 为本地待上传文件，需根据实际情况进行修改。&lt;/li&gt;
+&lt;li&gt;命令行中 &lt;code&gt;qs://mybucket/filename&lt;/code&gt; 为亿栖云对象存储 Bucket 中文件路径，需根据实际情况进行修改。其中若不指定 &lt;code&gt;filename&lt;/code&gt;，则上传后文件名根据源文件名创建；若指定 &lt;code&gt;filename&lt;/code&gt;，则将源文件重命名为 &lt;code&gt;filename&lt;/code&gt; 进行存储。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;将本地文件夹上传至亿栖云对象存储的 Bucket 中:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ qsctl cp /path/to/folder qs://mybucket/parent/ -r
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;将本地文件夹下的所有文件上传至亿栖云对象存储的 Bucket 中:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ qsctl cp /path/to/folder/ qs://mybucket/parent/ -r
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若待上传的对象是文件夹，则源文件为：&lt;code&gt;/path/to/folder&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;若待上传的对象是文件夹下的所有内容，则源文件为：&lt;code&gt;/path/to/folder/&lt;/code&gt;。需注意两者的区别。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r&lt;/code&gt; 参数用于递归地复制文件夹及其子文件夹。所以使用该参数时，源路径与目标路径必须都是目录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;下载文件&#34;&gt;下载文件&lt;/h3&gt;
+&lt;p&gt;执行如下命令行，从亿栖云对象存储的 Bucket 中下载文件至本地:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl cp qs://mybucket/filename /path/to/file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;与上传文件至亿栖云对象存储 Bucket 的区别在于源路径与目标路径的位置不同。&lt;/li&gt;
+&lt;li&gt;其他用法均与上传文件至亿栖云对象存储 Bucket 保持一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;查看文件信息&#34;&gt;查看文件信息&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;ls&lt;/code&gt; 的结果不能保证有序，请勿依赖该命令来遍历显示顺序。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;列出该用户的所有 Bucket:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl ls
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;列出指定 Bucket &lt;code&gt;mybucket&lt;/code&gt; 下的所有对象:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl ls qs://mybucket -R
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-R&lt;/code&gt; 参数用于递归地显示文件夹及其子文件夹下的对象。&lt;/li&gt;
+&lt;li&gt;若不指定&lt;code&gt;-R&lt;/code&gt; 参数，Bucket 若有文件夹时，则仅显示文件夹名，不显示文件夹内的文件。&lt;/li&gt;
+&lt;li&gt;输出内容如下所示：
+&lt;img src=&#34;/storage/object-storage/_images/qsctl_ls1.png&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;/storage/object-storage/_images/qsctl_ls2.png&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;以列出指定 Bucket &lt;code&gt;mybucket&lt;/code&gt; 下所有对象的详细信息:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl ls qs://mybucket -lRh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-l&lt;/code&gt; 参数用于显示文件的详细信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-h&lt;/code&gt; 参数用于转换文件的大小。&lt;/li&gt;
+&lt;li&gt;输出内容如下所示：
+&lt;img src=&#34;/storage/object-storage/_images/qsctl_ls3.png&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;移动文件&#34;&gt;移动文件&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;mv&lt;/code&gt; 操作与 &lt;code&gt;cp&lt;/code&gt; 操作对文件夹与文件夹中的文件的处理逻辑相同， 请参考 &lt;a href=&#34;#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6&#34;&gt;cp&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;查看统计信息&#34;&gt;查看统计信息&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;查看指定 Bucket &lt;code&gt;mybucket&lt;/code&gt; 的统计信息：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl stat qs://mybucket
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出结果：&lt;/strong&gt;
+&lt;img src=&#34;/storage/object-storage/_images/qsctl_stat1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;查看指定亿栖云对象信息:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl stat qs://mybucket/dir/to/test
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出结果：&lt;/strong&gt;
+&lt;img src=&#34;/storage/object-storage/_images/qsctl_stat2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;查看指定亿栖云对象信息，并自定义格式输出:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl stat qs://mybucket/dir/to/test --format&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name:%n, size:%s&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;输出结果：&lt;/strong&gt;
+&lt;img src=&#34;/storage/object-storage/_images/qsctl_stat3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;code&gt;format&lt;/code&gt; 参数用于传入格式化输出字符串。其中可用的有:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;%F&lt;/code&gt; (文件类型)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%h&lt;/code&gt; (文件内容的 etag 信息)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%n&lt;/code&gt; (文件名)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%s&lt;/code&gt; (文件大小，单位为字节)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%y&lt;/code&gt; (最后一次数据修改的时间，显示为可读模式)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;%Y&lt;/code&gt; (最后一次数据修改的时间，显示为 Unix 时间戳)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数据同步&#34;&gt;数据同步&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sync&lt;/code&gt; 命令用于本地目录与亿栖云对象存储目录的数据同步。故该操作的源路径与目标路径必须都是目录。由于亿栖云对象存储没有目录概念，所以必须以 &lt;code&gt;/&lt;/code&gt; 结尾。本地文件夹若为类 Unix 系统，须以 &lt;code&gt;/&lt;/code&gt; 结尾；若为 Windows 系统请替换为 &lt;code&gt;\&lt;/code&gt;。若本地文件夹不添加结尾字符，则系统会针对本地文件夹的父目录进行同步操作。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;同步亿栖云对象存储目录至本地文件夹:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl sync qs://mybucket/test/ /path/to/dir/ -r
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;仅同步本地文件夹中更新的文件(不同步目标路径中不存在的文件):&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl sync . qs://mybucket/test/ -r --update --existing
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--update&lt;/code&gt; 参数用于指定仅同步源路径中(比目标路径)更新的文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--existing&lt;/code&gt; 参数用于指定仅复制已存在于目标目录中的文件。对于目标目录中不存在的文件，不做同步。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--dry-run&lt;/code&gt; 参数可用于显示哪些文件将会被同步(但并不真正执行同步操作)，用于确认，避免误操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tee&#34;&gt;tee&lt;/h3&gt;
+&lt;p&gt;从标准输入上传文件至亿栖云对象存储。qsctl 将不会像 Linux tee 命令那样将内容绑定至标准输出。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat /path/to/file | qsctl tee qs://mybucket/filename
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;qsctl-shell&#34;&gt;qsctl shell&lt;/h3&gt;
+&lt;p&gt;自 qsctl v2.2.0 版本以来，亿栖云对象存储新加入了交互式的 shell 界面，包含更多的引导和提示信息，推荐新用户使用。若用户需使用 qsctl 开发脚本，建议直接使用前文介绍的命令模式。&lt;/p&gt;
+&lt;p&gt;亿栖云对象存储将所有命令执行中的交互都移动至 shell 中，包括进度条，删除 bucket 时的确认输入，删除 object 时的确认等。并在命令行直接执行时移除了这些交互效果，以便更好的支持用户使用脚本进行操作。除此之外，用户在终端与 qsctl shell 中输入同样指令所得到的结果是一致的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;执行如下命令，进入命令行界面：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl shell
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;命令行界面如下下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/qsctl_shell1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;根据提示，进行相关操作即可。在命令行中，亿栖云对象存储新增了对历史命令和自动补全的支持。详细说明如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;在行开头可以自动提示补全可用命令；&lt;/li&gt;
+&lt;li&gt;输入 &lt;code&gt;qs://&lt;/code&gt; 可以自动提示补全用户的 Bucket 信息；&lt;/li&gt;
+&lt;li&gt;空格后可以自动提示补全本地文件信息；&lt;/li&gt;
+&lt;li&gt;输入 &lt;code&gt;-&lt;/code&gt; 可以自动提示补全当前命令可用 flag 信息。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: qscamel</title>
+      <link>/storage/object-storage/manual/tool/qscamel/</link>
+      <pubDate>Tue, 10 Aug 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/manual/tool/qscamel/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;功能概述&#34;&gt;功能概述&lt;/h2&gt;
+&lt;p&gt;qscamel 是一个用于在不同的端点 (Endpoint) 间高效迁移数据的工具。作为端点间数据迁移的工具，qscamel 有着如下特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;简单，便于使用的任务管理&lt;/li&gt;
+&lt;li&gt;支持从任务中断处续传，从而节省用户的时间&lt;/li&gt;
+&lt;li&gt;提供完全自动化的重试机制，无须人工介入&lt;/li&gt;
+&lt;li&gt;基于 Goroutine 池实现的并发机制，提高迁移效率&lt;/li&gt;
+&lt;li&gt;支持 copy，fetch，delete 等迁移机制&lt;/li&gt;
+&lt;li&gt;支持数据校验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;用户可在 &lt;a href=&#34;https://github.com/qingstor/qscamel/releases&#34;&gt;releases&lt;/a&gt; 页面分别获取适用于 Linux，macOS 以及 Windows 操作系统的最新版本的 qscamel，并进行安装。&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;qscamel 默认从 &lt;code&gt;~/.qscamel/qscamel.yaml&lt;/code&gt; 读取配置文件，用户也可以通过 &lt;code&gt;-c&lt;/code&gt; 或者 &lt;code&gt;--config&lt;/code&gt; 参数来指定配置文件的位置。由于各配置项均有默认值，故，无特殊需求，用户无需对其进行修改。qscamel 的配置文件内容详细说明如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;qscamel 配置示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;concurrency&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;log_level&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;info&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;pid_file&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;~/.qscamel/qscamel.pid&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;log_file&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;~/.qscamel/qscamel.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;database_file&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;~/.qscamel/db&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;concurrency&lt;/code&gt; 用于控制同时启用的任务并发数量。若没有设置，或者设置为 0， qscamle 将会使用 &lt;code&gt;逻辑 CPU 数量 * 100&lt;/code&gt; 作为该项的值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_level&lt;/code&gt; 用于控制日志的级别。日志内容显示从多到少依次可设置为：debug，info，warn，error，fatal，panic。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pid_file&lt;/code&gt; 用于控制在何处创建 PID 文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_file&lt;/code&gt; 用于控制在何处创建日志文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;database_file&lt;/code&gt; 用于控制在何处创建数据库。&lt;/li&gt;
+&lt;li&gt;以上配置字段均有默认值，默认值如示例文件所示。用户可根据需求，修改相应参数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;任务&#34;&gt;任务&lt;/h2&gt;
+&lt;p&gt;用户可通过任务文件来定义一个数据迁移任务。每个任务文件都有着如下共同的配置内容：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置示例：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;copy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;source&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/path/to/source&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;destination&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;qingstor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/aaa&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_access_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;ignore_existing&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;last_modified&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;type&lt;/code&gt; 用于定义该任务的类型。可选值: copy，fetch，delete。&lt;br&gt;copy 将会从 &lt;code&gt;source&lt;/code&gt; 指定的端点读取文件，并写入到 &lt;code&gt;destination&lt;/code&gt; 指定的端点；&lt;br&gt;fetch 将会从 &lt;code&gt;source&lt;/code&gt; 指定的端点获取文件的下载链接，并使用 &lt;code&gt;destination&lt;/code&gt; 指定的端点的 fetch 功能对其进行拉取；&lt;br&gt;delete 将会从 &lt;code&gt;source&lt;/code&gt; 指定的端点获取文件的信息，并在 &lt;code&gt;destination&lt;/code&gt; 指定的端点将其删除。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;source：&lt;/code&gt; 标识后续字段为任务的源端点，即：source 端点信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;destination&lt;/code&gt; 标识后续字段为任务的目标端点，即 destination 端点信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;type&lt;/code&gt; 当前端点的类型。可选值: aliyun，azblob，cos，fs，filelist，gcs，hdfs，qingstor，qiniu，s3，upyun。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;path&lt;/code&gt; 当前端点的路径。须为目录名。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;options&lt;/code&gt; 标识后续字段为可选字段。不同端点的可选字段，会有区别，详情可参考 &lt;a href=&#34;#%E7%AB%AF%E7%82%B9%E4%BF%A1%E6%81%AF&#34;&gt;端点信息&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ignore_existing&lt;/code&gt; 用于控制是否跳过已经存在的文件，为空或未配置时将会禁用该配置，即总是覆盖。可选值为：last_modified 与 md5sum。&lt;br&gt;last_modified 将会检查目标的 LastModified 是否比源站要大；&lt;br&gt;md5sum 将会对文件做完整的 MD5 计算，当 MD5 相同时会跳过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;h3 id=&#34;run&#34;&gt;Run&lt;/h3&gt;
+&lt;p&gt;qscamel 最主要的命令。用户可通过该命令来创建或者恢复一个迁移任务。&lt;/p&gt;
+&lt;p&gt;当使用该命令，创建或恢复一个任务时，qscamel 会根据任务名查询数据库，检查任务文件内容是否有更新。若任务文件内容有更新，qscamel 会报错并退出；若无同名任务，qscamel 会对任务内容的 sha256 校验和进行计算，并将结果保存于数据库中；若有同名任务，且任务文件没有更新，qscamel 将恢复该任务，继续执行。&lt;/p&gt;
+&lt;p&gt;换句话说，数据迁移任务在创建成功后就不能修改。若用户需修改一个任务内容，请先 &lt;a href=&#34;#delete&#34;&gt;删除&lt;/a&gt; 该任务后，再创建一个新任务，或直接创建一个新任务。创建后的任务，无论执行完成或执行失败，均不会自动从数据库中删除，须人为执行 &lt;a href=&#34;#delete&#34;&gt;删除&lt;/a&gt; 或 &lt;a href=&#34;#clean&#34;&gt;Clean&lt;/a&gt; 操作。&lt;/p&gt;
+&lt;p&gt;详细操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用户可执行如下命令行，查看 &lt;code&gt;run&lt;/code&gt; 的使用教程：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel run -h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;命令行回显：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Create or resume a task
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Usage:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  qscamel run &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;task name or task path&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;flags&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Flags:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -h, --help          help &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; run
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -t, --task string   task path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Global Flags:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -c, --config string   config path &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;default &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.qscamel/qscamel.yaml&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;用户如需创建一个新的数据迁移任务，可执行如下命令行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel run task-name -t /path/to/task/file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;task-name&lt;/code&gt; 为新建数据迁移任务名，须唯一。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt; 参数用于指定任务文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/path/to/task/file&lt;/code&gt; 任务文件，可参考前文相关内容 &lt;a href=&#34;#%E4%BB%BB%E5%8A%A1&#34;&gt;任务&lt;/a&gt; 创建。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;在任务文件没有更新的前提下，若用户需要恢复一个数据迁移任务，可执行如下命令行：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel run task-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由于该操作用于恢复一个历史任务，故 &lt;code&gt;task-name&lt;/code&gt; 须为原任务名。&lt;/li&gt;
+&lt;li&gt;由于任务文件没有更新，故命令行中省略了任务文件，qscamel 会自动调用历史任务文件。&lt;/li&gt;
+&lt;li&gt;命令行中也可添加原任务文件 &lt;code&gt;-t /path/to/task/file&lt;/code&gt;，若添加该参数，则须确保任务文件没有变更，否则该操作会报错。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;更新任务文件后，再次创建该任务时，可执行如下操作：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# step 1：删除任务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel delete task-name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# step 2：创建任务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel run task-name -t /path/to/task/file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;delete&#34;&gt;Delete&lt;/h3&gt;
+&lt;p&gt;用户可使用该命令删除一个已经创建的任务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel delete task-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;status&#34;&gt;Status&lt;/h3&gt;
+&lt;p&gt;该命令用于查询展示所有任务的状态。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel status
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;clean&#34;&gt;Clean&lt;/h3&gt;
+&lt;p&gt;用户可通过该命令删除所有已经完成的任务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel clean
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;version&#34;&gt;Version&lt;/h3&gt;
+&lt;p&gt;Version 命令用于查询当前 qscamel 的版本信息。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;快速入门&#34;&gt;快速入门&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;#%E5%AE%89%E8%A3%85&#34;&gt;安装&lt;/a&gt; qscamel 工具。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更新 qscamel &lt;a href=&#34;#%E9%85%8D%E7%BD%AE&#34;&gt;配置&lt;/a&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;根据如下内容创建任务文件，并保存为 &lt;code&gt;example-task.yaml&lt;/code&gt;：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;copy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;source&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;fs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/path/to/source&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;destination&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;qingstor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/path/to/destination&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_access_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该任务即为：将本地目录 &lt;code&gt;/path/to/source&lt;/code&gt; 下的文件复制至亿栖云对象存储的 &lt;code&gt;example_bucket&lt;/code&gt; 下的 &lt;code&gt;/path/to/destination&lt;/code&gt; 目录。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;access_key_id&lt;/code&gt; 与 &lt;code&gt;secret_access_key&lt;/code&gt; 可参考 &lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;获取 Access Key&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;执行如下命令，创建数据迁移任务：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel run example-task -t example-task.yaml -c /path/to/config/file
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;执行如下命令，查看数据迁移任务的状态：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qscamel status
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;端点信息&#34;&gt;端点信息&lt;/h2&gt;
+&lt;h3 id=&#34;endpoint-aliyun&#34;&gt;Endpoint aliyun&lt;/h3&gt;
+&lt;p&gt;Aliyun 是 &lt;a href=&#34;https://www.aliyun.com/product/oss&#34;&gt;阿里云&lt;/a&gt; 提供的对象存储服务。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;Aliyun 作为 &lt;strong&gt;source&lt;/strong&gt; 端点时，须添加如下配置内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;endpoint&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_endpoint&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;access_key_secret&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key_secret&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;endpoint&lt;/code&gt; 用于标识访问的接口端点地址。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; 标识操作的 Aliyun 的 Bucket 名称。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;access_key_id&lt;/code&gt; Aliyun 的 access_key_id。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret_access_key&lt;/code&gt; Aliyun 的 secret_access_key。无默认值，须手动配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-azblob&#34;&gt;Endpoint azblob&lt;/h3&gt;
+&lt;p&gt;Azure Blob 是 &lt;a href=&#34;https://azure.microsoft.com/zh-cn/services/storage/&#34;&gt;Microsoft&lt;/a&gt; 提供的存储服务。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;azblob 作为 &lt;strong&gt;source&lt;/strong&gt; 端点时，须添加如下配置内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;account_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_account_name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;account_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_account_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;endpoint&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_endpoint&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;account_name&lt;/code&gt; 访问 Azure Blob 的账号。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;account_key&lt;/code&gt; 访问 Azure Blob 的密码。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; 标识操作的 Azure Blob 的 Bucket 名称。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;endpoint&lt;/code&gt; 用于标识访问的接口端点地址。无默认值，须手动配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-cos&#34;&gt;Endpoint cos&lt;/h3&gt;
+&lt;p&gt;Tencent COS 是 &lt;a href=&#34;https://cloud.tencent.com/product/cos&#34;&gt;Tencent&lt;/a&gt; 提供的对象存储服务。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;COS 作为 &lt;strong&gt;source&lt;/strong&gt; 端点时，须添加如下配置内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_url&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket_url&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;secret_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;secret_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bucket_url&lt;/code&gt; Tencent COS 的 Bucket URL 地址。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret_id&lt;/code&gt; 访问 Tencent COS 的 secret_id。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret_key&lt;/code&gt; 访问 Tencent COS 的 secret_key。无默认值，须手动配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-fs&#34;&gt;Endpoint fs&lt;/h3&gt;
+&lt;p&gt;fs 是指符合 POSIX 标准的文件系统 (local fs, nfs, s3fs 等)。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点与 &lt;strong&gt;destination&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;fs 作为端点有着如下配置内容，用于控制遇到软连接时，是否上传指向的文件。默认值为 false:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;enable_link_follow&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;endpoint-filelist&#34;&gt;Endpoint filelist&lt;/h3&gt;
+&lt;p&gt;filelist 是本地文件列表。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;filelist 作为 &lt;strong&gt;source&lt;/strong&gt; 端点时，须添加如下配置项，用于指定待迁移的文件列表，qscamel 将会逐行来读取该列表。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;list_path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/path/to/list&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;endpoint-gcs&#34;&gt;Endpoint gcs&lt;/h3&gt;
+&lt;p&gt;GCS(Google Cloud Storage) 是 &lt;a href=&#34;https://cloud.google.com/storage/&#34;&gt;Google&lt;/a&gt; 提供的对象存储服务。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;使用 gcs 作为 &lt;strong&gt;source&lt;/strong&gt; 端点时，须添加如下配置项，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;api_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_api_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;exmaple_bukcet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;api_key&lt;/code&gt; 访问 GCS 的 api_key。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; GCS 的 bucket 名。无默认值，须手动配置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-hdfs&#34;&gt;Endpoint hdfs&lt;/h3&gt;
+&lt;p&gt;能够用做 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;hdfs 是 &lt;a href=&#34;http://hadoop.apache.org/&#34;&gt;Hadoop&lt;/a&gt; 的分布式文件系统，可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;使用 hdfs 作为 &lt;strong&gt;source&lt;/strong&gt; 端点时，须添加如下配置项，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;address&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_address&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;endpoint-qingstor&#34;&gt;Endpoint qingstor&lt;/h3&gt;
+&lt;p&gt;亿栖云对象存储是亿栖云提供的对象存储服务。能够用做 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 与 &lt;strong&gt;destination&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;使用 qingstor 作为端点时，可添加如下配置内容:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;protocol&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;https&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;host&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;qingstor.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;zone&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pek3b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_access_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;storage_class&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;STANDARD&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;multipart_boundary_size&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2147483648&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;protocol&lt;/code&gt; 用于控制访问对象存储的协议类型。可选值: https, http；默认值: https。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;host&lt;/code&gt; 标识访问对象存储的云服务器名。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;port&lt;/code&gt; 标识访问对象存储的端口号。默认值: 443。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zone&lt;/code&gt; 标识访问对象存储的区域.自动检测，无需手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; 标识操作的对象存储的 Bucket 名称。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;access_key_id&lt;/code&gt; 对象存储的 access_key_id。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret_access_key&lt;/code&gt; 对象存储的 secret_access_key。无默认值，须手动配置。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage_class&lt;/code&gt; 标识对象存储所使用的存储级别。可选值: STANDARD, STANDARD_IA；默认值: STANDARD。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;multipart_boundary_size&lt;/code&gt; 用于控制对象存储何时使用分段上传，单位为 Byte，当文件大于该数值时，将会使用分段上传。可选值: 1 ~ 5368709120 (5G)。默认值: 2147483648 (2G)。&lt;/li&gt;
+&lt;li&gt;综上，除 &lt;code&gt;bucket_name&lt;/code&gt;，&lt;code&gt;access_key_id&lt;/code&gt; 与 &lt;code&gt;secret_access_key&lt;/code&gt; 以外，均有默认值，故除此三个参数外，其他参数均为可选参数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-qiniu&#34;&gt;Endpoint qiniu&lt;/h3&gt;
+&lt;p&gt;Qiniu 是 &lt;a href=&#34;https://www.qiniu.com/&#34;&gt;Qiniu&lt;/a&gt; 提供的对象存储服务。可用作 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;使用 qiniu 作为 &lt;strong&gt;source&lt;/strong&gt; 端点，须添加如下配置内容:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;access_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;secret_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;domain&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_domain&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;use_https&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;use_cdn_domains&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; 标识 qiniu 的 bucket 名称。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;access_key&lt;/code&gt; 标识 qiniu 的 access_key。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret_key&lt;/code&gt; 标识 qiniu 的 secret_key。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;domain&lt;/code&gt; 标识用于访问 qiniu bucket 的域名。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;use_https&lt;/code&gt; 控制是否使用 https 来访问 qiniu。默认值： false。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;use_cdn_domains&lt;/code&gt; 控制是否使用 CDN 加速域名来访问 qiniu。默认值： false。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-s3&#34;&gt;Endpoint s3&lt;/h3&gt;
+&lt;p&gt;S3 是 &lt;a href=&#34;https://amazonaws-china.com/cn/s3&#34;&gt;AWS&lt;/a&gt; 提供的对象存储服务。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 和 &lt;strong&gt;destination&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;使用 s3 作为端点，可添加如下配置内容:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;endpoint&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_endpoint&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;region&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_region&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_access_key_id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_secret_access_key&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;disable_ssl&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;use_accelerate&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; S3 的 Bucket 名称。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;endpoint&lt;/code&gt; S3 的接口端点地址。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;region&lt;/code&gt; S3 bucket 所在的区域。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;access_key_id&lt;/code&gt; 访问 S3 的 access_key_id。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;secret_access_key&lt;/code&gt; 访问 S3 的 secret_access_key。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;disable_ssl&lt;/code&gt; 是否禁用 SSL。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;use_accelerate&lt;/code&gt; 是否启用加速。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;endpoint-upyun&#34;&gt;Endpoint upyun&lt;/h3&gt;
+&lt;p&gt;upyun 是 &lt;a href=&#34;https://www.upyun.com/&#34;&gt;Upyun&lt;/a&gt; 提供的对象存储服务。可作为 qscamel 数据迁移任务中的 &lt;strong&gt;source&lt;/strong&gt; 端点。&lt;/p&gt;
+&lt;p&gt;使用 upyun 作为 &lt;strong&gt;source&lt;/strong&gt; 端点，须配置如下内容：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_bucket&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;operator&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_operator&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;password&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;example_password&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; upyun 的 bucket 名称。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;operator&lt;/code&gt; upyun 的 operator。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;password&lt;/code&gt; upyun 的 password。&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: qsftpd</title>
+      <link>/storage/object-storage/manual/tool/qsftpd/</link>
+      <pubDate>Tue, 24 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/manual/tool/qsftpd/</guid>
+      <description>
+        
+        
+        &lt;p&gt;qsftpd 是亿栖云对象存储提供的 FTP Server。用户通过简单的配置，即可通过 FTP 协议使用亿栖云对象存储服务。该工具已在 GitHub 开源，更多详情可参见 &lt;a href=&#34;https://github.com/qingstor/qsftpd&#34;&gt;GitHub 项目&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;qsftpd 支持 Linux、macOS 和 Windows 操作系统。用户可访问 GitHub 项目的 &lt;a href=&#34;https://github.com/qingstor/qsftpd/releases&#34;&gt;Releases&lt;/a&gt; 页面查看和下载相应版本。&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;在正式使用 qsftpd 工具之前，需要创建并填写配置文件 &lt;strong&gt;qsftpd.yaml&lt;/strong&gt;。详细操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在终端执行如下命令，创建配置文件：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;touch qsftpd.yaml&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;配置文件内容如下：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;qingstor&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;access_key_id_example&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;secret_access_key_example&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;host&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;qingstor.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;protocol&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;https&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;log_level&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;warn&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;bucket_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;bucket_name_example&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;zone&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;pek3a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;listen_host&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;listen_port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;21&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;public_host&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;127.0.0.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;max_connections&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;128&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;start_port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;6000&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;end_port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;7000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;log_level&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;error &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;cache_path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/var/cache/qsftpd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 认证设置，默认允许匿名用户登录，也可以指定特定的用户登录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#users:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#  username_example: password_example&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;qingstor&lt;/code&gt; 用于标识后续字段为亿栖云对象存储的基本信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;access_key_id&lt;/code&gt; 与 &lt;code&gt;secret_access_key&lt;/code&gt; 用于访问亿栖云对象存储的 AK 与 SK，须根据实际情况进行填写。具体可参照 &lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;获取 Access Key&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;host&lt;/code&gt; 亿栖云对象存储的域名。公有云环境无需修改。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;port&lt;/code&gt; 访问亿栖云对象存储的端口号。公有云环境无需修改。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;protocol&lt;/code&gt; 访问亿栖云对象存储的协议。公有云环境无需修改。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_level&lt;/code&gt; 亿栖云对象存储的日志级别。日志内容显示从多到少依次可设置为：debug，info，warn，error，fatal，panic。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bucket_name&lt;/code&gt; 待访问的亿栖云对象存储的 Bucket 名。须根据实际情况进行填写。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;zone&lt;/code&gt; 待访问的亿栖云对象存储的 Zone。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;listen_host listen_port public_host max_connections&lt;/code&gt; FTP Server 配置，监听的端口号以及最大连接数。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;start_port end_port&lt;/code&gt; FTP 数据连接建立方式为被动模式时，将会随机在 &lt;code&gt;start_port&lt;/code&gt; 与 &lt;code&gt;end_port&lt;/code&gt; 之间选择端口号进行数据传输。默认值是从 6000 至 7000。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_level&lt;/code&gt; FTP Server 的日志等级。日志内容显示从多到少依次可设置为：debug，info，warn，error，fatal，panic。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cache_path&lt;/code&gt; 缓存路径，qsftpd 将会在每次启动时清除 &lt;code&gt;cache_path&lt;/code&gt; 配置的目录。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;users&lt;/code&gt; 认证设置，默认允许匿名用户登录，也可以指定的用户登录。若指定用户，须根据配置上文中的示例进行填写用户信息。&lt;/li&gt;
+&lt;li&gt;除 &lt;code&gt;access_key_id，secret_access_key，bucket_name，zone&lt;/code&gt; 以外，其余字段均有默认值，用户可无需修改。&lt;/li&gt;
+&lt;li&gt;qsftpd 的配置文件可根据需要进行配置。模板可以 &lt;a href=&#34;https://github.com/qingstor/qsftpd/blob/master/qsftpd.yaml.example&#34;&gt;查看&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用说明&#34;&gt;使用说明&lt;/h2&gt;
+&lt;h3 id=&#34;帮助信息&#34;&gt;帮助信息&lt;/h3&gt;
+&lt;p&gt;用户可执行如下命令行，查看帮助信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;$ qsftpd -h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;A FTP server that persists all data to QingStor Object Storage.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;Usage&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;qsftpd [flags]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;Flags&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -&lt;span style=&#34;color:#ae81ff&#34;&gt;c, --config string   Specify config file (default &amp;#34;qsftpd.yaml&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -&lt;span style=&#34;color:#ae81ff&#34;&gt;h, --help            help for qsftpd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -&lt;span style=&#34;color:#ae81ff&#34;&gt;v, --version         Show version&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;选项列表&#34;&gt;选项列表&lt;/h3&gt;
+&lt;p&gt;根据前文可知，qsftpd 支持的常规命令选项如下所示:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数简写&lt;/th&gt;
+&lt;th&gt;参数全名&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;-c&lt;/td&gt;
+&lt;td&gt;–config&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;指定配置文件的路径，默认为 &lt;code&gt;qsftpd.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-h&lt;/td&gt;
+&lt;td&gt;–help&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;输出帮助信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-v&lt;/td&gt;
+&lt;td&gt;–version&lt;/td&gt;
+&lt;td&gt;string&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;输出版本信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;使用示例&#34;&gt;使用示例&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建配置文件，如 &lt;code&gt;qsftpd.yaml&lt;/code&gt;，按照前文的配置文件说明进行配置。参考 &lt;a href=&#34;#%E9%85%8D%E7%BD%AE&#34;&gt;配置&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行如下命令，启动 FTP Server，终端显示如下打印，即，说明服务端准备就绪:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ qsftpd -c path/to/your/qsftpd.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2017-04-12T03:24:40.541Z &lt;span style=&#34;color:#75715e&#34;&gt;#2527]  INFO -- : Listening... 127.0.0.1:21&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2017-04-12T03:24:40.541Z &lt;span style=&#34;color:#75715e&#34;&gt;#2527]  INFO -- : Starting...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2017-04-12T03:24:49.330Z &lt;span style=&#34;color:#75715e&#34;&gt;#2527]  INFO -- : FTP Client connected: ftp.connected, id: 76e209d6a89448279e947a7babe0097d, RemoteAddr: 127.0.0.1:51788, Total: 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;在客户端，执行如下命令行，通过 FTP 客户端连接 FTP Server 进行测试:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ftp -a 127.0.0.1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connected to 127.0.0.1.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;220&lt;/span&gt; Welcome to QSFTP Server
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;331&lt;/span&gt; User name okay, need password.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;230&lt;/span&gt; Password ok, &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Remote system type is UNIX.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Using binary mode to transfer files.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ftp&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;客户端成功链接后，FTP 服务端显示如下打印:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2017-04-12T03:24:49.330Z &lt;span style=&#34;color:#75715e&#34;&gt;#2527]  INFO -- : FTP Client connected: ftp.connected, id: 76e209d6a89448279e947a7babe0097d, RemoteAddr: 127.0.0.1:51788, Total: 1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;在客户端执行如下命令行，查看文件列表:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ftp&amp;gt; ls
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;229&lt;/span&gt; Entering Extended Passive Mode &lt;span style=&#34;color:#f92672&#34;&gt;(||&lt;/span&gt;|6081|&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt; Using transfer connection
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;d--------- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ftp ftp            &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  Nov &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt; 00:00  test-output
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;226&lt;/span&gt; Closing transfer connection
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;在客户端执行如下命令行，上传文件:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ftp&amp;gt; put AUTHORS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;local: AUTHORS remote: AUTHORS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;229&lt;/span&gt; Entering Extended Passive Mode &lt;span style=&#34;color:#f92672&#34;&gt;(||&lt;/span&gt;|6887|&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt; Using transfer connection
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;100% |***********************************|   &lt;span style=&#34;color:#ae81ff&#34;&gt;146&lt;/span&gt;       91.68 KiB/s    00:00 ETA
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;226&lt;/span&gt; Closing transfer connection
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;146&lt;/span&gt; bytes sent in 00:00 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2.19 KiB/s&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ftp&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Mountain Duck</title>
+      <link>/storage/object-storage/manual/tool/mountain-duck/</link>
+      <pubDate>Thu, 12 Aug 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/manual/tool/mountain-duck/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+&lt;p&gt;Mountain Duck 是 Windows 平台上用于挂载访问对象存储的第三方客户端软件。目前也支持 MAC 平台。&lt;/p&gt;
+&lt;p&gt;亿栖云对象存储推荐用户使用 Mountain Duck 来挂载由亿栖云对象存储为其提供的无限容量的在线文件存储空间，从而节省本地磁盘空间。用户通过 Mountain Duck 可以像操作本地磁盘(例如 C 盘、D 盘等)一样方便、快捷地访问或存取亿栖云对象存储 Bucket 中的各种类型文件。&lt;/p&gt;
+&lt;p&gt;目前支持以下平台：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 7、Windows 8、Windows 10 的 32/64 位平台。&lt;/li&gt;
+&lt;li&gt;MAC OS 10.12 及以后版本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;用户可下载 &lt;a href=&#34;https://mountainduck.io/&#34;&gt;Mountain Duck 安装包&lt;/a&gt;，解压缩后直接运行安装即可完成。&lt;/p&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;通过 Mountain Duck 成功挂载亿栖云对象存储中的 Bucket 后，用户即可像操作本地磁盘一样对亿栖云对象存储 Bucket 中的文件进行读写、存取等操作，同时可通过托盘菜单对缓存设置、版本更新、帐户信息等进行查看或操作。&lt;/p&gt;
+&lt;p&gt;详细操作步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;点击 &lt;strong&gt;Mountain Duck &amp;ndash; &amp;gt; 新建链接&lt;/strong&gt;，如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/mountain-duck1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;弹出新建链接对话框，根据提示信息输入相关字段，点击 &lt;strong&gt;连接&lt;/strong&gt; 即可：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/mountain-duck2.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;协议下拉框里，选择 &lt;code&gt;Amazon S3&lt;/code&gt;，如上图所示。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;服务器名&lt;/code&gt;，填写亿栖云对象存储的域名，格式为：&lt;code&gt;s3.&amp;lt;zone_id&amp;gt;.yiqiyun.com&lt;/code&gt;。其中 &lt;code&gt;zone_id&lt;/code&gt; 须根据实际情况进行修改。公有云环境，可参考 &lt;a href=&#34;/storage/object-storage/intro/object-storage/#zone&#34;&gt;公有云开放区域&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;访问密钥 ID&lt;/code&gt; 与 &lt;code&gt;访问私钥&lt;/code&gt;，即 AK/SK 须根据实际情况进行填写。具体可参考&lt;a href=&#34;/storage/object-storage/api/practices/signature/#%E8%8E%B7%E5%8F%96-access-key&#34;&gt;获取 Access Key&lt;/a&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;盘符&lt;/code&gt; 即亿栖云对象存储 Bucket 成功挂载至本地后的磁盘盘符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;成功挂载后，本地可直接查看亿栖云对象存储的 Bucket，如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/mountain-duck3.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;成功挂载的亿栖云对象存储 Bucket，可像本地磁盘一样进行操作。&lt;/li&gt;
+&lt;li&gt;由于新建链接时，没有指定路径，故这里显示了根目录下的所有 Bucket。&lt;/li&gt;
+&lt;li&gt;若用户须操作指定 Bucket，可在新建链接时，指定对应的目录即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Mountain Duck 挂载成功后，用户可通过设置菜单对该工具进行相关操作设置。设置菜单如下图所示：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/storage/object-storage/_images/mountain-duck4.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;升级&#34;&gt;升级&lt;/h2&gt;
+&lt;p&gt;当 Mountain Duck 新版本发布后，用户在登录 Mountain Duck 时将会收到版本的更新提示，用户根据需求进行更新即可。当然，用户也可在使用过程中，通过托盘菜单中的检查更新入口主动更新最新版本。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

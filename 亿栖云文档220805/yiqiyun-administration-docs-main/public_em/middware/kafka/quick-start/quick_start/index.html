@@ -1,0 +1,1512 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>创建 Kafka 集群 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/middware/kafka/" class="has-text-primary">消息队列 Kafka</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">快速入门</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">创建 Kafka 集群</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">快速入门</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  消息队列 Kafka
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/kafka/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/news/prodoct_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是消息队列 Kafka</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/quick-start/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/quick-start/quick_start/"
+      class="menu__title active "
+      data-depth="1">创建 Kafka 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/kafka_manager/"
+      class="menu__title  "
+      data-depth="1">Kafka-manager 配置</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/cluster_use/"
+      class="menu__title  "
+      data-depth="1">集群使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/kafka_client/"
+      class="menu__title  "
+      data-depth="1">Kafka 客户端命令行简介</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/kafka/manual/notice/"
+      class="menu__title  "
+      data-depth="1">注意事项</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  消息队列 RabbitMQ
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/rabbitmq/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/news/prodoct_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是 RabbitMQ</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/intro/func/"
+      class="menu__title  "
+      data-depth="1">产品优势</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/intro/artic/"
+      class="menu__title  "
+      data-depth="1">产品架构</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/quickstart/quick_start/"
+      class="menu__title  "
+      data-depth="1">创建 RabbitMQ 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/cluster_use/"
+      class="menu__title  "
+      data-depth="1">集群使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmq_management/"
+      class="menu__title  "
+      data-depth="1">rabbitmq_management 使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmqcli/"
+      class="menu__title  "
+      data-depth="1">rabbitmqcli 使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmq_admin/"
+      class="menu__title  "
+      data-depth="1">rabbitmqadmin 使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/rabbitmq_web_http/"
+      class="menu__title  "
+      data-depth="1">rabbitmq web http 命令使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/manual/setup_mirror/"
+      class="menu__title  "
+      data-depth="1">设置镜像队列 HA</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rabbitmq/faq/notice/"
+      class="menu__title  "
+      data-depth="1">消息数据如何持久化</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  消息队列 RocketMQ
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/rocketmq/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/news/prodoct_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是消息队列 RocketMQ</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/quick-start/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/quick-start/quick_start/"
+      class="menu__title active "
+      data-depth="1">创建 RocketMQ</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/cluster_use/"
+      class="menu__title  "
+      data-depth="1">集群使用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/rocketmq_console/"
+      class="menu__title  "
+      data-depth="1">RocketMQ Console使用示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/rocketmq_cli/"
+      class="menu__title  "
+      data-depth="1">RocketMQ CLI命令示例</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/manual/base_test/"
+      class="menu__title  "
+      data-depth="1">基准测试</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/rocketmq/faq/how_get_log/"
+      class="menu__title  "
+      data-depth="1">如何自助获取日志？</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  存储服务 etcd
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/etcd/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">什么是 etcd 服务</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/billing/main/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/quickstart/qs10_deploy_etcd/"
+      class="menu__title  "
+      data-depth="1">创建 etcd 集群</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/middware/kafka/quick-start/quick_start/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/middware/etcd/manual/man05_main_operation/"
+      class="menu__title  "
+      data-depth="1">etcd 集群操作</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#前提条件">前提条件</a>
+      <ul>
+        <li><a href="#第一步基本设置">第一步：基本设置</a></li>
+        <li><a href="#第二步kafka-节点设置">第二步：Kafka 节点设置</a></li>
+        <li><a href="#第三步客户端节点设置">第三步：客户端节点设置</a></li>
+        <li><a href="#第四步网络设置">第四步：网络设置</a></li>
+        <li><a href="#第五步依赖服务设置">第五步：依赖服务设置</a></li>
+        <li><a href="#第六步参数设置">第六步：参数设置</a></li>
+        <li><a href="#第七步用户协议">第七步：用户协议</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">快速入门</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>创建 Kafka 集群</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-12-01
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	
+	
+
+	
+	<h2 id="前提条件">前提条件</h2>
+<p>创建 Kafka 集群前，您需要先创建一个 VPC 网络，并<a href="/bigdata/zookeeper/quickstart/create_cluster/">创建一个 Zookeeper 集群</a>，其他地方创建的 ZooKeeper 集群识别不出来，建议 Kafka 与 ZooKeeper 在一个私有网络中。</p>
+<blockquote>
+<p>为了保障数据安全，Kafka 集群需要运行在受管私有网络中。所以在创建一个 Kafka 集群之前，需要创建一个 VPC 和一个受管私有网络，受管私有网络需要加入 VPC，并开启 DHCP 服务（默认开启）。</p>
+</blockquote>
+<h3 id="第一步基本设置">第一步：基本设置</h3>
+<p><img src="../../_images/base_setup.png" alt=""></p>
+<p>根据实际需求填写<strong>名称</strong>和<strong>描述</strong>，不影响集群的功能，版本一般建议选择最新版本。</p>
+<h3 id="第二步kafka-节点设置">第二步：Kafka 节点设置</h3>
+<p><img src="../../_images/kafka_node.png" alt=""></p>
+<p>CPU、内存、节点数量、节点类型和存储容量根据自己实际需求进行选择即可，生产环境建议使用至少3个节点。</p>
+<h3 id="第三步客户端节点设置">第三步：客户端节点设置</h3>
+<p><img src="../../_images/client_node.png" alt=""></p>
+<h3 id="第四步网络设置">第四步：网络设置</h3>
+<p><img src="../../_images/network_setup.png" alt=""></p>
+<p>出于安全考虑，所有的集群都需要部署在私有网络中，请选择自己创建的网络。</p>
+<h3 id="第五步依赖服务设置">第五步：依赖服务设置</h3>
+<p><img src="../../_images/dependence_service.png" alt=""></p>
+<p>选择您所依赖的ZooKeeper集群。</p>
+<blockquote>
+<p><strong>说明</strong></p>
+<p>初次使用 Kafka，请在上图中点击<strong>快捷创建</strong>创建一个 Zookeeper 集群。</p>
+</blockquote>
+<h3 id="第六步参数设置">第六步：参数设置</h3>
+<p><img src="../../_images/sevice_parameter.png" alt=""></p>
+<blockquote>
+<p><strong>注意</strong></p>
+<p>offsets.topic.replication.factor 参数必须小于或者等于 Kafka broker 节点数，不能大于 Kafka broker 节点数，否则就会消费不了消息，直至集群中 Kafka broker 节点数大于或者等于此参数。</p>
+</blockquote>
+<p>按照实际需求配置 Kafka 参数，同时也可以配置 Kafka-manager 是否需要登录，登录账户与密码和端口参数。</p>
+<h3 id="第七步用户协议">第七步：用户协议</h3>
+<p>阅读并同意 AppCenter 用户协议之后，点击<strong>提交</strong>，即可开始部署应用。</p>
+
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

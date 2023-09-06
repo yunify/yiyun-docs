@@ -1,0 +1,45 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 产品简介</title>
+    <link>/operation/resource/intro/</link>
+    <description>Recent content in 产品简介 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/operation/resource/intro/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Operation: 什么是项目管理</title>
+      <link>/operation/resource/intro/project_intro/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/operation/resource/intro/project_intro/</guid>
+      <description>
+        
+        
+        &lt;p&gt;项目是基于“资源协作（Collaboration）”升级的功能，目的是帮助您分组管理、分享资源。项目可以让用于不同目的资源，在独立的视图下进行操作。同时项目内能够设置角色、添加成员，使得项目能够分享给其他账户（包括子账户和其他独立账户）使用。项目是跨可用区的，您可以在全局视图看到项目的消费查询、预估，以及重点资源用量趋势、告警等。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Operation: 什么是配额管理</title>
+      <link>/operation/resource/intro/quota_intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/operation/resource/intro/quota_intro/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为防止资源滥用，系统限定了各服务资源的配额，对用户的资源数量和容量做了限制，如最多可以创建多少台云服务器等。如果当前资源配额无法满足使用需要，您可以申请扩大配额。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

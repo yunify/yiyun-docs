@@ -1,0 +1,35 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 计费指南</title>
+    <link>/container/qci/billing/</link>
+    <description>Recent content in 计费指南 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/container/qci/billing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Container: 消费说明</title>
+      <link>/container/qci/billing/price/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/container/qci/billing/price/</guid>
+      <description>
+        
+        
+        &lt;h1 id=&#34;关于资源计费的说明&#34;&gt;关于资源计费的说明&lt;/h1&gt;
+&lt;h2 id=&#34;容器组&#34;&gt;容器组&lt;/h2&gt;
+&lt;p&gt;ECI 容器组按小时计费，容器组页面上的费用预览计费仅包括基础资源费用。ECI 创建时指定的外部资源即镜像缓存、硬盘、防火墙、公网 IP、 VPC 网络资源费用将会另外计算。容器组基础资源费用的计算周期以容器组创建时间为起点，以容器组销毁时间为终点。&lt;/p&gt;
+&lt;h2 id=&#34;镜像缓存&#34;&gt;镜像缓存&lt;/h2&gt;
+&lt;p&gt;镜像缓存按小时计费，创建镜像缓存根据指定的缓存大小收取不同的缓存费用，支持的镜像缓存大小区间为 [20G, 500G] ，默认大小 20G 。镜像缓存的计费周期以镜像缓存创建时间为起点，以镜像缓存销毁时间为终点。与容器组的计费周期相互独立。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,59 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 操作指南</title>
+    <link>/compute/instance_group/manual/</link>
+    <description>Recent content in 操作指南 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/compute/instance_group/manual/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Compute: 安置策略组</title>
+      <link>/compute/instance_group/manual/instance_group/</link>
+      <pubDate>Thu, 30 Jan 2020 00:36:25 +0900</pubDate>
+      
+      <guid>/compute/instance_group/manual/instance_group/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;创建安置策略组&#34;&gt;创建安置策略组&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;登录管理控制台，选择&lt;strong&gt;产品与服务&lt;/strong&gt; &amp;gt; &lt;strong&gt;计算&lt;/strong&gt; &amp;gt; &lt;strong&gt;云服务器&lt;/strong&gt;，进入&lt;strong&gt;云服务器&lt;/strong&gt;页签。&lt;/li&gt;
+&lt;li&gt;进入安置策略组 Tab 页。（点击安置策略组 Tab 标签）。&lt;/li&gt;
+&lt;li&gt;点击创建按钮。&lt;/li&gt;
+&lt;li&gt;填写名称、选择安置策略组关系。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;../_images/create_instance_group_2.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;安置策略组关系在创建后无法修改&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;云服务器加入安置策略组&#34;&gt;云服务器加入安置策略组&lt;/h2&gt;
+&lt;p&gt;选择一个安置策略组，点击&lt;strong&gt;绑定云服务器&lt;/strong&gt;按钮， 即可选择加入该安置策略组的一个或多个云服务器。&lt;/p&gt;
+&lt;img src=&#34;../_images/join_instance_group_2.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个云服务器只能加入一个安置策略组，如果组内的云服务器多于 1 台，其中的云服务器可能会根据集中或分散类型的策略发生迁移。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;云服务器离开安置策略组&#34;&gt;云服务器离开安置策略组&lt;/h2&gt;
+&lt;p&gt;选择一个安置策略组，点击“解绑云服务器”按钮， 即可选择云服务器列表里的一个或多个云服务器离开该安置策略组。&lt;/p&gt;
+&lt;img src=&#34;../_images/leave_instance_group_2.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;h2 id=&#34;删除安置策略组&#34;&gt;删除安置策略组&lt;/h2&gt;
+&lt;p&gt;当不再需要时，可以通过安置策略组右键选项中的删除来进行操作。&lt;/p&gt;
+&lt;img src=&#34;../_images/delete_instance_group_1.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;删除安置策略组时，确保安置策略组内没有云服务器资源，需要解绑安置策略组内所有云服务器。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

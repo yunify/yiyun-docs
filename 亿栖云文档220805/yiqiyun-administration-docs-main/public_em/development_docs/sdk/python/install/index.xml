@@ -1,0 +1,40 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 安装指南</title>
+    <link>/development_docs/sdk/python/install/</link>
+    <description>Recent content in 安装指南 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/sdk/python/install/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: 安装 SDK</title>
+      <link>/development_docs/sdk/python/install/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/sdk/python/install/install/</guid>
+      <description>
+        
+        
+        &lt;p&gt;可使用 pip 安装:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ pip install shanhe-sdk
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果不是在 virtualenv 上安装，则需要 sudo&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ sudo pip install shanhe-sdk
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果你已安装 shanhe-sdk 并需要更新到最新版本，则可以:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ pip install --upgrade shanhe-sdk
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;通过源码安装:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ git clone https://github.com/shanhe-nsccjn/shanhe-sdk-python.git
+$ cd shanhe-sdk-python
+$ python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

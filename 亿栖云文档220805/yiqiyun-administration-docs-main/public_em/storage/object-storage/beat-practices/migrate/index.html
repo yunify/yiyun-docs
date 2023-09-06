@@ -1,0 +1,2561 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>数据迁移方案 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/storage/object-storage/" class="has-text-primary">对象存储</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/storage/object-storage/beat-practices/" class="has-text-primary">最佳实践</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">数据迁移方案</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">最佳实践</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  对象存储
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/object-storage/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/news/history/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/intro/object-storage/"
+      class="menu__title  "
+      data-depth="1">对象存储</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/intro/function_list/"
+      class="menu__title  "
+      data-depth="1">功能概览</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/billing/price/"
+      class="menu__title  "
+      data-depth="1">消费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/manual/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Console
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/console/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/overview/"
+      class="menu__title  "
+      data-depth="2">概述</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  Bucket 管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/bucket_manage/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/basic_opt/"
+      class="menu__title  "
+      data-depth="3">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/access_control/"
+      class="menu__title  "
+      data-depth="3">访问控制</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/monitor/"
+      class="menu__title  "
+      data-depth="3">监控与报表</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/logging/"
+      class="menu__title  "
+      data-depth="3">日志归档</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/lifecycle/"
+      class="menu__title  "
+      data-depth="3">生命周期管理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/bucket_manage/replication/"
+      class="menu__title  "
+      data-depth="3">跨区域复制</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  Object 管理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/object_manage/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/object_manage/basic_opt/"
+      class="menu__title  "
+      data-depth="3">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/object_manage/change_level/"
+      class="menu__title  "
+      data-depth="3">变更存储级别</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/object_manage/modify_meta/"
+      class="menu__title  "
+      data-depth="3">修改元数据</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="3">
+  数据处理
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/data_process/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/console/data_process/image_process/"
+      class="menu__title  "
+      data-depth="3">图片处理</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  客户端工具
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/tool/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/qsctl/"
+      class="menu__title  "
+      data-depth="2">qsctl</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/qscamel/"
+      class="menu__title  "
+      data-depth="2">qscamel</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/qsftpd/"
+      class="menu__title  "
+      data-depth="2">qsftpd</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/tool/mountain-duck/"
+      class="menu__title  "
+      data-depth="2">Mountain Duck</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  第三方数据集成
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/third_party_integration/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/third_party_integration/logstash_input/"
+      class="menu__title  "
+      data-depth="2">Logstash Input QingStor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/third_party_integration/logstash_output/"
+      class="menu__title  "
+      data-depth="2">Logstash Output QingStor</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/manual/third_party_integration/wordpress_plugin_for_qingstor/"
+      class="menu__title  "
+      data-depth="2">WordPress QingStor </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  最佳实践
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/beat-practices/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/migrate/"
+      class="menu__title active "
+      data-depth="1">数据迁移方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/backup/"
+      class="menu__title  "
+      data-depth="1">实时增量数据备份解决方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/app_integration/"
+      class="menu__title  "
+      data-depth="1">移动 App 接入方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/linux_uses_object_storage_as_a_local_disk/"
+      class="menu__title  "
+      data-depth="1">Linux 使用对象存储作为本地盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/web_hosting/"
+      class="menu__title  "
+      data-depth="1">静态网站托管方案</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/beat-practices/policy/"
+      class="menu__title  "
+      data-depth="1">Bucket Policy 白名单和黑名单使用实例</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  API 参考
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/api/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/overview/"
+      class="menu__title  "
+      data-depth="1">概述</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/common_header/"
+      class="menu__title  "
+      data-depth="1">公共字段</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/metadata/"
+      class="menu__title  "
+      data-depth="1">对象元数据</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/error_code/"
+      class="menu__title  "
+      data-depth="1">错误信息</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Bucket API
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/bucket/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/policy/"
+      class="menu__title  "
+      data-depth="2">Bucket 策略（Policy）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/basic_opt/"
+      class="menu__title  "
+      data-depth="2">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/repliation/"
+      class="menu__title  "
+      data-depth="2">跨区域复制（Replication）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/cors/"
+      class="menu__title  "
+      data-depth="2">跨域资源共享（CORS）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/acl/"
+      class="menu__title  "
+      data-depth="2">权限控制（ACL）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/logging/"
+      class="menu__title  "
+      data-depth="2">日志管理（Logging）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/lifecycle/"
+      class="menu__title  "
+      data-depth="2">生命周期（Lifecycle）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/notification/"
+      class="menu__title  "
+      data-depth="2">事件通知（Notification）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/external_mirror/"
+      class="menu__title  "
+      data-depth="2">外部镜像（External Mirror）</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/bucket/cname/"
+      class="menu__title  "
+      data-depth="2">自定义域名（CNAME）</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Object API
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/object/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/append/"
+      class="menu__title  "
+      data-depth="2">Append Object</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/multipart/"
+      class="menu__title  "
+      data-depth="2">Multipart 分段</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/post/"
+      class="menu__title  "
+      data-depth="2">Post Object</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/basic_opt/"
+      class="menu__title  "
+      data-depth="2">基础操作</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/encryption/"
+      class="menu__title  "
+      data-depth="2">数据加密</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/object/image_process/"
+      class="menu__title  "
+      data-depth="2">图片处理</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  Service API
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/service/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/service/get/"
+      class="menu__title  "
+      data-depth="2">GET Service</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/service/location/"
+      class="menu__title  "
+      data-depth="2">List Locations</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  API 使用示例
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/practices/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/practices/access_control/"
+      class="menu__title  "
+      data-depth="2">访问控制</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/api/practices/signature/"
+      class="menu__title  "
+      data-depth="2">签名验证</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/faq/object-faq/"
+      class="menu__title  "
+      data-depth="1">FAQ</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  AWS S3 兼容
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/s3/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/s3_browser/"
+      class="menu__title  "
+      data-depth="1">安装 S3 Browser</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/compatible_headers/"
+      class="menu__title  "
+      data-depth="1">兼容公共头</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/compatible_apis/"
+      class="menu__title  "
+      data-depth="1">兼容接口</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/s3/examples/"
+      class="menu__title  "
+      data-depth="1">使用示例</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  SDK
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/sdk/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/python/"
+      class="menu__title  "
+      data-depth="1">Python SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/go/"
+      class="menu__title  "
+      data-depth="1">Go SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/ruby/"
+      class="menu__title  "
+      data-depth="1">Ruby SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/cpp/"
+      class="menu__title  "
+      data-depth="1">C/C&#43;&#43; SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/java/"
+      class="menu__title  "
+      data-depth="1">Java SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/javascript/"
+      class="menu__title  "
+      data-depth="1">JavaScript SDK</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/object-storage/sdk/php/"
+      class="menu__title  "
+      data-depth="1">PHP SDK</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  硬盘
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/disk/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  动态与公告
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/news/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/news/product_news/"
+      class="menu__title  "
+      data-depth="1">产品动态</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">硬盘简介</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/billing/price/"
+      class="menu__title  "
+      data-depth="1">硬盘计费</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/create_disk/"
+      class="menu__title  "
+      data-depth="1">步骤1：购买硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/load/"
+      class="menu__title  "
+      data-depth="1">步骤2：加载硬盘</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  步骤3：初始化硬盘
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/init/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/init/init_start/"
+      class="menu__title  "
+      data-depth="2">初始化及分区方式</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/init/init_linux/"
+      class="menu__title  "
+      data-depth="2">初始化 Linux 数据盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/quickstart/init/init_win/"
+      class="menu__title  "
+      data-depth="2">初始化 Windows 数据盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/basic_operation/"
+      class="menu__title  "
+      data-depth="1">硬盘基本操作</a>
+  </li>
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  硬盘扩容
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/expand/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/expand/expan_linux/"
+      class="menu__title  "
+      data-depth="2">扩容 Linux 数据盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/expand/expan_win/"
+      class="menu__title  "
+      data-depth="2">扩容 Windows 数据盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/expand/expan_linux_sys/"
+      class="menu__title  "
+      data-depth="2">扩容系统盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="2">
+  配置自动挂载
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/auto_mount/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/auto_mount/linux_auto_mount/"
+      class="menu__title  "
+      data-depth="2">自动挂载 Linux 硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/auto_mount/win_auto_mount/"
+      class="menu__title  "
+      data-depth="2">自动挂载 Windows 硬盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/create_snapshot/"
+      class="menu__title  "
+      data-depth="1">备份硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/disk/manual/unload/"
+      class="menu__title  "
+      data-depth="1">卸载硬盘</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  共享存储
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/share/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/share/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">共享存储</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/share/manual/neonsan_volume/"
+      class="menu__title  "
+      data-depth="1">企业级分布式 SAN</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/share/manual/vsan/"
+      class="menu__title  "
+      data-depth="1">Virtual SAN</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  备份
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/backup/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">备份概述</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/create_snapshot/"
+      class="menu__title  "
+      data-depth="1">创建备份</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/delete_snapshot/"
+      class="menu__title  "
+      data-depth="1">删除备份</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/rollback_snapshot/"
+      class="menu__title  "
+      data-depth="1">备份回滚</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/bak_create_mirror/"
+      class="menu__title  "
+      data-depth="1">基于备份制作镜像</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/bak_create_disk/"
+      class="menu__title  "
+      data-depth="1">基于备份创建硬盘</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/backup/manual/backup/"
+      class="menu__title  "
+      data-depth="1">其他备份相关操作</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  文件存储
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/vnas/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/vnas/intro/introduction/"
+      class="menu__title  "
+      data-depth="1">Virtual NAS</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/manual/ data-link=/storage/object-storage/beat-practices/migrate/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/vnas/manual/vnas_expansion/"
+      class="menu__title  "
+      data-depth="1">Virtual NAS 云硬盘扩容</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/storage/vnas/manual/vnas/"
+      class="menu__title  "
+      data-depth="1">Virtual NAS</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#被动触发迁移---外部镜像">被动触发迁移 - 外部镜像</a></li>
+    <li><a href="#用户主动迁移---fetch-api">用户主动迁移 - Fetch API</a></li>
+    <li><a href="#用户主动迁移---qscamel">用户主动迁移 - qscamel</a></li>
+    <li><a href="#推荐使用步骤">推荐使用步骤</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">最佳实践</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>数据迁移方案</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-02-28
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	
+	
+
+	
+	<p>亿栖云对象存储推出了无缝数据迁移方案，帮助用户将业务数据从自建平台或者其他对象存储平台高效完整地迁移至亿栖云对象存储服务。</p>
+<p>本方案提供两种迁移方式：</p>
+<ul>
+<li>被动触发迁移</li>
+<li>用户主动迁移</li>
+</ul>
+<p>综合运用两种迁移方式，可以在不中断业务的前提下，平滑完整地进行迁移。本方案首先介绍亿栖云对象存储提供的两种迁移方式，再对迁移步骤进行详细说明。</p>
+<h2 id="被动触发迁移---外部镜像">被动触发迁移 - 外部镜像</h2>
+<p>对于已经设置了外部镜像的亿栖云对象存储 的 Bucket，当请求的 Object 在 Bucket 中不存在时，亿栖云对象存储服务端会把 Object Key 拼接在外部镜像源站后作为抓取的源链接，然后自动从源站抓取（回源），并写入到 Bucket 当中。在回源过程中，请求这个 Object 的客户端，有可能会下载到源站文件，也有可能收到重定向到源站相应路径的 302 请求。在回源完成后，客户端能够直接从亿栖云对象存储的 Bucket 中获取这个 Object。亿栖云对象存储建议用户可先使用 <a href="/storage/object-storage/api/object/basic_opt/head/">Head Object</a> 返回 200 成功来确认 Object 存在。</p>
+<p><img src="bucket_external_mirror_diagram.png" alt=""></p>
+<p>下面结合示意图，说明外部镜像的工作原理:</p>
+<p>假设用户的外部镜像源站为 <code>http://img.example.com</code>，在亿栖云对象存储的 Bucket 的默认域名为 <code>http://bucketname.jn2.is.yiqiyun.com</code>。</p>
+<p><strong>示意图左侧为首次请求:</strong></p>
+<ol>
+<li>用户发起获取 Object 的请求，如 <code>http://bucketname.jn2.is.yiqiyun.com/blog.png</code>；</li>
+<li>Object 在亿栖云对象存储的 Bucket 中不存在，且用户已经为该 Bucket 设置了外部镜像源站，此时，亿栖云对象存储服务端会将 Object Key <code>blog.png</code> 拼接到源站，生成源链接 <code>http://img.example.com/blog.png</code>；</li>
+<li>亿栖云对象存储服务端从该源链接抓取；</li>
+<li>在抓取过程中，请求该 Object 的客户端，有可能会下载到源站文件，也有可能收到重定向到源站相应路径的 302 请求。</li>
+</ol>
+<p><strong>示意图右侧为抓取完成后，再次发起请求:</strong></p>
+<ol>
+<li>用户发起获取 Object 的请求；</li>
+<li>Object 在亿栖云对象存储的 Bucket 中已存在，直接返回。</li>
+</ol>
+<p><strong>备注：</strong></p>
+<ul>
+<li>外部镜像 API 请参考 <a href="/storage/object-storage/api/bucket/external_mirror/">Bucket External Mirror</a></li>
+<li>外部镜像，需要源站在提供下载文件时能返回 <code>Content-Length</code> 头，否则回源失败。</li>
+</ul>
+<h2 id="用户主动迁移---fetch-api">用户主动迁移 - Fetch API</h2>
+<p>如果需要迁移单个源站资源，可以使用 <a href="/storage/object-storage/api/object/basic_opt/fetch/">PUT Object - Fetch</a> 接口。该接口通过请求头 <code>x-qs-fetch-source</code> 附带源链接。亿栖云对象存储会从该链接抓取资源，保存到指定的 Object 中， 并且在抓取时能够自动处理源链接服务器返回的 301/302/307 等重定向请求。该接口同步下载文件，完成后才会返回结果。</p>
+<p>使用该接口，根据不同场景，亿栖云对象存储服务端会返回如下错误信息：</p>
+<ul>
+<li>409 ：fetch_in_process，表明同一时间相同源链接的 Fetch 请求正在进行，或者被动触发的外部镜像功能正在抓取该源链接对应的文件；</li>
+<li>404 ：object_not_exists，获取的 Object 不存在；</li>
+<li>503 ：upstream_failed，无法与 Fetch 请求的源链接或者外部镜像的源站建立链接，或源站服务器返回 200，3xx，404 范围之外的错误代码，或链接中断；</li>
+<li>其他错误码，可参考：<a href="/storage/object-storage/api/error_code/">错误信息</a></li>
+</ul>
+<p>当 Object 特别大或源站下载速度比较慢时，该 API 请求有可能会导致客户端 TCP 超时。针对这种情形，亿栖云对象存储建议用户可以先使用 <a href="/storage/object-storage/api/object/basic_opt/head/">Head Object</a> 获取并比较源站文件和 Bucket 中 Object 的大小与时间戳，如果 Head Object 返回 404，客户端需重复调用一次 Fetch Object 接口； 请求若返回 409 则说明抓取已经开始。</p>
+<p><strong>备注：</strong></p>
+<ul>
+<li>Fetch API 请参考 <a href="/storage/object-storage/api/object/basic_opt/fetch/">PUT Object - Fetch</a>；</li>
+<li>Fetch 功能，需要源站在提供下载文件时能返回 <code>Content-Length</code> 头，否则回源失败；</li>
+<li>亿栖云对象存储建议用户使用本文介绍的 <a href="#%E7%94%A8%E6%88%B7%E4%B8%BB%E5%8A%A8%E8%BF%81%E7%A7%BB---qscamel">qscamel</a> 工具，便捷的实现迁移。</li>
+</ul>
+<h2 id="用户主动迁移---qscamel">用户主动迁移 - qscamel</h2>
+<p>qscamel 是把 HTTP(s) 形式的数据高效地批量迁移到亿栖云对象存储的命令行工具。其输入可以是包含源链接的文件，也可以是其他对象存储平台的 Bucket 名称。更多介绍请参考 <a href="/storage/object-storage/manual/tool/qscamel/">qscamel</a></p>
+<p><strong>qscamel 有如下特点:</strong></p>
+<ol>
+<li>支持并行迁移，即同时迁移多个对象。</li>
+<li>支持给迁移任务命名，用来继续迁移未完成的迁移任务。qscamel 会记录本次迁移任务中成功迁移的源站。在退出后、重新执行时，qscamel 会跳过已经成功迁移的源站资源，迁移剩下未完成的源站资源。</li>
+<li>支持灵活的覆盖模式。qscamel 默认进行增量迁移，即通过比较源站资源和亿栖云对象存储的 Bucket 中 Object 的最后修改时间，仅同步亿栖云对象存储的 Bucket 中已存在但非最新的 Object，及亿栖云对象存储的 Bucket 中不存在的 Object。</li>
+<li>除了默认的增量迁移外，qscamel 还支持参数 <code>--ignore-existing</code>，即：不覆盖亿栖云对象存储的 Bucket 中已存在的 Object；以及参数 <code>--overwrite</code> ，强制覆盖亿栖云对象存储的 Bucket 中已存在的 Object。</li>
+<li>支持指定日志文件。qscamel 默认输出到标准输出，也可以指定输出到日志文件。</li>
+</ol>
+<h2 id="推荐使用步骤">推荐使用步骤</h2>
+<ol>
+<li>通过命令行工具 qscamel 将冷数据批量迁移到亿栖云对象存储。</li>
+<li>更改业务的数据上传路径，将路径设置为亿栖云对象存储的 Bucket 默认域名，或者亿栖云对象存储的 Bucket 所绑定的自定义域名。</li>
+<li>配置外部镜像功能，以使得访问不存在的 Object 时触发回源。</li>
+<li>外部镜像功能只针对 Object 不存在的情况，不会从源站拉取新版本 Object。如果业务逻辑中没有覆盖更新同一 Object 的场景，可以直接让业务从亿栖云对象存储中读取；如果业务逻辑中有覆盖更新同一 Object 的逻辑，建议先更新业务代码，让业务上传数据时同时更新到源站和亿栖云对象存储，然后就可以使用亿栖云对象存储来承载业务。</li>
+<li>再次使用命令行工具 qscamel 增量同步，以保证源站到亿栖云对象存储的 Bucket 数据迁移完成，没有遗漏。</li>
+<li>停止源站的使用。</li>
+</ol>
+<h2 id="faq">FAQ</h2>
+<ol>
+<li>
+<p>请问回源过程下载数据会产生费用吗？</p>
+<p>会按照请求次数收费。内网下载请求不收流量费。假如是外网下载请求，若已经回源成功到亿栖云对象存储的 Bucket 中，会收取下载流量费用；假如返回 302 重定向到源站，则不收取流量费用。</p>
+</li>
+<li>
+<p>请问被动迁移有什么限制 ?</p>
+<p>源站方面需要返回文件的长度 <code>Content-Length</code>，并且从源站下载不能要求用户认证。亿栖云对象存储会最大限度保证客户端请求成功。</p>
+</li>
+</ol>
+
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+
+		
+		<a href="/storage/object-storage/beat-practices/backup/" class="next pr1" title="实时增量数据备份解决方案">
+			下一页: 实时增量数据备份解决方案
+		</a>
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

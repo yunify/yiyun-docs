@@ -1,0 +1,735 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – API文档</title>
+    <link>/development_docs/api/</link>
+    <description>Recent content in API文档 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: 概述</title>
+      <link>/development_docs/api/overview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/overview/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云向用户开放所有资源操作相关的API，我们的API是通过 HTTPS GET 方式来进行调用的。在调用我们的API之前，您需要先在我们的控制台申请API密钥，包括 API密钥ID ( access_key_id ) 和 API密钥的私钥 ( secret_access_key )。 API密钥ID 将作为参数包含在每一个请求中发送；而 API密钥的私钥 负责生成请求串的签名，API密钥的私钥 需要被妥善保管，请勿外传。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;API 请求限制&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;配额限制: 为了保证用户能合理地使用 API ，我们对每位用户的 API 访问配额进行了限制，初始用户： 2000次 / 3600秒，未来会开放更高的配额。&lt;/li&gt;
+&lt;li&gt;返回数据集长度限制: 当获取资源列表时，系统返回的最大数据长度是 100 ，即便你传了更大的 limit ， 所以如果你需要获取很多的数据时，请根据返回的 total_sum （根据请求时的过滤参数，得到的数据集总数）分批获取。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;API 请求结构&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;API入口&lt;/td&gt;
+&lt;td&gt;API 调用的 webservice 入口&lt;/td&gt;
+&lt;td&gt;我们的API入口目前统一为：&lt;a href=&#34;https://api.yiqiyun.net.cn/iaas/&#34;&gt;https://api.yiqiyun.net.cn/iaas/&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;公共参数&lt;/td&gt;
+&lt;td&gt;每个 API 调用都需要包含公共参数&lt;/td&gt;
+&lt;td&gt;详情可见 &lt;a href=&#34;../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指令名称&lt;/td&gt;
+&lt;td&gt;API指令的名称 ( action )，例如 DescribeInstances 等。&lt;/td&gt;
+&lt;td&gt;完整的指令名称列表请参见 &lt;a href=&#34;../command_list/instance/&#34;&gt;&lt;em&gt;API指令列表&lt;/em&gt;&lt;/a&gt;。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;指令参数&lt;/td&gt;
+&lt;td&gt;指令参数请参见每个指令的相关文档。&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;API 请求样例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一个典型的API请求如下所示，这是一个 DescribeInstances 的API请求:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?access_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=DescribeInstances&amp;amp;expires=2013-08-29T07%3A42%3A25Z&amp;amp;limit=20&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;status.1=running&amp;amp;time_stamp=2013-08-29T06%3A42%3A25Z&amp;amp;version=1&amp;amp;zone=jn1b&amp;amp;signature=ihPnXFgsg5yyqhDN2IejJ2%2Bbo89ABQ1UqFkyOdzRITY%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为了方便查看，我们将文档中的请求都进行换行来显示:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?access_key_id=QYACCESSKEYIDEXAMPLE
+&amp;amp;action=DescribeInstances
+&amp;amp;expires=2013-08-29T07%3A42%3A25Z
+&amp;amp;limit=20
+&amp;amp;signature_method=HmacSHA256
+&amp;amp;signature_version=1
+&amp;amp;status.1=running
+&amp;amp;time_stamp=2013-08-29T06%3A42%3A25Z
+&amp;amp;version=1
+&amp;amp;zone=zw2
+&amp;amp;signature=ihPnXFgsg5yyqhDN2IejJ2%2Bbo89ABQ1UqFkyOdzRITY%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;API 返回结构&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;指令名称&lt;/td&gt;
+&lt;td&gt;API 返回的指令名称 ( action )，例如 DescribeInstancesResponse 等。&lt;/td&gt;
+&lt;td&gt;API 返回的指令名称一般以 “API 请求指令名称” + “Response” 来表示。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;返回码&lt;/td&gt;
+&lt;td&gt;返回码 ( ret_code ) 用来表示API请求的返回值，当ret_code = 0时表示API请求正常，ret_code != 0时表示API请求错误。&lt;/td&gt;
+&lt;td&gt;详情可见 &lt;a href=&#34;../error_code/&#34;&gt;&lt;em&gt;错误码&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;返回参数&lt;/td&gt;
+&lt;td&gt;返回参数请参见每个指令的相关文档。&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;API 返回样例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;API的返回结果为 JSON 结构，这是一个 DescribeInstances 的API请求返回:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeInstancesResponse&amp;#34;,
+  &amp;#34;instance_set&amp;#34;:[
+    {
+      &amp;#34;vcpus_current&amp;#34;:1,
+      &amp;#34;instance_id&amp;#34;:&amp;#34;i-ogbndull&amp;#34;,
+      &amp;#34;vxnets&amp;#34;:[
+        {
+          &amp;#34;vxnet_name&amp;#34;:&amp;#34;primary vxnet&amp;#34;,
+          &amp;#34;vxnet_type&amp;#34;:1,
+          &amp;#34;vxnet_id&amp;#34;:&amp;#34;vxnet-0&amp;#34;,
+          &amp;#34;nic_id&amp;#34;:&amp;#34;52:54:ef:0c:ed:66&amp;#34;,
+          &amp;#34;private_ip&amp;#34;:&amp;#34;10.50.13.54&amp;#34;
+        }
+      ],
+      &amp;#34;memory_current&amp;#34;:1024,
+      &amp;#34;sub_code&amp;#34;:0,
+      &amp;#34;transition_status&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;instance_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;instance_type&amp;#34;:&amp;#34;c1m1&amp;#34;,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2013-08-28T14:26:03Z&amp;#34;,
+      &amp;#34;status&amp;#34;:&amp;#34;running&amp;#34;,
+      &amp;#34;status_time&amp;#34;:&amp;#34;2013-08-28T14:26:03Z&amp;#34;,
+      &amp;#34;image&amp;#34;:{
+        &amp;#34;processor_type&amp;#34;:&amp;#34;64bit&amp;#34;,
+        &amp;#34;platform&amp;#34;:&amp;#34;linux&amp;#34;,
+        &amp;#34;image_size&amp;#34;:20,
+        &amp;#34;image_name&amp;#34;:&amp;#34;CentOS 6.4 64bit&amp;#34;,
+        &amp;#34;image_id&amp;#34;:&amp;#34;centos64x64&amp;#34;,
+        &amp;#34;os_family&amp;#34;:&amp;#34;centos&amp;#34;,
+        &amp;#34;provider&amp;#34;:&amp;#34;system&amp;#34;
+      },
+      &amp;#34;description&amp;#34;:null
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;total_count&amp;#34;:1
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;API 请求类型&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我们的API请求主要分为 &lt;strong&gt;延迟请求&lt;/strong&gt; 和 &lt;strong&gt;实时请求&lt;/strong&gt; 两种。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;延迟请求&lt;/strong&gt;: 对于耗时请求，无法实时返回执行结果，例如 RunInstances 等。这些请求将以任务形式提交给云平台后台执行，并会在API请求返回中返回任务ID ( job_id )。这种情况下，用户可以通过查看资源状态来判断任务是否执行完成。例如，在提交 RunInstances 操作之后，用户可以通过 DescribeInstances 来查看 Instance 的状态以确认 Instance 是否创建成功。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;实时请求&lt;/strong&gt;: 对于非耗时请求，会直接返回操作结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 公共参数</title>
+      <link>/development_docs/api/parameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/parameters/</guid>
+      <description>
+        
+        
+        &lt;p&gt;公共参数是所有 API 请求都必需的参数。&lt;/p&gt;
+&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;为减少内容重复，公共参数就不在各 API 详情中列出了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;公共参数&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;action&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;每个 API 都有自己的 action，用来标识所请求指令。例如 RunInstances。&lt;/td&gt;
+&lt;td&gt;完整的指令名称列表请参见 &lt;a href=&#34;../command_list/instance/&#34;&gt;&lt;em&gt;API指令列表&lt;/em&gt;&lt;/a&gt;。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;zone&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;区域 ID，当 API 请求是需要在某个具体的区域执行时，需要加上该参数。例如 zw2。&lt;/td&gt;
+&lt;td&gt;目前支持的区域 ID 有：&lt;br/&gt;zw2：行政服务域&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;time_stamp&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求串生成时间，格式为 YYYY-MM-DDThh:mm:ssZ，例如”2013-08-27T13:58:35Z”，具体格式可以参见 &lt;a href=&#34;http://www.w3.org/TR/NOTE-datetime&#34;&gt;ISO8601&lt;/a&gt;.&lt;/td&gt;
+&lt;td&gt;这个时间为 UTC 时间，假设您的本地时间为北京时间 UTC+8 ，您需要将其转化为 UTC+0 的时间。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;access_key_id&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;申请的 API密钥ID，例如”QYACCESSKEYIDEXAMPLE”。&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;version&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;API的版本号，目前只支持版本号为 1。&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;signature_method&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;签名所用哈希算法，目前支持 HmacSHA256 和 HmacSHA1。&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;signature_version&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;签名函数的版本号，目前只支持版本号为 1。&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;signature&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;请求消息的签名，请参见 &lt;a href=&#34;../signature/&#34;&gt;&lt;em&gt;签名方法&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;请求样例&lt;/strong&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://api.yiqiyun.net.cn/iaas/?access_key_id=QYACCESSKEYIDEXAMPLE&#34;&gt;https://api.yiqiyun.net.cn/iaas/?access_key_id=QYACCESSKEYIDEXAMPLE&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;amp;action=RunInstances&lt;/p&gt;
+&lt;p&gt;&amp;amp;count=1&lt;/p&gt;
+&lt;p&gt;&amp;amp;time_stamp=2013-08-27T13%3A58%3A35Z&lt;/p&gt;
+&lt;p&gt;&amp;amp;image_id=centos64x64&lt;/p&gt;
+&lt;p&gt;&amp;amp;instance_type=small_b&lt;/p&gt;
+&lt;p&gt;&amp;amp;signature_method=HmacSHA256&lt;/p&gt;
+&lt;p&gt;&amp;amp;signature_version=1&lt;/p&gt;
+&lt;p&gt;&amp;amp;version=1&lt;/p&gt;
+&lt;p&gt;&amp;amp;zone=zw2&lt;/p&gt;
+&lt;p&gt;&amp;amp;signature=xMFvKenlbAAc0jGJ0iBHUhzh/wOBu3B8hypk+fTThFY=&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 签名方法</title>
+      <link>/development_docs/api/signature/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/signature/</guid>
+      <description>
+        
+        
+        &lt;p&gt;这里介绍 API 请求中签名 ( signature ) 的生成方法。您可以根据实际情况选择使用 &lt;strong&gt;API 密钥&lt;/strong&gt; 或 &lt;a href=&#34;../../../authorization/iam/&#34;&gt;IAM&lt;/a&gt; &lt;strong&gt;身份&lt;/strong&gt; 来完成签名。&lt;/p&gt;
+&lt;h2 id=&#34;api-密钥签名&#34;&gt;API 密钥签名&lt;/h2&gt;
+&lt;p&gt;您需要先在控制台创建&lt;a href=&#34;http://console.yiqiyun.net.cn/access_keys/&#34;&gt;API密钥&lt;/a&gt;，获得 accesss_key_id 和 secret_access_key，这里我们假设&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id = &amp;#39;QYACCESSKEYIDEXAMPLE&amp;#39;
+secret_access_key = &amp;#39;SECRETACCESSKEY&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;例如我们的请求参数如下:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;count&amp;#34;:1,
+  &amp;#34;vxnets.1&amp;#34;:&amp;#34;vxnet-0&amp;#34;,
+  &amp;#34;zone&amp;#34;:&amp;#34;zw2&amp;#34;,
+  &amp;#34;instance_type&amp;#34;:&amp;#34;small_b&amp;#34;,
+  &amp;#34;signature_version&amp;#34;:1,
+  &amp;#34;signature_method&amp;#34;:&amp;#34;HmacSHA256&amp;#34;,
+  &amp;#34;instance_name&amp;#34;:&amp;#34;demo&amp;#34;,
+  &amp;#34;image_id&amp;#34;:&amp;#34;centos64x86a&amp;#34;,
+  &amp;#34;login_mode&amp;#34;:&amp;#34;passwd&amp;#34;,
+  &amp;#34;login_passwd&amp;#34;:&amp;#34;20130712&amp;#34;,
+  &amp;#34;version&amp;#34;:1,
+  &amp;#34;access_key_id&amp;#34;:&amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+  &amp;#34;action&amp;#34;:&amp;#34;RunInstances&amp;#34;,
+  &amp;#34;time_stamp&amp;#34;:&amp;#34;2013-08-27T14:30:10Z&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注解&lt;/p&gt;
+&lt;p&gt;你可以使用上述的 AccessKey 和 Request 调试你的代码， 当得到跟后面一致的签名结果后(即表示你的代码是正确的)， 可再换为你自己的 AccessKey 和其他 API 请求。&lt;/p&gt;
+&lt;p&gt;签名步骤&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 按参数名进行升序排列&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;排序后的参数为:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;access_key_id&amp;#34;:&amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+  &amp;#34;action&amp;#34;:&amp;#34;RunInstances&amp;#34;,
+  &amp;#34;count&amp;#34;:1,
+  &amp;#34;image_id&amp;#34;:&amp;#34;centos64x86a&amp;#34;,
+  &amp;#34;instance_name&amp;#34;:&amp;#34;demo&amp;#34;,
+  &amp;#34;instance_type&amp;#34;:&amp;#34;small_b&amp;#34;,
+  &amp;#34;login_mode&amp;#34;:&amp;#34;passwd&amp;#34;,
+  &amp;#34;login_passwd&amp;#34;:&amp;#34;20130712&amp;#34;,
+  &amp;#34;signature_method&amp;#34;:&amp;#34;HmacSHA256&amp;#34;,
+  &amp;#34;signature_version&amp;#34;:1,
+  &amp;#34;time_stamp&amp;#34;:&amp;#34;2013-08-27T14:30:10Z&amp;#34;,
+  &amp;#34;version&amp;#34;:1,
+  &amp;#34;vxnets.1&amp;#34;:&amp;#34;vxnet-0&amp;#34;,
+  &amp;#34;zone&amp;#34;:&amp;#34;zw2&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2. 对参数名称和参数值进行URL编码&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;编码后的请求串为:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;access_key_id&amp;#34;:&amp;#34;QYACCESSKEYIDEXAMPLE&amp;#34;,
+  &amp;#34;action&amp;#34;:&amp;#34;RunInstances&amp;#34;,
+  &amp;#34;count&amp;#34;:1,
+  &amp;#34;image_id&amp;#34;:&amp;#34;centos64x86a&amp;#34;,
+  &amp;#34;instance_name&amp;#34;:&amp;#34;demo&amp;#34;,
+  &amp;#34;instance_type&amp;#34;:&amp;#34;small_b&amp;#34;,
+  &amp;#34;login_mode&amp;#34;:&amp;#34;passwd&amp;#34;,
+  &amp;#34;login_passwd&amp;#34;:&amp;#34;20130712&amp;#34;,
+  &amp;#34;signature_method&amp;#34;:&amp;#34;HmacSHA256&amp;#34;,
+  &amp;#34;signature_version&amp;#34;:1,
+  &amp;#34;time_stamp&amp;#34;:&amp;#34;2013-08-27T14%3A30%3A10Z&amp;#34;,
+  &amp;#34;version&amp;#34;:1,
+  &amp;#34;vxnets.1&amp;#34;:&amp;#34;vxnet-0&amp;#34;,
+  &amp;#34;zone&amp;#34;:&amp;#34;zw2&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;编码时空格要转换成 “%20” , 而不是 “+”&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;转码部分的字符要用大写，如 ”:” 应转成 “%3A”，而不是 “%3a”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. 构造URL请求&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;参数名和参数值之间用 “=” 号连接，参数和参数之间用 “＆” 号连接，构造后的URL请求为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=RunInstances&amp;amp;count=1&amp;amp;image_id=centos64x86a&amp;amp;instance_name=demo&amp;amp;instance_type=small_b&amp;amp;login_mode=passwd&amp;amp;login_passwd=20130712&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;vxnets.1=vxnet-0&amp;amp;zone=zw2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;4. 构造被签名串&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;被签名串的构造规则为: 被签名串 = HTTP请求方式 + “\n” + uri + “\n” + url 请求串&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;“\n” 是换行符，不要将 “\” 转义。也就是说，不要用 “\n” ，有些语言，比如 php 和 ruby ，请用 “\n” , 而不是 ‘\n’&lt;/p&gt;
+&lt;p&gt;假设 HTTP 请求方法为 GET 请求的uri路径为 “/iaas/” , 则被签名串为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;GET\n/iaas/\naccess_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=RunInstances&amp;amp;count=1&amp;amp;image_id=centos64x86a&amp;amp;instance_name=demo&amp;amp;instance_type=small_b&amp;amp;login_mode=passwd&amp;amp;login_passwd=20130712&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;vxnets.1=vxnet-0&amp;amp;zone=zw2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;5. 计算签名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;计算被签名串的签名 signature。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将API密钥的私钥 ( secret_access_key ) 作为key，生成被签名串的 HMAC-SHA256 或者 HMAC-SHA1 签名，更多信息可参见 &lt;a href=&#34;http://www.ietf.org/rfc/rfc2104.txt&#34;&gt;RFC2104&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将签名进行 Base64 编码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将 Base64 编码后的结果进行 URL 编码&lt;/p&gt;
+&lt;p&gt;警告&lt;/p&gt;
+&lt;p&gt;当 Base64 编码后存在空格时，不要对空格进行 URL 编码，而要直接将空格转为 “+”&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以 Python (版本 2.7) 代码为例 (其他语言类似，需要使用 sha256 + base64 编码，最后需要再进行 URL 编码，URL 编码时需要将原有的空格 ” ” 转为 “+”)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import base64
+import hmac
+import urllib
+from hashlib import sha256
+
+# 前面生成的被签名串
+string_to_sign = &amp;#39;GET\n/iaas/\naccess_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=RunInstances&amp;amp;count=1&amp;amp;image_id=centos64x86a&amp;amp;instance_name=demo&amp;amp;instance_type=small_b&amp;amp;login_mode=passwd&amp;amp;login_passwd=20130712&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;vxnets.1=vxnet-0&amp;amp;zone=zw2&amp;#39;
+h = hmac.new(secret_access_key, digestmod=sha256)
+h.update(string_to_sign)
+sign = base64.b64encode(h.digest()).strip()
+signature = urllib.quote_plus(sign)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;6. 添加签名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将签名参数附在原有请求串的最后面。 最终的HTTP请求串为(为了查看方便，我们人为地将参数之间用回车分隔开)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;access_key_id=QYACCESSKEYIDEXAMPLE
+&amp;amp;action=RunInstances
+&amp;amp;count=1
+&amp;amp;image_id=centos64x86a
+&amp;amp;instance_name=demo
+&amp;amp;instance_type=small_b
+&amp;amp;login_mode=passwd
+&amp;amp;login_passwd=20130712
+&amp;amp;signature_method=HmacSHA256
+&amp;amp;signature_version=1
+&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z
+&amp;amp;version=1
+&amp;amp;vxnets.1=vxnet-0
+&amp;amp;zone=zw2
+&amp;amp;signature=byjccvWIvAftaq%2BoublemagH3bYAlDWxxLFAzAsyslw%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;完整的请求URL为(为了查看方便，我们人为地将参数之间用回车分隔开)&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?access_key_id=QYACCESSKEYIDEXAMPLE
+&amp;amp;action=RunInstances
+&amp;amp;count=1
+&amp;amp;image_id=centos64x86a
+&amp;amp;instance_name=demo
+&amp;amp;instance_type=small_b
+&amp;amp;login_mode=passwd
+&amp;amp;login_passwd=20130712
+&amp;amp;signature_method=HmacSHA256
+&amp;amp;signature_version=1
+&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z
+&amp;amp;version=1
+&amp;amp;vxnets.1=vxnet-0
+&amp;amp;zone=zw2
+&amp;amp;signature=byjccvWIvAftaq%2BoublemagH3bYAlDWxxLFAzAsyslw%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实际URL为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?access_key_id=QYACCESSKEYIDEXAMPLE&amp;amp;action=RunInstances&amp;amp;count=1&amp;amp;image_id=centos64x86a&amp;amp;instance_name=demo&amp;amp;instance_type=small_b&amp;amp;login_mode=passwd&amp;amp;login_passwd=20130712&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=1&amp;amp;time_stamp=2013-08-27T14%3A30%3A10Z&amp;amp;version=1&amp;amp;vxnets.1=vxnet-0&amp;amp;zone=zw2&amp;amp;signature=byjccvWIvAftaq%2BoublemagH3bYAlDWxxLFAzAsyslw%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;iam-身份签名&#34;&gt;IAM 身份签名&lt;/h2&gt;
+&lt;p&gt;您需要先到IAM控制面板创建一个基于特定信任载体类型的身份，并将身份绑定到 API 执行设备上。&lt;/p&gt;
+&lt;p&gt;这里我们假设您的 API 执行设备为 广东 2 区 id 为 i-7lchv5u3 的云服务器：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../../authorization/iam/_images/iam_role.png&#34; alt=&#34;iam_role&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 获取 IAM 身份的临时凭证&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在云服务器中执行如下命令，即可取得身份的临时凭证：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -i -H &amp;#34;Accept: application/json&amp;#34; http://169.254.169.254/latest/meta-data/security-credentials
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回信息：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;{\&amp;#34;jti\&amp;#34;:\&amp;#34;0z7dO3oN03byx1CepBDTyl\&amp;#34;,\&amp;#34;id_token\&amp;#34;:\&amp;#34;eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3IiOiIxIiwiYXVkIjoiaWFtIiwiYXpwIjoiaWFtIiwiY29ucyI6ImFkbWluIiwiY3VpZCI6ImlhbXItejU3dm42anIiLCJlaXNrIjoieUxjcFViRXZVOWZQZmJSQTA2eUFQMUtMS21keVpoX1JueDJmNmRmeFZZZz0iLCJleHAiOjE1OTAzMTk1MjMsImlhdCI6MTU5MDMxNTkyMywiaXNzIjoic3RzIiwianRpIjoiMHo3ZE8zb04wM2J5eDFDZXBCRFR5bCIsIm5iZiI6MCwib3JnaSI6ImFwcC0xMjM0NTY3OCIsIm93dXIiOiJ1c3ItQ29qOGFIZ24iLCJwcmVmIjoicXJuOnFpbmdjbG91ZDppYW06Iiwicm91ciI6InVzci1Db2o4YUhnbiIsInJ0eXAiOiJyb2xlIiwic3ViIjoic3RzIiwidHlwIjoiSUQifQ.YrCnvySApej2zHsn9cfn3D7tgOahDzeTP1TRBVMZ_3TyToo-H7hB2_mx_J_Qy1NY5K-WykYE4NFxqVN7PqsnAmskqAnRM2D7Gza_PffO7ajEJhtVF7Fo7nsmPKs7y1kryQ2Rvj3ABBJThHjQDtYVsk_pLUio5P0Nl9zb1sSswN4\&amp;#34;,\&amp;#34;access_key\&amp;#34;:\&amp;#34;0z7dO3oN03byx1CepBDTyl\&amp;#34;,\&amp;#34;secret_key\&amp;#34;:\&amp;#34;5qlKnUc3esKJp3G\&amp;#34;,\&amp;#34;expiration\&amp;#34;:1590319523}&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为了查看方便，我们人为地将参数之间用回车分隔开：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;jti&amp;#34;:&amp;#34;0z7dO3oN03byx1CepBDTyl&amp;#34;,
+&amp;#34;id_token&amp;#34;:&amp;#34;eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3IiOiIxIiwiYXVkIjoiaWFtIiwiYXpwIjoiaWFtIiwiY29ucyI6ImFkbWluIiwiY3VpZCI6ImlhbXItejU3dm42anIiLCJlaXNrIjoieUxjcFViRXZVOWZQZmJSQTA2eUFQMUtMS21keVpoX1JueDJmNmRmeFZZZz0iLCJleHAiOjE1OTAzMTk1MjMsImlhdCI6MTU5MDMxNTkyMywiaXNzIjoic3RzIiwianRpIjoiMHo3ZE8zb04wM2J5eDFDZXBCRFR5bCIsIm5iZiI6MCwib3JnaSI6ImFwcC0xMjM0NTY3OCIsIm93dXIiOiJ1c3ItQ29qOGFIZ24iLCJwcmVmIjoicXJuOnFpbmdjbG91ZDppYW06Iiwicm91ciI6InVzci1Db2o4YUhnbiIsInJ0eXAiOiJyb2xlIiwic3ViIjoic3RzIiwidHlwIjoiSUQifQ.YrCnvySApej2zHsn9cfn3D7tgOahDzeTP1TRBVMZ_3TyToo-H7hB2_mx_J_Qy1NY5K-WykYE4NFxqVN7PqsnAmskqAnRM2D7Gza_PffO7ajEJhtVF7Fo7nsmPKs7y1kryQ2Rvj3ABBJThHjQDtYVsk_pLUio5P0Nl9zb1sSswN4&amp;#34;,
+&amp;#34;access_key&amp;#34;:&amp;#34;0z7dO3oN03byx1CepBDTyl&amp;#34;,
+&amp;#34;secret_key&amp;#34;:&amp;#34;5qlKnUc3esKJp3G&amp;#34;,
+&amp;#34;expiration&amp;#34;:1590319523
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2. 添加签名&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;将身份临时凭证中的 access_key 和 secret_key 按照前文 API 密钥同样的方法进行签名计算，然后将请求的 uri 路径改为 “/iam/”，最后在请求中附上 token 参数（参数值为临时凭证中的 id_token ）。&lt;/p&gt;
+&lt;p&gt;以 DescribeInstances 为例，最后请求的 URL 为（为了查看方便，我们人为地将参数之间用回车分隔开）:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iam/?access_key_id=0z7dO3oN03byx1CepBDTyl
+&amp;amp;action=DescribeInstances
+&amp;amp;req_id=35430c022b694133a6a758b62e21067b
+&amp;amp;signature_method=HmacSHA256
+&amp;amp;signature_version=2
+&amp;amp;status.1=running
+&amp;amp;status.2=stopped
+&amp;amp;time_stamp=2020-05-25T07%3A20%3A28Z
+&amp;amp;token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3IiOiIxIiwiYXVkIjoiaWFtIiwiYXpwIjoiaWFtIiwiY29ucyI6ImFkbWluIiwiY3VpZCI6ImlhbXItejU3dm42anIiLCJlaXNrIjoieUxjcFViRXZVOWZQZmJSQTA2eUFQMUtMS21keVpoX1JueDJmNmRmeFZZZz0iLCJleHAiOjE1OTAzMTk1MjMsImlhdCI6MTU5MDMxNTkyMywiaXNzIjoic3RzIiwianRpIjoiMHo3ZE8zb04wM2J5eDFDZXBCRFR5bCIsIm5iZiI6MCwib3JnaSI6ImFwcC0xMjM0NTY3OCIsIm93dXIiOiJ1c3ItQ29qOGFIZ24iLCJwcmVmIjoicXJuOnFpbmdjbG91ZDppYW06Iiwicm91ciI6InVzci1Db2o4YUhnbiIsInJ0eXAiOiJyb2xlIiwic3ViIjoic3RzIiwidHlwIjoiSUQifQ.YrCnvySApej2zHsn9cfn3D7tgOahDzeTP1TRBVMZ_3TyToo-H7hB2_mx_J_Qy1NY5K-WykYE4NFxqVN7PqsnAmskqAnRM2D7Gza_PffO7ajEJhtVF7Fo7nsmPKs7y1kryQ2Rvj3ABBJThHjQDtYVsk_pLUio5P0Nl9zb1sSswN4
+&amp;amp;verbose=0
+&amp;amp;version=1
+&amp;amp;zone=pekt3
+&amp;amp;signature=o8TW8DUQ3wyHz5YSkpMd9fSj4pJ24U7%2Buf7CeWKMoQw%3D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实际 URL 为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iam/?access_key_id=0z7dO3oN03byx1CepBDTyl&amp;amp;action=DescribeInstances&amp;amp;req_id=35430c022b694133a6a758b62e21067b&amp;amp;signature_method=HmacSHA256&amp;amp;signature_version=2&amp;amp;status.1=running&amp;amp;status.2=stopped&amp;amp;time_stamp=2020-05-25T07%3A20%3A28Z&amp;amp;token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3IiOiIxIiwiYXVkIjoiaWFtIiwiYXpwIjoiaWFtIiwiY29ucyI6ImFkbWluIiwiY3VpZCI6ImlhbXItejU3dm42anIiLCJlaXNrIjoieUxjcFViRXZVOWZQZmJSQTA2eUFQMUtMS21keVpoX1JueDJmNmRmeFZZZz0iLCJleHAiOjE1OTAzMTk1MjMsImlhdCI6MTU5MDMxNTkyMywiaXNzIjoic3RzIiwianRpIjoiMHo3ZE8zb04wM2J5eDFDZXBCRFR5bCIsIm5iZiI6MCwib3JnaSI6ImFwcC0xMjM0NTY3OCIsIm93dXIiOiJ1c3ItQ29qOGFIZ24iLCJwcmVmIjoicXJuOnFpbmdjbG91ZDppYW06Iiwicm91ciI6InVzci1Db2o4YUhnbiIsInJ0eXAiOiJyb2xlIiwic3ViIjoic3RzIiwidHlwIjoiSUQifQ.YrCnvySApej2zHsn9cfn3D7tgOahDzeTP1TRBVMZ_3TyToo-H7hB2_mx_J_Qy1NY5K-WykYE4NFxqVN7PqsnAmskqAnRM2D7Gza_PffO7ajEJhtVF7Fo7nsmPKs7y1kryQ2Rvj3ABBJThHjQDtYVsk_pLUio5P0Nl9zb1sSswN4&amp;amp;verbose=0&amp;amp;version=1&amp;amp;zone=pekt3&amp;amp;signature=o8TW8DUQ3wyHz5YSkpMd9fSj4pJ24U7%2Buf7CeWKMoQw%3D
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 错误码</title>
+      <link>/development_docs/api/error_code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/error_code/</guid>
+      <description>
+        
+        
+        &lt;p&gt;当请求发生错误时，服务器会返回错误码 ( ret_code ) 和错误信息 ( message )，完整的错误码如下表。&lt;/p&gt;
+&lt;p&gt;错误分为 &lt;strong&gt;客户端错误&lt;/strong&gt; ， &lt;strong&gt;服务器端错误&lt;/strong&gt; ， &lt;strong&gt;配置文件错误&lt;/strong&gt;， &lt;strong&gt;License 错误&lt;/strong&gt; 四种，如果是客户端错误，说明该错误是由用户提交的 API 引起的；如果是服务器端错误，说明该错误是由服务器端引起的；如果是配置文件错误，说明配置文件中的某项存在问题；如果是　License　错误， 说明授权证书存在错误。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;客户端错误&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误代码&lt;/th&gt;
+&lt;th&gt;错误类型&lt;/th&gt;
+&lt;th&gt;提示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1100&lt;/td&gt;
+&lt;td&gt;消息格式错误&lt;/td&gt;
+&lt;td&gt;当缺少必要参数，或者参数值格式不正确时，会返回该错误。此时可以查看相关文档确认每个参数的格式是否正确。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1101&lt;/td&gt;
+&lt;td&gt;请求方法错误&lt;/td&gt;
+&lt;td&gt;当请求了不存在的方法，或者参数值不正确时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1200&lt;/td&gt;
+&lt;td&gt;身份验证失败&lt;/td&gt;
+&lt;td&gt;当用户提供了不存在的　access_key_id　参数，或者　API　请求的签名不正确时，会返回该错误。&lt;br&gt;此时可以检查　access_key_id　和　secret_access_key　是否配置正确，或者参考我们的签名文档 &lt;a href=&#34;../signature/&#34;&gt;&lt;em&gt;签名方法&lt;/em&gt;&lt;/a&gt; 检查是否签名有误。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1300&lt;/td&gt;
+&lt;td&gt;消息已过期&lt;/td&gt;
+&lt;td&gt;当用户提交的 time_stamp 参数时间过期(超过　60　秒)时会返回该错误。关于 time_stamp ，可以参考 &lt;a href=&#34;../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1400&lt;/td&gt;
+&lt;td&gt;访问被拒绝&lt;/td&gt;
+&lt;td&gt;当用户试图访问不属于自己的资源，或者对于提交的操作没有权限，或者试图更改的资源处于不可更改的状态时等，会返回该错误。我们会在返回的错误信息里头提及错误原因。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1500&lt;/td&gt;
+&lt;td&gt;注册用户失败&lt;/td&gt;
+&lt;td&gt;当用户注册失败时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1510&lt;/td&gt;
+&lt;td&gt;帐号已存在&lt;/td&gt;
+&lt;td&gt;当注册已存在的账号时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1520&lt;/td&gt;
+&lt;td&gt;帐号格式不合法&lt;/td&gt;
+&lt;td&gt;当注册的账号格式不满足要求时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1600&lt;/td&gt;
+&lt;td&gt;登录失败&lt;/td&gt;
+&lt;td&gt;当用户输入错误的登录信息时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1610&lt;/td&gt;
+&lt;td&gt;找不到该用户&lt;/td&gt;
+&lt;td&gt;当用户提供了不存在的用户名时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1620&lt;/td&gt;
+&lt;td&gt;密码不匹配&lt;/td&gt;
+&lt;td&gt;当用户提供了不匹配的密码时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1630&lt;/td&gt;
+&lt;td&gt;重置密码失败&lt;/td&gt;
+&lt;td&gt;当用户重置密码不符合要求时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1640&lt;/td&gt;
+&lt;td&gt;重置密码过于频繁&lt;/td&gt;
+&lt;td&gt;当用户重置密码过于频繁时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1650&lt;/td&gt;
+&lt;td&gt;无效的密码重置　token&lt;/td&gt;
+&lt;td&gt;当用户重置密码　token　无效时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1660&lt;/td&gt;
+&lt;td&gt;用户名或密码不匹配&lt;/td&gt;
+&lt;td&gt;当用户提供了不匹配的用户名密码时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1661&lt;/td&gt;
+&lt;td&gt;用户未完成注册&lt;/td&gt;
+&lt;td&gt;当用户注册未完成时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1662&lt;/td&gt;
+&lt;td&gt;用户已被禁止访问&lt;/td&gt;
+&lt;td&gt;当用户执行超出权限时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2000&lt;/td&gt;
+&lt;td&gt;登录会话过期&lt;/td&gt;
+&lt;td&gt;当用户会话空闲过久时， 会返回该错误 ，请重新登录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2100&lt;/td&gt;
+&lt;td&gt;找不到资源&lt;/td&gt;
+&lt;td&gt;当用户试图访问不存在的资源时，会返回该错误。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2110&lt;/td&gt;
+&lt;td&gt;资源已存在&lt;/td&gt;
+&lt;td&gt;当用户创建已存在的资源时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2200&lt;/td&gt;
+&lt;td&gt;租赁资源失败&lt;/td&gt;
+&lt;td&gt;当用户租赁信息存在错误时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2300&lt;/td&gt;
+&lt;td&gt;解除租赁失败&lt;/td&gt;
+&lt;td&gt;当用户解除租赁失败时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2400&lt;/td&gt;
+&lt;td&gt;余额不足&lt;/td&gt;
+&lt;td&gt;当用户余额不足时，会返回该错误。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2500&lt;/td&gt;
+&lt;td&gt;超过配额&lt;/td&gt;
+&lt;td&gt;当用户试图创建的资源超过用户配额，或者短时间内的API访问请求超过配额限制，会返回该错误。&lt;br&gt;API　访问请求配额限制是以天为单位，当超过配置限额时， 将会在在次日零点恢复。&lt;br&gt;您可以通过提交工单的方式来向我们申请提高配额，并说明你申请的理由。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3300&lt;/td&gt;
+&lt;td&gt;无效的　API　模块&lt;/td&gt;
+&lt;td&gt;当用户使用了无效的　API　模块时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;License 错误&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误代码&lt;/th&gt;
+&lt;th&gt;错误类型&lt;/th&gt;
+&lt;th&gt;提示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;4000&lt;/td&gt;
+&lt;td&gt;无效的证书&lt;/td&gt;
+&lt;td&gt;当用户的证书失效时， 会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4001&lt;/td&gt;
+&lt;td&gt;授权证书已经过期&lt;/td&gt;
+&lt;td&gt;当用户的授权证书已经过期时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4002&lt;/td&gt;
+&lt;td&gt;平台已有相同的授权证书&lt;/td&gt;
+&lt;td&gt;当用户的证书重复时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4003&lt;/td&gt;
+&lt;td&gt;超出证书授权&lt;/td&gt;
+&lt;td&gt;当用户的当前宿云服务器的数量已超过授权证书的规定数量时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4004&lt;/td&gt;
+&lt;td&gt;加载授权证书失败&lt;/td&gt;
+&lt;td&gt;当用户加载授权证书失败时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4005&lt;/td&gt;
+&lt;td&gt;找不到授权证书&lt;/td&gt;
+&lt;td&gt;当用户没有有效的授权证书时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;服务器端错误&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误代码&lt;/th&gt;
+&lt;th&gt;错误类型&lt;/th&gt;
+&lt;th&gt;提示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;5000&lt;/td&gt;
+&lt;td&gt;内部错误&lt;/td&gt;
+&lt;td&gt;当服务器执行请求过程中，遇到未知错误时，会返回该错误信息。遇到这种错误，请及时与我们联系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5100&lt;/td&gt;
+&lt;td&gt;服务器繁忙&lt;/td&gt;
+&lt;td&gt;当服务器执行超时，或者服务器负载过高无法完成请求时，会返回该错误信息。遇到这种错误，请稍后再尝试，或者及时与我们联系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5200&lt;/td&gt;
+&lt;td&gt;资源不足&lt;/td&gt;
+&lt;td&gt;当我们后台计算资源不足以满足用户的创建需求时，会返回该错误信息。遇到这种错误，请及时与我们联系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5300&lt;/td&gt;
+&lt;td&gt;服务更新中&lt;/td&gt;
+&lt;td&gt;当我们的后台服务正在更新时，会返回该错误信息。遇到这种错误，请稍后再尝试，或者及时与我们联系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5400&lt;/td&gt;
+&lt;td&gt;存在依赖关系&lt;/td&gt;
+&lt;td&gt;当我们的后台服务正在更新时，会返回该错误信息。遇到这种错误，请稍后再尝试，或者及时与我们联系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5500&lt;/td&gt;
+&lt;td&gt;Warehouse　服务未开启&lt;/td&gt;
+&lt;td&gt;当服务器　Warehouse　服务未开启时，会返回该错误信息 。遇到这种错误，请及时与我们联系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5600&lt;/td&gt;
+&lt;td&gt;不支持的硬盘类型&lt;/td&gt;
+&lt;td&gt;当用户向一个不支持加密的云服务器挂载加密硬盘时，会返回该错误信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;配置文件错误&lt;/strong&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误代码&lt;/th&gt;
+&lt;th&gt;错误类型&lt;/th&gt;
+&lt;th&gt;提示&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;8000&lt;/td&gt;
+&lt;td&gt;命令参数验证失败&lt;/td&gt;
+&lt;td&gt;当用户在配置文件中提供了错误的参数时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8001&lt;/td&gt;
+&lt;td&gt;配置文件中无任何镜像&lt;/td&gt;
+&lt;td&gt;当用户配置文件中无镜像时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8002&lt;/td&gt;
+&lt;td&gt;配置文件中镜像在指定区不存在&lt;/td&gt;
+&lt;td&gt;当用户配置文件中的镜像在指定区不存在时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8003&lt;/td&gt;
+&lt;td&gt;无效的集群设置&lt;/td&gt;
+&lt;td&gt;当用户配置文件提供了无效的集群设置时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8004&lt;/td&gt;
+&lt;td&gt;缺少配置文件&lt;/td&gt;
+&lt;td&gt;当缺少相应配置文件时，会返回该错误&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;错误样例&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;出现错误时，我们会返回错误码和详细的错误提示:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;message&amp;#34;:&amp;#34;PermissionDenied, instance [i-2aypaijz] is not running， can not be stopped&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:1400
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: API指令列表</title>
+      <link>/development_docs/api/command_list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/</guid>
+      <description>
+        
+        
+        &lt;p&gt;这里列出了所有的API请求指令列表。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: 通用部分</title>
+      <link>/development_docs/api/common/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/common/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

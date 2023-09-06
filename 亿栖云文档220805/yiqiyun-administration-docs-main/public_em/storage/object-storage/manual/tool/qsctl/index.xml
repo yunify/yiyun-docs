@@ -1,0 +1,171 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – qsctl</title>
+    <link>/storage/object-storage/manual/tool/qsctl/</link>
+    <description>Recent content in qsctl on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 17 May 2021 10:08:56 +0800</lastBuildDate>
+    
+	  <atom:link href="/storage/object-storage/manual/tool/qsctl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: qsctl v1 文档</title>
+      <link>/storage/object-storage/manual/tool/qsctl/v1/</link>
+      <pubDate>Fri, 27 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/manual/tool/qsctl/v1/</guid>
+      <description>
+        
+        
+        &lt;p&gt;qsctl 是亿栖云对象存储服务的高级命令行工具。它提供了更强大的类 UNIX 命令，使管理对象存储的资源变得像管理本地资源一样方便。这些命令包括：cp，ls，mb，mv，rb，rm, sync 和 presign。所有 qsctl 的命令都支持批量操作。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;qsctl 支持 pip 进行安装，用户也可以直接下载并运行亿栖云对象存储提供的可执行文件。详细操作分别如下：&lt;/p&gt;
+&lt;h3 id=&#34;pip-安装&#34;&gt;pip 安装&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;类 Unix 操作系统的服务器上，执行如下命令进行安装:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install qsctl -U
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 若没有安装 virtualenv，则执行如下命令&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo pip install qsctl -U
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在 Windows 服务器上，请使用管理员权限打开命令行窗口，运行如下命令进行安装：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install qsctl -U
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;下载安装包&#34;&gt;下载安装包&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;用户根据操作系统，下载相应的安装包：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 用户 &lt;a href=&#34;https://pek3a.qingstor.com/releases-qs/qsctl/qsctl-latest-windows.zip&#34;&gt;qsctl-latest.zip&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Linux &lt;a href=&#34;https://pek3a.qingstor.com/releases-qs/qsctl/qsctl-latest-linux.tar.gz&#34;&gt;qsctl-latest.tar.gz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mac OS X 用户 &lt;a href=&#34;https://pek3a.qingstor.com/releases-qs/qsctl/qsctl-latest-darwin.tar.gz&#34;&gt;qsctl-latest.tar.gz&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;部分 Windows 用户可能出现缺少 dll 文件的错误，根据自己系统下载并安装合适的依赖包即可：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pek3a.qingstor.com/releases-qs/qsctl/vc_redist.x64.exe&#34;&gt;64位系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pek3a.qingstor.com/releases-qs/qsctl/vc_redist.x86.exe&#34;&gt;32位系统&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;在正式使用 qsctl 工具前，用户需修改相应的配置文件，从而使其能正常工作。在载入配置文件时，qsctl 会按照如下顺序进行尝试，一旦读取成功便不再尝试下一个配置文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户通过 &lt;code&gt;-c&lt;/code&gt; 参数指定的路径&lt;/li&gt;
+&lt;li&gt;配置文件：&lt;code&gt;~/.qingstor/config.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置文件：&lt;code&gt;~/.qingcloud/config.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上为类 Unix 系统下的配置文件路径，对 Windows 用户而言，配置文件路径为 &lt;code&gt;%USERPROFILE%\.qingstor\config.yaml&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;详细操作步骤如下：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在管理控制台申请 API 密钥，并下载保存。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;根据前文信息，依次查看是否存在默认配置文件：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat ~/.qingstor/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat ~/.qingcloud/config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;若以上文件均不存在，即说明无默认配置文件，需按照如下步骤手动创建配置文件：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;touch qsctl_config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;按如下格式填写配置相关信息：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;access_key_id&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ACCESS_KEY_ID_EXAMPLE&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;secret_access_key&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SECRET_ACCESS_KEY_EXAMPLE&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;host&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;qingstor.com&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;443&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;protocol&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;connection_retries&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Valid levels are &amp;#39;debug&amp;#39;, &amp;#39;info&amp;#39;, &amp;#39;warn&amp;#39;, &amp;#39;error&amp;#39;, and &amp;#39;fatal&amp;#39;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;log_level&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;debug&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;说明：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;access_key_id&lt;/code&gt; 与 &lt;code&gt;secret_access_key&lt;/code&gt; 根据步骤 1 中下载的 API 密钥进行填写。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;host&lt;/code&gt;，&lt;code&gt;port&lt;/code&gt; 与 &lt;code&gt;protocol&lt;/code&gt; 参数为待访问的亿栖云对象存储的域名，端口号及协议类型。公有云维持默认即可，私有云环境需根据实际情况进行填写。&lt;/li&gt;
+&lt;li&gt;qsctl 提供了对旧版的 &lt;code&gt;qs_access_key_id&lt;/code&gt;，&lt;code&gt;qs_secret_access_key&lt;/code&gt; 参数的兼容，旧版的配置文件可直接使用，其中 &lt;code&gt;zone&lt;/code&gt; 参数将忽略。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;h3 id=&#34;命令列表&#34;&gt;命令列表&lt;/h3&gt;
+&lt;p&gt;qsctl 支持的操作命令如下表所示：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ls&lt;/td&gt;
+&lt;td&gt;列出所有的 Bucket，或给定 Bucket 给定前缀下的所有对象。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cp&lt;/td&gt;
+&lt;td&gt;复制本地文件至亿栖云对象存储 Bucket，或复制亿栖云对象存储 Bucket 中的对象到本地。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mb&lt;/td&gt;
+&lt;td&gt;创建一个新的 Bucket。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rb&lt;/td&gt;
+&lt;td&gt;删除一个空的 Bucket，或强制删除一个非空的 Bucket。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mv&lt;/td&gt;
+&lt;td&gt;移动本地文件至亿栖云对象存储的 Bucket，或移动亿栖云对象存储的 Bucket 中的对象到本地。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;rm&lt;/td&gt;
+&lt;td&gt;删除一个亿栖云对象存储 Bucket 中的对象或给定前缀下的所有对象。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;sync&lt;/td&gt;
+&lt;td&gt;在本地目录和亿栖云对象存储 Bucket 目录之间同步。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;presign&lt;/td&gt;
+&lt;td&gt;生成指定对象的临时下载链接。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;查看帮助文件&#34;&gt;查看帮助文件&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;可执行如下命令行查看 qsctl 的参数和简易使用教程:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl -h
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;如需查看 qsctl 的详细手册和示例，请运行:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qsctl help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;示例&#34;&gt;示例&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;列出 Bucket 下的所有对象:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; qsctl ls qs://mybucket
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Directory                          test/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2016-04-03 11:16:04     &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; Bytes    test1.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2016-04-03 11:16:04     &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; Bytes    test2.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;同步亿栖云对象存储中的目录至本地文件夹:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;gt; qsctl sync qs://mybucket/test/ test/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;File &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test/README.md&amp;#39;&lt;/span&gt; written
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;File &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test/commands.py&amp;#39;&lt;/span&gt; written
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

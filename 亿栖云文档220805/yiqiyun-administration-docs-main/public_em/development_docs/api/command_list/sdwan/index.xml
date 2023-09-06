@@ -1,0 +1,851 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – SD-WAN</title>
+    <link>/development_docs/api/command_list/sdwan/</link>
+    <description>Recent content in SD-WAN on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/development_docs/api/command_list/sdwan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Development_docs: ChangeWanAccessBandwidth</title>
+      <link>/development_docs/api/command_list/sdwan/change_wan_access_bandwidth/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sdwan/change_wan_access_bandwidth/</guid>
+      <description>
+        
+        
+        &lt;p&gt;修改接入点的弹性带宽。&lt;/p&gt;
+&lt;p&gt;注意： 弹性带宽值不得大于基础带宽。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_access&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bandwidth_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;带宽类型, 目前只支持 elastic 类型&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bandwidth&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;带宽值, bandwidth_type 为 elastic 时, bandwidth 必须指定&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;global_job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的全局 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_access&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=ChangeWanAccessBandwidth
+&amp;amp;wan_access=wacc-fub9b1eo
+&amp;amp;bandwidth_type=elastic
+&amp;amp;bandwidth=1
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;ChangeWanAccessBandwidthResponse&amp;#34;,
+  &amp;#34;wan_access&amp;#34;:&amp;#34;wacc-3xv90kn5&amp;#34;,
+  &amp;#34;global_job_id&amp;#34;:&amp;#34;gj-ytmu2ec1&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: DescribeWanAccesss</title>
+      <link>/development_docs/api/command_list/sdwan/describe_wan_accesss/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sdwan/describe_wan_accesss/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取SD-WAN接入点信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_accesss.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点 ID&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_access_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点名称&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点状态:  pending, active, stopped, suspended, terminated, ceased&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;access_type.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点类型, 包含 cpe, connect, vpc&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_nation&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在国家&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_province&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在省份&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_city&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在城市&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_nets.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;按照 WAN 网过滤, 只返回指定 WAN 网下的资源&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_pops.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;按照 POP 点过滤, 只返回指定 POP 点下的资源&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;owner.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;按照用户账户过滤, 只返回指定账户的资源&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;search_word&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;搜索关键词, 支持接入点名称, 光盒序列号&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;verbose&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;是否返回冗长的信息, 若为1, 则返回接入点时延详细数据&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offset&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;数据偏移量, 默认为0&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;limit&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;返回数据长度，默认为20，最大100&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_access_set&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;JSON 格式的接入点数据列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;total_count&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;根据过滤条件得到的接入点总数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Response Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_access_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_access_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bandwidth&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;带宽值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;elastic_bandwidth&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;弹性带宽值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;access_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点类型, cpe/connect/vpc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点状态, 有效值为pending, active, stopped, suspended, terminated, ceased&lt;br/&gt;pending： 等待被创建&lt;br/&gt;active： 活跃&lt;br/&gt;stopped： 已关机&lt;br/&gt;suspended： 由于欠费, 已被暂停使用&lt;br/&gt;terminated： 已被删除，被删除的接入点不可以被恢复&lt;br/&gt;ceased： 已被彻底删除&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;transition_status&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点过渡状态，有效值为 creating, updating, configuring, starting, stopping, suspending, resuming, deleting, replacing&lt;br/&gt;creating： 创建中, 由 pending 状态变成 active 状态&lt;br/&gt;updating： 配置更新中&lt;br/&gt;configuring： 配置下发中&lt;br/&gt;starting： 启动中, 由 stopped 状态变成 active 状态&lt;br/&gt;stopping： 关闭中, 由 active 状态变成 stopped 状态&lt;br/&gt;suspending： 欠费暂停中, 由 active/stopped 状态变成 suspended 状态&lt;br/&gt;resuming： 恢复中, 由 suspended 状态变成 active 状态&lt;br/&gt;deleting： 删除中, 由 active/stopped/suspended 状态变成 terminated 状态&lt;br/&gt;replacing： 光盒替换中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;接入点创建时间, 为UTC时间, 格式可参见 ISO8601.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;status_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;接入点最近一次状态变更时间, 为UTC时间, 格式可参见 ISO8601.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;gps_coordinate&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点 GPS 坐标&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_address&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_nation&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在国家&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_province&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在省份&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_city&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在城市&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_county&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在乡村&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;location_description&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所在地描述&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_net_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所属 WAN 网&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_pop_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点所属 POP 点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_cpe&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;光盒详细信息, 接入点类型为cpe时有效&lt;br/&gt;agent_version: 光盒版本号&lt;br/&gt;has_new_version: 是否为最新版本, True表示检测到最版本，False表示本版本为最新版本&lt;br/&gt;cpe_sn: 光盒序列号&lt;br/&gt;lan_infos: 光盒LAN口信息&lt;br/&gt;tunnel_status: 隧道状态 up/down&lt;br/&gt;tunnel_delay: 隧道时延&lt;br/&gt;secondary_tunnel_status: 备份隧道状态&lt;br/&gt;secondary_tunnel_delay: 备份隧道时延&lt;br/&gt;wan_infos: 光盒WAN口详细信息&lt;br/&gt;wan_interfaces: 光盒 WAN 接口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=DescribeWanAccesss
+&amp;amp;wan_accesss.1=wacc-fub9b1eo
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;DescribeWanAccesssResponse&amp;#34;,
+  &amp;#34;wan_access_set&amp;#34;:[
+    {
+      &amp;#34;location_county&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;operator_phone&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;is_applied&amp;#34;:1,
+      &amp;#34;auto_renew&amp;#34;:null,
+      &amp;#34;billing_months&amp;#34;:0,
+      &amp;#34;operator_remarks&amp;#34;:null,
+      &amp;#34;access_type&amp;#34;:&amp;#34;cpe&amp;#34;,
+      &amp;#34;last_renew_request_time&amp;#34;:null,
+      &amp;#34;wan_cpe_model_id&amp;#34;:&amp;#34;wcmd-boxrz5xj&amp;#34;,
+      &amp;#34;bandwidth&amp;#34;:1,
+      &amp;#34;create_time&amp;#34;:&amp;#34;2020-04-24T07:26:15Z&amp;#34;,
+      &amp;#34;owner&amp;#34;:&amp;#34;usr-JmZCZBRQ&amp;#34;,
+      &amp;#34;contact_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;wan_access_id&amp;#34;:&amp;#34;wacc-fub9b1eo&amp;#34;,
+      &amp;#34;is_hub&amp;#34;:0,
+      &amp;#34;border_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;billing_expire_time&amp;#34;:&amp;#34;2020-04-24T08:26:17Z&amp;#34;,
+      &amp;#34;service_mode&amp;#34;:0,
+      &amp;#34;sub_code&amp;#34;:0,
+      &amp;#34;location_description&amp;#34;:&amp;#34;\u4e2d\u56fd&amp;#34;,
+      &amp;#34;status_time&amp;#34;:&amp;#34;2020-04-24T07:26:17Z&amp;#34;,
+      &amp;#34;elastic_bw_sub_code&amp;#34;:0,
+      &amp;#34;border_zone_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;billing_mode&amp;#34;:&amp;#34;bw&amp;#34;,
+      &amp;#34;access_mode&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;contact_phone&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;wan_template_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;elastic_bandwidth_local&amp;#34;:0,
+      &amp;#34;bandwidth_remote&amp;#34;:0,
+      &amp;#34;description&amp;#34;:null,
+      &amp;#34;route_type&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;wan_cpe_register_key_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;transition_status&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;cpe_sn&amp;#34;:&amp;#34;5254a4e1724d&amp;#34;,
+      &amp;#34;location_city&amp;#34;:&amp;#34;\u5317\u4eac\u5e02&amp;#34;,
+      &amp;#34;wan_net_id&amp;#34;:&amp;#34;wnet-ndyb12t8&amp;#34;,
+      &amp;#34;location_province&amp;#34;:&amp;#34;\u5317\u4eac\u5e02&amp;#34;,
+      &amp;#34;wan_access_name&amp;#34;:&amp;#34;vdi-sdwan&amp;#34;,
+      &amp;#34;elastic_bw_status&amp;#34;:null,
+      &amp;#34;service_enabled&amp;#34;:1,
+      &amp;#34;wan_cpe_hagroup_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;wan_cpe&amp;#34;:{
+        &amp;#34;secondary_tunnel_delay&amp;#34;:0,
+        &amp;#34;secondary_tunnel_status&amp;#34;:&amp;#34;&amp;#34;,
+        &amp;#34;wan_cpe_name&amp;#34;:&amp;#34;vdi-sdwan&amp;#34;,
+        &amp;#34;tunnel_delay&amp;#34;:0,
+        &amp;#34;cpe_sn&amp;#34;:&amp;#34;5254a4e1724d&amp;#34;,
+        &amp;#34;has_new_version&amp;#34;:false,
+        &amp;#34;wan_interfaces&amp;#34;:[
+          &amp;#34;eth0&amp;#34;
+        ],
+        &amp;#34;mobile_iface_name&amp;#34;:&amp;#34;&amp;#34;,
+        &amp;#34;wan_cpe_id&amp;#34;:&amp;#34;wcpe-orcqzqif&amp;#34;,
+        &amp;#34;tunnel_status&amp;#34;:&amp;#34;&amp;#34;,
+        &amp;#34;agent_version&amp;#34;:&amp;#34;2.2.9-16664e82&amp;#34;
+      },
+      &amp;#34;console_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;elastic_bandwidth_remote&amp;#34;:0,
+      &amp;#34;net_mode&amp;#34;:1,
+      &amp;#34;location_nation&amp;#34;:&amp;#34;\u4e2d\u56fd&amp;#34;,
+      &amp;#34;status&amp;#34;:&amp;#34;active&amp;#34;,
+      &amp;#34;wan_pop_id&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;elastic_bandwidth&amp;#34;:0,
+      &amp;#34;charge_mode&amp;#34;:&amp;#34;elastic&amp;#34;,
+      &amp;#34;acceleration_status&amp;#34;:0,
+      &amp;#34;next_charge_mode&amp;#34;:null,
+      &amp;#34;root_user_id&amp;#34;:&amp;#34;usr-JmZCZBRQ&amp;#34;,
+      &amp;#34;gps_coordinate&amp;#34;:&amp;#34;39.616706,116.090471&amp;#34;,
+      &amp;#34;bandwidth_local&amp;#34;:0,
+      &amp;#34;operator_name&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;location_address&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;contact_email&amp;#34;:&amp;#34;&amp;#34;,
+      &amp;#34;resource_project_info&amp;#34;:[],
+      &amp;#34;wan_cpe_id&amp;#34;:&amp;#34;wcpe-orcqzqif&amp;#34;
+    }
+  ],
+  &amp;#34;total_count&amp;#34;:1,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetWanInfo</title>
+      <link>/development_docs/api/command_list/sdwan/get_wan_info/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sdwan/get_wan_info/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取 SD-WAN 资源信息详情。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resources.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;br/&gt;如果获取光盒移动接入信息（例如，4G 卡信息)，使用接入点 ID，类似 wacc-fub9b1eo&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;info_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;信息类型&lt;br/&gt;如果获取光盒移动接入信息，info_type 为 cpe_mobile_info&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_info&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;JSON 格式的资源信息详情&lt;br/&gt;如果获取光盒移动接入信息，则 key 为接入点ID，类似 wacc-fub9b1eo，value 为 Dict&lt;br/&gt;(其中 key 为光盒标识ID, 类似 wcpe-gw0l5d9u，value 为具体移动接入信息, 参数可见下面 &lt;a href=&#34;#response-item&#34;&gt;Response Item&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Response Item&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mobile_imsi&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;IMSI&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mobile_apn&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;APN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mobile_iface_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接口名称&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mobile_provider&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;运营商&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;mobile_flow&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;当月使用流量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=GetWanInfo
+&amp;amp;resources.1=wacc-nzgqtn8b
+&amp;amp;info_type=cpe_mobile_info
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;: &amp;#34;GetWanInfoResponse&amp;#34;, 
+  &amp;#34;wan_info&amp;#34;: {
+    &amp;#34;wacc-nzgqtn8b&amp;#34;: {
+      &amp;#34;wcpe-gw0l5d9u&amp;#34;: {
+        &amp;#34;mobile_imsi&amp;#34;: &amp;#34;460019236208998&amp;#34;, 
+        &amp;#34;mobile_apn&amp;#34;: &amp;#34;3GNET&amp;#34;, 
+        &amp;#34;mobile_iface_name&amp;#34;: &amp;#34;ppp99&amp;#34;, 
+        &amp;#34;mobile_provider&amp;#34;: &amp;#34;CHN-UNICOM&amp;#34;, 
+        &amp;#34;mobile_flow&amp;#34;: 1898576838
+      }
+    }
+  }, 
+  &amp;#34;ret_code&amp;#34;: 0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: GetWanMonitor</title>
+      <link>/development_docs/api/command_list/sdwan/get_wan_monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sdwan/get_wan_monitor/</guid>
+      <description>
+        
+        
+        &lt;p&gt;获取接入点监控数据。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;resource&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;br/&gt;如果接入点为光盒，使用接入点 ID，类似 wacc-fub9b1eo&lt;br/&gt;如果接入点为专线/网关，使用专线/网关接口 ID，类似 waif-6bm6mt85&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;access_type&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;接入点类型&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meters.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控项, 有效值为：traffic, flow, pps&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;step&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;数据间隔时间，有效值为：1m, 5m, 15m, 30m, 1h, 2h, 1d&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;start_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;监控数据的起始 UTC 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;end_time&lt;/td&gt;
+&lt;td&gt;TimeStamp&lt;/td&gt;
+&lt;td&gt;监控数据的结束 UTC 时间，格式为 2011-07-11T11:07:00Z 或 2011-07-11T11:07:00.520Z&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;interface_name&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;光盒接口名称, 例如：eth0, eth1&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;monitor_type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;监控类型, 有效值为：internet, pop&lt;br/&gt;internet: 表示需要获取访问互联网的监控数据&lt;br/&gt;pop: 表示需要获取访问接入点的监控数据&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ha_member_index&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;光盒双机成员索引&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meter_set&lt;/td&gt;
+&lt;td&gt;Dict&lt;/td&gt;
+&lt;td&gt;监控数据集&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;resource_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;资源 ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;接入点为光盒示例：
+https://api.yiqiyun.net.cn/iaas/?action=GetWanMonitor
+&amp;amp;resource=wacc-fub9b1eo
+&amp;amp;access_type=cpe
+&amp;amp;meters.1=traffic
+&amp;amp;meters.2=flow
+&amp;amp;meters.3=pps
+&amp;amp;step=5m
+&amp;amp;interface_name=eth0
+&amp;amp;monitor_type=pop
+&amp;amp;start_time=2020-05-09T02:04:32.200Z
+&amp;amp;end_time=2020-05-09T08:04:32.200Z
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+
+接入点为网关示例：
+https://api.yiqiyun.net.cn/iaas/?action=GetWanMonitor
+&amp;amp;resource=waif-6bm6mt85
+&amp;amp;access_type=vpc
+&amp;amp;meters.1=traffic
+&amp;amp;meters.2=flow
+&amp;amp;meters.3=pps
+&amp;amp;step=5m
+&amp;amp;start_time=2020-05-09T02:04:32.200Z
+&amp;amp;end_time=2020-05-09T08:04:32.200Z
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;GetWanMonitorResponse&amp;#34;,
+  &amp;#34;meter_set&amp;#34;:[
+    {
+      &amp;#34;data&amp;#34;:[
+        [1589001300,[300,291]],
+        [125,147],
+        [161,151],
+        [178,189],
+        [155,154]......
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;traffic&amp;#34;
+    },
+    {
+      &amp;#34;data&amp;#34;:[
+        [1589001300,[90324,87444]],
+        [37748,44228],
+        [48718,45511],
+        [53709,56850]......
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;flow&amp;#34;
+    },
+    {
+      &amp;#34;data&amp;#34;:[
+        [1589001300,[5,5]],
+        [2,2],
+        [2,2],
+        [3,3]......
+      ],
+      &amp;#34;meter_id&amp;#34;:&amp;#34;pps&amp;#34;
+    }
+  ],
+  &amp;#34;ret_code&amp;#34;:0,
+  &amp;#34;resource_id&amp;#34;:&amp;#34;waif-6bm6mt85&amp;#34;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Development_docs: UpgradeWanAccess</title>
+      <link>/development_docs/api/command_list/sdwan/upgrade_wan_access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/development_docs/api/command_list/sdwan/upgrade_wan_access/</guid>
+      <description>
+        
+        
+        &lt;p&gt;调整接入点基础带宽。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Request Parameters&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_accesss.n&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;接入点 ID&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bandwidth&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;带宽值&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&#34;../../../parameters/&#34;&gt;&lt;em&gt;公共参数&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Response Elements&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;action&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应动作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;global_job_id&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;执行任务的全局 Job ID&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wan_accesss&lt;/td&gt;
+&lt;td&gt;Array&lt;/td&gt;
+&lt;td&gt;接入点 ID 列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ret_code&lt;/td&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;执行成功与否，0 表示成功，其他值则为错误代码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example Request&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;https://api.yiqiyun.net.cn/iaas/?action=UpgradeWanAccess
+&amp;amp;wan_accesss.1=wacc-fub9b1eo
+&amp;amp;bandwidth=10
+&amp;amp;zone=zw2
+&amp;amp;COMMON_PARAMS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;Example Response&lt;/em&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+  &amp;#34;action&amp;#34;:&amp;#34;UpgradeWanAccessResponse&amp;#34;,
+  &amp;#34;wan_accesss&amp;#34;:[
+    &amp;#34;wacc-3xv90kn5&amp;#34;
+  ],
+  &amp;#34;global_job_id&amp;#34;:&amp;#34;gj-svqc8nju&amp;#34;,
+  &amp;#34;ret_code&amp;#34;:0
+}
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+  </channel>
+</rss>

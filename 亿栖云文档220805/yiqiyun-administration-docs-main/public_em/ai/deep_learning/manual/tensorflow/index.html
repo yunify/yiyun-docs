@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="generator" content="Hugo 0.101.0" />
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="icon" href="http://yiqiyun.sd.cegn.cn/static/assets/images/favicon.ico?v=1632342842" type="image/x-icon">
+
+<title>TensorFlow 使用指南 | 亿栖云文档</title>
+
+<link href="/css/bulma.css" rel="stylesheet">
+<link href="/css/autocomplete.css" rel="stylesheet" />
+<link href="/css/copy-to-clipboard.css" rel="stylesheet" />
+
+
+    
+
+
+
+<link rel="preload" href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" as="style">
+<link href="/scss/console.min.3968935d0a1c8815d0609e047c8c7bddc7781a37538ed1b0cc049f82a7c994c1.css" rel="stylesheet" integrity="">
+
+
+<script
+  src="/js/jquery-2.2.4.js?v=1510299508"
+  ></script>
+	
+
+<script src="/js/common.js?v=1.3"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      <div class="nav-wrapper ">
+  <nav class="navbar navmenu"  style="display:none;" >
+    <div class="container with-no-position doc-container-width ">
+      <div class="navbar-brand" id="search-mobile-logo">
+        <a class="navbar-item logo" href="http://www.yiqiyun.net.cn">
+          <img src="/images/yiqiyun_logo.png" alt="logo" style="height: 32px;width: 120px;">
+        </a>
+      </div>
+      <div class="media-content column is-centered is-5 search-mobile">
+        <form action="/search" method="GET">
+          <div class="control has-icons-right docs-search-input">
+            <input class="input" id="search-bar" name="q" type="search" placeholder="搜索" autocomplete="off">
+            <span class="icon is-right" id="mobile-search">
+              <img src="/images/icons/search.svg">
+            </span>
+          </div>
+        </form>
+        <a href="javascript:;" class="search-mobile-icon"><img src="/images/icons/search.svg"></a>
+      </div>
+      <div class="navbar-end is-hidden-mobile header-account">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://www.yiqiyun.cn">服务商门户</a>
+            </p>
+            <p class="control navbar-user">
+              <a class="nav-item" href="http://console.yiqiyun.cn/login">登录</a>
+            </p>
+            <div class="navbar-user">
+              <a class="button is-primary j-signup" href="http://console.yiqiyun.cn/signup/" data-gio="{id:'createPageView',var:{sourceType_var:'导航栏'}}" style="background-color: #55a8fd">注册</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <nav class="navbar navmenu navbar-index">
+    <div class="container is-size-7 doc-container-width " data-path="1">
+
+
+	
+	
+		
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+	
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="/ai/deep_learning/" class="has-text-primary">深度学习平台</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+	
+	
+	<a href="" class="has-text-primary">操作指南</a><img class="container_span_space" src="/images/icons/path.svg">
+	
+
+
+
+
+  
+
+
+
+	
+	<span class="crumb-last-color">详情</span>
+	
+
+
+
+	
+
+</div>
+
+
+  </nav>
+  
+</div>
+    </header>
+    <div class="container td-outer doc-container-width container-min-height">
+      <div class="td-main">
+		
+			<h1 class="console-tree-title">操作指南</h1>
+		
+        <div class="row flex-xl-nowrap">
+		  
+          <div class="col-12 col-md-3 col-xl-3 td-sidebar d-print-none td-sidebar-menu">
+            
+
+
+
+
+
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  
+  <nav class="collapse td-sidebar-nav pt-2" id="td-section-nav">
+    <div class="nav-item dropdown d-block ">
+      
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active display-hide"
+  data-depth="0">
+  深度学习平台
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/deep_learning/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是深度学习平台</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/intro/list/"
+      class="menu__title  "
+      data-depth="1">产品系列</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/intro/superiority/"
+      class="menu__title  "
+      data-depth="1">产品优势</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/intro/scene/"
+      class="menu__title  "
+      data-depth="1">应用场景</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/quickstart/deploy_app/"
+      class="menu__title  "
+      data-depth="1">步骤一：部署 Deep Learning 应用</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/quickstart/login_vm/"
+      class="menu__title  "
+      data-depth="1">步骤二：登录主机</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/quickstart/start_env/"
+      class="menu__title  "
+      data-depth="1">步骤三：启动训练环境</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/manual/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/deploy/"
+      class="menu__title  "
+      data-depth="1">部署 Deep Learning 服务</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/manual/"
+      class="menu__title  "
+      data-depth="1">深度学习平台启动指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/caffe/"
+      class="menu__title  "
+      data-depth="1">Caffe 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/tensorflow/"
+      class="menu__title active "
+      data-depth="1">TensorFlow 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/pytorch/"
+      class="menu__title  "
+      data-depth="1">PyTorch 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/keras/"
+      class="menu__title  "
+      data-depth="1">Keras 使用指南</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/testing/"
+      class="menu__title  "
+      data-depth="1">Deep Learning 性能测试</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/training/"
+      class="menu__title  "
+      data-depth="1">训练和推理</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/model/"
+      class="menu__title  "
+      data-depth="1">附表1</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/manual/form/"
+      class="menu__title  "
+      data-depth="1">附表2</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  常见问题
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/faq/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_01/"
+      class="menu__title  more-space"
+      data-depth="1">容器中 TensorBoard 或者 jupyter 服务已经启动，如何访问？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_02/"
+      class="menu__title  more-space"
+      data-depth="1">为什么在 import tensorflow 的时候显示 no module named tensorflow？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_03/"
+      class="menu__title  more-space"
+      data-depth="1">运行 GPU 版容器，为什么会出现错误 libcuda.so.1: cannot open shared object file: No such file or directory？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_04/"
+      class="menu__title  more-space"
+      data-depth="1">容器启动后，目录 /root 下可能存在 test/ caffe/ opencv/ nccl/ 等文件夹，可以删除吗？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_05/"
+      class="menu__title  more-space"
+      data-depth="1">如何查看深度学习平台的 GPU 使用率？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_06/"
+      class="menu__title  "
+      data-depth="1">为什么 TensorBoard UI 加载失败？</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/deep_learning/faq/faq_07/"
+      class="menu__title  "
+      data-depth="1">pip 安装 Python module 速度比较慢怎么办</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  display-hide"
+  data-depth="0">
+  推理引擎
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list  "
+  data-data=/inference/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  产品简介
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/intro/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/intro/intro/"
+      class="menu__title  "
+      data-depth="1">什么是推理引擎</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/intro/list/"
+      class="menu__title  "
+      data-depth="1">部署方式</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/intro/superiority/"
+      class="menu__title  "
+      data-depth="1">产品优势</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  计费指南
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/billing/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/billing/price/"
+      class="menu__title  "
+      data-depth="1">计费说明</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse  "
+  data-depth="1">
+  快速入门
+  <span
+    class="menu__title--icon right">
+
+  </span>
+</span>
+<ul class="menu__list "
+  data-data=/quickstart/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/quickstart/deploy_app/"
+      class="menu__title  "
+      data-depth="1">部署 Inference Engine 应用</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="menu__title--collapse active "
+  data-depth="1">
+  操作指南
+  <span
+    class="menu__title--icon down">
+
+  </span>
+</span>
+<ul class="menu__list active"
+  data-data=/manual/ data-link=/ai/deep_learning/manual/tensorflow/>
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/manual/depoly_model/"
+      class="menu__title  "
+      data-depth="1">部署模型</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/manual/use_model/"
+      class="menu__title  "
+      data-depth="1">使用模型</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/manual/log/"
+      class="menu__title  "
+      data-depth="1">查看日志</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/manual/testing/"
+      class="menu__title  "
+      data-depth="1">性能测试</a>
+  </li>
+  
+  
+  
+  
+  
+  
+  <li>
+    <a href="/ai/inference/manual/launching/"
+      class="menu__title  "
+      data-depth="1">负载均衡</a>
+  </li>
+  
+  
+</ul>
+
+
+  
+  
+</ul>
+
+
+      
+    </div>
+  </nav>
+</div>
+
+
+<script src="/js/sidebar-tree.js"></script>
+
+
+          </div>
+          <div class="d-none col-md-2 d-xl-block d-md-block col-xl-2 td-toc d-print-none">
+            
+
+
+<h3 class="nav-title">本页目录</h3>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#单机">单机</a>
+      <ul>
+        <li><a href="#非容器版">非容器版</a></li>
+        <li><a href="#容器版">容器版</a></li>
+      </ul>
+    </li>
+    <li><a href="#单任务使用双-gpu">单任务使用双 GPU</a>
+      <ul>
+        <li><a href="#非容器版-1">非容器版</a></li>
+        <li><a href="#容器版-1">容器版</a></li>
+      </ul>
+    </li>
+    <li><a href="#多任务共享单-gpu">多任务共享单 GPU</a></li>
+    <li><a href="#多任务分别运行于指定-gpu">多任务分别运行于指定 GPU</a>
+      <ul>
+        <li><a href="#分布式">分布式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+
+          </div>
+          <main class="col-12 col-md-7 col-xl-7" role="main">
+            
+  
+
+            
+            
+            
+<div class="td-content">
+	<div class="td-sidebar-section-title content-index">
+		<img class="is-40x40" src="/images/icons/book-open.svg">
+		<h3 class="doc_vice_title">操作指南</h3>
+		<a href="javascript:;" class="nav-trigger">&nbsp;<span aria-hidden="true"></span></a>
+	</div>
+	<div class="td-page-top">
+		<h1>TensorFlow 使用指南</h1>
+		
+
+
+
+
+
+
+<div class="td-page-meta page-meta-actions ml-2 pb-1 mb-0">
+
+
+
+
+
+
+
+</div>
+
+
+
+	</div>
+	<div class="page-meta-lastmod text-muted ">
+	更新时间 2020-12-01
+
+</div>
+
+	<input type="hidden" id="content_console" value="1">
+	
+	
+	<div class="lead"></div>
+	
+
+	
+	<p>完整信息请见 <a href="http://tensorflow.org">TensorFlow 文档</a></p>
+<h2 id="单机">单机</h2>
+<h3 id="非容器版">非容器版</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /home/ubuntu/test/tensorflow
+</span></span><span style="display:flex;"><span>python mnist.py
+</span></span></code></pre></div><h4 id="tensorflow-训练过程">TensorFlow 训练过程</h4>
+<p><img src="../_images/tensorflow_start.png" alt="TensorFlow 训练过程">
+TensorFlow 训练结果
+<img src="../../_images/tensorflow_result.png" alt="TensorFlow 训练结果"></p>
+<h3 id="容器版">容器版</h3>
+<p>容器版的测试用例为：~/test/tensorflow/mnist.py，进入容器后运行命令如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd ~/test/tensorflow
+</span></span><span style="display:flex;"><span>python mnist.py
+</span></span></code></pre></div><h2 id="单任务使用双-gpu">单任务使用双 GPU</h2>
+<h3 id="非容器版-1">非容器版</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://github.com/QingCloudAppcenterAppcenter/DeepLearning/raw/master/examples/tensorflow_multi_gpu_test.py
+</span></span><span style="display:flex;"><span>python tensorflow_multi_gpu_test.py
+</span></span></code></pre></div><h3 id="容器版-1">容器版</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /root/test/tensorflow <span style="color:#f92672">&amp;&amp;</span> python tensorflow_multi_gpu_test.py
+</span></span></code></pre></div><p><img src="../_images/multip-gpu-tf.png" alt="Alt text"></p>
+<h2 id="多任务共享单-gpu">多任务共享单 GPU</h2>
+<p>单 GPU 多任务共享方式，一般适用于 GPU 和显存需求不高的场景，同时启动多个任务（非容器版），或者启动多个容器分别运行一个任务（容器版），通过指定显存占用量的方式，实现多个任务共享 GPU 和显存。</p>
+<p>以 TensorFlow 为例，只需要将任务的 Session 启动参数修改为指定的 Fraction 值(例如 0.4 )，即可限定该 Session 占用最多40%的显存。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>gpu_options <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>GPUOptions(per_process_gpu_memory_fraction<span style="color:#f92672">=</span><span style="color:#ae81ff">0.4</span>)
+</span></span><span style="display:flex;"><span>sess <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Session(config<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>ConfigProto(gpu_options<span style="color:#f92672">=</span>gpu_options))
+</span></span></code></pre></div><blockquote>
+<p>多任务共享 GPU 方式，用户需要根据训练任务的运算量和数据量大小，选择运行任务的个数，以及每个任务的显存占用比例。</p>
+</blockquote>
+<h2 id="多任务分别运行于指定-gpu">多任务分别运行于指定 GPU</h2>
+<p>如果主机有多个 GPU，TensorFlow 默认全部使用。如果想指定任务只使用指定 GPU，可以设置 CUDA_VISIBLE_DEVICES。</p>
+<p>任务1运行在第一块 GPU 上（ GPU 编号为0）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> python mnist.py
+</span></span></code></pre></div><p><img src="../_images/use_gpu0.png" alt="Alt text"></p>
+<p>任务2运行在第二块 GPU 上（ GPU 编号为1）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>CUDA_VISIBLE_DEVICES<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> python mnist.py
+</span></span></code></pre></div><p><img src="../_images/use_gpu1.png" alt="Alt text"></p>
+<h3 id="分布式">分布式</h3>
+<p>增加节点，在线扩容：在详情页点击 <code>新增节点</code> 按钮，可以对每个新增节点指定 IP 或选择自动分配。</p>
+<p><strong>TensorFlow 增加节点</strong>
+<img src="../_images/add_node.png" alt="TensorFlow 增加节点"></p>
+<p>TensorFlow 分布式训练需要指定 parameter server 和 worker 的 IP 地址和端口号（根据自己的 IP 进行修改）</p>
+<p>跨区分布式：深度学习平台支持跨区分布式TensorFlow训练，首先使用IPSec或GRE方式，连通两个集群的路由器。参考 IPSec 隧道。如果是异地路由器，则要求两个路由器都有公网IP地址，并为公网IP分配足够的带宽，依据实际训练数据交互的带宽需求，调整带宽到合适的值。两个路由器连通之后，集群中的深度学习节点将会在不同的网段，例如 192.168.1.2 和 192.168.2.2 但是相互之间的连通性和在一个局域网没有差别，在进行 TensorFlow 分布式训练时，只需按照实际地址，指定分布式训练节点 IP 地址即可。</p>
+<p>下面是一个 parameter server 和两个 worker 进行分布式训练的示例，非容器版和容器版仅在指定 IP 地址时有不同：</p>
+<p><strong>节点 1</strong></p>
+<ul>
+<li>启动 parameter server</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /home/ubuntu/test/tensorflow
+</span></span><span style="display:flex;"><span>python mnist_dist.py --ps_hosts<span style="color:#f92672">=</span>192.168.1.6:2221 --worker_hosts<span style="color:#f92672">=</span>192.168.1.6:2223,192.168.1.7:2223 --job_name<span style="color:#f92672">=</span>ps --task_index<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><ul>
+<li>启动第一个 worker</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /home/ubuntu/test/tensorflow
+</span></span><span style="display:flex;"><span>python mnist_dist.py --ps_hosts<span style="color:#f92672">=</span>192.168.1.6:2221 --worker_hosts<span style="color:#f92672">=</span>192.168.1.6:2223,192.168.1.7:2223 --job_name<span style="color:#f92672">=</span>worker --task_index<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p><strong>节点 2</strong></p>
+<ul>
+<li>启动第二个 worker （<strong>注意：是在第二个节点即新增节点上启动</strong>）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd /home/ubuntu/test/tensorflow
+</span></span><span style="display:flex;"><span>python mnist_dist.py --ps_hosts<span style="color:#f92672">=</span>192.168.1.6:2221 --worker_hosts<span style="color:#f92672">=</span>192.168.1.6:2223,192.168.1.7:2223 --job_name<span style="color:#f92672">=</span>worker --task_index<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h4 id="tensorflow-分布式训练过程">TensorFlow 分布式训练过程</h4>
+<p><img src="../_images/tensorflowdist_start.png" alt="TensorFlow 分布式训练过程"></p>
+<h4 id="tensorflow-分布式训练结果">TensorFlow 分布式训练结果</h4>
+<p><img src="../_images/tensorflowdist_result.png" alt="TensorFlow 分布式训练结果"></p>
+<h4 id="开启-tensorboard-服务">开启 TensorBoard 服务</h4>
+<p>TensorFlow 中的 TensorBoard 提供了训练过程中丰富的信息，默认端口号为 <code>6006</code>。在某一节点上启动一下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tensorboard --logdir<span style="color:#f92672">=</span>./tflog/
+</span></span></code></pre></div><h4 id="tensorboard-展示结果">TensorBoard 展示结果</h4>
+<p><img src="../_images/tensorboard_graph.png" alt="TensorBoard 展示结果"></p>
+<blockquote>
+<p>您可以通过如下方式之一查看 TensorBoard UI：</p>
+<ol>
+<li>如需在 TensorBoard 中显示相关信息，需要编写相关代码。TensorBoard 详细用法请参考 <a href="https://github.com/tensorflow/tensorboard">Github TensorBoard</a> 页面。</li>
+<li>通过公网访问，您需要先申请一个公网 IP 绑定在路由器上，在路由器上设置端口转发，同时打开防火墙相应的下行端口。</li>
+<li>或参考 VPN 隧道指南 配置 VPN，通过私网 IP 地址访问。</li>
+</ol>
+</blockquote>
+
+	
+	
+	<div class="page-meta-pagination border-top">
+		
+		<a href="/ai/deep_learning/manual/caffe/" class="prev pl1" title="Caffe 使用指南 ">
+			上一页: Caffe 使用指南
+		</a>
+		
+
+		
+		<a href="/ai/deep_learning/manual/pytorch/" class="next pr1" title="PyTorch 使用指南">
+			下一页: PyTorch 使用指南
+		</a>
+		
+	</div>
+	<div class="page-meta-pagination_word">
+		这篇文档解决了您的问题吗？
+		<div class="doc_fix_click fix-background-like" data-flag='1'>
+			<span>0</span>
+		</div>
+		<div class="doc_fix_click fix-background-unlike" data-flag='0'>
+			<span>0</span>
+		</div>
+		<input type="hidden" id="doc_fix_flag" value="0">
+	</div>
+</div>
+<script src="/js/content.js"></script>
+<script src="/js/viewer.min.js"></script>
+<link rel="stylesheet" href="/css/viewer.min.css">
+<script>
+	var viewer = new Viewer(document.querySelector('.td-content'), {
+		url: 'src'
+	})
+</script>
+
+          </main>
+        </div>
+      </div>
+    </div>
+         
+    
+<script src="/css/bootstrap.min.js"></script>
+<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/copy-to-clipboard.js"></script>
+</script>
+
+
+
+
+
+
+<script src="/js/main.min.7d5b92c4889cf0554b0ea5e2309b0b81b196aa7c9a235632938a25d9fc4d8a7c.js" integrity="sha256-fVuSxIic8FVLDqXiMJsLgbGWqnyaI1Yyk4ol2fxNinw=" crossorigin="anonymous"></script>
+
+
+
+  </body>
+</html>

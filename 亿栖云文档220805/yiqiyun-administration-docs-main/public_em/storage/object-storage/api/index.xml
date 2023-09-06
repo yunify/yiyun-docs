@@ -1,0 +1,789 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – API 参考</title>
+    <link>/storage/object-storage/api/</link>
+    <description>Recent content in API 参考 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 25 Nov 2020 10:08:56 +0900</lastBuildDate>
+    
+	  <atom:link href="/storage/object-storage/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: 概述</title>
+      <link>/storage/object-storage/api/overview/</link>
+      <pubDate>Tue, 17 Aug 2021 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/overview/</guid>
+      <description>
+        
+        
+        &lt;p&gt;对象存储服务旨在为用户提供稳定可靠，安全易用，空间无限的云存储服务。可用于存储任意类型，任意数量，任意大小的非结构化数据。&lt;/p&gt;
+&lt;p&gt;需注意的是，对象存储支持的单个对象最大为 50T。&lt;/p&gt;
+&lt;p&gt;本文将详细介绍对象存储提供的 API，以及指导用户如何使用该 API。&lt;/p&gt;
+&lt;h2 id=&#34;总览&#34;&gt;总览&lt;/h2&gt;
+&lt;p&gt;对象存储服务提供的 API 符合 REST (Representational State Transfer) 风格所定义的语义，即：通过 URL 指定想要访问的资源，并使用标准的 HTTP 方法定义对资源的操作方式。&lt;/p&gt;
+&lt;h2 id=&#34;api-列表&#34;&gt;API 列表&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/storage/object-storage/api/bucket/&#34;&gt;Bucket API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/storage/object-storage/api/object/&#34;&gt;Object API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/storage/object-storage/api/service/&#34;&gt;Service API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 公共字段</title>
+      <link>/storage/object-storage/api/common_header/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/common_header/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;请求头字段-request-header&#34;&gt;请求头字段 (Request Header)&lt;/h2&gt;
+&lt;h3 id=&#34;host&#34;&gt;Host&lt;/h3&gt;
+&lt;p&gt;指定所请求资源的云服务器名及端口。在 HTTP/1.1 中为必填字段，可以为空值。HTTP/1.0 中为可选字段。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.23&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;authorization&#34;&gt;Authorization&lt;/h3&gt;
+&lt;p&gt;认证所需信息。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;date&#34;&gt;Date&lt;/h3&gt;
+&lt;p&gt;客户端请求发送时的时间。格式由 RFC 822 定义，如：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Date: Tue, 15 Nov 1994 08:12:31 GMT
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.18&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;content-length&#34;&gt;Content-Length&lt;/h3&gt;
+&lt;p&gt;请求的内容长度，以字节为单位。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;content-type&#34;&gt;Content-Type&lt;/h3&gt;
+&lt;p&gt;请求实体的 MIME 类型。总长度不可超过 255 个字符，且应该符合 RFC 文档的规范。若客户端未指定 &lt;code&gt;Content-Type&lt;/code&gt; 或值为空，服务端将按 &lt;code&gt;application/octet-stream&lt;/code&gt; 处理。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;content-md5&#34;&gt;Content-MD5&lt;/h3&gt;
+&lt;p&gt;请求实体的 MD5 校验值，用来验证数据的完整性。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.15&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;expect&#34;&gt;Expect&lt;/h3&gt;
+&lt;p&gt;用来确认服务端是否支持特定行为。当 &lt;code&gt;Expect&lt;/code&gt; 的值为 &lt;code&gt;100-continue&lt;/code&gt; 时，客户端在发送请求实体前，等待服务器的确认，若服务器拒绝该请求，则请求实体将不会被发送。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.20&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;range&#34;&gt;Range&lt;/h3&gt;
+&lt;p&gt;用于指定请求的内容范围。取值可为以下三类，目前不支持 rfc2616 中定义的按逗号分隔的多段 Range：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bytes=start_offset-stop_offset&lt;/code&gt; 将返回从 &lt;strong&gt;start_offset&lt;/strong&gt; 开始，至 &lt;strong&gt;stop_offset&lt;/strong&gt; 的数据，单位为字节，包含 &lt;strong&gt;stop_offset&lt;/strong&gt; 所对应的字节。如 &lt;code&gt;bytes=0-0&lt;/code&gt;，将返回第一个字节的数据。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bytes=start_offset-&lt;/code&gt; 将返回从 &lt;strong&gt;start_offset&lt;/strong&gt; 开始之后的数据，单位为字节，包含 &lt;strong&gt;start_offset&lt;/strong&gt; 所对应的字节。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bytes=-suffix_length&lt;/code&gt; 将返回文件末尾长度为 &lt;strong&gt;suffix_length&lt;/strong&gt; 的数据。若 &lt;strong&gt;suffix_length&lt;/strong&gt; 大于文件长度，那么将返回整个文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;若指定了 Range 头字段，那么成功的情况下 HTTP 返回码为 206，若参数有误或 &lt;strong&gt;start_offset&lt;/strong&gt; 超出文件边界的情况下返回 416 错误。 详情可参考 &lt;a href=&#34;https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;响应头字段-response-header&#34;&gt;响应头字段 (Response Header)&lt;/h2&gt;
+&lt;h3 id=&#34;content-length-1&#34;&gt;Content-Length&lt;/h3&gt;
+&lt;p&gt;服务端返回的消息实体的传输长度，以字节为单位。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;content-type-1&#34;&gt;Content-Type&lt;/h3&gt;
+&lt;p&gt;服务端返回的消息实体的 MIME 类型。仅支持 &lt;code&gt;application/json&lt;/code&gt; 格式。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;connection&#34;&gt;Connection&lt;/h3&gt;
+&lt;p&gt;标识连接是否已关闭，有效值为 &lt;code&gt;keep-alive&lt;/code&gt; 和 &lt;code&gt;close&lt;/code&gt;。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.10&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;date-1&#34;&gt;Date&lt;/h3&gt;
+&lt;p&gt;服务端返回响应时的日期和时间。格式由 RFC 822 定义，如：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Date: Tue, 15 Nov 1994 08:12:31 GMT
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.18&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;etag&#34;&gt;ETag&lt;/h3&gt;
+&lt;p&gt;用于标识 Object 的内容是否已被更新。对于通过 PUT Object 上传的对象，该值由服务端生成；对于通过 Multipart Upload 上传的对象，该值由调用 Complete Multipart Upload 接口时，请求头中的 ETag 来设置。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;需要注意的是，这里提到的 Object 内容，不包括元数据。&lt;/p&gt;
+&lt;h3 id=&#34;server&#34;&gt;Server&lt;/h3&gt;
+&lt;p&gt;Web服务器软件信息，固定为 &lt;code&gt;OIS&lt;/code&gt;。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.38&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;x-qs-request-id&#34;&gt;x-qs-request-id&lt;/h3&gt;
+&lt;p&gt;服务端会为每个请求生成并返回一个唯一标示。用户提交工单时如果能附带此 ID 将有助于对象存储的研发团队定位问题。&lt;/p&gt;
+&lt;h3 id=&#34;content-range&#34;&gt;Content-Range&lt;/h3&gt;
+&lt;p&gt;当请求中附带了 &lt;code&gt;Range&lt;/code&gt; 头字段时，响应中的 &lt;code&gt;Content-Range&lt;/code&gt; 头说明了实际返回的数据在文件中的位置。格式为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bytes start_offset-stop_offset/file_size
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如一个长度为500字节的文件，在请求中有 &lt;code&gt;Range: bytes=0-0&lt;/code&gt; 的时候，响应中附带 &lt;code&gt;Content-Range: bytes 0-0/500&lt;/code&gt;。详情可参考 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16&#34;&gt;RFC 文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;x-qs-content-copy-range&#34;&gt;x-qs-content-copy-range&lt;/h3&gt;
+&lt;p&gt;当请求中附带了 &lt;code&gt;x-qs-copy-range&lt;/code&gt; 头字段时，响应中的 &lt;code&gt;x-qs-content-copy-range&lt;/code&gt; 头说明了实际返回的数据在文件中的位置。格式为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bytes start_offset-stop_offset/file_size
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如一个长度为500字节的文件，在请求中有 &lt;code&gt;x-qs-copy-range: bytes=0-0&lt;/code&gt; 的时候，响应中附带 &lt;code&gt;x-qs-content-copy-range: bytes 0-0/500&lt;/code&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 对象元数据</title>
+      <link>/storage/object-storage/api/metadata/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/metadata/</guid>
+      <description>
+        
+        
+        &lt;p&gt;对象存储定义对象元数据是附属于对象的数据结构，不能脱离于对象而独立存在。&lt;/p&gt;
+&lt;p&gt;对象元数据包括标准 HTTP 头与自定义元数据。用户在创建对象时，可以在请求头中添加元数据信息。当用户在获取对象时，对象存储服务端会返回请求头中添加的元数据信息。&lt;/p&gt;
+&lt;p&gt;对象存储服务端也支持用户对元数据的修改。其中可供修改的元数据包括 &lt;code&gt;Cache-Control&lt;/code&gt;，&lt;code&gt;Cache-Control&lt;/code&gt;，&lt;code&gt;Content-Encoding&lt;/code&gt;，&lt;code&gt;Content-Type&lt;/code&gt; 以及 &lt;code&gt;Expires&lt;/code&gt; 等 5 个标准 HTTP 头和用户自定义的元数据。&lt;/p&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;对象存储支持用户对元数据的增加与修改。匿名用户不支持该操作，用户需拥有该 Object 所在 Bucket 的读写权限。&lt;/li&gt;
+&lt;li&gt;当用户复制源对象到目标对象时，默认情况下，亿栖云对象存储会将源对象的元数据复制给目标对象。&lt;/li&gt;
+&lt;li&gt;当用户移动源对象到目标对象时，目标对象将保留源对象的元数据。&lt;/li&gt;
+&lt;li&gt;当用户删除对象时，该对象的元数据将被删除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;可修改的元数据&#34;&gt;可修改的元数据&lt;/h2&gt;
+&lt;p&gt;支持修改的对象元数据包括如下标准 HTTP 头与自定义元数据。详细说明如下：&lt;/p&gt;
+&lt;h3 id=&#34;标准-http-头&#34;&gt;标准 HTTP 头&lt;/h3&gt;
+&lt;p&gt;亿栖云对象存储支持修改的标准 HTTP 头为：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;是否必须&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Cache-Control&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定请求和响应遵循的缓存机制。了解更多信息见 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9&#34;&gt;RFC2616#14.9&lt;/a&gt;。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Cache-Disposition&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定对象下载时的默认文件名。了解更多信息见 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1&#34;&gt;RFC2616#19.5&lt;/a&gt;。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Content-Encoding&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定对象的内容编码类型。了解更多信息见 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11&#34;&gt;RFC2616#14.11&lt;/a&gt;。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Content-Type&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;指定请求实体的MIME类型。。了解更多信息见 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17&#34;&gt;RFC2616#14.17&lt;/a&gt;。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Expires&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;响应过期的日期和时间。了解更多信息见 &lt;a href=&#34;http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21&#34;&gt;RFC2616#14.21&lt;/a&gt;。&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;除以上字段外，其他标准 HTTP 头不支持修改。其他标准 HTTP 头参考 &lt;a href=&#34;/storage/object-storage/api/common_header/#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%AD%97%E6%AE%B5-request-header&#34;&gt;公共请求头&lt;/a&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;自定义元数据&#34;&gt;自定义元数据&lt;/h3&gt;
+&lt;p&gt;对象存储支持用户自定义元数据，也支持用户修改这部分元数据信息。自定义元数据是指前缀为 &lt;code&gt;x-qs-meta-&lt;/code&gt; 的键值对。对象存储对自定义元数据的大小及有效字符均有限制。详细说明如下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;有效字符集：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义元数据中的 &lt;code&gt;key&lt;/code&gt; 只能由英文字母、数字、连接符 &lt;code&gt;-&lt;/code&gt;、下划线 &lt;code&gt;_&lt;/code&gt; 以及英文句号 &lt;code&gt;.&lt;/code&gt; 组成。&lt;/li&gt;
+&lt;li&gt;自定义元数据中的 &lt;code&gt;key&lt;/code&gt; 的长度不能超过 512 字节，且前缀 &lt;code&gt;x-qs-meta-&lt;/code&gt; 不包括在 &lt;code&gt;key&lt;/code&gt; 的长度计算范围内。&lt;/li&gt;
+&lt;li&gt;自定义元数据中的 &lt;code&gt;value&lt;/code&gt; 只能由 &lt;a href=&#34;https://en.wikipedia.org/wiki/ASCII#Printable_characters&#34;&gt;Printable ASCII 字符&lt;/a&gt; 组成。&lt;/li&gt;
+&lt;li&gt;自定义元数据中的 &lt;code&gt;value&lt;/code&gt; 若带有 Non-printable ASCII 或 Non-ASCII 字符，用户可以使用 &lt;a href=&#34;https://www.ietf.org/rfc/rfc2047.txt&#34;&gt;rfc2047&lt;/a&gt; 或者 &lt;a href=&#34;https://en.wikipedia.org/wiki/Percent-encoding&#34;&gt;percent encoding&lt;/a&gt; 来对其进行编码。也可以选择其他编码方式，只要编码后的字符集是 Printable ASCII 字符即可。&lt;/li&gt;
+&lt;li&gt;自定义元数据总大小不能超过 2KB。&lt;/li&gt;
+&lt;li&gt;由于 HTTP 头字段不区分大小写，所以自定义元数据的 &lt;code&gt;key&lt;/code&gt; 也不区分大小写。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;创建元数据&#34;&gt;创建元数据&lt;/h2&gt;
+&lt;p&gt;根据前文说明，我们知道对象元数据不能脱离于对象而独立存在。因此当创建对象的时候，相应的该对象的元数据也跟随创建。&lt;/p&gt;
+&lt;p&gt;支持该操作的 API 如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;API&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/put/&#34;&gt;PutObject&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;当向 Bucket 上传一个对象时，可以指定 &lt;a href=&#34;#%E5%8F%AF%E4%BF%AE%E6%94%B9%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE&#34;&gt;可修改的元数据&lt;/a&gt; 一节中定义的请求头来创建可供修改的对象元数据。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/post/&#34;&gt;PostObject&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;当通过 HTML 表单的方式上传一个对象时，可以使用 &lt;a href=&#34;#%E5%8F%AF%E4%BF%AE%E6%94%B9%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE&#34;&gt;可修改的元数据&lt;/a&gt; 一节中定义的请求头来创建可供修改的对象元数据。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/multipart/initiate/&#34;&gt;InitiateMultipartUpload&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;当初始化一个分段上传时，可以使用 &lt;a href=&#34;#%E5%8F%AF%E4%BF%AE%E6%94%B9%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE&#34;&gt;可修改的元数据&lt;/a&gt; 一节中定义的请求头来创建可供修改的对象元数据。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;获取元数据&#34;&gt;获取元数据&lt;/h2&gt;
+&lt;p&gt;用户可通过下载对象或获取对象信息的方式来获取该对象携带的元数据信息。支持该操作的 API 如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;API&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/get/&#34;&gt;GetObject&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;下载对象时，亿栖云对象存储服务端会返回该对象创建时所包含的元数据信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/head/&#34;&gt;HeadObject&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;获取对象元数据时，亿栖云对象存储服务端会返回该对象创建时所包含的元数据信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;复制修改元数据&#34;&gt;复制修改元数据&lt;/h2&gt;
+&lt;p&gt;用户可通过复制对象的方式，来复制或修改对象元数据。当用户调用如下 API 复制对象时，默认将源对象的元数据复制到目标对象：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;API&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/copy/&#34;&gt;PutObject - Copy&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;当复制一个源对象到目标对象时，默认将源对象的元数据信息复制至目标对象&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;复制源对象的元数据&#34;&gt;复制源对象的元数据&lt;/h3&gt;
+&lt;p&gt;复制源对象到目标对象，此时会默认将源对象的元数据信息复制至目标对象。无需添加额外的消息头。&lt;/p&gt;
+&lt;h3 id=&#34;更新目标对象的元数据&#34;&gt;更新目标对象的元数据&lt;/h3&gt;
+&lt;p&gt;复制对象时，可在消息头中指定 &lt;a href=&#34;#%E5%8F%AF%E4%BF%AE%E6%94%B9%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE&#34;&gt;可修改的元数据&lt;/a&gt; 一节中定义的请求头来更新目标对象的元数据。此外，还需添加如下头字段，并将其设置为 &lt;code&gt;replace&lt;/code&gt;。此时源对象的元数据信息不变，目标对象的元数据根据请求头中的设定而更新。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;头字段&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;x-qs-metadata-directive&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;此选项用来修改元数据。有效值为 &lt;code&gt;copy&lt;/code&gt; 或 &lt;code&gt;replace&lt;/code&gt; 。默认值为 &lt;code&gt;copy&lt;/code&gt;。&lt;br&gt;copy：复制源对象的元数据。&lt;br&gt;replace：表示修改对象的元数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;修改源对象的元数据&#34;&gt;修改源对象的元数据&lt;/h3&gt;
+&lt;p&gt;用户通过调用复制对象 API，并指定如下头字段，且将其设置为 &lt;code&gt;replace&lt;/code&gt;，即可完成修改源对象的元数据操作。可修改的元数据参考 &lt;a href=&#34;#%E5%8F%AF%E4%BF%AE%E6%94%B9%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE&#34;&gt;前文内容&lt;/a&gt;。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;头字段&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;x-qs-metadata-directive&lt;/td&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;此选项用来修改元数据。有效值为 &lt;code&gt;copy&lt;/code&gt; 或 &lt;code&gt;replace&lt;/code&gt; 。默认值为 &lt;code&gt;copy&lt;/code&gt;。&lt;br&gt;copy：复制源对象的元数据。&lt;br&gt;replace：表示修改对象的元数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;移动元数据&#34;&gt;移动元数据&lt;/h2&gt;
+&lt;p&gt;用户可通过移动对象的方式来移动该对象携带的元数据信息。支持该操作的 API 如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;API&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;/storage/object-storage/api/object/basic_opt//move/&#34;&gt;PutObject - Move&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;当移动一个源对象到目标对象时，源对象的元数据信息将保留。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;h3 id=&#34;修改对象的元数据&#34;&gt;修改对象的元数据&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个命名为 &lt;code&gt;copy_to_self&lt;/code&gt; 的对象，并附带元数据：&lt;code&gt;x-qs-meta-id: 0&lt;/code&gt; 和 &lt;code&gt;Cache-Control: no-cache&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /copy_to_self &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;no-cache&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;调用 API：&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/copy/&#34;&gt;PUT Object COPY&lt;/a&gt; 将对象 &lt;code&gt;copy_to_self&lt;/code&gt; 的元数据修改为： &lt;code&gt;x-qs-meta-id: 1&lt;/code&gt; 与 &lt;code&gt;Cache-Control: max-age=31536000&lt;/code&gt;。并添加头字段：&lt;code&gt;x-qs-metadata-directive: replace&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /copy_to_self &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=31536000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-metadata-directive&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;replace&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-copy-source&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;/mybucket/copy_to_self&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;调用 API：&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/head/&#34;&gt;HEAD Object&lt;/a&gt; 验证对象的元数据修改成功。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;HEAD&lt;/span&gt; /copy_to_self &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=31536000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;复制对象-复制源对象的元数据&#34;&gt;复制对象, 复制源对象的元数据&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个命名为 &lt;code&gt;source_object&lt;/code&gt; 的对象，并附带元数据：&lt;code&gt;x-qs-meta-id: 0&lt;/code&gt; 和 &lt;code&gt;Cache-Control: no-cache&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /source_object &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;no-cache&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;调用 API：&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/copy/&#34;&gt;PUT Object COPY&lt;/a&gt; 复制源对象 &lt;code&gt;source_object&lt;/code&gt; 到目标对象 &lt;code&gt;dest_object&lt;/code&gt;。复制 &lt;code&gt;source_object&lt;/code&gt; 的元数据到 &lt;code&gt;dest_object&lt;/code&gt; 为默认操作，故，这里可以省略请求头 &lt;code&gt;x-qs-metadata-directive&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /dest_object &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-copy-source&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;/mybucket/source_object&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;调用 API：&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/head/&#34;&gt;HEAD Object&lt;/a&gt; 验证目标对象 &lt;code&gt;dest_object&lt;/code&gt; 的元数据与源对象 &lt;code&gt;source_object&lt;/code&gt; 的元数据相同。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;HEAD&lt;/span&gt; /dest_object &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;no-cache&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;复制对象-在请求头中指定元数据&#34;&gt;复制对象, 在请求头中指定元数据&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;创建一个命名为 &lt;code&gt;source_object&lt;/code&gt; 的对象，并附带元数据：&lt;code&gt;x-qs-meta-id: 0&lt;/code&gt; 和 &lt;code&gt;Cache-Control: no-cache&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /source_object &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;no-cache&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;调用 API：&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/put/&#34;&gt;PUT Object COPY&lt;/a&gt; 复制源对象 &lt;code&gt;source_object&lt;/code&gt; 到目标对象 &lt;code&gt;dest_object&lt;/code&gt;，并在请求头中指定元数据：&lt;code&gt;x-qs-meta-id: 1, Cache-Control: max-age=31536000&lt;/code&gt;。此时需增加请求头字段：&lt;code&gt;x-qs-metadata-directive : replace&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PUT&lt;/span&gt; /dest_object &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=31536000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-copy-source&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;/mybucket/source_object&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;201&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CREATED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;调用 API：&lt;a href=&#34;/storage/object-storage/api/object/basic_opt/head/&#34;&gt;HEAD Object&lt;/a&gt; 验证目标对象 &lt;code&gt;dest_object&lt;/code&gt; 的元数据与上一步请求头中的一致。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请求服务端：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;HEAD&lt;/span&gt; /dest_object &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;mybucket.jn1.is.yiqiyun.com&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Authorization&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;authorization string&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;服务端返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Server&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;yiqiyun&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Date&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Thu, 05 Jul 2018 11:01:40 GMT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cache-Control&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;max-age=31536000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-meta-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;x-qs-request-id&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;&amp;lt;x-qs-request-id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 错误信息</title>
+      <link>/storage/object-storage/api/error_code/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/error_code/</guid>
+      <description>
+        
+        
+        &lt;p&gt;在请求返回的结果中，消息头中的 HTTP 状态码：Status Code，会表明请求处理完成后的状态，它符合 HTTP 规范所规定的语义。当错误发生时，请求返回的消息体会以 json 格式返回具体的错误信息。&lt;/p&gt;
+&lt;h2 id=&#34;错误码列表&#34;&gt;错误码列表&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;错误代码&lt;/th&gt;
+&lt;th&gt;错误描述&lt;/th&gt;
+&lt;th&gt;HTTP 状态码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_access_key_id&lt;/td&gt;
+&lt;td&gt;请求中的 Access Key 不正确或不存在&lt;/td&gt;
+&lt;td&gt;401&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_range&lt;/td&gt;
+&lt;td&gt;请求头中的 &lt;code&gt;Range&lt;/code&gt; 不符合规则。具体规则可参考公共字段中 &lt;a href=&#34;../common_header/#range&#34;&gt;Range&lt;/a&gt; 的定义&lt;/td&gt;
+&lt;td&gt;416&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;request_expired&lt;/td&gt;
+&lt;td&gt;请求头中 &lt;code&gt;Date&lt;/code&gt; 或 &lt;code&gt;x-qs-date&lt;/code&gt; 与服务端本地时间差大于 15 分钟&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;signature_not_matched&lt;/td&gt;
+&lt;td&gt;请求中的签名不匹配&lt;/td&gt;
+&lt;td&gt;401&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_argument&lt;/td&gt;
+&lt;td&gt;请求中存在非法的参数值&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bad_digest&lt;/td&gt;
+&lt;td&gt;请求头中携带的 &lt;code&gt;Content-MD5&lt;/code&gt; 与服务端根据实际接收到的数据所计算出的 &lt;code&gt;MD5&lt;/code&gt; 值不匹配&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;permission_denied&lt;/td&gt;
+&lt;td&gt;没有权限执行此次请求&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_already_exists&lt;/td&gt;
+&lt;td&gt;创建 Bucket时，Bucket 已存在&lt;/td&gt;
+&lt;td&gt;409&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_not_exists&lt;/td&gt;
+&lt;td&gt;访问的 Bucket 不存在&lt;/td&gt;
+&lt;td&gt;404&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;object_not_exists&lt;/td&gt;
+&lt;td&gt;访问的 Object 不存在&lt;/td&gt;
+&lt;td&gt;404&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_bucket_name&lt;/td&gt;
+&lt;td&gt;创建 Bucket 时，指定的 Bucket 名称不符合规则&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;too_many_buckets&lt;/td&gt;
+&lt;td&gt;创建 Bucket 时，超出限额。可通过工单提高额度&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_not_empty&lt;/td&gt;
+&lt;td&gt;删除非空的 Bucket&lt;/td&gt;
+&lt;td&gt;409&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bucket_not_active&lt;/td&gt;
+&lt;td&gt;访问的 Bucket 状态不为活跃状态&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lease_not_ready&lt;/td&gt;
+&lt;td&gt;Bucket 租赁信息未准备好&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;method_not_allowed&lt;/td&gt;
+&lt;td&gt;请求中指定的 &lt;code&gt;method&lt;/code&gt; 不被允许&lt;/td&gt;
+&lt;td&gt;405&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_request&lt;/td&gt;
+&lt;td&gt;请求中的消息体不符合规定&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_location&lt;/td&gt;
+&lt;td&gt;请求头中携带的区域信息不存在&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;max_requests_exceeded&lt;/td&gt;
+&lt;td&gt;创建和删除 Bucket 的请求过于频繁&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;precondition_failed&lt;/td&gt;
+&lt;td&gt;请求的 Header 中某些先决条件不满足&lt;/td&gt;
+&lt;td&gt;412&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_object_state&lt;/td&gt;
+&lt;td&gt;当前 Object 状态不支持此次操作&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_object_name&lt;/td&gt;
+&lt;td&gt;Object 名称不符合规则&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;entity_too_small&lt;/td&gt;
+&lt;td&gt;分段上传时，Object 的分段大小小于 4M&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;entity_too_large&lt;/td&gt;
+&lt;td&gt;单个 Object 上传和使用分段上传时，Object 的大小或一个分段的大小大于 5G&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;max_parts_exceeded&lt;/td&gt;
+&lt;td&gt;分段上传时，分段数量超过最大分段量数 1000&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;upload_not_exists&lt;/td&gt;
+&lt;td&gt;分段上传时，请求中携带的 &lt;code&gt;upload id&lt;/code&gt; 不存在&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;account_problem&lt;/td&gt;
+&lt;td&gt;账号异常&lt;/td&gt;
+&lt;td&gt;403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;delinquent_account&lt;/td&gt;
+&lt;td&gt;账号欠费&lt;/td&gt;
+&lt;td&gt;402&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;invalid_json&lt;/td&gt;
+&lt;td&gt;请求消息体的 json 格式错误&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;access_denied&lt;/td&gt;
+&lt;td&gt;请求被拒绝&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;incomplete_body&lt;/td&gt;
+&lt;td&gt;请求消息体不完整&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;form_policy_violated&lt;/td&gt;
+&lt;td&gt;表单内容与策略不相符&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cname_error&lt;/td&gt;
+&lt;td&gt;CNAME 设置错误&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;too_many_objects&lt;/td&gt;
+&lt;td&gt;操作包含的 Object 数量过多&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fetch_in_process&lt;/td&gt;
+&lt;td&gt;调用 Fetch Object API 时，有相同源链接的 Fetch 请求正在进行中，或被动触发的外部镜像功能正在抓取该源链接对应的文件&lt;/td&gt;
+&lt;td&gt;409&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;metadata_too_large&lt;/td&gt;
+&lt;td&gt;自定义元数据总大小超过限制 2 KB 或键的长度，不含前缀 &lt;code&gt;x-qs-meta-&lt;/code&gt;，超过 512 字节&lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fetch_throttled&lt;/td&gt;
+&lt;td&gt;服务端正在处理过多的抓取请求。包括 Fetch 请求从源链接抓取或外部镜像从源站抓取&lt;/td&gt;
+&lt;td&gt;429&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;internal_error&lt;/td&gt;
+&lt;td&gt;亿栖云对象存储系统内部错误，请稍后重试&lt;/td&gt;
+&lt;td&gt;500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;service_unavailable&lt;/td&gt;
+&lt;td&gt;亿栖云对象存储系统临时不可用，请稍后重试&lt;/td&gt;
+&lt;td&gt;503&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;upstream_failed&lt;/td&gt;
+&lt;td&gt;无法与 Fetch 请求的源链接或者外部镜像的源站建立链接，或源站服务器返回 200，3xx，404 范围之外的错误代码，或链接中断&lt;/td&gt;
+&lt;td&gt;503&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分段上传时，对象存储对 Object 的一个分段大小做出了限制。最小为 4M，最大为 5G。&lt;/li&gt;
+&lt;li&gt;单个 Object 上传时，亿栖云对象存储对其上限做出了限制，最大为 5G。&lt;/li&gt;
+&lt;li&gt;自定义元数据是指所有前缀为 &lt;code&gt;x-qs-meta-&lt;/code&gt; 的键值对。计算自定义元数据大小时，不含前缀 &lt;code&gt;x-qs-meta-&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;错误返回格式&#34;&gt;错误返回格式&lt;/h2&gt;
+&lt;p&gt;当错误发生时，请求返回的消息体会以 json 格式返回具体的错误信息。如下所示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;code&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bad_request&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Invalid argument(s) or invalid argument value(s)&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;request_id&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;aa08cf7a43f611e5&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;url&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://docsv3.yiqiyun.com/api/error_code.html&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;各字段说明&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数名&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;code&lt;/td&gt;
+&lt;td&gt;错误码&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;message&lt;/td&gt;
+&lt;td&gt;详细错误信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;request_id&lt;/td&gt;
+&lt;td&gt;服务端为该次错误请求生成的唯一标示。亿栖云对象存储研发通过该 ID，能更快定位问题。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;url&lt;/td&gt;
+&lt;td&gt;指向相关帮助文档&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Bucket API</title>
+      <link>/storage/object-storage/api/bucket/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/bucket/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./basic_opt&#34;&gt;基础操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./acl&#34;&gt;权限控制（ACL）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./lifecycle&#34;&gt;生命周期（Lifecycle）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./external_mirror&#34;&gt;外部镜像（External Mirror）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./cors&#34;&gt;跨域资源共享（CORS）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./logging&#34;&gt;日志管理（Logging）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./repliation&#34;&gt;跨区域复制（Replication）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./notification&#34;&gt;事件通知（Notification）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./cname&#34;&gt;自定义域名（CNAME）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./policy&#34;&gt;Bucket 策略（Policy）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Object API</title>
+      <link>/storage/object-storage/api/object/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/object/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./basic_opt&#34;&gt;基础操作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./append&#34;&gt;Append Object&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./encryption&#34;&gt;数据加密&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./post&#34;&gt;表单上传&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./multipart&#34;&gt;分段上传&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: Service API</title>
+      <link>/storage/object-storage/api/service/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/service/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;get&#34;&gt;GET Service&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;location&#34;&gt;List Locations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: API 使用示例</title>
+      <link>/storage/object-storage/api/practices/</link>
+      <pubDate>Wed, 25 Nov 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/api/practices/</guid>
+      <description>
+        
+        
+        &lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;signature&#34;&gt;签名验证&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;access_control&#34;&gt;访问控制&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

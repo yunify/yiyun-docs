@@ -1,0 +1,112 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 平台管理</title>
+    <link>/appcenter/dev-platform/platform-manage/</link>
+    <description>Recent content in 平台管理 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 28 Feb 2020 10:08:56 +0900</lastBuildDate>
+    
+	  <atom:link href="/appcenter/dev-platform/platform-manage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Appcenter: 财务管理</title>
+      <link>/appcenter/dev-platform/platform-manage/finance/finance/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0900</pubDate>
+      
+      <guid>/appcenter/dev-platform/platform-manage/finance/finance/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;财务管理&#34;&gt;财务管理&lt;/h2&gt;
+&lt;p&gt;财务管理主要包括应用收入统计、应用保证金及平台费用管理、提现管理等功能。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/menu.png&#34; alt=&#34;财务管理菜单&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;应用收入管理&#34;&gt;应用收入管理&lt;/h3&gt;
+&lt;p&gt;点击【财务管理】可查看到所有应用整体收入情况。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/finance.png&#34; alt=&#34;财务管理&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;应用收入详情&#34;&gt;应用收入详情&lt;/h3&gt;
+&lt;p&gt;点击【查看详情】可查看单个应用收入详细情况。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/finance-detail.png&#34; alt=&#34;财务详情&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Appcenter: 订单管理</title>
+      <link>/appcenter/dev-platform/platform-manage/order/order/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0900</pubDate>
+      
+      <guid>/appcenter/dev-platform/platform-manage/order/order/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;订单管理&#34;&gt;订单管理&lt;/h2&gt;
+&lt;h3 id=&#34;订单处理&#34;&gt;订单处理&lt;/h3&gt;
+&lt;p&gt;在用户下单并购买支付后，应用开发者会收到待处理订单。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/order-manager.png&#34; alt=&#34;用户订单处理&#34;&gt;&lt;/p&gt;
+&lt;p&gt;待处理订单列表，可看到用户下单时间、购买信息，应用开发者需在&lt;strong&gt;交付截止时间&lt;/strong&gt;前处理完成该订单。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/order-list.png&#34; alt=&#34;订单列表&#34;&gt;&lt;/p&gt;
+&lt;p&gt;提交 License 支持文本方式、与上传文件附件方式。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/order-proc.png&#34; alt=&#34;订单处理&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Appcenter: 工单管理</title>
+      <link>/appcenter/dev-platform/platform-manage/tickets/tickets/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0900</pubDate>
+      
+      <guid>/appcenter/dev-platform/platform-manage/tickets/tickets/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;工单管理&#34;&gt;工单管理&lt;/h2&gt;
+&lt;p&gt;工单系统在应用开发平台做了全面升级，开发者或用户可向亿栖云提交工单的同时，也支持用户直接向开发者提交工单。开发者既可以做为用户向亿栖云提交工单，同时也能够接收用户针对开发者所开发的应用接收用户提交的工单。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/ticket-menu.png&#34; alt=&#34;工单菜单&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建工单&#34;&gt;创建工单&lt;/h3&gt;
+&lt;p&gt;应用开发平台提供创建工单入口，开发者用户可以提交工单。&lt;/p&gt;
+&lt;p&gt;1.在页面右上角，点击【工单】，选择【创建工单】。&lt;/p&gt;
+&lt;p&gt;2.填写工单内容，包括：工单类型、标题、描述、问题的影响类型、相关产品以及文件。&lt;/p&gt;
+&lt;p&gt;3.提交工单后，可在【我的工单】中查看该工单处理详情。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/ticket-create.png&#34; alt=&#34;创建工单&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;我的工单&#34;&gt;我的工单&lt;/h3&gt;
+&lt;p&gt;可查看我创建的工单、共享给我的工单、企业内工单，其中共享给我的工单需要用户在【新邀请】中确定接受后才确认同意接收共享给我的工单。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/tickets-my.png&#34; alt=&#34;我的工单&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;处理工单&#34;&gt;处理工单&lt;/h3&gt;
+&lt;p&gt;开发者接收到用户提交给开发者的全部工单，可查看到待处理、处理中、待确认、已解决的工单。开发者可在【工单回复】窗口直接回复用户提交的工单。&lt;/p&gt;
+&lt;p&gt;每个工单均有处理超时期限，开发者应尽快在超时期限内处理工单，以免影响用户对应用的使用体验。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/tickets-pending.png&#34; alt=&#34;处理工单&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Appcenter: 通知中心</title>
+      <link>/appcenter/dev-platform/platform-manage/notification/notification/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0900</pubDate>
+      
+      <guid>/appcenter/dev-platform/platform-manage/notification/notification/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;通知中心&#34;&gt;通知中心&lt;/h2&gt;
+&lt;p&gt;开发者除了接收各种类型的通知，并可以对上架应用的使用用户发送自己的通知。&lt;/p&gt;
+&lt;h3 id=&#34;查看通知&#34;&gt;查看通知&lt;/h3&gt;
+&lt;p&gt;点击右上角【通知】，可查看接收到的全部通知，可根据通知类型进行筛选系统通知、财务通知、告警通知等。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/notifications.png&#34; alt=&#34;发送通知给用户&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;发送通知&#34;&gt;发送通知&lt;/h3&gt;
+&lt;p&gt;开发者可针对其开发应用对用户发送通知，该应用的使用者可接收到开发者发送的通知。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/notice-create.png&#34; alt=&#34;发送通知给用户&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/appcenter/dev-platform/platform-manage/_image/notification-send.png&#34; alt=&#34;发送通知给用户&#34;&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

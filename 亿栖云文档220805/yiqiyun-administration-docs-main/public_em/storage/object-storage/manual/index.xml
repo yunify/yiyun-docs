@@ -1,0 +1,93 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>亿栖云文档 – 操作指南</title>
+    <link>/storage/object-storage/manual/</link>
+    <description>Recent content in 操作指南 on 亿栖云文档</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/storage/object-storage/manual/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Storage: Console</title>
+      <link></link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid></guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 客户端工具</title>
+      <link>/storage/object-storage/manual/tool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/storage/object-storage/manual/tool/</guid>
+      <description>
+        
+        
+        &lt;p&gt;亿栖云对象存储提供了多种命令行和 GUI 工具，便于用户高效操作、管理对象存储资源，迁移数据至亿栖云对象存储。&lt;/p&gt;
+&lt;h2 id=&#34;qsctl&#34;&gt;qsctl&lt;/h2&gt;
+&lt;p&gt;亿栖云对象存储服务的高级命令行工具。详情可参考 &lt;a href=&#34;./qsctl&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;qscamel&#34;&gt;qscamel&lt;/h2&gt;
+&lt;p&gt;对大批量数据进行迁移的工具。详情可参考 &lt;a href=&#34;./qscamel&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;qsftpd&#34;&gt;qsftpd&lt;/h2&gt;
+&lt;p&gt;亿栖云对象存储提供的 FTP 服务。详情可参考 &lt;a href=&#34;./qsftpd&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;mountain-duck&#34;&gt;Mountain Duck&lt;/h2&gt;
+&lt;p&gt;支持 Windows 平台的本地挂载盘。详情可参考 &lt;a href=&#34;./mountain-duck&#34;&gt;文档&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;s3fs&#34;&gt;s3fs&lt;/h2&gt;
+&lt;p&gt;s3fs 允许用户在 Linux 与 macOs 系统中通过 FUSE 挂载一个 S3 桶作为本地盘。s3fs 保留本地文件格式，并允许用户使用其他工具，例如 AWS CLI.&lt;/p&gt;
+&lt;p&gt;可参考 &lt;a href=&#34;https://github.com/s3fs-fuse/s3fs-fuse&#34;&gt;详情&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;rclone&#34;&gt;RClone&lt;/h2&gt;
+&lt;p&gt;由第三方开发，类似 rsync 方式进行多种数据源之间同步的工具。可参考 &lt;a href=&#34;http://rclone.org&#34;&gt;详情&lt;/a&gt;。&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Storage: 第三方数据集成</title>
+      <link>/storage/object-storage/manual/third_party_integration/</link>
+      <pubDate>Fri, 28 Feb 2020 10:08:56 +0900</pubDate>
+      
+      <guid>/storage/object-storage/manual/third_party_integration/</guid>
+      <description>
+        
+        
+        &lt;p&gt;为了进一步提高亿栖云对象存储的易用性，降低使用亿栖云对象存储服务的学习成本，亿栖云对象存储为用户提供了相应的插件与工具，用于支持第三方软件与亿栖云对象存储服务的直接对接。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_input/&#34;&gt;Logstash Input QingStor&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_input/#%E5%AE%89%E8%A3%85&#34;&gt;安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_input/#%E9%85%8D%E7%BD%AE&#34;&gt;配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_input/#%E4%BD%BF%E7%94%A8&#34;&gt;使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_output/&#34;&gt;Logstash Output QingStor&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_output/#%E5%AE%89%E8%A3%85&#34;&gt;安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_output/#%E9%85%8D%E7%BD%AE&#34;&gt;配置&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;logstash_output/#%E4%BD%BF%E7%94%A8&#34;&gt;使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;wordpress_plugin_for_qingstor/&#34;&gt;WordPress QingStor&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;wordpress_plugin_for_qingstor/#%E5%AE%89%E8%A3%85&#34;&gt;安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;wordpress_plugin_for_qingstor/#%E9%85%8D%E7%BD%AE&#34;&gt;配置&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
